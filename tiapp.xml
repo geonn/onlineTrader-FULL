@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ti:app xmlns:ti="http://ti.appcelerator.org">
+    <property name="acs-oauth-secret-development" type="string">nBa2gaLp0YlaPgVPEPzHJco5FuhwuodJ</property>
+    <property name="acs-oauth-key-development" type="string">BSUwvogr5Bv0PSiux8tuXdWQMn6TtDNO</property>
+    <property name="acs-api-key-development" type="string">YTkIiQzV8Vw1ZOnh9yu41nxUDHZezpxF</property>
+    <property name="acs-oauth-secret-production" type="string">nBa2gaLp0YlaPgVPEPzHJco5FuhwuodJ</property>
+    <property name="acs-oauth-key-production" type="string">BSUwvogr5Bv0PSiux8tuXdWQMn6TtDNO</property>
+    <property name="acs-api-key-production" type="string">YTkIiQzV8Vw1ZOnh9yu41nxUDHZezpxF</property>
+    <id>com.biomasglobal.onlinetrader</id>
+    <property name="acs-push-type-development" type="string">gcm</property>
+    <property name="acs-push-type-production" type="string">gcm</property>
+    <property name="acs-push-type" type="string">gcm</property>
+    <property name="acs-grouped-notification-message" type="string">You have $number$ unread messages.</property>
+    <name>Online Trader</name>
+    <version>1.0</version>
+    <publisher>online trader</publisher>
+    <url>http://</url>
+    <description>not specified</description>
+    <copyright>2014 by online trader</copyright>
+    <icon>appicon.png</icon>
+    <fullscreen>false</fullscreen>
+    <navbar-hidden>false</navbar-hidden>
+    <analytics>true</analytics>
+    <guid>947075c2-ffb7-4cf7-8e9a-f8c7ad397b3e</guid>
+    <property name="ti.ui.defaultunit" type="string">dp</property>
+    <ios>
+        <plist>
+            <dict>
+                <key>UISupportedInterfaceOrientations~iphone</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                </array>
+                <key>UISupportedInterfaceOrientations~ipad</key>
+                <array>
+                    <string>UIInterfaceOrientationPortrait</string>
+                    <string>UIInterfaceOrientationPortraitUpsideDown</string>
+                    <string>UIInterfaceOrientationLandscapeLeft</string>
+                    <string>UIInterfaceOrientationLandscapeRight</string>
+                </array>
+                <key>UIRequiresPersistentWiFi</key>
+                <false/>
+                <key>UIPrerenderedIcon</key>
+                <false/>
+                <key>UIStatusBarHidden</key>
+                <false/>
+                <key>UIStatusBarStyle</key>
+                <string>UIStatusBarStyleDefault</string>
+            </dict>
+        </plist>
+    </ios>
+    <android xmlns:android="http://schemas.android.com/apk/res/android">
+        <manifest>
+            <application>
+                <activity android:windowSoftInputMode="stateVisible|adjustPan"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="org.appcelerator.titanium.TiActivity" android:screenOrientation="portrait"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="org.appcelerator.titanium.TiTranslucentActivity"
+                    android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="org.appcelerator.titanium.TiModalActivity"
+                    android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="ti.modules.titanium.ui.TiTabActivity" android:screenOrientation="portrait"/>
+                <activity
+                    android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" android:screenOrientation="portrait"/>
+            </application>
+        </manifest>
+    </android>
+    <mobileweb>
+        <precache/>
+        <splash>
+            <enabled>true</enabled>
+            <inline-css-images>true</inline-css-images>
+        </splash>
+        <theme>default</theme>
+    </mobileweb>
+    <modules>
+        <module platform="android" version="3.2.1">ti.cloudpush</module>
+        <module platform="commonjs" version="3.2.2">ti.cloud</module>
+    </modules>
+    <deployment-targets>
+        <target device="iphone">true</target>
+        <target device="ipad">false</target>
+        <target device="android">true</target>
+        <target device="blackberry">false</target>
+        <target device="mobileweb">true</target>
+        <target device="tizen">false</target>
+    </deployment-targets>
+    <sdk-version>3.2.2.GA</sdk-version>
+    <plugins>
+        <plugin version="1.0">ti.alloy</plugin>
+    </plugins>
+</ti:app>

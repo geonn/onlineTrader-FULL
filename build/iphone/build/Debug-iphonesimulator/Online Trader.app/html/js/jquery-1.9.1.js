@@ -1,1 +1,0 @@
-/Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/Resources/iphone/html/js/jquery-1.9.1.js

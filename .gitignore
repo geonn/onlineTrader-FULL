@@ -1,3 +1,4 @@
 # Build folder and log file
 build/
 build.log
+build/alloy/global_style_cache.json
