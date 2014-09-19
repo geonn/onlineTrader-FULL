@@ -1,0 +1,220 @@
+<html>
+    <head>
+    	<title>New Post</title>
+    	 <link rel="stylesheet" href="js/jquery-ui.css">
+    	 <link rel="stylesheet" href="js/noty.css">
+    	 <link rel="stylesheet" href="js/noty_theme_default.css">
+  		 <script src="js/jquery-1.9.1.js"></script>
+  		 <script src="js/jquery-ui.js"></script>
+  		 <script src="js/noty.js"></script>
+   		 <script src="js/main.js" type="text/javascript"></script>
+		<meta name="viewport" content="initial-scale=1.0, width=device-width, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no" />
+  		<script>
+
+			  $(function() {
+			  	Ti.App.addEventListener("app:dispatchRefreshPage", refreshPage);
+			  	
+			  	function refreshPage(e){
+			  		noty({"text":"Refreshing my task...","layout":"top","type":"success","animateOpen":{"height":"toggle"},"animateClose":{"height":"toggle"},"speed":100,"timeout":3000,"closeButton":false,"closeOnSelfClick":true,"closeOnSelfOver":false,"modal":false});
+        	
+            		var listUrl = localStorage.getItem("url");
+            		var thedate =$( "#datepicker" ).val();
+            		
+            		if(thedate == 'All Date'){
+            			thedate = "";
+            		}
+            		drawTable(listUrl+"&date="+thedate);
+				}
+				
+			    $( "#datepicker" ).datepicker({
+				    onSelect: function(dateText) {
+				       $("#dealer_order_list").html("<div style='display:inline;color:#243F8B;font-weight:bold;'>Loading...</div>");
+				         thedate =$( "#datepicker" ).val();
+				       
+	        			$( "#datepicker" ).val(thedate);
+				        var reloadURL = localStorage.getItem("url");
+
+				        drawTable(reloadURL+"&date="+thedate);
+				    },
+				    dateFormat: 'dd/mm/yy'
+			     });
+			  });
+			</script>
+  		<style>
+  		     html {-webkit-text-size-adjust: none;}
+  		 	body{
+				color: #e02222;
+				font-size:12px;
+			}
+			input.text-input {
+				width: 80%;
+				margin:0 auto;
+				-moz-border-radius: 4px;
+			    -webkit-border-radius: 4px;
+				border-radius: 4px;
+				background: #fff;
+				border: solid 1px #BDBDBD;
+				color: #555;
+				height:34px;
+				font-size: 13px;
+			}
+  			table tr td, tr th{
+				font-size:12px;
+				font-family: Verdana;
+				color: "#e02222";
+			}
+			table.boxes{
+				border: solid 1px #d4d4d4;
+				background:#F6F4F0;
+				color: #444444;
+				border-radius: 2px;
+				-moz-border-radius: 2px;
+			    -webkit-border-radius: 2px;
+			    padding: 5px;
+			    margin: 5px 0;
+			}
+			table.unread{
+				border: solid 1px #bfb900;
+				background:#fffdd2;
+				color: #444444;
+				border-radius: 2px;
+				-moz-border-radius: 2px;
+			    -webkit-border-radius: 2px;
+			    padding: 5px;
+			    margin: 5px 0;
+			}
+			select {
+				border-radius: 4px;
+				background: #ffffff;
+				-webkit-appearance: none;
+				border: solid 1px #BDBDBD;
+				color: #555;
+				-moz-border-radius: 4px;
+			    -webkit-border-radius: 4px;
+			    padding: 5px;
+				height: 34px;
+			}
+			.tableTitle {
+				background: #D2F0F4;
+				color:#645D57;
+				font-size:12px;
+				padding:5px;
+				border-radius: 2px;
+				-moz-border-radius: 2px;
+			    -webkit-border-radius: 2px;
+			    width: 100px;
+			    margin: 0 auto;
+			   /* opacity:0.7;*/
+			    text-align:center;
+				/*filter:alpha(opacity=70); /* For IE8 and earlier */
+			}
+			.staticBar{
+				-webkit-box-shadow: 0px 1px 3px rgba(59,57,59,1);
+				-moz-box-shadow:  0px 1px 3px rgba(59,57,59,1);
+				box-shadow: 0px 1px 3px rgba(59,57,59,1);
+				width:100%;	
+				position:fixed;
+				height:35px;
+				top:0;
+				background-color:#D8D8D8;
+				left:0;
+				padding-top:5px;
+				padding-bottom:5px;
+				text-align:center;
+				index:99;
+			}
+  		</style>
+  		<script>
+			Ti.App.addEventListener("app:dispatchrorderListParam", dispatchrorderListParam);
+				
+			function dispatchrorderListParam(e){
+				localStorage.setItem("url", e.url);
+            		localStorage.setItem("session",e.session);
+            		$("#dealer_order_list").html("<div style='display:inline;color:#243F8B;font-weight:bold;'>Loading...</div>");
+					drawTable(e.url);
+			}
+			
+			$(window).unload(function() {
+			    Ti.App.removeEventListener("app:dispatchrorderListParam", dispatchrorderListParam);
+			    Ti.App.removeEventListener("app:dispatchRefreshPage", refreshPage);
+			});
+							
+			function orderDetail(o_id){
+				$("#table_"+o_id).removeClass("unread");
+				Ti.App.fireEvent('app:viewOrderDetail', { 
+					o_id: o_id, 
+				});
+			}
+			
+			
+			function drawTable(queryUrl){
+				
+				$.getJSON(queryUrl, function( data ) {
+				   if(data.status == 'error'){
+				   	//getStateSelector();
+				   }else{
+				   	var total_item = 0;
+				   
+				   	var str = "";
+				   	 if(data.status == 'success'){
+					     $.each( data.data, function( key, items ) {
+					    	 var day_item   = 0;
+						     str += "<div id='div_"+key+"' class='tableTitle'>"+key+"</div>";
+						     $.each( items, function( k_item, val ) {
+						     	var unread = (val.order.unread_status)?"unread":"";
+						      	str += "<table onClick='orderDetail("+val.order.o_id+");' class='table_"+key+" boxes "+unread+"' width='100%' id='table_"+ val.order.o_id+"'>";
+						      	
+						      	str += "<tr><th width='20%'>Ref. No.</th><td width='70%' style='color:#525252'> : "+ val.order.o_id+"</td><td rowspan=4 valign=middle><img onClick='return pickOrder(\""+key+"\", "+val.order.o_id+");' src='../images/btn-view-blue.png'  style='height:30px; float:right;'></td></tr>";
+						      	str += "<tr><th width='20%' valign=top>Customer</th><td valign=top style='color:#525252'> : "+ val.order.name+"</td></tr>";
+						      	if(val.order.areaname != ""){
+						      		str += "<tr><th width='20%' valign=top>Location</th><td valign=top style='color:#525252'> : "+ val.order.location+", "+val.order.areaname+", "+val.order.area+"</td></tr>";
+						      	}else{
+						      		str += "<tr><th width='20%' valign=top>Location</th><td valign=top style='color:#525252'> : "+ val.order.location+", "+val.order.area+"</td></tr>";
+						      	}
+						      	str += "<tr><th width='20%'>Post On</th><td valign=top style='color:#525252'> : "+ val.order.created+"</td></tr>";
+						        var prod_text = "";
+								var prod_counter = 1;
+								$.each( val.product, function( prod_key, prod ) {
+									prod_text += prod.name + "("+prod.quantity+")";
+									if(prod_counter !== val.product.length){
+										prod_text += ", "; 
+									}
+									
+									prod_counter++;
+								});
+								str += "<tr><th width='20%' valign='top'>Products</th><td valign=top style='color:#525252'> : "+ prod_text +"</td></tr>";
+								str += "<tr><th width='20%'>Status</th><td valign=top style='color:#525252'> : "+ val.order.status+"</td></tr>";
+									
+						      	str += "</table>";
+						      	total_item++;
+						      	day_item++;
+							 });
+							 
+						 });
+						}else{
+						 	str = "<div>No record found</div>";
+						}
+						
+						$("#total_item").val(total_item);
+				 		$("#dealer_order_list").html(str);	
+				   }
+				});
+			}
+			
+			function resetDate(){
+				$('#datepicker').val("All Date");
+				var reloadURL = localStorage.getItem("url");
+				drawTable(reloadURL+"&date=");
+			}
+		</script>
+  </head>
+    
+    <body>
+    	<input type="hidden" name="total_item" id="total_item" value="0">
+    	<div class="staticBar">
+			<input class="text-input" name="senddate" readonly type="text" id="datepicker" value="All Date" > <div style="float:right; border-left:1px solid #555; padding:0 15px; line-height: 34px; font-size:13px; " onClick="resetDate();">All</div>
+		</div>
+    	<div id="dealer_order_list" style="padding-top:40px;display:block;"></div>	
+	</body>
+	
+</html>

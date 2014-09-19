@@ -1,0 +1,438 @@
+<html>
+    <head>
+    	<title>New Post</title>
+    	 <link rel="stylesheet" href="js/jquery-ui.css">
+    	 <link rel="stylesheet" href="js/noty.css">
+    	 <link rel="stylesheet" href="js/noty_theme_default.css">
+    	 <link rel="stylesheet" href="css/main.css">
+  		 <script src="js/jquery-1.9.1.js"></script>
+  		 <script src="js/jquery-ui.js"></script>
+  		 <script src="js/noty.js"></script>
+   		 <script src="js/main.js" type="text/javascript"></script>
+		<meta name="viewport" content="initial-scale=1.0, width=device-width, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no" />
+<script>
+
+  $(function() {
+  		Ti.App.addEventListener("app:orderDetailsParam", orderDetailsParam);
+    	Ti.App.addEventListener("app:refresh", refresh);
+
+	function refresh(e){
+ 			noty({"text":"Order update from dispatch","layout":"center","type":"success","animateOpen":{"height":"toggle"},"animateClose":{"height":"toggle"},"speed":500,"timeout":4000,"closeButton":false,"closeOnSelfClick":true,"closeOnSelfOver":false,"modal":false});
+            loadDetails();
+        }
+    	
+    function orderDetailsParam(e){
+		localStorage.setItem("session",e.session);
+        localStorage.setItem("details", e.details);
+        localStorage.setItem("update", e.update);
+        localStorage.setItem("stateURL", e.state);
+        localStorage.setItem("productURL", e.product);
+        localStorage.setItem("url", e.url);
+        getStateSelector(e,'');
+		getProductelector(e);
+		setTimeout(function(){ loadDetails(e);	},1500);
+    }
+    
+    $(window).unload(function() {
+	    Ti.App.removeEventListener("app:orderDetailsParam", orderDetailsParam);
+	    Ti.App.removeEventListener("app:refresh", refresh);
+	});
+				    
+  	
+    $( "#datepicker" ).datepicker({
+	    onSelect: function(dateText) {
+	        thedate =$( "#datepicker" ).val();
+			$( "#datepicker" ).val(thedate);
+	    },
+	    minDate: 0,
+		dateFormat: 'dd/mm/yy'
+     });
+  });
+  </script>
+        <style>
+       		
+        </style>
+    </head>
+    
+    <body>
+    <script type='text/javascript'>
+
+    	function loadDetails(e){
+    			//localStorage.setItem("details", e.details);
+    			details = localStorage.getItem('details');
+    			$.getJSON(details, function( data ) {
+					if(data.status == 'success'){
+						if(data.data.order.status < 3){
+							Ti.App.fireEvent('showFooter', {  });
+							$("#editable").show();
+							$("#o_id").val(data.data.order.o_id);
+							$("input[name=name]").val(data.data.order.name);
+							$("input[name=mobile]").val(data.data.order.mobile);
+							$("input[name=location]").val(data.data.order.location);
+							$("input[name=senddate]").val(data.data.order.senddate);
+							$("textarea[name=remark]").html(data.data.order.remark);
+							$("#selector_area").val(data.data.order.area);
+							//alert(data.data.order.area2);
+							if(data.data.order.area2 > 0){
+								$("#areaDesc").show();	
+								$("#areaSel").show();	
+								areaList = localStorage.getItem('stateArea');
+								areaArr  = JSON.parse(areaList);
+								var item2 = '<select name="area2" class="selector" id="selector_area2" style="float:left;width:100%; ">';
+				    			item2 += '<option value="">Area</option>';
+							    $.each(areaArr[data.data.order.area], function( area_id, area_name ) {
+							    	
+							      	item2 += '<option value='+area_id+'>'+ area_name + '</option>';
+							    });
+							    item2 += '</select>';
+							    
+							    $("#area_selector").show();	
+							    $("#area_selector").html(item2);	
+								$("#selector_area2").val(data.data.order.area2);
+							}else{
+								$("#areaDesc").hide();	
+								$("#areaSel").hide();	
+							}	
+						}else{
+							
+							$("#noneditable").show();
+							$("#o_id").val(data.data.order.o_id);
+							$("#name").html(data.data.order.name);
+							$("#mobile").html("<a href='tel:"+data.data.order.mobile+"'>"+data.data.order.mobile+"</a>");
+							$("#location").html(data.data.order.location);
+							$("#senddate").html(data.data.order.senddate);
+							$("#remark").html(data.data.order.remark);
+							$("#stateName").html(data.data.order.stateName);
+							if(data.data.order.area2){
+								$("#fixedArea").show();
+								$("#fixedAreaDesc").show();
+								$("#areaName").html(data.data.order.areaName);
+							}
+							
+						}
+						localStorage.setItem("o_id",data.data.order.o_id);
+						
+						
+						var product_item = data.data.product.length;
+						if(product_item > 0){
+							$(".product_details").show();
+							$(".product_total").show();
+							$("#divHiddenInput").html("");
+							$(".product_content").html("");
+							
+							$.each( data.data.product, function( key, items ) {
+								var subtotal = 0;
+								//alert(items.p_id+"_table");
+  								subtotal = parseFloat(items.price).toFixed(2); 
+								$("#divHiddenInput").append("<input type='hidden' name='product[]' id='div_prod_"+items.p_id+"' value='"+items.p_id+"' class='productName' />");
+				        		$("#divHiddenInput").append("<input type='hidden' name='qty[]' id='div_qty_"+items.p_id+"' value='"+items.quantity+"' class='productQty' />");
+				  				$("#divHiddenInput").append("<input type='hidden' name='price[]' id='div_price_"+items.p_id+"' value='"+items.price+"' class='productPrice' />");
+				  				
+				  				$(".product_content").append("<table width='100%' id='"+items.p_id+"_table'><tr><td id='name_"+items.p_id+"' width='40%' style='text-align:left;'>"+items.name+"</td><td id='qty_"+items.p_id+"' style='width:30%;text-align:right;'>"+items.quantity+"</td><td id='subtotal_"+items.p_id+"' style='width:30%;text-align:right;'>"+subtotal+"</td></tr></table>");
+				        	
+							});
+							
+							total_qty = findTotalQty();
+				        	total_amt   = findTotalPrice();
+				        	$('#total_qty').val(total_qty);
+				        	$('#total_amt').val(total_amt.toFixed(2));
+				        	
+				        	$('.product_grant_qty').html(total_qty);
+				        	$('.product_grant_price').html(total_amt.toFixed(2));
+						 }
+						 
+						$("#pop_data").hide(); 
+					}else{
+					}
+							
+				});
+    	}
+    	
+    	function loadArea(){
+			var area = $("#selector_area").val();
+			areaList = localStorage.getItem('stateArea');
+			areaArr  = JSON.parse(areaList);
+			if(areaArr[area]){
+				var item2 = '<select name="area2" class="selector" id="selector_area2" onChange="loadArea2();" style="float:left;width:100%; ">';
+			    item2 += '<option value="">Area</option>';
+				$.each( areaArr[area], function( area_id, area_name ) {
+					item2 += '<option value='+area_id+'>'+ area_name + '</option>';
+				});
+				item2 += '</select>';
+				
+				$("#areaDesc").show();	
+				$("#areaSel").show();	
+				$("#area_selector").show();	
+				$("#area_selector").html(item2);	
+			}else{
+				$("#areaDesc").hide();	
+				$("#areaSel").hide();
+				$("#area_selector").hide();	
+			}   	
+		}
+		
+        function addItem(){
+        	var product = $('#sel_product').val();
+        	var qty     = parseInt($('#quantity').val());
+        	var price   = parseFloat($('#price').val());
+        	
+        	if(product === ''){
+        		alert("Please select product");
+        		return;
+        	}
+        	
+        	var chkQty = isNumber(qty);
+        	if(chkQty === false || typeof chkQty === "undefined"){
+        		alert("Quantity must be a number");
+        		return;
+        	}
+        	
+        	var chkPrice = isNumber(price, qty);
+        	if(chkQty === true && qty > 0){
+        		if(chkPrice === false || typeof chkPrice === "undefined"){
+	        		alert("Price must be a decimal");
+	        		return;
+	        	}
+        	}
+        	
+        	$(".product_details").show();
+        	$(".product_total").show();
+        	
+        	var productName = localStorage.getItem("prodName"+product);
+        	var is_exits = $('#div_prod_'+product).val();
+  			subtotal = parseFloat(price).toFixed(2); 
+  			
+        	if(typeof is_exits === "undefined"){
+        		if(qty > 0 ){
+        			$("#divHiddenInput").append("<input type='hidden' name='product[]' id='div_prod_"+product+"' value='"+product+"' class='productName' />");
+	        		$("#divHiddenInput").append("<input type='hidden' name='qty[]' id='div_qty_"+product+"' value='"+qty+"' class='productQty' />");
+	  				$("#divHiddenInput").append("<input type='hidden' name='price[]' id='div_price_"+product+"' value='"+price+"' class='productPrice' />");
+	  				
+	  				$(".product_content").append("<table width='100%' id='"+product+"_table'><tr><td id='name_"+product+"' width='40%' style='text-align:left;'>"+productName+"</td><td id='qty_"+product+"' style='width:30%;text-align:right;'>"+qty+"</td><td id='subtotal_"+product+"' style='width:30%;text-align:right;'>"+subtotal+"</td></tr></table>");
+	        	}
+        		
+        	}else{
+        		var is_prod = $("#"+product+"_table").length;
+        		if(qty == 0 ){
+	        		$("table").remove("#"+product+"_table");
+	        		subtotal = 0.00;
+	        		price = 0;
+	        	}else if(typeof is_prod === "undefined"){ 
+	        		$(".product_content").append("<table width='100%' id='"+product+"_table'><tr><td id='name_"+product+"' width='40%' style='text-align:left;'>"+productName+"</td><td id='qty_"+product+"' style='width:30%;text-align:right;'>"+qty+"</td><td id='subtotal_"+product+"' style='width:30%;text-align:right;'>"+subtotal+"</td></tr></table>");
+	        	}else{
+	        		if(is_prod == "0"){
+	        			$(".product_content").append("<table width='100%' id='"+product+"_table'><tr><td id='name_"+product+"' width='40%' style='text-align:left;'>"+productName+"</td><td id='qty_"+product+"' style='width:30%;text-align:right;'>"+qty+"</td><td id='subtotal_"+product+"' style='width:30%;text-align:right;'>"+subtotal+"</td></tr></table>");
+	        		}else{
+	        			$("#"+product+"_table").html("<tr><td id='name_"+product+"' width='40%' style='text-align:left;'>"+productName+"</td><td id='qty_"+product+"' style='width:30%;text-align:right;'>"+qty+"</td><td id='subtotal_"+product+"' style='width:30%;text-align:right;'>"+subtotal+"</td></tr>");
+	        		}
+	        		
+	        	}
+	        	
+        		$("#name_"+product).html(productName);
+        		$("#qty_"+product).html(qty);
+	        	$("#subtotal_"+product).html(subtotal);
+	        	
+				$("#div_prod_"+product).val(product);
+		        $("#div_qty_"+product).val(qty);
+		        $("#div_price_"+product).val(price);
+	        	
+        	}
+  			
+  			total_qty = findTotalQty();
+  			//total_qty   = parseInt($('#total_qty').val()) + parseInt(qty);
+        	total_amt   = findTotalPrice();
+        	//alert(total_qty + " = " + total_amt); 
+        	$('#total_qty').val(total_qty);
+        	$('#total_amt').val(total_amt.toFixed(2));
+        	
+        	$('.product_grant_qty').html(total_qty);
+        	$('.product_grant_price').html(total_amt.toFixed(2));
+        	
+        	//reset
+        	$('#sel_product').val("");
+        	$('#quantity').val("");
+        	$('#price').val("");
+        }
+		
+		function submitOrder(){
+			$("#post_form").hide();
+			$("#loading").show();
+			//Ti.App.addEventListener("app:newPostParam", function(e) {
+				//alert(e.url);
+				var ret = validateForm();
+				
+				if(ret === false){
+					$("#post_form").show();
+					$("#loading").hide();
+					return false;
+				}
+				var str = $("#post_form").serialize();
+				
+				var updatePostUrl = localStorage.getItem("update");
+					
+					$.post(updatePostUrl,str, function( data ) {
+						
+						var res = JSON.parse(data);
+						if(res.status == 'success'){
+							
+							noty({"text":"Order update successfully!","layout":"center","type":"success","animateOpen":{"height":"toggle"},"animateClose":{"height":"toggle"},"speed":500,"timeout":4000,"closeButton":false,"closeOnSelfClick":true,"closeOnSelfOver":false,"modal":false});
+							$("#post_form").show();
+							$("#loading").hide();
+						}else{
+							$("#post_form").show();
+							$("#loading").hide();
+						}
+						
+					});
+			//});
+			return false;
+		}
+    </script>
+    
+    <div id="pop_data" style="display:inline;color:#243F8B;font-weight:bold;">Populating data...</div>
+    
+    <!-- STATUS = 'PENDING' ,  EDITABLE CONTENT -->
+    <form id="post_form">
+    	<div id="divHiddenInput"></div>
+    	<input type="hidden" name="o_id" id="o_id" value="">
+    	<table id="editable" style="display:none;" width="100%">
+    		<tr><td class="field" width="20%">Customer Name</td></tr>
+    		<tr><td class="value"><input type="text" value="" name="name" class="text-input" placeholder="Enter Customer Name"></td></tr>
+    		
+    		
+    		<tr><td class="field" width="20%">Mobile</td></tr> 
+    		<tr><td class="value"><input type="tel" value="" name="mobile" class="text-input" placeholder="Enter Mobile Number"></td></tr> 
+    		
+    		<tr><td class="field" width="20%">Send Date</td></tr>
+    		<tr><td class="value"><input class="text-input" name="senddate" readonly type="text" id="datepicker"></td></tr>	
+			
+    		<tr><td class="field" width="20%">State</td></tr>
+    		<tr><td class="value"><div id="country_selector"></div></td></tr>
+			
+			<tr id="areaDesc" style="display:none;"><td class="field" width="20%">Area</td></tr>
+    		<tr id="areaSel" style="display:none;"><td class="value"><div id="area_selector"></div></td></tr>
+			
+    		<tr><td class="field" width="20%">Location</td></tr>
+    		<tr><td class="value"><input type="text" value="" name="location" class="text-input" placeholder="Enter Location"></td></tr>
+			
+    		<tr><td class="field" width="20%">Remark</td></tr>
+    		<tr><td class="value"><textarea rows="4" cols="40" style="height:68px;"  name="remark" class="text-input" placeholder="Enter Remark"></textarea></td></tr>
+    		
+    		<tr><td class="field" width="20%">Product</td></tr>
+    		<tr><td class="value" align="left">
+	    			<div id="product_selector" style="padding-bottom:3px"></div>
+					<input type="tel" value="" min="1" name="quantity_form" id="quantity" placeholder="Enter Quantity"  class="small" />
+					<input type="number" value="" min="1" name="price_form" id="price" placeholder="Enter Price" class="small" style="margin-left:3px" />
+					
+					<img onClick="return addItem();" src="../images/btn-add.png"  style="float:right;width:40px;height:34px;vertical-align: middle;padding-left:3px;">
+				</td>
+			</tr>
+			<tr style="display:none;" id="product_details" class="product_details">
+    			<td colspan="2">
+					<table width="100%">
+						<tr><td width="40%" align="left" style="color:#6E6E6E">Name</td><td width="30%" style="text-align:right;color:#6E6E6E;">Qty</td><td width="30%" style="text-align:right;color:#6E6E6E;">Total</td></tr>
+						<tr><th width="100%" colspan=4><div style="border-bottom: 1px solid #444;"></div></th></tr>
+						<tr><th width="100%" colspan=4><div id="product_content" class="product_content"></div></th></tr>
+					</table>
+				</td>
+    		</tr>
+    		<tr style="display:none;" id="product_total" class="product_total">
+    			<td colspan="2">
+					<table width="100%">
+						<tr><th width="100%" colspan=3><div style="size:14px;border-bottom: 1px solid #444;"></div></th></tr>
+						<tr>
+							<th width="100%" colspan=3>
+								<table width="100%">
+									<tr>
+										<th class="field" width="40%" style="text-align:left;">Total</th>
+										<th class="field" width="30%" style="text-align:right;"><div id="product_grant_qty" class="product_grant_qty">0</div></th>
+										<th class="field" width="30%" style="text-align:right;"><div id="product_grant_price"  class="product_grant_price">0.00</div></th>
+									</tr>
+									<tr>
+										
+									</tr>
+								</table>
+								
+							</th>
+						</tr>
+					</table>
+				</td>
+    		</tr>
+    		<tr>
+    			<td colspan="2"><br/><div style="width:100%;margin:0 auto;text-align:center;"><img onClick="return submitOrder();" src="../images/btn-update.png" width="90%" ></div></td>
+    		</tr>
+    		<tr><th width="100%" colspan=3><br/></th></tr>
+    	</table>    	
+    </form>
+     <!-- STATUS = 'PENDING' ,  EDITABLE CONTENT -->
+     
+     <!-- STATUS = 'DELIVERED' , NON EDITABLE CONTENT -->
+    <table id="noneditable" style="display:none;" width="100%">
+    		<tr><td width="20%" class="field">Customer Name</td></tr>
+    		<tr><td class="value"><div id="name"></div></td></tr>
+    		
+    		
+    		<tr><td class="field" width="20%">Mobile</td></tr> 
+    		<tr><td class="value"><div id="mobile"></div></td></tr> 
+    		
+    		<tr><td class="field" width="20%">Send Date</td></tr>
+    		<tr><td class="value"><div id="senddate"></div></td></tr>
+    		
+    		
+			<tr><td class="field" width="20%">State</td></tr>
+    		<tr><td class="value"><div id="stateName"></div></td></tr>
+    		
+			<tr id="fixedAreaDesc" style="display:none;"><td class="field" width="20%">Area</td></tr>
+    		<tr id="fixedArea"  style="display:none;"><td class="value"><div id="areaName"></div></td></tr>
+    		
+    		<tr><td class="field" width="20%">Location</td></tr>
+    		<tr><td class="value"><div id="location"></div></td></tr>
+			
+    		<tr><td class="field" width="20%">Remark</td></tr>
+    		<tr><td class="value"><div id="remark"></div></td></tr>
+    		
+    		<tr><td class="field" width="20%">Products</td></tr>
+    		
+			<tr style="display:none;" id="product_details"  class="product_details">
+    			<td colspan="2">
+					<table width="100%">
+						<tr><td width="40%" class="field" align="left">Name</td><td class="field" width="30%" style="text-align:right;">Qty</td><td class="field" width="30%" style="text-align:right;">Total</td></tr>
+						<tr><th width="100%" colspan=4><div style="border-bottom: 1px solid #444;"></div></th></tr>
+						<tr><th width="100%" colspan=4><div id="product_content" class="product_content"></div></th></tr>
+					</table>
+				</td>
+    		</tr>
+    		<tr style="display:none;" id="product_total" class="product_total">
+    			<td colspan="2">
+					<table width="100%">
+						<tr><th width="100%" colspan=3><div style="size:14px;border-bottom: 1px solid #444;"></div></th></tr>
+						<tr>
+							<th width="100%" colspan=3>
+								<table width="100%">
+									<tr>
+										<th class="field" width="40%" style="text-align:left;">Total</th>
+										<th class="field" width="30%" style="text-align:right;"><div id="product_grant_qty" class="product_grant_qty">0</div></th>
+										<th class="field" width="30%" style="text-align:right;"><div id="product_grant_price"  class="product_grant_price">0.00</div></th>
+									</tr>
+								</table>
+								
+							</th>
+						</tr>
+					</table>
+				</td>
+    		</tr>
+    		
+    		<tr><th width="100%" colspan=3 style="padding-bottom:10px;"><br/></th></tr>
+    </table>
+    
+    <!-- STATUS = 'DELIVERED' , NON EDITABLE CONTENT -->
+        	
+    <div id="loading" style="display:none;margin:0 auto;width:100%;text-align: center;"><img src="../images/loading.gif"></div>
+    <script>
+       $(document).ready(function(){
+       	    orderDetailListener("app:orderDetailsParam");
+        });
+       
+    </script>
+    </body>
+</html>
