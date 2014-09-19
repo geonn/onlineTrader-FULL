@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/build/iphone/Classes/KrollPropertyDelegate.m \
-  /Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/build/iphone/Classes/KrollPropertyDelegate.h
+  /Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/build/iphone/Classes/KrollPropertyDelegate.m \
+  /Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/build/iphone/Classes/KrollPropertyDelegate.h

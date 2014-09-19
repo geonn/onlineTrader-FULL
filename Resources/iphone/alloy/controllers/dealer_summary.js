@@ -1,12 +1,3 @@
-function __processArg(obj, key) {
-    var arg = null;
-    if (obj) {
-        arg = obj[key] || null;
-        delete obj[key];
-    }
-    return arg;
-}
-
 function Controller() {
     function getDailySummary() {
         var url = Ti.API.GETDAILYSUMMARY + Ti.App.Properties.getString("session");
@@ -63,11 +54,9 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_summary";
-    if (arguments[0]) {
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
-    }
+    arguments[0] ? arguments[0]["__parentSymbol"] : null;
+    arguments[0] ? arguments[0]["$model"] : null;
+    arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -103,8 +92,7 @@ function Controller() {
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
-            fontSize: "18dp",
-            fontFamily: "sans-serif"
+            fontSize: "18dp"
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "DEALER - SUMMARY",
@@ -154,8 +142,7 @@ function Controller() {
         width: Titanium.UI.FILL,
         color: "#fff",
         font: {
-            fontSize: "12dp",
-            fontFamily: "sans-serif"
+            fontSize: "12dp"
         },
         backgroundColor: "#e02222",
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
@@ -204,8 +191,7 @@ function Controller() {
         width: Titanium.UI.FILL,
         color: "#fff",
         font: {
-            fontSize: "12dp",
-            fontFamily: "sans-serif"
+            fontSize: "12dp"
         },
         backgroundColor: "#e02222",
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
@@ -222,8 +208,7 @@ function Controller() {
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
-            fontSize: "18dp",
-            fontFamily: "sans-serif"
+            fontSize: "18dp"
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "MONTHLY SALES",

@@ -187,10 +187,6 @@
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
             transitionWithGesture = NO;
-            // Added
-            if ([TiUtils isIOS7OrGreater]) {
-                controller.interactivePopGestureRecognizer.enabled = YES;
-            }
             break;
         default:
             break;
@@ -212,9 +208,6 @@
 		controllerStack = [[NSMutableArray alloc] init];
 		[controllerStack addObject:[self rootController]];
 		if ([TiUtils isIOS7OrGreater]) {
-            // Added
-            controller.interactivePopGestureRecognizer.delegate = self;
-            // End
 			[controller.interactivePopGestureRecognizer addTarget:self action:@selector(popGestureStateHandler:)];
 		}
 	}
@@ -320,8 +313,6 @@
 	transitionIsAnimating = NO;
 	transitionWithGesture = NO;
 	[self handleDidShowViewController:viewController animated:animated];
-    controller.interactivePopGestureRecognizer.enabled = ([controller respondsToSelector:@selector(interactivePopGestureRecognizer)] && [controller.viewControllers count] > 1);
-
 }
 
 

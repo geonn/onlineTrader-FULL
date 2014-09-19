@@ -1,4 +1,4 @@
 dependencies: \
-  /Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/build/iphone/Classes/CAXException.cpp \
-  /Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/build/iphone/Classes/CAXException.h \
-  /Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/build/iphone/Classes/CADebugMacros.h
+  /Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/build/iphone/Classes/CAXException.cpp \
+  /Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/build/iphone/Classes/CAXException.h \
+  /Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/build/iphone/Classes/CADebugMacros.h

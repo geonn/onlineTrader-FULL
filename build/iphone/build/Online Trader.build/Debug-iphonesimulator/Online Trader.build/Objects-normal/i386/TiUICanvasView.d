@@ -1,2 +1,2 @@
 dependencies: \
-  /Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/build/iphone/Classes/TiUICanvasView.m
+  /Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/build/iphone/Classes/TiUICanvasView.m

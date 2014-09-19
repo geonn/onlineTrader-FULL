@@ -1,4 +1,4 @@
 dependencies: \
-  /Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/build/iphone/Classes/UIImage+RoundedCorner.m \
-  /Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/build/iphone/Classes/UIImage+RoundedCorner.h \
-  /Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/build/iphone/Classes/UIImage+Alpha.h
+  /Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/build/iphone/Classes/UIImage+RoundedCorner.m \
+  /Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/build/iphone/Classes/UIImage+RoundedCorner.h \
+  /Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/build/iphone/Classes/UIImage+Alpha.h

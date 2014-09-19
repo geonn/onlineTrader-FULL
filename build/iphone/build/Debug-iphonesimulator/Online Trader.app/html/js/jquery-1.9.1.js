@@ -1,1 +1,1 @@
-/Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/Resources/iphone/html/js/jquery-1.9.1.js
+/Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/Resources/iphone/html/js/jquery-1.9.1.js

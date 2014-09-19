@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/build/iphone/Classes/AQRecorder.mm \
-  /Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/build/iphone/Classes/AQRecorder.h \
-  /Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/build/iphone/Classes/CAStreamBasicDescription.h \
-  /Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/build/iphone/Classes/CADebugMacros.h \
-  /Users/geomilano/Documents/Titanium_Studio_Workspace/OnlineTrader_v1/build/iphone/Classes/CAXException.h
+  /Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/build/iphone/Classes/AQRecorder.mm \
+  /Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/build/iphone/Classes/AQRecorder.h \
+  /Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/build/iphone/Classes/CAStreamBasicDescription.h \
+  /Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/build/iphone/Classes/CADebugMacros.h \
+  /Users/HatsuneMiku/Documents/Titanium_Studio_Workspace/onlineTrader-FULL/build/iphone/Classes/CAXException.h

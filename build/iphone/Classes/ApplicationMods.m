@@ -21,7 +21,7 @@
 			@"name",
 			@"ti.cloud",
 			@"moduleid",
-			@"3.2.3",
+			@"3.2.2",
 			@"version",
 			@"1056b5d2-2bb5-4339-b930-297637aeec4e",
 			@"guid",

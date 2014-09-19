@@ -5,10 +5,6 @@
  * Please see the LICENSE included with this distribution for details.
  * 
  * WARNING: This is generated code. Modify at your own risk and without support.
- *
- * Gesture Fix
- *
- *
  */
 #ifdef USE_TI_UIIOSNAVIGATIONWINDOW
 
@@ -49,10 +45,6 @@
         case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateFailed:
             transitionWithGesture = NO;
-            // Added
-            if ([TiUtils isIOS7OrGreater]) {
-                navController.interactivePopGestureRecognizer.enabled = YES;
-            }
             break;
         default:
             break;
@@ -101,9 +93,6 @@
         navController.delegate = self;
         [TiUtils configureController:navController withObject:self];
         if ([TiUtils isIOS7OrGreater]) {
-            // Added
-            navController.interactivePopGestureRecognizer.delegate = self;
-            // End
             [navController.interactivePopGestureRecognizer addTarget:self action:@selector(popGestureStateHandler:)];
         }
     }
@@ -129,7 +118,6 @@
         if (args != nil) {
             args = [NSArray arrayWithObject:args];
         }
-        
         [window open:args];
         return;
     }
@@ -182,9 +170,6 @@
 {
     if (!transitionWithGesture) {
         transitionIsAnimating = YES;
-
-
-        navController.interactivePopGestureRecognizer.enabled = NO; 
     }
     if (current != nil) {
         UIViewController *curController = [current hostingController];
@@ -235,9 +220,6 @@
     if (focussed) {
         [current gainFocus];
     }
-    // Added
-    navController.interactivePopGestureRecognizer.enabled = ([navController respondsToSelector:@selector(interactivePopGestureRecognizer)] && [navController.viewControllers count] > 1);
-
 }
 
 #pragma mark - Private API
