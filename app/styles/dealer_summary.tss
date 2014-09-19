@@ -1,0 +1,28 @@
+".summary_figure" : {
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	top :"10dp",
+	width: "20%",
+	left :"60%",
+},
+"Label":{
+	width: Titanium.UI.FILL,
+	color: "#000",
+	font:{
+		fontSize: '12dp',
+		fontFamily: 'sans-serif',
+	},
+},
+"#activityIndicator":{
+},
+"#webview":{
+	top:0,
+},
+".button":{
+	color: "#fff",
+	backgroundColor: "#e02222",
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	height: Titanium.UI.FILL,
+	font:{
+		fontSize: '12dp',
+	},
+}

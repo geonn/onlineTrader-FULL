@@ -1,0 +1,13 @@
+<Alloy>
+	<Window class="container" id="dealer_pos">
+		<Require src="_subheader"></Require>
+		<View class="content_post" id="content">
+			<Label class="h2">DEALER - COURIER</Label>
+			<ImageView class="separator" ></ImageView>
+		</View>
+		<View class="post_form"  >
+			<WebView id="posview" disableBounce="true" url="/html/dealer_pos.html" />
+		</View>
+		
+	</Window>
+</Alloy>

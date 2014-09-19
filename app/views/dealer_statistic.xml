@@ -1,0 +1,14 @@
+<Alloy>
+	<Window class="container" id="dealer_statistic">
+		<Require src="_header" id="footer"></Require>
+		<View class="content_post" id="content">
+			<Label class="h2" id="titleHeader">Top Sales Location</Label>
+			<ImageView class="separator" ></ImageView>
+		</View>
+		<View class="list_form"  >
+			<WebView id="salessatisticview" disableBounce="true"   url="/html/dealer_statistic.html" />
+		</View>
+		<Require src="_dealer_subfooter" id="r_sub_footer"></Require>
+		<Require src="_dealer_footer" id="footer"></Require>
+	</Window>
+</Alloy>

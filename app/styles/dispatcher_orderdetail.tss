@@ -1,0 +1,48 @@
+".content_post":{
+	top:'60dp',
+	font:{
+		fontSize: '16dp'
+	},
+	color: "#e02222",
+	layout: 'vertical',	
+	left:'5dp',
+	right:'5dp'
+},
+
+".details_form" : {
+	layout: "vertical",
+	width : "100%",
+	bottom: 2,
+	height: "70%", 
+	top : "90"
+},
+"#btncomplete":{
+	left: '66%',
+	color: "#fff",
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	width: '33%',
+	height: Titanium.UI.FILL,
+	font:{
+		fontSize: '12dp',
+	},
+},
+"#btnrelease":{
+	left: '0%',
+	color: "#fff",
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	width: '33%',
+	height: Titanium.UI.FILL,
+	font:{
+		fontSize: '12dp',
+	},
+},
+"#btncancel":{
+	left: '33%',
+	color: "#fff",
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	width: '33%',
+	height: Titanium.UI.FILL,
+	font:{
+		fontSize: '12dp',
+	},
+}

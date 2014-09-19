@@ -1,0 +1,15 @@
+
+".container" : {
+  fullscreen      : true,
+  navBarHidden:true
+},
+"#rightMenu" :{
+	left: '75%',
+	color: "#fff",
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	width: '25%',
+	height: Titanium.UI.FILL,
+	font:{
+		fontSize: '12dp',
+	},
+}

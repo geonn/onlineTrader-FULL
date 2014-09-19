@@ -1,0 +1,48 @@
+".text_input" : {
+	 height:'35dp',
+	 left:10,
+	 font:{
+		fontSize: '14dp'
+	},
+	 width:'90%',
+	 color: '#000000',
+	 backgroundColor: '#eee',
+	 keyboardType: Titanium.UI.KEYBOARD_DEFAULT,
+     returnKeyType: Titanium.UI.RETURNKEY_NEXT ,
+	 borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
+},
+".password_input" : {
+	 passwordMask:true,
+	 height:'35dp',
+	 font:{
+		fontSize: '14dp'
+	},
+	 left:10,
+	 width:'90%',
+	 color: '#000000',
+	 backgroundColor: '#eee',
+	 keyboardType: Titanium.UI.KEYBOARD_DEFAULT,
+     returnKeyType: Titanium.UI.RETURNKEY_NEXT  ,
+	 borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
+},
+".number_input" : {
+	
+	 height:'35dp',
+	 font:{
+		fontSize: '14dp'
+	},
+	 left:10,
+	 width:'90%',
+	 color: '#000000',
+	 backgroundColor: '#eee',
+	 keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+     returnKeyType: Titanium.UI.RETURNKEY_NEXT ,
+	 borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	 clearButtonMode: Titanium.UI.INPUT_BUTTONMODE_ONFOCUS
+}
+
+".form_label" :{
+	color: '#000000',
+	 left:10,
+	 width:'auto',
+}

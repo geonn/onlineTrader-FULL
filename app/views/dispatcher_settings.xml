@@ -1,0 +1,36 @@
+<Alloy>
+	<Window class="container" id="dispatcher_settings">
+		<Require src="_header" id="header"></Require>
+		<View class="content" id="content">
+			<Label class="h2">SETTINGS</Label>
+			<ImageView class="separator" bottom=5></ImageView>
+			<ScrollView layout="vertical" height="78%" width="100%">
+			
+				<View class="container" layout="horizontal" top="5" height="60">
+					<Label class="form_label" title="Name" >Dispatcher name</Label>
+					<TextField class="text_input" id="fullname"  value=""  width="90%" hintText='Enter Fullname'/>
+				</View>
+				<View class="container" layout="horizontal" height="60">
+					<Label class="form_label" title="Contact" >Contact Number</Label>
+					<TextField class="number_input" id="mobile"  value=""  width="90%" />
+				</View>
+				<View class="container" layout="horizontal" height="60">
+					<Label class="form_label" title="Contact" >Preferred State</Label>
+					<TextField class="text_input" id="prefer_state" onClick="chooseState" editable="false" hintText='Choose state'  width="90%" />
+				</View>
+				<View class="container" layout="horizontal" height="60">
+					<Label class="form_label" title="Email">New Password</Label>
+					<TextField class="password_input" id="new_password" hintText='Enter New Password' value="" />
+				</View>
+				<View class="container" layout="horizontal" height="60">
+					<Label class="form_label" title="Email">Confirm Password</Label>
+					<TextField class="password_input" id="confirm_password" hintText='Enter Confirm Password' value="" />
+				</View>
+				<Button id="updateButton" onClick="doUpdates"  backgroundImage="/images/btn-update.png" width="90%" bottom="10"   />
+				
+			</ScrollView>
+			
+		</View>
+		<Require src="_dispatcher_footer" id="footer"></Require>
+	</Window>
+</Alloy>

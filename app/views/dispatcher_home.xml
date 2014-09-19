@@ -1,0 +1,22 @@
+<Alloy>
+	<Window class="container" id="dispatcher_home_win">
+		<View id="header">
+			
+			<ImageView width="7%" left="10%" onTouchend="refreshPage" image="/images/refresh-icon.png" />
+			<View class="border-line" left="25%" top="0%"></View>
+			<Label class="h1" id="appTitle">ONLINE TRADER</Label>
+			
+		</View>
+		<View class="content_post" id="content">
+			<Label class="h2">HOME - ALL TASK</Label>
+			<ImageView class="separator" ></ImageView>
+		</View>
+		<View class="home_form" id="home_form" >
+			<ScrollView height="auto" id="orderlistable"  layout="vertical" >
+	        	<WebView layout="vertical" id="dis_home" height="auto" disableBounce="true" url="/html/dispatcher_home.html" />
+	        </ScrollView>	 
+		</View>
+		<Require type="view" src="_dispatcher_footer" id="footer"/>
+	
+	</Window>
+</Alloy>

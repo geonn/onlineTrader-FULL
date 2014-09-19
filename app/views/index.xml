@@ -1,0 +1,17 @@
+<Alloy>
+	<Window class="container">
+		<View id="header">
+			<Label class="h1" id="appTitle">LOGIN</Label>
+		</View>
+		<View class="content" id="content">
+			<ScrollView showVerticalScrollIndicator="true" showHorizontalScrollIndicator="true" height="320" width="100%">
+				<Label backgroundImage="/images/online-trader-logo.png" width="120" height="120" bottom="150" />
+				<TextField id="username" /><Label id="usernamehint">Enter Username</Label>
+				<TextField id="password" /><Label id="passwordhint">Enter Password</Label>
+			</ScrollView>
+			<Button id="btnLogin" onClick="doLogin"    />
+			<ActivityIndicator id="activityIndicator" message="Loading..."/>
+		</View>
+
+	</Window>
+</Alloy>

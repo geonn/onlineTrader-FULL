@@ -1,0 +1,176 @@
+<html>
+    <head>
+    	<title>Order List</title>
+    	 <link rel="stylesheet" href="js/jquery-ui.css">
+    	 <link rel="stylesheet" href="js/noty.css">
+    	 <link rel="stylesheet" href="js/noty_theme_default.css">
+    	 <link rel="stylesheet" href="css/main.css">
+  		 <script src="js/jquery-1.9.1.js"></script>
+  		 <script src="js/jquery-ui.js"></script>
+  		 <script src="js/noty.js"></script>
+   		 <script src="js/main.js" type="text/javascript"></script>
+		<meta name="viewport" content="initial-scale=1.0, width=device-width, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no" />
+  		
+  		<script>
+	  		Ti.App.addEventListener("app:getStatistic", function(e) {
+				var dateToday = todayDate();
+  				$( "#datepicker" ).val(dateToday);
+  				
+	            localStorage.setItem("session",e.session);
+	            localStorage.setItem("url", e.url);
+	            localStorage.setItem("userstat", e.userstat);
+	            localStorage.setItem("tableTitle", "Location");
+	            localStorage.setItem("targetURL", e.url); //Default
+	            drawTable(e.url+"&date="+dateToday);
+	            
+				$( "#datepicker" ).datepicker({
+				    onSelect: function(dateText) {
+				    	$("#dealer_order_list").html("<div style='display:inline;color:#243F8B;font-weight:bold;'>Loading...</div>");
+				        thedate =$( "#datepicker" ).val();
+				       
+	        			$( "#datepicker" ).val(thedate);
+				        var reloadURL = localStorage.getItem("url");
+						
+				        refreshTable();
+				    },
+				     dateFormat: 'dd/mm/yy'
+			     });
+	        });
+  			
+			
+			function loadList(){
+				Ti.App.addEventListener("app:getStatistic", function(e) {
+					var myDate = $( "#datepicker" ).val();
+            		localStorage.setItem("url", e.url);
+            		$("#dealer_statistic_list").html("<div style='display:inline;color:#243F8B;font-weight:bold;'>Loading...</div>");
+					drawTable(e.url+"&date="+myDate);
+				});
+			}
+			
+			function refreshTable(){
+				thedate =$( "#datepicker" ).val();
+				var dateRpt = localStorage.getItem("targetURL");
+				$("#dealer_statistic_list").html("<div style='display:inline;color:#243F8B;font-weight:bold;'>Loading...</div>");
+				
+				drawTable(dateRpt+"&date="+thedate);
+			}
+			
+			function drawTable(queryUrl){
+				$.getJSON(queryUrl, function( data ) {
+				   if(data.status == 'error'){
+				   	//getStateSelector();
+				   }else{
+				   	var total_item = 0;
+				   	var str = "";
+				   	 if(data.status == 'success'){
+				   	 	var dateRpt = localStorage.getItem("targetURL");
+				   	 	var tableTitle = localStorage.getItem("tableTitle");
+				   	 	
+				   	 	str += "<table cellpadding='0' cellspacing='0' style='width:100%;' class='bordered'>";
+				   	 	
+				   	 	if(tableTitle == "Dealer"){
+				   	 		str += "<tr><th width='100%' id='titleName'>"+ localStorage.getItem("tableTitle")+"</th></tr>";
+					  	
+						  	if(data.data == ""){
+						  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
+						  	}else{
+						  		$.each( data.data, function( key, val ) {
+									str += "<tr><td width='100%'>"+key+". "+val.name+"</td></tr>";
+								});
+						  	}
+				   	 		
+				   	 	}else{
+				   	 		str += "<tr><th width='70%' id='titleName'>"+ localStorage.getItem("tableTitle")+"</th><th width='30%' id='titleTotal'>Total Order</th></tr>";
+					  	
+						  	if(data.data == ""){
+						  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
+						  	}else{
+						  		$.each( data.data, function( key, val ) {
+									str += "<tr><td width='70%'>"+key+". "+val.name+"</td><td width='30%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
+								});
+						  	}
+				   	 		
+				   	 	}
+				   	 	
+						  str += "</table>";
+						}else{
+						 	str = "<div>No records found</div>";
+						}
+				 		$("#dealer_statistic_list").html(str);	
+				   }
+				})
+				.error(function() { refreshTable(); });
+			}
+			
+			function showContent(options){
+				if(options == "dealer"){
+					Ti.App.fireEvent('changeTitle', {title: "Top Sales Dealer"  });
+					localStorage.setItem("tableTitle", "Dealer");
+					localStorage.setItem("targetURL", localStorage.getItem("userstat"));
+				}else{
+					Ti.App.fireEvent('changeTitle', {title: "Top Sales Location"  });
+					localStorage.setItem("tableTitle", "Location");
+					localStorage.setItem("targetURL", localStorage.getItem("url"));
+				}
+				refreshTable();
+				$('.floatMenu').toggle('slide', { direction: 'left' }, 300);
+			}
+			
+			$(document).ready(function(){
+				$('#menuOptions').click(function(){
+					event.preventDefault();
+					
+				    $('.floatMenu').toggle('slide', { direction: 'left' }, 300);
+				});	
+				
+		     });
+		</script>
+		<style>
+			input.text-input {
+				width: 75%;
+				margin:0 auto;
+				-moz-border-radius: 4px;
+			    -webkit-border-radius: 4px;
+				border-radius: 4px;
+				background: #fff;
+				border: solid 1px #BDBDBD;
+				color: #555;
+				height:34px;
+				font-size: 13px;
+				float:left;
+			}
+  			
+			.staticBar{
+				-webkit-box-shadow: 0px 1px 3px rgba(59,57,59,1);
+				-moz-box-shadow:  0px 1px 3px rgba(59,57,59,1);
+				box-shadow: 0px 1px 3px rgba(59,57,59,1);
+				width:100%;	
+				position:inline;
+				height:35px;
+				top:0;
+				background-color:#D8D8D8;
+				left:0;
+				padding-top:5px;
+				padding-bottom:5px;
+				text-align:center;
+				index:99;
+			}
+		</style>
+  </head>
+    
+    <body>
+    	<div class="floatMenu" id="floatMenu">
+    		<div class="floatContent" onClick="showContent('location')">Sales by Location</div>
+    		<hr/>
+    		<div class="floatContent"  onClick="showContent('dealer')">Sales by Dealer</div>
+    	</div>
+    	<div class="staticBar" id="dateBar">
+    		<img id="menuOptions" src="../images/menu.png"  style="float:left;width:30px;vertical-align: middle;padding-left:10px;padding-right:10px;">
+    		<input class="text-input" name="senddate" readonly type="text" id="datepicker" value="" >
+    	
+    	</div>
+    	<div id="dealer_statistic_list" style="padding-top:45px;display:block;"></div>	
+		
+	</body>
+	
+</html>

@@ -1,0 +1,57 @@
+<Alloy>
+	<Window class="container" id="dealer_settings">
+		<Require src="_header" id="footer"></Require>
+		<View class="content" id="content">
+			<Label class="h2">SETTINGS</Label>
+			<ImageView class="separator" bottom=5></ImageView>
+			<ScrollView layout="vertical" height="78%" width="100%">
+				<View class="container" layout="vertical" top="5" height="50">
+					<Label class="form_label" title="Name" >Dealer ID</Label>
+					<Label class="form_label" id="dealer_id" color="#585858"></Label>
+				</View>
+				<View class="container" layout="horizontal"  height="60">
+					<Label class="form_label" title="Name" >Dealer name</Label>
+					<TextField class="text_input" id="fullname"  value=""  width="90%" hintText='Enter Fullname' />
+				</View>
+				<View class="container" layout="horizontal" height="60">
+					<Label class="form_label" title="Contact" >Contact Number</Label>
+					<TextField class="number_input" id="mobile"  value="" hintText='Enter Mobile Number'  width="90%" />
+				</View>
+				<View class="container" layout="horizontal" height="60">
+					<Label class="form_label" title="Address" >Address</Label>
+					<TextField class="text_input" id="address"  value=""  width="90%" />
+				</View>
+				<View class="container" layout="horizontal" height="60">
+					<Label class="form_label" title="City" >City</Label>
+					<TextField class="text_input" id="city"  value=""  width="90%" />
+				</View>
+				<View class="container" layout="horizontal" height="60">
+					<Label class="form_label" title="Postcode" >Postcode</Label>
+					<TextField class="number_input" id="postcode" hintText='Enter Postcode'  value=""  width="90%" />
+				</View>
+				<View class="container" layout="horizontal" height="60">
+					<Label class="form_label" title="State" >State</Label>
+					<TextField class="text_input" id="state" onClick="chooseMState" editable="false"  hintText='Choose State'   width="90%" />
+				</View>
+				<View class="container" layout="horizontal" height="60">
+					<Label class="form_label" title="Contact" >Preferred State</Label>
+					<TextField class="text_input" id="prefer_state" onClick="chooseState" editable="false"  hintText='Choose Preferred State'   width="90%" />
+				</View>
+				<View class="container" layout="horizontal" height="60">
+					<Label class="form_label" title="Email">New Password</Label>
+					<TextField class="password_input" id="new_password" hintText='Enter New Password' value="" />
+				</View>
+				<View class="container" layout="horizontal" height="60">
+					<Label class="form_label" title="Email">Confirm Password</Label>
+					<TextField class="password_input" id="confirm_password" hintText='Enter Confirm Password' value="" />
+				</View>
+
+				<Button id="updateButton" onClick="doUpdates"  backgroundImage="/images/btn-update.png" top="20" width="90%"  />				
+
+			</ScrollView>
+			
+		</View>
+		<Require src="_dealer_subfooter" id="r_sub_footer"></Require>
+		<Require src="_dealer_footer" id="footer"></Require>
+	</Window>
+</Alloy>

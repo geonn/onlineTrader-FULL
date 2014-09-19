@@ -1,0 +1,264 @@
+<html>
+    <head>
+    	<title>Pos List</title>
+    	 <link rel="stylesheet" href="js/jquery-ui.css">
+    	 <link rel="stylesheet" href="js/noty.css">
+    	 <link rel="stylesheet" href="js/noty_theme_default.css">
+  		 <script src="js/jquery-1.9.1.js"></script>
+  		 <script src="js/jquery-ui.js"></script>
+  		 <script src="js/noty.js"></script>
+   		 <script src="js/main.js" type="text/javascript"></script>
+		<meta name="viewport" content="initial-scale=1.0, width=device-width, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no" />
+  		<script>
+
+			  $(function() {
+				Ti.App.addEventListener("html:realDrawTable", realDrawTable);
+				Ti.App.addEventListener("app:refreshPage", refreshPage);
+			  	Ti.App.addEventListener("app:posListParam", posListParam);
+				
+				function refreshPage(e){
+					noty({"text":"Refreshing list...","layout":"top","type":"success","animateOpen":{"height":"toggle"},"animateClose":{"height":"toggle"},"speed":100,"timeout":3000,"closeButton":false,"closeOnSelfClick":true,"closeOnSelfOver":false,"modal":false});
+        		
+            		var listUrl = localStorage.getItem("posUrl");
+            		var thedate =$( "#datepicker" ).val();
+            		
+            		if(thedate == 'All Date'){
+            			thedate = "";
+            		}
+            		
+            		//Ti.App.fireEvent('Ti:clearCache', { 
+					//		queryUrl: listUrl+"&date="+thedate
+					//	});
+            		drawTable(listUrl+"&date="+thedate);
+				}
+				
+				function posListParam(e){
+					localStorage.setItem("session",e.session);
+					
+            		localStorage.setItem("posUrl", e.posUrl);
+            		var thedate =$( "#datepicker" ).val();
+            		if(thedate == 'All Date'){
+            			thedate = "";
+            		}
+            		$("#dealer_order_list").html("<div style='display:inline;color:#243F8B;font-weight:bold;'>Loading...</div>");
+            		
+            		//Ti.App.fireEvent('Ti:clearCache', { 
+					//		queryUrl: e.posUrl+"&date="+thedate
+					//	});
+					drawTable(e.posUrl+"&date="+thedate);
+
+				}
+				
+				$(window).unload(function() {
+				    Ti.App.removeEventListener("app:posListParam", posListParam);
+				    Ti.App.removeEventListener("app:refreshPage", refreshPage);
+				    Ti.App.removeEventListener("html:realDrawTable", realDrawTable);
+				});
+
+			    $( "#datepicker" ).datepicker({
+				    onSelect: function(dateText) {
+				    	$("#dealer_order_list").html("<div style='display:inline;color:#243F8B;font-weight:bold;'>Loading...</div>");
+				        thedate =$( "#datepicker" ).val();
+				       
+	        			$( "#datepicker" ).val(thedate);
+				        var reloadURL = localStorage.getItem("posUrl");
+						
+						//Ti.App.fireEvent('Ti:clearCache', { 
+						//	queryUrl: reloadURL+"&date="+thedate
+						//});
+				        drawTable(reloadURL+"&date="+thedate);
+				    },
+				     dateFormat: 'dd/mm/yy'
+			     });
+			  });
+		</script>
+		<style>
+  		    html {-webkit-text-size-adjust: none;}
+  		 	body{
+				color: #e02222;
+				font-size:12px;
+			}
+			input.text-input {
+				width: 80%;
+				margin:0 auto;
+				-moz-border-radius: 4px;
+			    -webkit-border-radius: 4px;
+				border-radius: 4px;
+				background: #fff;
+				border: solid 1px #BDBDBD;
+				color: #555;
+				height:34px;
+				font-size: 13px;
+			}
+  			table tr td, tr th{
+				font-size:12px;
+				font-family: Verdana;
+				color: "#e02222";
+			}
+			table.boxes{
+				border: solid 1px #d4d4d4;
+				background:#F6F4F0;
+				color: #444444;
+				border-radius: 2px;
+				-moz-border-radius: 2px;
+			    -webkit-border-radius: 2px;
+			    padding: 5px;
+			    margin: 5px 0;
+			}
+			select {
+				border-radius: 4px;
+				background: #ffffff;
+				-webkit-appearance: none;
+				border: solid 1px #BDBDBD;
+				color: #555;
+				-moz-border-radius: 4px;
+			    -webkit-border-radius: 4px;
+			    padding: 5px;
+				height: 34px;
+			}
+			.tableTitle {
+				background: #D2F0F4;
+				color:#645D57;
+				font-size:12px;
+				padding:5px;
+				border-radius: 2px;
+				-moz-border-radius: 2px;
+			    -webkit-border-radius: 2px;
+			    width: 100px;
+			    margin: 0 auto;
+			   /* opacity:0.7;*/
+			    text-align:center;
+				/*filter:alpha(opacity=70); /* For IE8 and earlier */
+			}
+			.staticBar{
+				-webkit-box-shadow: 0px 1px 3px rgba(59,57,59,1);
+				-moz-box-shadow:  0px 1px 3px rgba(59,57,59,1);
+				box-shadow: 0px 1px 3px rgba(59,57,59,1);
+				width:100%;	
+				position:fixed;
+				height:35px;
+				top:0;
+				background-color:#D8D8D8;
+				left:0;
+				padding-top:5px;
+				padding-bottom:5px;
+				text-align:center;
+				index:99;
+			}
+  		</style>
+  		<script>
+			var locker = false;
+			
+			function posDetail(p_id){
+				
+				if(locker === false){
+					locker = true;
+					Ti.App.fireEvent('app:viewPosDetail', { 
+						p_id: p_id, 
+					});
+					locker = false;
+				}
+				
+			}
+			
+			function drawTable(queryUrl){
+				var total_item = 0;
+				//var data = e.data;
+				var str = "";
+				$.getJSON(queryUrl, function( data ) {   	
+				   if(data.status == 'error'){
+				   				
+				   }else{
+				   	var total_item = 0;
+				  
+				   	var str = "";
+				   	 if(data.status == 'success'){
+				   	 
+				   	 	var total_item = data.data.length;
+				   	 	//loop date
+				   	 	if(total_item == 0){
+				   	 		str = "<div style='height:500px'>No record found</div>";
+						 	$("#total_item").val(total_item);
+					 		$("#dealer_order_list").html(str);
+				   	 	}else{
+				   	 		$.each( data.data, function( key, items ) {
+					    	 var day_item   = 0;
+						     str += "<div id='div_"+key+"' class='tableTitle'>"+key+"</div>";
+						     
+						     //loop order by date
+						     $.each( items, function( index, val ) {
+						     	
+						      	str += "<table onClick='return posDetail("+val.order.p_id+");' class='table_"+index+" boxes' width='100%' id='table_"+ val.order.p_id+"'>";
+
+						      	str += "<tr><th width='20%'>Customer</th><td width='70%' style='color:#525252'> : "+ val.order.receiver_name+"</td><td rowspan=4 valign=middle></td></tr>";
+						      	str += "<tr><th width='20%' valign=top>Mobile</th><td valign=top style='color:#525252'> : <a href='tel:"+val.order.receiver_mobile+"'>"+ val.order.receiver_mobile+"</a></td></tr>";
+						      	if(val.order.receiver_state == "Others"){
+						      		str += "<tr><th width='20%' valign=top>Location</th><td valign=top style='color:#525252'> : "+ val.order.receiver_city+", "+val.order.receiver_others+"</td></tr>";
+						      	}else{
+						      		str += "<tr><th width='20%' valign=top>Location</th><td valign=top style='color:#525252'> : "+ val.order.receiver_city+", "+val.order.receiver_state+"</td></tr>";
+						      	}
+						      	
+						      	str += "<tr><th width='20%'>Tracking Code</th><td valign=top style='color:#525252'> : "+ val.order.tracking_code+"</td></tr>";
+								
+								var prod_text = "";
+								var prod_counter = 1;
+								
+								
+								// loop product		
+								$.each( val.order.product, function( prod_key, prod ) {
+
+									prod_text += prod.name + "("+prod.quantity+")";
+									if(prod_counter !== val.order.product.length){
+										prod_text += ", "; 
+									}
+									prod_counter++;
+								});
+								str += "<tr><th width='20%' valign='top'>Products</th><td valign=top style='color:#525252'> : "+ prod_text +"</td></tr>";
+									
+						      	str += "</table>";
+						      	total_item++;
+						      	day_item++;
+							 });
+							 
+						 });
+						 	$("#total_item").val(total_item);
+					 		$("#dealer_order_list").html(str);
+				   	 		
+				   	 	}
+					     
+						}else{
+							
+						 	str = "<div style='height:500px'>No record found</div>";
+						 	$("#total_item").val(total_item);
+					 		$("#dealer_order_list").html(str);
+						}
+
+				   }
+				});
+			}
+			
+			var realDrawTable = function(e){
+					
+			};
+			
+			function resetDate(){
+				$('#datepicker').val("All Date");
+				var reloadURL = localStorage.getItem("posUrl");
+				
+				//Ti.App.fireEvent('Ti:clearCache', { 
+				//			queryUrl: reloadURL+"&date="
+				//		});
+				drawTable(reloadURL+"&date=");
+			}
+		</script>
+  </head>
+    
+    <body>
+    	<input type="hidden" name="total_item" id="total_item" value="0">
+    	<div class="staticBar">
+			<input class="text-input" name="senddate" readonly type="text" id="datepicker" value="All Date" > <div style="float:right; border-left:1px solid #555; padding:0 15px; line-height: 34px; font-size:13px; " onClick="resetDate();">All</div>
+		</div>
+    	<div id="dealer_order_list" style="padding-top:40px;display:block;min-height: 300px;"></div>	
+	</body>
+	
+</html>

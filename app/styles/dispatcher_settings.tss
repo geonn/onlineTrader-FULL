@@ -1,0 +1,36 @@
+".text_input" : {
+	 
+	 height:'35dp',
+	 left:10,
+	 width:'90%',
+	 keyboardType: Titanium.UI.KEYBOARD_DEFAULT,
+     returnKeyType: Titanium.UI.RETURNKEY_NEXT ,
+	 borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	 clearButtonMode: Titanium.UI.INPUT_BUTTONMODE_ONFOCUS
+},
+".password_input" : {
+	 
+	 passwordMask:true,
+	 height:'35dp',
+	 left:10,
+	 width:'90%',
+	 keyboardType: Titanium.UI.KEYBOARD_DEFAULT,
+     returnKeyType: Titanium.UI.RETURNKEY_NEXT  ,
+	 borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	 clearButtonMode: Titanium.UI.INPUT_BUTTONMODE_ONFOCUS
+},
+".number_input" : {
+	hintText:'Enter Mobile Number',
+	 height:'35dp',
+	 left:10,
+	 width:'90%',
+	 keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+     returnKeyType: Titanium.UI.RETURNKEY_NEXT ,
+	 borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	 clearButtonMode: Titanium.UI.INPUT_BUTTONMODE_ONFOCUS
+}
+
+".form_label" :{
+	 left:10,
+	 width:'auto',
+}

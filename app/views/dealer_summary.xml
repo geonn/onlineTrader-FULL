@@ -1,0 +1,30 @@
+<Alloy>
+	<Window class="container" id="dealer_summary">
+		<Require src="_header" id="header"></Require>
+		<View class="content" height="140dp">
+			<Label class="h2">DEALER - SUMMARY</Label>
+			<ImageView class="separator"></ImageView>
+			<View height="30">
+				<Label top="10dp" left="10dp">Today Commission</Label>
+				<Label class="summary_figure" id="todayCommission">0</Label>
+				<Label class="button" top="10dp" left="80%" mod="daily_commission" onTouchend="popup">DETAIL</Label>
+			</View>
+			
+			<View height="30">
+				<Label top="10dp" left="10dp">Monthly Commission</Label>
+				<Label class="summary_figure" id="monthCommission">0</Label>
+				<Label class="button" top="10dp" left="80%" mod="monthly_commission" onTouchend="popup">DETAIL</Label>							</View>
+			<Label class="h2">MONTHLY SALES</Label>
+			<ImageView class="separator"></ImageView>
+			<ActivityIndicator id="activityIndicator" message="Loading..."/>
+			 
+		</View>
+		<View top="140dp" >
+			<ScrollView height="77%"   layout="vertical" >
+				<WebView id="webview" layout="vertical" height="auto" disableBounce="true" loading="true"  width="100%" url="/html/dealer_summary_inventory.html" />
+			</ScrollView>	
+		</View>
+		<Require src="_dealer_footer" id="footer"></Require>
+		
+	</Window>
+</Alloy>

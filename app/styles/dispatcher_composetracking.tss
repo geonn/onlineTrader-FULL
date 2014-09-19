@@ -1,0 +1,69 @@
+"#rightMenu" :{
+	left: '75%',
+	color: "#fff",
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	width: '25%',
+	height: Titanium.UI.FILL,
+	font:{
+		fontSize: '12dp',
+	},
+},
+".content_post":{
+	top:'60dp',
+	font:{
+		fontSize: '16dp'
+	},
+	color: "#e02222",
+	layout: 'vertical',	
+	left:'5dp',
+	right:'5dp'
+},
+
+".details_form" : {
+	layout: "vertical",
+	width : "100%",
+	bottom: 2,
+	height: "90%", 
+	top : "90"
+},
+".text_input" : {
+	 height:'35dp',
+	 left:10,
+	 font:{
+		fontSize: '14dp'
+	},
+	 width:'90%',
+	 keyboardType: Titanium.UI.KEYBOARD_DEFAULT,
+     returnKeyType: Titanium.UI.RETURNKEY_NEXT ,
+	 borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
+},
+".password_input" : {
+	 passwordMask:true,
+	 height:'35dp',
+	 font:{
+		fontSize: '14dp'
+	},
+	 left:10,
+	 width:'90%',
+	 keyboardType: Titanium.UI.KEYBOARD_DEFAULT,
+     returnKeyType: Titanium.UI.RETURNKEY_NEXT  ,
+	 borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
+},
+".number_input" : {
+	hintText:'Enter Mobile Number',
+	 height:'35dp',
+	 font:{
+		fontSize: '14dp'
+	},
+	 left:10,
+	 width:'90%',
+	 keyboardType: Titanium.UI.KEYBOARD_NUMBER_PAD,
+     returnKeyType: Titanium.UI.RETURNKEY_NEXT ,
+	 borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
+	 clearButtonMode: Titanium.UI.INPUT_BUTTONMODE_ONFOCUS
+}
+
+".form_label" :{
+	 left:10,
+	 width:'auto',
+}

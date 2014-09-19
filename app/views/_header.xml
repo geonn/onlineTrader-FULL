@@ -1,0 +1,5 @@
+<Alloy>
+	<View id="header">
+		<Label class="h1" id="appTitle">ONLINE TRADER</Label>
+	</View>
+</Alloy>

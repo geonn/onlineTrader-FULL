@@ -1,0 +1,16 @@
+
+<Alloy>
+	<Window class="container" id="tracking">
+		<View id="header">
+				<Label id="backTitle" onTouchend="goBack" >BACK</Label>
+				<View class="border-line" left="25%" top="0%"></View>
+
+				<Label class="h1" id="appTitle">Tracking Details</Label>
+				<View class="border-line" left="75%" top="0%"></View>
+				<Label id="rightMenu" mod="composetracking" onTouchend="popup">ADD</Label>
+
+		</View>
+		<ImageView class="separator" bottom=5></ImageView>
+			<WebView id="webview_tracking" width="100%" top="50" height="90%" disableBounce="true" onLoad="construct"  url="/html/tracking.html" />
+	</Window>
+</Alloy>

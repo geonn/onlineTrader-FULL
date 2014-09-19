@@ -1,0 +1,96 @@
+"Label":{
+	width: Titanium.UI.FILL,
+	color: "#e02222"
+},
+".container": {
+	backgroundColor:"white",
+	navBarHidden:true
+},
+"#header":{
+	height: '50dp',
+	top: 0,
+	backgroundColor: '#e02222'
+},
+".header":{
+	height: '50dp',
+	top: 0,
+	backgroundColor: '#e02222'
+},
+"#footer":{
+	height: Titanium.UI.SIZE,
+	bottom:0,
+	backgroundColor: '#e02222'
+},
+"#subfooter":{
+	height: Titanium.UI.SIZE,
+	bottom:0,
+},
+".content":{
+	top:'60dp',
+	font:{
+		fontSize: '14dp',
+		fontFamily: 'sans-serif',
+	},
+	color: "#525252",
+	layout: 'vertical',	
+	left:'5dp',
+	right:'5dp'
+},
+".h1": {
+	font:{
+		fontSize: '20dp'
+	}, 
+	color: "#fff",
+	width: Titanium.UI.SIZE
+},
+".h2":{
+	font:{
+		fontSize: '18dp'
+	},
+	color: "#e02222",
+	textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+},
+".separator":{
+	width: "100%",
+	height: 1,
+	backgroundColor: "#9d0404"
+},
+"#popupTitle":{
+	top :"20",
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	left:"20",
+	font:{
+		fontSize: '18dp'
+	},
+	color: "#fff",
+},
+"#activityIndicator" :{
+	color: "#888"
+},
+".border-line":{
+	backgroundColor: '#e8e8e8',
+    width: 1,
+    height: Titanium.UI.FILL,
+},
+"#backTitle":{
+	left: '0%',
+	color: "#fff",
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	width: '25%',
+	height: Titanium.UI.FILL,
+	font:{
+		fontSize: '12dp'
+	}
+},
+".rightNav":{
+	left: '75%',
+	color: '#fff',
+		textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	width: '25%',
+	height: Titanium.UI.FILL,
+	font:{
+		fontSize: '12dp'
+	}
+
+}
+

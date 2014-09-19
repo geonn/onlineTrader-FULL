@@ -1,0 +1,26 @@
+".content_post":{
+	top:'60dp',
+	font:{
+		fontSize: '16dp'
+	},
+	color: "#e02222",
+	layout: 'vertical',	
+	left:'5dp',
+	right:'5dp'
+},
+".content":{	
+	left:0,
+	right:0
+},
+".home_form" : {
+	layout: "vertical",
+	width : "100%",
+	bottom: 2,
+	height: "70%", 
+	top : "90"
+},
+"#orderlistable" : {
+	separatorStyle: Titanium.UI.iPhone.TableViewSeparatorStyle.NONE,
+	separatorColor: 'transparent'
+}
+

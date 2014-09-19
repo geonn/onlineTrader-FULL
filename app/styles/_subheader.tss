@@ -1,0 +1,5 @@
+"#appTitle":{
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	left: "25%",
+	width: "75%",
+}

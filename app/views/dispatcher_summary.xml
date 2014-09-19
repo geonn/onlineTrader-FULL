@@ -1,0 +1,25 @@
+<Alloy>
+	<Window class="container"  id="dispatcher_summary">
+		<Require src="_header" id="header"></Require>
+		<View class="content" height="500">
+			<Label class="h2">DISPATCH - COMMISSION</Label>
+			<ImageView class="separator"></ImageView>
+			<View height="30">
+				<Label top="10dp" left="10dp">Today Commission</Label>
+				<Label class="summary_figure" id="todayCommission">0</Label>
+				<Label class="button" top="10dp" left="80%" mod="daily_commission" onTouchend="popup">DETAIL</Label>
+			</View>
+			
+			<View height="30">
+				<Label top="10dp" left="10dp">Monthly Commission</Label>
+				<Label class="summary_figure" id="monthCommission">0</Label>
+				<Label class="button" top="10dp" left="80%" mod="monthly_commission" onTouchend="popup">DETAIL</Label>		
+			</View>
+			<ScrollView height="auto" class="list_form" id="list_form" >
+				<WebView id="donelistview" showHorizontalScrollIndicator="false" disableBounce="true"  url="/html/dispatcher_donelist.html" />
+			</ScrollView>
+		</View>
+		
+		<Require src="_dispatcher_footer" id="footer"></Require>
+	</Window>
+</Alloy>

@@ -1,0 +1,23 @@
+<Alloy>
+	<Window class="container" id="composetracking_win">
+		<View id="header">
+			<Label id="backTitle" onTouchend="goBack">BACK</Label>
+			<View class="border-line" left="25%" top="0%"></View>
+			<Label class="h1" id="appTitle">MESSAGE</Label>
+			<View class="border-line" left="75%" top="0%"></View>
+			<Label id="rightMenu" mod="ordertracking" onClick="sendTracking">SEND</Label>
+		</View>
+		<View class="content_post" id="content">
+			<Label class="h2">ADD TRACKING</Label>
+			<ImageView class="separator" ></ImageView>
+		</View>
+		<View class="details_form"  >
+			<TextArea id="textArea" id="trackingMessage" suppressReturn="false"
+            borderWidth="2" borderColor="#bbb" borderRadius="2"
+            color="#888" textAlign="left" hintText="Enter tracking message"
+            top="5" width="90%" height="150" />
+		</View>
+		
+	</Window>
+</Alloy>
+

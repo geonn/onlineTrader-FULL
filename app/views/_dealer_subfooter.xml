@@ -1,0 +1,9 @@
+<Alloy>
+	<View id="subfooter">
+		<ImageView width="20%" id="summary" mod="summary" onTouchend="goNav" left="0" image="/images/icons/icon-summary.png" />
+		<ImageView width="20%" id="newpost" mod="newpost" onTouchend="goNav" left="20%" image="/images/icons/icon-neworder.png" />
+		<ImageView width="20%" id="orderlist" mod="orderlist" onTouchend="goNav" left="40%" image="/images/icons/icon-listing.png" />
+		<ImageView width="20%" left="60%" image="/images/icons/icon-pos.png" />
+		<ImageView width="20%" id="settings" mod="settings" onTouchend="goNav" left="80%" image="/images/icons/icon-setting.png" />
+	</View>
+</Alloy>
