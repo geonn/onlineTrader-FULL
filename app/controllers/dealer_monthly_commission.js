@@ -1,4 +1,5 @@
 var args = arguments[0] || {};
+var clickTime = null;
 getSummary();
 
 //Active icon displayed
@@ -81,13 +82,20 @@ function getSummary(e) {
 	 client.send();
 }
 
-$.tableView.addEventListener("touchend", function(e){
-    var prop = e.rowData.month;
-    console.log(prop);
-    var param = {
-        date: prop,
-    };
-	var orderdetail = Alloy.createController("dealer_monthly_commission_detail",param).getView();
-    
-    setWindowRelationship(orderdetail);
+$.tableView.addEventListener("click", function(e){
+	var currentTime = new Date();
+	if (currentTime - clickTime < 1000) {
+	    return;
+	}else{
+		clickTime = currentTime;
+		console.log(e.rowData);
+	    var prop = e.rowData.month;
+	   
+	    var param = {
+	        date: prop,
+	    };
+		var orderdetail = Alloy.createController("dealer_monthly_commission_detail",param).getView();
+	    
+	    setWindowRelationship(orderdetail);
+   }
 });

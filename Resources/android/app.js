@@ -22,6 +22,9 @@ function goBack() {
 }
 
 function popup(event) {
+    var currentTime = new Date();
+    if (1e3 > currentTime - clickTime) return;
+    clickTime = currentTime;
     var page = event.source.mod;
     var module = Ti.App.Properties.getString("module");
     var roles = Ti.App.Properties.getString("roles");
@@ -363,6 +366,8 @@ var notificationNumber = 0;
 var app_status = "";
 
 xhr.clean();
+
+var clickTime = null;
 
 if ("android" == Alloy.Globals.osname) {
     var CloudPush = require("ti.cloudpush");

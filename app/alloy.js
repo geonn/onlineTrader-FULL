@@ -64,7 +64,7 @@ var notificationNumber = 0;
 var app_status = '';
 // Delete all expired documents (this method should be called at least once in your app)
 xhr.clean();
-
+var clickTime = null;
 // Delete all cached documents (expired or not, be very careful using this method)
 //xhr.purge();
 
@@ -112,6 +112,11 @@ function goBack(){
 }
 
 function popup(event){
+	var currentTime = new Date();
+	if (currentTime - clickTime < 1000) {
+	    return;
+	};
+	clickTime = currentTime;
 	var page  = event.source.mod;
 	var module = Ti.App.Properties.getString('module');
 	var roles = Ti.App.Properties.getString('roles');
