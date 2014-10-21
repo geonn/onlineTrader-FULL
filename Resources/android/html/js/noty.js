@@ -2,7 +2,7 @@ function noty(options) {
     return jQuery.noty(options);
 }
 
-(function($) {
+!function($) {
     $.noty = function(options, customContainer) {
         var base = {};
         var $noty = null;
@@ -73,7 +73,7 @@ function noty(options) {
             $noty.close = function() {
                 return this.trigger("noty.close");
             };
-            isGrowl ? base.container.prepend($("<li/>").append($noty)) : base.container.prepend($noty);
+            base.container.prepend(isGrowl ? $("<li/>").append($noty) : $noty);
             ("noty_layout_topCenter" == base.options.layout || "noty_layout_center" == base.options.layout) && $.noty.reCenter($noty);
             $noty.bind("noty.setText", function(event, text) {
                 $noty.find(".noty_text").html(text);
@@ -116,7 +116,7 @@ function noty(options) {
         return $("#" + id);
     };
     $.noty.close = function(id) {
-        for (var i = 0; $.noty.queue.length > i; ) $.noty.queue[i].options.id == id ? $.noty.queue.splice(id, 1) : i++;
+        for (var i = 0; i < $.noty.queue.length; ) $.noty.queue[i].options.id == id ? $.noty.queue.splice(id, 1) : i++;
         $.noty.get(id).trigger("noty.close");
     };
     $.noty.setText = function(id, text) {
@@ -187,4 +187,4 @@ function noty(options) {
             new $.noty(options, $(this));
         });
     };
-})(jQuery);
+}(jQuery);

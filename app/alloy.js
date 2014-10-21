@@ -44,7 +44,8 @@ Ti.API.GETDONELIST   = "http://"+Ti.API.API_DOMAIN+"/api/getDoneList?user="+Ti.A
 Ti.API.SETUNREAD   = "http://"+Ti.API.API_DOMAIN+"/api/unsetUserNotification?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETNOTISCOUNT   = "http://"+Ti.API.API_DOMAIN+"/api/totalUserNotificationByUser?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETDAILYSUMMARYBYMONTH = "http://"+Ti.API.API_DOMAIN+"/api/getDailySummaryByMonth?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
-
+Ti.API.GETDEALERRANKINGBYMONTH = "http://"+Ti.API.API_DOMAIN+"/api/getMonthlyRankingByDealer?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
+Ti.API.GETLOCATIONRANKINGBYMONTH = "http://"+Ti.API.API_DOMAIN+"/api/getMonthlyRankingByLocation?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.CURRENTWINDOW = '';
 
 //Global Variable

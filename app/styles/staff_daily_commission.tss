@@ -1,0 +1,10 @@
+
+".container" : {
+  
+},
+".post_form" : {
+	layout: "vertical",
+	width : "100%",
+	bottom: 2,
+	height: "89%" 
+}

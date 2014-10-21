@@ -10,7 +10,7 @@ function __processArg(obj, key) {
 function Controller() {
     function loadTableRow(data) {
         var tableData = [];
-        for (var i = 0; data.length > i; i++) {
+        for (var i = 0; i < data.length; i++) {
             var row = Ti.UI.createTableViewRow({
                 className: "forumEvent",
                 rowIndex: i,
@@ -78,9 +78,21 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_monthly_commission_detail";
     if (arguments[0]) {
+<<<<<<< HEAD
         __processArg(arguments[0], "__parentSymbol");
         __processArg(arguments[0], "$model");
         __processArg(arguments[0], "__itemTemplate");
+=======
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+>>>>>>> FETCH_HEAD
     }
     var $ = this;
     var exports = {};

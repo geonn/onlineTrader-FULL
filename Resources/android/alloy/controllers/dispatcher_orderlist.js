@@ -14,9 +14,21 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dispatcher_orderlist";
     if (arguments[0]) {
+<<<<<<< HEAD
         __processArg(arguments[0], "__parentSymbol");
         __processArg(arguments[0], "$model");
         __processArg(arguments[0], "__itemTemplate");
+=======
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+>>>>>>> FETCH_HEAD
     }
     var $ = this;
     var exports = {};
@@ -141,7 +153,7 @@ function Controller() {
     $.dealer_orderlist.addEventListener("close", function() {
         Ti.App.removeEventListener("app:viewOrderDetail", goToDetails);
     });
-    "480" >= Alloy.Globals.deviceHeight && ($.list_form.height = "67%");
+    Alloy.Globals.deviceHeight <= "480" && ($.list_form.height = "67%");
     __defers["$.__views.__alloyId109!touchend!refreshPage"] && $.__views.__alloyId109.addEventListener("touchend", refreshPage);
     _.extend($, exports);
 }

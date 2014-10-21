@@ -11,9 +11,21 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_statistic";
     if (arguments[0]) {
+<<<<<<< HEAD
         __processArg(arguments[0], "__parentSymbol");
         __processArg(arguments[0], "$model");
         __processArg(arguments[0], "__itemTemplate");
+=======
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+>>>>>>> FETCH_HEAD
     }
     var $ = this;
     var exports = {};
@@ -107,6 +119,8 @@ function Controller() {
             session: Ti.App.Properties.getString("session"),
             url: Ti.API.GETSTATISTIC + Ti.App.Properties.getString("session"),
             userstat: Ti.API.GETUSERSTAT + Ti.App.Properties.getString("session"),
+            m_url: Ti.API.GETDEALERRANKINGBYMONTH + Ti.App.Properties.getString("session"),
+            m_userstat: Ti.API.GETLOCATIONRANKINGBYMONTH + Ti.App.Properties.getString("session"),
             datelist: Ti.API.GETDATELIST + Ti.App.Properties.getString("session")
         });
     });

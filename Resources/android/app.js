@@ -47,7 +47,7 @@ function removeWindowRelationship() {
 
 function removeAllWindow() {
     var tempArr = Ti.App.WindowCabinet;
-    if (tempArr.length > 0) for (var a = 0; tempArr.length > a; a++) tempArr[a].close();
+    if (tempArr.length > 0) for (var a = 0; a < tempArr.length; a++) tempArr[a].close();
 }
 
 function setWindowRelationship(current) {
@@ -269,7 +269,7 @@ function deviceTokenError(e) {
 
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
-Ti.API.API_DOMAIN = "onlinetrader.com.my";
+Ti.API.API_DOMAIN = "staging.onlinetrader.com.my";
 
 Ti.API.USER = "biomas";
 
@@ -342,6 +342,10 @@ Ti.API.SETUNREAD = "http://" + Ti.API.API_DOMAIN + "/api/unsetUserNotification?u
 Ti.API.GETNOTISCOUNT = "http://" + Ti.API.API_DOMAIN + "/api/totalUserNotificationByUser?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
 Ti.API.GETDAILYSUMMARYBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getDailySummaryByMonth?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+
+Ti.API.GETDEALERRANKINGBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getMonthlyRankingByDealer?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+
+Ti.API.GETLOCATIONRANKINGBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getMonthlyRankingByLocation?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
 Ti.CURRENTWINDOW = "";
 

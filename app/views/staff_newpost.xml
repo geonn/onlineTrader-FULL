@@ -1,0 +1,13 @@
+<Alloy>
+	<Window class="container" id="dealer_newpost">
+		<Require src="_subheader"></Require>
+		<View class="content_post" id="content">
+			<Label id="titleHeader" class="h2">NEW POST</Label>
+			<ImageView class="separator" ></ImageView>
+		</View>
+		<View class="post_form"  >
+			<WebView id="newpostview" disableBounce="true" url="/html/dealer_newpost.html" />
+		</View>
+		
+	</Window>
+</Alloy>
