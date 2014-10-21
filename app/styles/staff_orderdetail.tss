@@ -1,0 +1,28 @@
+".content_post":{
+	top:'60dp',
+	font:{
+		fontSize: '16dp'
+	},
+	color: "#e02222",
+	layout: 'vertical',	
+	left:'5dp',
+	right:'5dp'
+},
+
+".details_form" : {
+	layout: "vertical",
+	width : "100%",
+	bottom: 2,
+	height: "90%", 
+	top : "90"
+}
+"#btncancel":{
+	left: '0%',
+	color: "#fff",
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	width: '33%',
+	height: Titanium.UI.FILL,
+	font:{
+		fontSize: '12dp',
+	},
+}

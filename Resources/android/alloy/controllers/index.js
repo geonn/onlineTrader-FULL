@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function doLogin() {
         $.activityIndicator.show();
@@ -16,7 +25,7 @@ function Controller() {
                     Ti.App.Properties.setString("roles", res.data.roles);
                     Ti.App.Properties.setString("session", res.data.session);
                     "android" == Alloy.Globals.osname && subscribeDeviceToken(dt, res.data.roles);
-                    if ("dealer" == res.data.roles) {
+                    if ("dealer" == res.data.roles || "staff" == res.data.roles) {
                         $.index.close();
                         var summary = Alloy.createController(res.data.roles + "_summary").getView();
                         setWindowRelationship(summary);
@@ -38,9 +47,17 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "index";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -182,7 +199,7 @@ function Controller() {
                 var res = JSON.parse(this.responseText);
                 if ("success" == res.status) {
                     var rl = Ti.App.Properties.getString("roles");
-                    if ("dealer" == rl) {
+                    if ("dealer" == rl || "staff" == rl) {
                         $.index.close();
                         var summary = Alloy.createController(rl + "_summary").getView();
                         setWindowRelationship(summary);
@@ -208,7 +225,7 @@ function Controller() {
         $.password.focus();
     });
     $.password.addEventListener("blur", function() {
-        0 >= $.password.value && ($.passwordhint.visible = true);
+        $.password.value <= 0 && ($.passwordhint.visible = true);
     });
     $.password.addEventListener("focus", function() {
         $.passwordhint.visible = false;
@@ -219,7 +236,7 @@ function Controller() {
         $.username.focus();
     });
     $.username.addEventListener("blur", function() {
-        0 >= $.username.value && ($.usernamehint.visible = true);
+        $.username.value <= 0 && ($.usernamehint.visible = true);
     });
     $.username.addEventListener("focus", function() {
         $.usernamehint.visible = false;

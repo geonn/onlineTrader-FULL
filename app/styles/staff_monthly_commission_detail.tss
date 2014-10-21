@@ -1,0 +1,10 @@
+".summary_figure" : {
+	textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+	top :"10dp",
+	width: "20%",
+	left :"80%",
+}
+
+"#tableView" :{
+	width: '100%'
+}

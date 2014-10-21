@@ -19,7 +19,7 @@ if(ses == null){
 	         if(res.status == "success"){
 	         	var rl = Ti.App.Properties.getString('roles');
 	
-				if(rl == 'dealer'){
+				if(rl == 'dealer' || rl == 'staff'){
 					$.index.close();
 					var summary = Alloy.createController(rl + '_summary').getView();
 				   	
@@ -86,7 +86,7 @@ function doLogin(e) {
          	 	 	subscribeDeviceToken(dt,res.data.roles);
          	 	 }
          	 	 
-         	 	 if(res.data.roles == 'dealer'){
+         	 	 if(res.data.roles == 'dealer' || res.data.roles == 'staff'){
          	 	 	$.index.close();
          	 	 	var summary = Alloy.createController(res.data.roles + '_summary').getView();
          	 	 	

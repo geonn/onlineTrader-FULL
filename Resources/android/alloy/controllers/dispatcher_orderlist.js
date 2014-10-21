@@ -1,12 +1,29 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function refreshPage() {
         Ti.App.fireEvent("app:dispatchRefreshPage");
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dispatcher_orderlist";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -130,7 +147,7 @@ function Controller() {
     $.dealer_orderlist.addEventListener("close", function() {
         Ti.App.removeEventListener("app:viewOrderDetail", goToDetails);
     });
-    "480" >= Alloy.Globals.deviceHeight && ($.list_form.height = "67%");
+    Alloy.Globals.deviceHeight <= "480" && ($.list_form.height = "67%");
     __defers["$.__views.__alloyId109!touchend!refreshPage"] && $.__views.__alloyId109.addEventListener("touchend", refreshPage);
     _.extend($, exports);
 }

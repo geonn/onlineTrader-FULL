@@ -1,9 +1,26 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_statistic";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     $.__views.dealer_statistic = Ti.UI.createWindow({
@@ -96,6 +113,8 @@ function Controller() {
             session: Ti.App.Properties.getString("session"),
             url: Ti.API.GETSTATISTIC + Ti.App.Properties.getString("session"),
             userstat: Ti.API.GETUSERSTAT + Ti.App.Properties.getString("session"),
+            m_url: Ti.API.GETDEALERRANKINGBYMONTH + Ti.App.Properties.getString("session"),
+            m_userstat: Ti.API.GETLOCATIONRANKINGBYMONTH + Ti.App.Properties.getString("session"),
             datelist: Ti.API.GETDATELIST + Ti.App.Properties.getString("session")
         });
     });

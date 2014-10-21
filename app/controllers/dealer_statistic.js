@@ -23,6 +23,8 @@ $.salessatisticview.addEventListener('load', function(data) {
 		session: Ti.App.Properties.getString('session'), 
 		url: Ti.API.GETSTATISTIC + Ti.App.Properties.getString('session'),
 		userstat: Ti.API.GETUSERSTAT + Ti.App.Properties.getString('session'),
+		m_url: Ti.API.GETDEALERRANKINGBYMONTH + Ti.App.Properties.getString('session'),
+		m_userstat: Ti.API.GETLOCATIONRANKINGBYMONTH + Ti.App.Properties.getString('session'),
 		datelist : Ti.API.GETDATELIST + Ti.App.Properties.getString('session'),
 	});
 });
