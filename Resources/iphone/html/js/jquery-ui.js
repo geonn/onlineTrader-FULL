@@ -1,4 +1,4 @@
-(function($, undefined) {
+!function($, undefined) {
     function focusable(element, isTabIndexNotNaN) {
         var map, mapName, img, nodeName = element.nodeName.toLowerCase();
         if ("area" === nodeName) {
@@ -167,7 +167,7 @@
             call: function(instance, name, args) {
                 var i, set = instance.plugins[name];
                 if (!set || !instance.element[0].parentNode || 11 === instance.element[0].parentNode.nodeType) return;
-                for (i = 0; set.length > i; i++) instance.options[set[i][0]] && set[i][1].apply(instance.element, args);
+                for (i = 0; i < set.length; i++) instance.options[set[i][0]] && set[i][1].apply(instance.element, args);
             }
         },
         hasScroll: function(el, a) {
@@ -180,9 +180,9 @@
             return has;
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($, undefined) {
+!function($, undefined) {
     var uuid = 0, slice = Array.prototype.slice, _cleanData = $.cleanData;
     $.cleanData = function(elems) {
         for (var elem, i = 0; null != (elem = elems[i]); i++) try {
@@ -266,16 +266,16 @@
         $.fn[name] = function(options) {
             var isMethodCall = "string" == typeof options, args = slice.call(arguments, 1), returnValue = this;
             options = !isMethodCall && args.length ? $.widget.extend.apply(null, [ options ].concat(args)) : options;
-            isMethodCall ? this.each(function() {
+            this.each(isMethodCall ? function() {
                 var methodValue, instance = $.data(this, fullName);
-                if (!instance) return $.error("cannot call methods on " + name + " prior to initialization; " + "attempted to call method '" + options + "'");
+                if (!instance) return $.error("cannot call methods on " + name + " prior to initialization; attempted to call method '" + options + "'");
                 if (!$.isFunction(instance[options]) || "_" === options.charAt(0)) return $.error("no such method '" + options + "' for " + name + " widget instance");
                 methodValue = instance[options].apply(instance, args);
                 if (methodValue !== instance && methodValue !== undefined) {
                     returnValue = methodValue && methodValue.jquery ? returnValue.pushStack(methodValue.get()) : methodValue;
                     return false;
                 }
-            }) : this.each(function() {
+            } : function() {
                 var instance = $.data(this, fullName);
                 instance ? instance.option(options || {})._init() : $.data(this, fullName, new object(options, this));
             });
@@ -322,7 +322,7 @@
         destroy: function() {
             this._destroy();
             this.element.unbind(this.eventNamespace).removeData(this.widgetName).removeData(this.widgetFullName).removeData($.camelCase(this.widgetFullName));
-            this.widget().unbind(this.eventNamespace).removeAttr("aria-disabled").removeClass(this.widgetFullName + "-disabled " + "ui-state-disabled");
+            this.widget().unbind(this.eventNamespace).removeAttr("aria-disabled").removeClass(this.widgetFullName + "-disabled ui-state-disabled");
             this.bindings.unbind(this.eventNamespace);
             this.hoverable.removeClass("ui-state-hover");
             this.focusable.removeClass("ui-state-focus");
@@ -340,7 +340,7 @@
                 key = parts.shift();
                 if (parts.length) {
                     curOption = options[key] = $.widget.extend({}, this.options[key]);
-                    for (i = 0; parts.length - 1 > i; i++) {
+                    for (i = 0; i < parts.length - 1; i++) {
                         curOption[parts[i]] = curOption[parts[i]] || {};
                         curOption = curOption[parts[i]];
                     }
@@ -468,9 +468,9 @@
             });
         };
     });
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     var mouseHandled = false;
     $(document).mouseup(function() {
         mouseHandled = false;
@@ -529,7 +529,7 @@
             return true;
         },
         _mouseMove: function(event) {
-            if ($.ui.ie && (!document.documentMode || 9 > document.documentMode) && !event.button) return this._mouseUp(event);
+            if ($.ui.ie && (!document.documentMode || document.documentMode < 9) && !event.button) return this._mouseUp(event);
             if (this._mouseStarted) {
                 this._mouseDrag(event);
                 return event.preventDefault();
@@ -562,9 +562,9 @@
             return true;
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($, undefined) {
+!function($, undefined) {
     function getOffsets(offsets, width, height) {
         return [ parseFloat(offsets[0]) * (rpercent.test(offsets[0]) ? width / 100 : 1), parseFloat(offsets[1]) * (rpercent.test(offsets[1]) ? height / 100 : 1) ];
     }
@@ -716,8 +716,8 @@
                     horizontal: 0 > right ? "left" : left > 0 ? "right" : "center",
                     vertical: 0 > bottom ? "top" : top > 0 ? "bottom" : "middle"
                 };
-                elemWidth > targetWidth && targetWidth > abs(left + right) && (feedback.horizontal = "center");
-                elemHeight > targetHeight && targetHeight > abs(top + bottom) && (feedback.vertical = "middle");
+                elemWidth > targetWidth && abs(left + right) < targetWidth && (feedback.horizontal = "center");
+                elemHeight > targetHeight && abs(top + bottom) < targetHeight && (feedback.vertical = "middle");
                 feedback.important = max(abs(left), abs(right)) > max(abs(top), abs(bottom)) ? "horizontal" : "vertical";
                 options.using.call(this, props, feedback);
             });
@@ -748,20 +748,20 @@
                 var newOverRight, newOverLeft, within = data.within, withinOffset = within.offset.left + within.scrollLeft, outerWidth = within.width, offsetLeft = within.isWindow ? within.scrollLeft : within.offset.left, collisionPosLeft = position.left - data.collisionPosition.marginLeft, overLeft = collisionPosLeft - offsetLeft, overRight = collisionPosLeft + data.collisionWidth - outerWidth - offsetLeft, myOffset = "left" === data.my[0] ? -data.elemWidth : "right" === data.my[0] ? data.elemWidth : 0, atOffset = "left" === data.at[0] ? data.targetWidth : "right" === data.at[0] ? -data.targetWidth : 0, offset = -2 * data.offset[0];
                 if (0 > overLeft) {
                     newOverRight = position.left + myOffset + atOffset + offset + data.collisionWidth - outerWidth - withinOffset;
-                    (0 > newOverRight || abs(overLeft) > newOverRight) && (position.left += myOffset + atOffset + offset);
+                    (0 > newOverRight || newOverRight < abs(overLeft)) && (position.left += myOffset + atOffset + offset);
                 } else if (overRight > 0) {
                     newOverLeft = position.left - data.collisionPosition.marginLeft + myOffset + atOffset + offset - offsetLeft;
-                    (newOverLeft > 0 || overRight > abs(newOverLeft)) && (position.left += myOffset + atOffset + offset);
+                    (newOverLeft > 0 || abs(newOverLeft) < overRight) && (position.left += myOffset + atOffset + offset);
                 }
             },
             top: function(position, data) {
                 var newOverTop, newOverBottom, within = data.within, withinOffset = within.offset.top + within.scrollTop, outerHeight = within.height, offsetTop = within.isWindow ? within.scrollTop : within.offset.top, collisionPosTop = position.top - data.collisionPosition.marginTop, overTop = collisionPosTop - offsetTop, overBottom = collisionPosTop + data.collisionHeight - outerHeight - offsetTop, top = "top" === data.my[1], myOffset = top ? -data.elemHeight : "bottom" === data.my[1] ? data.elemHeight : 0, atOffset = "top" === data.at[1] ? data.targetHeight : "bottom" === data.at[1] ? -data.targetHeight : 0, offset = -2 * data.offset[1];
                 if (0 > overTop) {
                     newOverBottom = position.top + myOffset + atOffset + offset + data.collisionHeight - outerHeight - withinOffset;
-                    position.top + myOffset + atOffset + offset > overTop && (0 > newOverBottom || abs(overTop) > newOverBottom) && (position.top += myOffset + atOffset + offset);
+                    position.top + myOffset + atOffset + offset > overTop && (0 > newOverBottom || newOverBottom < abs(overTop)) && (position.top += myOffset + atOffset + offset);
                 } else if (overBottom > 0) {
                     newOverTop = position.top - data.collisionPosition.marginTop + myOffset + atOffset + offset - offsetTop;
-                    position.top + myOffset + atOffset + offset > overBottom && (newOverTop > 0 || overBottom > abs(newOverTop)) && (position.top += myOffset + atOffset + offset);
+                    position.top + myOffset + atOffset + offset > overBottom && (newOverTop > 0 || abs(newOverTop) < overBottom) && (position.top += myOffset + atOffset + offset);
                 }
             }
         },
@@ -776,7 +776,7 @@
             }
         }
     };
-    (function() {
+    !function() {
         var testElement, testElementParent, testElementStyle, offsetLeft, i, body = document.getElementsByTagName("body")[0], div = document.createElement("div");
         testElement = document.createElement(body ? "div" : "body");
         testElementStyle = {
@@ -801,10 +801,10 @@
         $.support.offsetFractions = offsetLeft > 10 && 11 > offsetLeft;
         testElement.innerHTML = "";
         testElementParent.removeChild(testElement);
-    })();
-})(jQuery);
+    }();
+}(jQuery);
 
-(function($) {
+!function($) {
     var uid = 0, hideProps = {}, showProps = {};
     hideProps.height = hideProps.paddingTop = hideProps.paddingBottom = hideProps.borderTopWidth = hideProps.borderBottomWidth = "hide";
     showProps.height = showProps.paddingTop = showProps.paddingBottom = showProps.borderTopWidth = showProps.borderBottomWidth = "show";
@@ -830,7 +830,7 @@
             this.element.addClass("ui-accordion ui-widget ui-helper-reset").attr("role", "tablist");
             options.collapsible || false !== options.active && null != options.active || (options.active = 0);
             this._processPanels();
-            0 > options.active && (options.active += this.headers.length);
+            options.active < 0 && (options.active += this.headers.length);
             this._refresh();
         },
         _getCreateEventData: function() {
@@ -1098,9 +1098,9 @@
             this._trigger("activate", null, data);
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.widget("ui.autocomplete", {
         version: "1.10.4",
         defaultElement: "<input>",
@@ -1497,9 +1497,9 @@
             this.liveRegion.text(message);
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     var lastActive, baseClasses = "ui-button ui-widget ui-state-default ui-corner-all", typeClasses = "ui-button-icons-only ui-button-icon-only ui-button-text-icons ui-button-text-icon-primary ui-button-text-icon-secondary ui-button-text-only", formResetHandler = function() {
         var form = $(this);
         setTimeout(function() {
@@ -1680,9 +1680,9 @@
             }).removeClass("ui-corner-left ui-corner-right").end().button("destroy");
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($, undefined) {
+!function($, undefined) {
     function Datepicker() {
         this._curInst = null;
         this._keyEvent = false;
@@ -1871,7 +1871,7 @@
                     findMax = function(names) {
                         max = 0;
                         maxI = 0;
-                        for (i = 0; names.length > i; i++) if (names[i].length > max) {
+                        for (i = 0; i < names.length; i++) if (names[i].length > max) {
                             max = names[i].length;
                             maxI = i;
                         }
@@ -1982,7 +1982,7 @@
         },
         _isDisabledDatepicker: function(target) {
             if (!target) return false;
-            for (var i = 0; this._disabledInputs.length > i; i++) if (this._disabledInputs[i] === target) return true;
+            for (var i = 0; i < this._disabledInputs.length; i++) if (this._disabledInputs[i] === target) return true;
             return false;
         },
         _getInst: function(target) {
@@ -2340,7 +2340,7 @@
             value = "object" == typeof value ? value.toString() : value + "";
             if ("" === value) return null;
             var iFormat, dim, extra, date, iValue = 0, shortYearCutoffTemp = (settings ? settings.shortYearCutoff : null) || this._defaults.shortYearCutoff, shortYearCutoff = "string" != typeof shortYearCutoffTemp ? shortYearCutoffTemp : new Date().getFullYear() % 100 + parseInt(shortYearCutoffTemp, 10), dayNamesShort = (settings ? settings.dayNamesShort : null) || this._defaults.dayNamesShort, dayNames = (settings ? settings.dayNames : null) || this._defaults.dayNames, monthNamesShort = (settings ? settings.monthNamesShort : null) || this._defaults.monthNamesShort, monthNames = (settings ? settings.monthNames : null) || this._defaults.monthNames, year = -1, month = -1, day = -1, doy = -1, literal = false, lookAhead = function(match) {
-                var matches = format.length > iFormat + 1 && format.charAt(iFormat + 1) === match;
+                var matches = iFormat + 1 < format.length && format.charAt(iFormat + 1) === match;
                 matches && iFormat++;
                 return matches;
             }, getNumber = function(match) {
@@ -2368,7 +2368,7 @@
                 if (value.charAt(iValue) !== format.charAt(iFormat)) throw "Unexpected literal at position " + iValue;
                 iValue++;
             };
-            for (iFormat = 0; format.length > iFormat; iFormat++) if (literal) "'" !== format.charAt(iFormat) || lookAhead("'") ? checkLiteral() : literal = false; else switch (format.charAt(iFormat)) {
+            for (iFormat = 0; iFormat < format.length; iFormat++) if (literal) "'" !== format.charAt(iFormat) || lookAhead("'") ? checkLiteral() : literal = false; else switch (format.charAt(iFormat)) {
               case "d":
                 day = getNumber("d");
                 break;
@@ -2414,7 +2414,7 @@
               default:
                 checkLiteral();
             }
-            if (value.length > iValue) {
+            if (iValue < value.length) {
                 extra = value.substr(iValue);
                 if (!/^\s+/.test(extra)) throw "Extra/unparsed characters found in date: " + extra;
             }
@@ -2445,21 +2445,21 @@
         TICKS: "!",
         TIMESTAMP: "@",
         W3C: "yy-mm-dd",
-        _ticksTo1970: 1e7 * 60 * 60 * 24 * (718685 + Math.floor(492.5) - Math.floor(19.7) + Math.floor(4.925)),
+        _ticksTo1970: 24 * (718685 + Math.floor(492.5) - Math.floor(19.7) + Math.floor(4.925)) * 60 * 60 * 1e7,
         formatDate: function(format, date, settings) {
             if (!date) return "";
             var iFormat, dayNamesShort = (settings ? settings.dayNamesShort : null) || this._defaults.dayNamesShort, dayNames = (settings ? settings.dayNames : null) || this._defaults.dayNames, monthNamesShort = (settings ? settings.monthNamesShort : null) || this._defaults.monthNamesShort, monthNames = (settings ? settings.monthNames : null) || this._defaults.monthNames, lookAhead = function(match) {
-                var matches = format.length > iFormat + 1 && format.charAt(iFormat + 1) === match;
+                var matches = iFormat + 1 < format.length && format.charAt(iFormat + 1) === match;
                 matches && iFormat++;
                 return matches;
             }, formatNumber = function(match, value, len) {
                 var num = "" + value;
-                if (lookAhead(match)) while (len > num.length) num = "0" + num;
+                if (lookAhead(match)) while (num.length < len) num = "0" + num;
                 return num;
             }, formatName = function(match, value, shortNames, longNames) {
                 return lookAhead(match) ? longNames[value] : shortNames[value];
             }, output = "", literal = false;
-            if (date) for (iFormat = 0; format.length > iFormat; iFormat++) if (literal) "'" !== format.charAt(iFormat) || lookAhead("'") ? output += format.charAt(iFormat) : literal = false; else switch (format.charAt(iFormat)) {
+            if (date) for (iFormat = 0; iFormat < format.length; iFormat++) if (literal) "'" !== format.charAt(iFormat) || lookAhead("'") ? output += format.charAt(iFormat) : literal = false; else switch (format.charAt(iFormat)) {
               case "d":
                 output += formatNumber("d", date.getDate(), 2);
                 break;
@@ -2481,7 +2481,7 @@
                 break;
 
               case "y":
-                output += lookAhead("y") ? date.getFullYear() : (10 > date.getYear() % 100 ? "0" : "") + date.getYear() % 100;
+                output += lookAhead("y") ? date.getFullYear() : (date.getYear() % 100 < 10 ? "0" : "") + date.getYear() % 100;
                 break;
 
               case "@":
@@ -2503,11 +2503,11 @@
         },
         _possibleChars: function(format) {
             var iFormat, chars = "", literal = false, lookAhead = function(match) {
-                var matches = format.length > iFormat + 1 && format.charAt(iFormat + 1) === match;
+                var matches = iFormat + 1 < format.length && format.charAt(iFormat + 1) === match;
                 matches && iFormat++;
                 return matches;
             };
-            for (iFormat = 0; format.length > iFormat; iFormat++) if (literal) "'" !== format.charAt(iFormat) || lookAhead("'") ? chars += format.charAt(iFormat) : literal = false; else switch (format.charAt(iFormat)) {
+            for (iFormat = 0; iFormat < format.length; iFormat++) if (literal) "'" !== format.charAt(iFormat) || lookAhead("'") ? chars += format.charAt(iFormat) : literal = false; else switch (format.charAt(iFormat)) {
               case "d":
               case "m":
               case "y":
@@ -2689,10 +2689,10 @@
             defaultDate = this._getDefaultDate(inst);
             html = "";
             dow;
-            for (row = 0; numMonths[0] > row; row++) {
+            for (row = 0; row < numMonths[0]; row++) {
                 group = "";
                 this.maxRows = 4;
-                for (col = 0; numMonths[1] > col; col++) {
+                for (col = 0; col < numMonths[1]; col++) {
                     selectedDate = this._daylightSavingAdjust(new Date(drawYear, drawMonth, inst.selectedDay));
                     cornerClass = " ui-corner-all";
                     calender = "";
@@ -2715,18 +2715,18 @@
                         }
                         calender += "'>";
                     }
-                    calender += "<div class='ui-datepicker-header ui-widget-header ui-helper-clearfix" + cornerClass + "'>" + (/all|left/.test(cornerClass) && 0 === row ? isRTL ? next : prev : "") + (/all|right/.test(cornerClass) && 0 === row ? isRTL ? prev : next : "") + this._generateMonthYearHeader(inst, drawMonth, drawYear, minDate, maxDate, row > 0 || col > 0, monthNames, monthNamesShort) + "</div><table class='ui-datepicker-calendar'><thead>" + "<tr>";
+                    calender += "<div class='ui-datepicker-header ui-widget-header ui-helper-clearfix" + cornerClass + "'>" + (/all|left/.test(cornerClass) && 0 === row ? isRTL ? next : prev : "") + (/all|right/.test(cornerClass) && 0 === row ? isRTL ? prev : next : "") + this._generateMonthYearHeader(inst, drawMonth, drawYear, minDate, maxDate, row > 0 || col > 0, monthNames, monthNamesShort) + "</div><table class='ui-datepicker-calendar'><thead><tr>";
                     thead = showWeek ? "<th class='ui-datepicker-week-col'>" + this._get(inst, "weekHeader") + "</th>" : "";
                     for (dow = 0; 7 > dow; dow++) {
                         day = (dow + firstDay) % 7;
-                        thead += "<th" + ((dow + firstDay + 6) % 7 >= 5 ? " class='ui-datepicker-week-end'" : "") + ">" + "<span title='" + dayNames[day] + "'>" + dayNamesMin[day] + "</span></th>";
+                        thead += "<th" + ((dow + firstDay + 6) % 7 >= 5 ? " class='ui-datepicker-week-end'" : "") + "><span title='" + dayNames[day] + "'>" + dayNamesMin[day] + "</span></th>";
                     }
                     calender += thead + "</tr></thead><tbody>";
                     daysInMonth = this._getDaysInMonth(drawYear, drawMonth);
                     drawYear === inst.selectedYear && drawMonth === inst.selectedMonth && (inst.selectedDay = Math.min(inst.selectedDay, daysInMonth));
                     leadDays = (this._getFirstDayOfMonth(drawYear, drawMonth) - firstDay + 7) % 7;
                     curRows = Math.ceil((leadDays + daysInMonth) / 7);
-                    numRows = isMultiMonth ? this.maxRows > curRows ? this.maxRows : curRows : curRows;
+                    numRows = isMultiMonth && this.maxRows > curRows ? this.maxRows : curRows;
                     this.maxRows = numRows;
                     printDate = this._daylightSavingAdjust(new Date(drawYear, drawMonth, 1 - leadDays));
                     for (dRow = 0; numRows > dRow; dRow++) {
@@ -2762,10 +2762,10 @@
                 inMinYear = minDate && minDate.getFullYear() === drawYear;
                 inMaxYear = maxDate && maxDate.getFullYear() === drawYear;
                 monthHtml += "<select class='ui-datepicker-month' data-handler='selectMonth' data-event='change'>";
-                for (month = 0; 12 > month; month++) (!inMinYear || month >= minDate.getMonth()) && (!inMaxYear || maxDate.getMonth() >= month) && (monthHtml += "<option value='" + month + "'" + (month === drawMonth ? " selected='selected'" : "") + ">" + monthNamesShort[month] + "</option>");
+                for (month = 0; 12 > month; month++) (!inMinYear || month >= minDate.getMonth()) && (!inMaxYear || month <= maxDate.getMonth()) && (monthHtml += "<option value='" + month + "'" + (month === drawMonth ? " selected='selected'" : "") + ">" + monthNamesShort[month] + "</option>");
                 monthHtml += "</select>";
             }
-            showMonthAfterYear || (html += monthHtml + (!secondary && changeMonth && changeYear ? "" : "&#xa0;"));
+            showMonthAfterYear || (html += monthHtml + (secondary || !(changeMonth && changeYear) ? "&#xa0;" : ""));
             if (!inst.yearshtml) {
                 inst.yearshtml = "";
                 if (secondary || !changeYear) html += "<span class='ui-datepicker-year'>" + drawYear + "</span>"; else {
@@ -2787,7 +2787,7 @@
                 }
             }
             html += this._get(inst, "yearSuffix");
-            showMonthAfterYear && (html += (!secondary && changeMonth && changeYear ? "" : "&#xa0;") + monthHtml);
+            showMonthAfterYear && (html += (secondary || !(changeMonth && changeYear) ? "&#xa0;" : "") + monthHtml);
             html += "</div>";
             return html;
         },
@@ -2834,7 +2834,7 @@
                 yearSplit[0].match(/[+\-].*/) && (minYear += currentYear);
                 yearSplit[1].match(/[+\-].*/) && (maxYear += currentYear);
             }
-            return (!minDate || date.getTime() >= minDate.getTime()) && (!maxDate || date.getTime() <= maxDate.getTime()) && (!minYear || date.getFullYear() >= minYear) && (!maxYear || maxYear >= date.getFullYear());
+            return (!minDate || date.getTime() >= minDate.getTime()) && (!maxDate || date.getTime() <= maxDate.getTime()) && (!minYear || date.getFullYear() >= minYear) && (!maxYear || date.getFullYear() <= maxYear);
         },
         _getFormatConfig: function(inst) {
             var shortYearCutoff = this._get(inst, "shortYearCutoff");
@@ -2875,9 +2875,9 @@
     $.datepicker.initialized = false;
     $.datepicker.uuid = new Date().getTime();
     $.datepicker.version = "1.10.4";
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     var sizeRelatedOptions = {
         buttons: true,
         height: true,
@@ -3332,7 +3332,7 @@
                         }
                     });
                     position = {
-                        my: myAt[0] + (0 > offset[0] ? offset[0] : "+" + offset[0]) + " " + myAt[1] + (0 > offset[1] ? offset[1] : "+" + offset[1]),
+                        my: myAt[0] + (offset[0] < 0 ? offset[0] : "+" + offset[0]) + " " + myAt[1] + (offset[1] < 0 ? offset[1] : "+" + offset[1]),
                         at: myAt.join(" ")
                     };
                 }
@@ -3344,9 +3344,9 @@
             isVisible || this.uiDialog.hide();
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.widget("ui.draggable", $.ui.mouse, {
         version: "1.10.4",
         widgetEventPrefix: "drag",
@@ -3799,10 +3799,10 @@
                     continue;
                 }
                 if ("inner" !== o.snapMode) {
-                    ts = d >= Math.abs(t - y2);
-                    bs = d >= Math.abs(b - y1);
-                    ls = d >= Math.abs(l - x2);
-                    rs = d >= Math.abs(r - x1);
+                    ts = Math.abs(t - y2) <= d;
+                    bs = Math.abs(b - y1) <= d;
+                    ls = Math.abs(l - x2) <= d;
+                    rs = Math.abs(r - x1) <= d;
                     ts && (ui.position.top = inst._convertPositionTo("relative", {
                         top: t - inst.helperProportions.height,
                         left: 0
@@ -3822,10 +3822,10 @@
                 }
                 first = ts || bs || ls || rs;
                 if ("outer" !== o.snapMode) {
-                    ts = d >= Math.abs(t - y1);
-                    bs = d >= Math.abs(b - y2);
-                    ls = d >= Math.abs(l - x1);
-                    rs = d >= Math.abs(r - x2);
+                    ts = Math.abs(t - y1) <= d;
+                    bs = Math.abs(b - y2) <= d;
+                    ls = Math.abs(l - x1) <= d;
+                    rs = Math.abs(r - x2) <= d;
                     ts && (ui.position.top = inst._convertPositionTo("relative", {
                         top: t,
                         left: 0
@@ -3874,9 +3874,9 @@
             o._zIndex && $(ui.helper).css("zIndex", o._zIndex);
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     function isOverAxis(x, reference, size) {
         return x > reference && reference + size > x;
     }
@@ -3917,7 +3917,7 @@
         },
         _destroy: function() {
             var i = 0, drop = $.ui.ddmanager.droppables[this.options.scope];
-            for (;drop.length > i; i++) drop[i] === this && drop.splice(i, 1);
+            for (;i < drop.length; i++) drop[i] === this && drop.splice(i, 1);
             this.element.removeClass("ui-droppable ui-droppable-disabled");
         },
         _setOption: function(key, value) {
@@ -3990,7 +3990,7 @@
             return x1 >= l && r >= x2 && y1 >= t && b >= y2;
 
           case "intersect":
-            return x1 + draggable.helperProportions.width / 2 > l && r > x2 - draggable.helperProportions.width / 2 && y1 + draggable.helperProportions.height / 2 > t && b > y2 - draggable.helperProportions.height / 2;
+            return l < x1 + draggable.helperProportions.width / 2 && x2 - draggable.helperProportions.width / 2 < r && t < y1 + draggable.helperProportions.height / 2 && y2 - draggable.helperProportions.height / 2 < b;
 
           case "pointer":
             draggableLeft = (draggable.positionAbs || draggable.position.absolute).left + (draggable.clickOffset || draggable.offset.click).left;
@@ -4011,9 +4011,9 @@
         },
         prepareOffsets: function(t, event) {
             var i, j, m = $.ui.ddmanager.droppables[t.options.scope] || [], type = event ? event.type : null, list = (t.currentItem || t.element).find(":data(ui-droppable)").addBack();
-            droppablesLoop: for (i = 0; m.length > i; i++) {
+            droppablesLoop: for (i = 0; i < m.length; i++) {
                 if (m[i].options.disabled || t && !m[i].accept.call(m[i].element[0], t.currentItem || t.element)) continue;
-                for (j = 0; list.length > j; j++) if (list[j] === m[i].element[0]) {
+                for (j = 0; j < list.length; j++) if (list[j] === m[i].element[0]) {
                     m[i].proportions().height = 0;
                     continue droppablesLoop;
                 }
@@ -4081,21 +4081,21 @@
             draggable.options.refreshPositions || $.ui.ddmanager.prepareOffsets(draggable, event);
         }
     };
-})(jQuery);
+}(jQuery);
 
-(function($, undefined) {
+!function($, undefined) {
     var dataSpace = "ui-effects-";
     $.effects = {
         effect: {}
     };
-    (function(jQuery, undefined) {
+    !function(jQuery, undefined) {
         function clamp(value, prop, allowEmpty) {
             var type = propTypes[prop.type] || {};
             if (null == value) return allowEmpty || !prop.def ? null : prop.def;
             value = type.floor ? ~~value : parseFloat(value);
             if (isNaN(value)) return prop.def;
             if (type.mod) return (value + type.mod) % type.mod;
-            return 0 > value ? 0 : value > type.max ? type.max : value;
+            return 0 > value ? 0 : type.max < value ? type.max : value;
         }
         function stringParse(string) {
             var inst = color(), rgba = inst._rgba = [];
@@ -4117,9 +4117,9 @@
         }
         function hue2rgb(p, q, h) {
             h = (h + 1) % 1;
-            if (1 > 6 * h) return p + 6 * (q - p) * h;
+            if (1 > 6 * h) return p + (q - p) * h * 6;
             if (1 > 2 * h) return q;
-            if (2 > 3 * h) return p + 6 * (q - p) * (2 / 3 - h);
+            if (2 > 3 * h) return p + (q - p) * (2 / 3 - h) * 6;
             return p;
         }
         var colors, stepHooks = "backgroundColor borderBottomColor borderLeftColor borderRightColor borderTopColor color columnRuleColor outlineColor textDecorationColor textEmphasisColor", rplusequals = /^([\-+])=\s*(\d+\.?\d*)/, stringParsers = [ {
@@ -4240,7 +4240,7 @@
                             }
                             inst[cache][prop.idx] = clamp(red[key], prop, true);
                         });
-                        if (inst[cache] && 0 > jQuery.inArray(null, inst[cache].slice(0, 3))) {
+                        if (inst[cache] && jQuery.inArray(null, inst[cache].slice(0, 3)) < 0) {
                             inst[cache][3] = 1;
                             space.from && (inst._rgba = space.from(inst[cache]));
                         }
@@ -4439,8 +4439,8 @@
             transparent: [ null, null, null, 0 ],
             _default: "#ffffff"
         };
-    })(jQuery);
-    (function() {
+    }(jQuery);
+    !function() {
         function getElementStyles(elem) {
             var key, len, style = elem.ownerDocument.defaultView ? elem.ownerDocument.defaultView.getComputedStyle(elem, null) : elem.currentStyle, styles = {};
             if (style && style.length && style[0] && style[style[0]]) {
@@ -4560,8 +4560,8 @@
                 }, speed, easing, callback);
             }
         });
-    })();
-    (function() {
+    }();
+    !function() {
         function _normalizeArguments(effect, options, speed, callback) {
             if ($.isPlainObject(effect)) {
                 options = effect;
@@ -4601,11 +4601,11 @@
         $.extend($.effects, {
             version: "1.10.4",
             save: function(element, set) {
-                for (var i = 0; set.length > i; i++) null !== set[i] && element.data(dataSpace + set[i], element[0].style[set[i]]);
+                for (var i = 0; i < set.length; i++) null !== set[i] && element.data(dataSpace + set[i], element[0].style[set[i]]);
             },
             restore: function(element, set) {
                 var val, i;
-                for (i = 0; set.length > i; i++) if (null !== set[i]) {
+                for (i = 0; i < set.length; i++) if (null !== set[i]) {
                     val = element.data(dataSpace + set[i]);
                     val === undefined && (val = "");
                     element.css(set[i], val);
@@ -4773,8 +4773,8 @@
                 return val;
             }
         });
-    })();
-    (function() {
+    }();
+    !function() {
         var baseEasings = {};
         $.each([ "Quad", "Cubic", "Quart", "Quint", "Expo" ], function(i, name) {
             baseEasings[name] = function(p) {
@@ -4796,7 +4796,7 @@
             },
             Bounce: function(p) {
                 var pow2, bounce = 4;
-                while (((pow2 = Math.pow(2, --bounce)) - 1) / 11 > p) ;
+                while (p < ((pow2 = Math.pow(2, --bounce)) - 1) / 11) ;
                 return 1 / Math.pow(4, 3 - bounce) - 7.5625 * Math.pow((3 * pow2 - 2) / 22 - p, 2);
             }
         });
@@ -4809,10 +4809,10 @@
                 return .5 > p ? easeIn(2 * p) / 2 : 1 - easeIn(-2 * p + 2) / 2;
             };
         });
-    })();
-})(jQuery);
+    }();
+}(jQuery);
 
-(function($) {
+!function($) {
     var rvertical = /up|down|vertical/, rpositivemotion = /up|left|vertical|horizontal/;
     $.effects.effect.blind = function(o, done) {
         var wrapper, distance, margin, el = $(this), props = [ "position", "top", "bottom", "left", "right", "height", "width" ], mode = $.effects.setMode(el, o.mode || "hide"), direction = o.direction || "up", vertical = rvertical.test(direction), ref = vertical ? "height" : "width", ref2 = vertical ? "top" : "left", motion = rpositivemotion.test(direction), animation = {}, show = "show" === mode;
@@ -4846,9 +4846,9 @@
             }
         });
     };
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.effects.effect.bounce = function(o, done) {
         var i, upAnim, downAnim, el = $(this), props = [ "position", "top", "bottom", "left", "right", "height", "width" ], mode = $.effects.setMode(el, o.mode || "effect"), hide = "hide" === mode, show = "show" === mode, direction = o.direction || "up", distance = o.distance, times = o.times || 5, anims = 2 * times + (show || hide ? 1 : 0), speed = o.duration / anims, easing = o.easing, ref = "up" === direction || "down" === direction ? "top" : "left", motion = "up" === direction || "left" === direction, queue = el.queue(), queuelen = queue.length;
         (show || hide) && props.push("opacity");
@@ -4888,9 +4888,9 @@
         queuelen > 1 && queue.splice.apply(queue, [ 1, 0 ].concat(queue.splice(queuelen, anims + 1)));
         el.dequeue();
     };
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.effects.effect.clip = function(o, done) {
         var wrapper, animate, distance, el = $(this), props = [ "position", "top", "bottom", "left", "right", "height", "width" ], mode = $.effects.setMode(el, o.mode || "hide"), show = "show" === mode, direction = o.direction || "vertical", vert = "vertical" === direction, size = vert ? "height" : "width", position = vert ? "top" : "left", animation = {};
         $.effects.save(el, props);
@@ -4918,9 +4918,9 @@
             }
         });
     };
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.effects.effect.drop = function(o, done) {
         var distance, el = $(this), props = [ "position", "top", "bottom", "left", "right", "opacity", "height", "width" ], mode = $.effects.setMode(el, o.mode || "hide"), show = "show" === mode, direction = o.direction || "left", ref = "up" === direction || "down" === direction ? "top" : "left", motion = "up" === direction || "left" === direction ? "pos" : "neg", animation = {
             opacity: show ? 1 : 0
@@ -4943,9 +4943,9 @@
             }
         });
     };
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.effects.effect.explode = function(o, done) {
         function childComplete() {
             pieces.push(this);
@@ -4987,9 +4987,9 @@
             }
         }
     };
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.effects.effect.fade = function(o, done) {
         var el = $(this), mode = $.effects.setMode(el, o.mode || "toggle");
         el.animate({
@@ -5001,9 +5001,9 @@
             complete: done
         });
     };
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.effects.effect.fold = function(o, done) {
         var wrapper, distance, el = $(this), props = [ "position", "top", "bottom", "left", "right", "height", "width" ], mode = $.effects.setMode(el, o.mode || "hide"), show = "show" === mode, hide = "hide" === mode, size = o.size || 15, percent = /([0-9]+)%/.exec(size), horizFirst = !!o.horizFirst, widthFirst = show !== horizFirst, ref = widthFirst ? [ "width", "height" ] : [ "height", "width" ], duration = o.duration / 2, animation1 = {}, animation2 = {};
         $.effects.save(el, props);
@@ -5029,9 +5029,9 @@
             done();
         });
     };
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.effects.effect.highlight = function(o, done) {
         var elem = $(this), props = [ "backgroundImage", "backgroundColor", "opacity" ], mode = $.effects.setMode(elem, o.mode || "show"), animation = {
             backgroundColor: elem.css("backgroundColor")
@@ -5052,9 +5052,9 @@
             }
         });
     };
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.effects.effect.pulsate = function(o, done) {
         var i, elem = $(this), mode = $.effects.setMode(elem, o.mode || "show"), show = "show" === mode, hide = "hide" === mode, showhide = show || "hide" === mode, anims = 2 * (o.times || 5) + (showhide ? 1 : 0), duration = o.duration / anims, animateTo = 0, queue = elem.queue(), queuelen = queue.length;
         if (show || !elem.is(":visible")) {
@@ -5077,9 +5077,9 @@
         queuelen > 1 && queue.splice.apply(queue, [ 1, 0 ].concat(queue.splice(queuelen, anims + 1)));
         elem.dequeue();
     };
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.effects.effect.puff = function(o, done) {
         var elem = $(this), mode = $.effects.setMode(elem, o.mode || "hide"), hide = "hide" === mode, percent = parseInt(o.percent, 10) || 150, factor = percent / 100, original = {
             height: elem.height(),
@@ -5266,9 +5266,9 @@
             }
         });
     };
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.effects.effect.shake = function(o, done) {
         var i, el = $(this), props = [ "position", "top", "bottom", "left", "right", "height", "width" ], mode = $.effects.setMode(el, o.mode || "effect"), direction = o.direction || "left", distance = o.distance || 20, times = o.times || 3, anims = 2 * times + 1, speed = Math.round(o.duration / anims), ref = "up" === direction || "down" === direction ? "top" : "left", positiveMotion = "up" === direction || "left" === direction, animation = {}, animation1 = {}, animation2 = {}, queue = el.queue(), queuelen = queue.length;
         $.effects.save(el, props);
@@ -5288,9 +5288,9 @@
         queuelen > 1 && queue.splice.apply(queue, [ 1, 0 ].concat(queue.splice(queuelen, anims + 1)));
         el.dequeue();
     };
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.effects.effect.slide = function(o, done) {
         var distance, el = $(this), props = [ "position", "top", "bottom", "left", "right", "width", "height" ], mode = $.effects.setMode(el, o.mode || "show"), show = "show" === mode, direction = o.direction || "left", ref = "up" === direction || "down" === direction ? "top" : "left", positiveMotion = "up" === direction || "left" === direction, animation = {};
         $.effects.save(el, props);
@@ -5313,9 +5313,9 @@
             }
         });
     };
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.effects.effect.transfer = function(o, done) {
         var elem = $(this), target = $(o.to), targetFixed = "fixed" === target.css("position"), body = $("body"), fixTop = targetFixed ? body.scrollTop() : 0, fixLeft = targetFixed ? body.scrollLeft() : 0, endPosition = target.offset(), animation = {
             top: endPosition.top - fixTop,
@@ -5333,9 +5333,9 @@
             done();
         });
     };
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.widget("ui.menu", {
         version: "1.10.4",
         defaultElement: "<ul>",
@@ -5646,7 +5646,7 @@
                 height = this.element.height();
                 this.active.nextAll(".ui-menu-item").each(function() {
                     item = $(this);
-                    return 0 > item.offset().top - base - height;
+                    return item.offset().top - base - height < 0;
                 });
                 this.focus(event, item);
             } else this.focus(event, this.activeMenu.children(".ui-menu-item")[this.active ? "last" : "first"]());
@@ -5680,9 +5680,9 @@
             this._trigger("select", event, ui);
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($, undefined) {
+!function($, undefined) {
     $.widget("ui.progressbar", {
         version: "1.10.4",
         options: {
@@ -5754,9 +5754,9 @@
             value === this.options.max && this._trigger("complete");
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     function num(v) {
         return parseInt(v, 10) || 0;
     }
@@ -5845,7 +5845,7 @@
                 "all" === this.handles && (this.handles = "n,e,s,w,se,sw,ne,nw");
                 n = this.handles.split(",");
                 this.handles = {};
-                for (i = 0; n.length > i; i++) {
+                for (i = 0; i < n.length; i++) {
                     handle = $.trim(n[i]);
                     hname = "ui-resizable-" + handle;
                     axis = $("<div class='ui-resizable-handle " + hname + "'></div>");
@@ -6043,8 +6043,8 @@
                 pMaxHeight = b.maxWidth / this.aspectRatio;
                 pMinWidth > b.minWidth && (b.minWidth = pMinWidth);
                 pMinHeight > b.minHeight && (b.minHeight = pMinHeight);
-                b.maxWidth > pMaxWidth && (b.maxWidth = pMaxWidth);
-                b.maxHeight > pMaxHeight && (b.maxHeight = pMaxHeight);
+                pMaxWidth < b.maxWidth && (b.maxWidth = pMaxWidth);
+                pMaxHeight < b.maxHeight && (b.maxHeight = pMaxHeight);
             }
             this._vBoundaries = b;
         },
@@ -6084,13 +6084,13 @@
         _proportionallyResize: function() {
             if (!this._proportionallyResizeElements.length) return;
             var i, j, borders, paddings, prel, element = this.helper || this.element;
-            for (i = 0; this._proportionallyResizeElements.length > i; i++) {
+            for (i = 0; i < this._proportionallyResizeElements.length; i++) {
                 prel = this._proportionallyResizeElements[i];
                 if (!this.borderDif) {
                     this.borderDif = [];
                     borders = [ prel.css("borderTopWidth"), prel.css("borderRightWidth"), prel.css("borderBottomWidth"), prel.css("borderLeftWidth") ];
                     paddings = [ prel.css("paddingTop"), prel.css("paddingRight"), prel.css("paddingBottom"), prel.css("paddingLeft") ];
-                    for (j = 0; borders.length > j; j++) this.borderDif[j] = (parseInt(borders[j], 10) || 0) + (parseInt(paddings[j], 10) || 0);
+                    for (j = 0; j < borders.length; j++) this.borderDif[j] = (parseInt(borders[j], 10) || 0) + (parseInt(paddings[j], 10) || 0);
                 }
                 prel.css({
                     height: element.height() - this.borderDif[0] - this.borderDif[2] || 0,
@@ -6366,7 +6366,7 @@
     });
     $.ui.plugin.add("resizable", "grid", {
         resize: function() {
-            var that = $(this).data("ui-resizable"), o = that.options, cs = that.size, os = that.originalSize, op = that.originalPosition, a = that.axis, grid = "number" == typeof o.grid ? [ o.grid, o.grid ] : o.grid, gridX = grid[0] || 1, gridY = grid[1] || 1, ox = Math.round((cs.width - os.width) / gridX) * gridX, oy = Math.round((cs.height - os.height) / gridY) * gridY, newWidth = os.width + ox, newHeight = os.height + oy, isMaxWidth = o.maxWidth && newWidth > o.maxWidth, isMaxHeight = o.maxHeight && newHeight > o.maxHeight, isMinWidth = o.minWidth && o.minWidth > newWidth, isMinHeight = o.minHeight && o.minHeight > newHeight;
+            var that = $(this).data("ui-resizable"), o = that.options, cs = that.size, os = that.originalSize, op = that.originalPosition, a = that.axis, grid = "number" == typeof o.grid ? [ o.grid, o.grid ] : o.grid, gridX = grid[0] || 1, gridY = grid[1] || 1, ox = Math.round((cs.width - os.width) / gridX) * gridX, oy = Math.round((cs.height - os.height) / gridY) * gridY, newWidth = os.width + ox, newHeight = os.height + oy, isMaxWidth = o.maxWidth && o.maxWidth < newWidth, isMaxHeight = o.maxHeight && o.maxHeight < newHeight, isMinWidth = o.minWidth && o.minWidth > newWidth, isMinHeight = o.minHeight && o.minHeight > newHeight;
             o.grid = grid;
             isMinWidth && (newWidth += gridX);
             isMinHeight && (newHeight += gridY);
@@ -6401,9 +6401,9 @@
             }
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     $.widget("ui.selectable", $.ui.mouse, {
         version: "1.10.4",
         options: {
@@ -6519,7 +6519,7 @@
             this.selectees.each(function() {
                 var selectee = $.data(this, "selectable-item"), hit = false;
                 if (!selectee || selectee.element === that.element[0]) return;
-                "touch" === options.tolerance ? hit = !(selectee.left > x2 || x1 > selectee.right || selectee.top > y2 || y1 > selectee.bottom) : "fit" === options.tolerance && (hit = selectee.left > x1 && x2 > selectee.right && selectee.top > y1 && y2 > selectee.bottom);
+                "touch" === options.tolerance ? hit = !(selectee.left > x2 || selectee.right < x1 || selectee.top > y2 || selectee.bottom < y1) : "fit" === options.tolerance && (hit = selectee.left > x1 && selectee.right < x2 && selectee.top > y1 && selectee.bottom < y2);
                 if (hit) {
                     if (selectee.selected) {
                         selectee.$element.removeClass("ui-selected");
@@ -6593,9 +6593,9 @@
             return false;
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     var numPages = 5;
     $.widget("ui.slider", $.ui.mouse, {
         version: "1.10.4",
@@ -6622,7 +6622,7 @@
             this._handleIndex = null;
             this._detectOrientation();
             this._mouseInit();
-            this.element.addClass("ui-slider ui-slider-" + this.orientation + " ui-widget" + " ui-widget-content" + " ui-corner-all");
+            this.element.addClass("ui-slider ui-slider-" + this.orientation + " ui-widget ui-widget-content ui-corner-all");
             this._refresh();
             this._setOption("disabled", this.options.disabled);
             this._animateOff = false;
@@ -6839,7 +6839,7 @@
             if (!$.isArray(arguments[0])) return this.options.values && this.options.values.length ? this._values(index) : this.value();
             vals = this.options.values;
             newValues = arguments[0];
-            for (i = 0; vals.length > i; i += 1) {
+            for (i = 0; i < vals.length; i += 1) {
                 vals[i] = this._trimAlignValue(newValues[i]);
                 this._change(null, i);
             }
@@ -6904,13 +6904,13 @@
             }
             if (this.options.values && this.options.values.length) {
                 vals = this.options.values.slice();
-                for (i = 0; vals.length > i; i += 1) vals[i] = this._trimAlignValue(vals[i]);
+                for (i = 0; i < vals.length; i += 1) vals[i] = this._trimAlignValue(vals[i]);
                 return vals;
             }
             return [];
         },
         _trimAlignValue: function(val) {
-            if (this._valueMin() >= val) return this._valueMin();
+            if (val <= this._valueMin()) return this._valueMin();
             if (val >= this._valueMax()) return this._valueMax();
             var step = this.options.step > 0 ? this.options.step : 1, valModStep = (val - this._valueMin()) % step, alignValue = val - valModStep;
             2 * Math.abs(valModStep) >= step && (alignValue += valModStep > 0 ? step : -step);
@@ -6925,7 +6925,7 @@
         _refreshValue: function() {
             var lastValPercent, valPercent, value, valueMin, valueMax, oRange = this.options.range, o = this.options, that = this, animate = this._animateOff ? false : o.animate, _set = {};
             if (this.options.values && this.options.values.length) this.handles.each(function(i) {
-                valPercent = 100 * ((that.values(i) - that._valueMin()) / (that._valueMax() - that._valueMin()));
+                valPercent = (that.values(i) - that._valueMin()) / (that._valueMax() - that._valueMin()) * 100;
                 _set["horizontal" === that.orientation ? "left" : "bottom"] = valPercent + "%";
                 $(this).stop(1, 1)[animate ? "animate" : "css"](_set, o.animate);
                 if (true === that.options.range) if ("horizontal" === that.orientation) {
@@ -6954,7 +6954,7 @@
                 value = this.value();
                 valueMin = this._valueMin();
                 valueMax = this._valueMax();
-                valPercent = valueMax !== valueMin ? 100 * ((value - valueMin) / (valueMax - valueMin)) : 0;
+                valPercent = valueMax !== valueMin ? (value - valueMin) / (valueMax - valueMin) * 100 : 0;
                 _set["horizontal" === this.orientation ? "left" : "bottom"] = valPercent + "%";
                 this.handle.stop(1, 1)[animate ? "animate" : "css"](_set, o.animate);
                 "min" === oRange && "horizontal" === this.orientation && this.range.stop(1, 1)[animate ? "animate" : "css"]({
@@ -7043,9 +7043,9 @@
             }
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     function isOverAxis(x, reference, size) {
         return x > reference && reference + size > x;
     }
@@ -7295,7 +7295,7 @@
         },
         _intersectsWith: function(item) {
             var x1 = this.positionAbs.left, x2 = x1 + this.helperProportions.width, y1 = this.positionAbs.top, y2 = y1 + this.helperProportions.height, l = item.left, r = l + item.width, t = item.top, b = t + item.height, dyClick = this.offset.click.top, dxClick = this.offset.click.left, isOverElementHeight = "x" === this.options.axis || y1 + dyClick > t && b > y1 + dyClick, isOverElementWidth = "y" === this.options.axis || x1 + dxClick > l && r > x1 + dxClick, isOverElement = isOverElementHeight && isOverElementWidth;
-            return "pointer" === this.options.tolerance || this.options.forcePointerForContainers || "pointer" !== this.options.tolerance && this.helperProportions[this.floating ? "width" : "height"] > item[this.floating ? "width" : "height"] ? isOverElement : x1 + this.helperProportions.width / 2 > l && r > x2 - this.helperProportions.width / 2 && y1 + this.helperProportions.height / 2 > t && b > y2 - this.helperProportions.height / 2;
+            return "pointer" === this.options.tolerance || this.options.forcePointerForContainers || "pointer" !== this.options.tolerance && this.helperProportions[this.floating ? "width" : "height"] > item[this.floating ? "width" : "height"] ? isOverElement : l < x1 + this.helperProportions.width / 2 && x2 - this.helperProportions.width / 2 < r && t < y1 + this.helperProportions.height / 2 && y2 - this.helperProportions.height / 2 < b;
         },
         _intersectsWithPointer: function(item) {
             var isOverElementHeight = "x" === this.options.axis || isOverAxis(this.positionAbs.top + this.offset.click.top, item.top, item.height), isOverElementWidth = "y" === this.options.axis || isOverAxis(this.positionAbs.left + this.offset.click.left, item.left, item.width), isOverElement = isOverElementHeight && isOverElementWidth, verticalDirection = this._getDragVerticalDirection(), horizontalDirection = this._getDragHorizontalDirection();
@@ -7345,7 +7345,7 @@
         _removeCurrentsFromItems: function() {
             var list = this.currentItem.find(":data(" + this.widgetName + "-item)");
             this.items = $.grep(this.items, function(item) {
-                for (var j = 0; list.length > j; j++) if (list[j] === item.item[0]) return false;
+                for (var j = 0; j < list.length; j++) if (list[j] === item.item[0]) return false;
                 return true;
             });
         },
@@ -7469,7 +7469,7 @@
                         nearBottom = true;
                         cur += this.items[j][sizeProperty];
                     }
-                    if (dist > Math.abs(cur - base)) {
+                    if (Math.abs(cur - base) < dist) {
                         dist = Math.abs(cur - base);
                         itemWithLeastDistance = this.items[j];
                         this.direction = nearBottom ? "up" : "down";
@@ -7653,7 +7653,7 @@
             if (this.cancelHelperRemoval) {
                 if (!noPropagation) {
                     this._trigger("beforeStop", event, this._uiHash());
-                    for (i = 0; delayedTriggers.length > i; i++) delayedTriggers[i].call(this, event);
+                    for (i = 0; i < delayedTriggers.length; i++) delayedTriggers[i].call(this, event);
                     this._trigger("stop", event, this._uiHash());
                 }
                 this.fromOutside = false;
@@ -7664,7 +7664,7 @@
             this.helper[0] !== this.currentItem[0] && this.helper.remove();
             this.helper = null;
             if (!noPropagation) {
-                for (i = 0; delayedTriggers.length > i; i++) delayedTriggers[i].call(this, event);
+                for (i = 0; i < delayedTriggers.length; i++) delayedTriggers[i].call(this, event);
                 this._trigger("stop", event, this._uiHash());
             }
             this.fromOutside = false;
@@ -7686,9 +7686,9 @@
             };
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     function modifier(fn) {
         return function() {
             var previous = this.element.val();
@@ -7830,7 +7830,7 @@
             return "<span class='ui-spinner ui-widget ui-widget-content ui-corner-all'></span>";
         },
         _buttonHtml: function() {
-            return "<a class='ui-spinner-button ui-spinner-up ui-corner-tr'><span class='ui-icon " + this.options.icons.up + "'>&#9650;</span>" + "</a>" + "<a class='ui-spinner-button ui-spinner-down ui-corner-br'>" + "<span class='ui-icon " + this.options.icons.down + "'>&#9660;</span>" + "</a>";
+            return "<a class='ui-spinner-button ui-spinner-up ui-corner-tr'><span class='ui-icon " + this.options.icons.up + "'>&#9650;</span></a><a class='ui-spinner-button ui-spinner-down ui-corner-br'><span class='ui-icon " + this.options.icons.down + "'>&#9660;</span></a>";
         },
         _start: function(event) {
             if (!this.spinning && false === this._trigger("start", event)) return false;
@@ -7879,7 +7879,7 @@
             value = base + aboveMin;
             value = parseFloat(value.toFixed(this._precision()));
             if (null !== options.max && value > options.max) return options.max;
-            if (null !== options.min && options.min > value) return options.min;
+            if (null !== options.min && value < options.min) return options.min;
             return value;
         },
         _stop: function(event) {
@@ -7978,9 +7978,9 @@
             return this.uiSpinner;
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($, undefined) {
+!function($, undefined) {
     function getNextTabId() {
         return ++tabId;
     }
@@ -8435,9 +8435,9 @@
             return this.element.find(this._sanitizeSelector("#" + id));
         }
     });
-})(jQuery);
+}(jQuery);
 
-(function($) {
+!function($) {
     function addDescribedBy(elem, id) {
         var describedby = (elem.attr("aria-describedby") || "").split(/\s+/);
         describedby.push(id);
@@ -8653,4 +8653,4 @@
             });
         }
     });
-})(jQuery);
+}(jQuery);

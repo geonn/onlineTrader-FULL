@@ -11,6 +11,7 @@ if(ses == null){
 }else{
 	//console.log("other");
 	var url = Ti.API.CHECKSESSION +ses;
+	console.log(url);
 	var client = Ti.Network.createHTTPClient({
 	     // function called when the response data is available
 	     onload : function(e) {

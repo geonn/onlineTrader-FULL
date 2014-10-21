@@ -22,6 +22,9 @@ function goBack() {
 }
 
 function popup(event) {
+    var currentTime = new Date();
+    if (1e3 > currentTime - clickTime) return;
+    clickTime = currentTime;
     var page = event.source.mod;
     var module = Ti.App.Properties.getString("module");
     var roles = Ti.App.Properties.getString("roles");
@@ -44,7 +47,7 @@ function removeWindowRelationship() {
 
 function removeAllWindow() {
     var tempArr = Ti.App.WindowCabinet;
-    if (tempArr.length > 0) for (var a = 0; tempArr.length > a; a++) tempArr[a].close();
+    if (tempArr.length > 0) for (var a = 0; a < tempArr.length; a++) tempArr[a].close();
 }
 
 function setWindowRelationship(current) {
@@ -268,13 +271,13 @@ function deviceTokenError(e) {
 
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
-Ti.API.API_DOMAIN = "onlinetrader.com.my";
+Ti.API.API_DOMAIN = "staging.onlinetrader.com.my";
 
 Ti.API.USER = "biomas";
 
 Ti.API.KEY = "06b53047cf294f7207789ff5293ad2dc";
 
-Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.0.52&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.0.53&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
 Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.0.52&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
 
@@ -365,6 +368,8 @@ var notificationNumber = 0;
 var app_status = "";
 
 xhr.clean();
+
+var clickTime = null;
 
 if ("android" == Alloy.Globals.osname) {
     var CloudPush = require("ti.cloudpush");

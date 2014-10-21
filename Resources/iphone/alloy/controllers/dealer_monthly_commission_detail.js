@@ -1,7 +1,16 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function loadTableRow(data) {
         var tableData = [];
-        for (var i = 0; data.length > i; i++) {
+        for (var i = 0; i < data.length; i++) {
             var row = Ti.UI.createTableViewRow({
                 className: "forumEvent",
                 rowIndex: i,
@@ -68,9 +77,17 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_monthly_commission_detail";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     $.__views.dealer_monthly_commission_detail = Ti.UI.createWindow({
@@ -128,8 +145,12 @@ function Controller() {
     _.extend($, $.__views);
     var args = arguments[0] || {};
     var date = args.date || "";
+    var clickTime = null;
     getSummary();
-    $.tableView.addEventListener("touchend", function(e) {
+    $.tableView.addEventListener("click", function(e) {
+        var currentTime = new Date();
+        if (1e3 > currentTime - clickTime) return;
+        clickTime = currentTime;
         var prop = e.rowData.day;
         var param = {
             date: prop,

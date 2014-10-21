@@ -6,14 +6,14 @@ function isNumber(n) {
 function findTotalQty() {
     var arr = document.getElementsByClassName("productQty");
     var tot = 0;
-    for (var i = 0; arr.length > i; i++) parseInt(arr[i].value) && (tot += parseInt(arr[i].value));
+    for (var i = 0; i < arr.length; i++) parseInt(arr[i].value) && (tot += parseInt(arr[i].value));
     return tot;
 }
 
 function findTotalPrice() {
     var arr = document.getElementsByClassName("productPrice");
     var tot = 0;
-    for (var i = 0; arr.length > i; i++) if (parseFloat(arr[i].value)) {
+    for (var i = 0; i < arr.length; i++) if (parseFloat(arr[i].value)) {
         grand_total = parseFloat(arr[i].value);
         tot += parseFloat(grand_total);
     }
