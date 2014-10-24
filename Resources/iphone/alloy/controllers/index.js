@@ -25,7 +25,7 @@ function Controller() {
                     Ti.App.Properties.setString("roles", res.data.roles);
                     Ti.App.Properties.setString("session", res.data.session);
                     "android" == Alloy.Globals.osname && subscribeDeviceToken(dt, res.data.roles);
-                    if ("dealer" == res.data.roles) {
+                    if ("dealer" == res.data.roles || "staff" == res.data.roles) {
                         $.index.close();
                         var summary = Alloy.createController(res.data.roles + "_summary").getView();
                         setWindowRelationship(summary);
@@ -62,7 +62,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.index = Ti.UI.createWindow({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "index"
     });
@@ -200,7 +200,7 @@ function Controller() {
                 var res = JSON.parse(this.responseText);
                 if ("success" == res.status) {
                     var rl = Ti.App.Properties.getString("roles");
-                    if ("dealer" == rl) {
+                    if ("dealer" == rl || "staff" == rl) {
                         $.index.close();
                         var summary = Alloy.createController(rl + "_summary").getView();
                         setWindowRelationship(summary);

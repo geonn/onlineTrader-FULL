@@ -68,7 +68,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dispatcher_settings = Ti.UI.createWindow({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dispatcher_settings"
     });
@@ -121,7 +121,7 @@ function Controller() {
     });
     $.__views.content.add($.__views.__alloyId117);
     $.__views.__alloyId118 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         top: "5",
@@ -152,7 +152,7 @@ function Controller() {
     });
     $.__views.__alloyId118.add($.__views.fullname);
     $.__views.__alloyId120 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
@@ -182,7 +182,7 @@ function Controller() {
     });
     $.__views.__alloyId120.add($.__views.mobile);
     $.__views.__alloyId122 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
@@ -213,7 +213,7 @@ function Controller() {
     $.__views.__alloyId122.add($.__views.prefer_state);
     chooseState ? $.__views.prefer_state.addEventListener("click", chooseState) : __defers["$.__views.prefer_state!click!chooseState"] = true;
     $.__views.__alloyId124 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
@@ -244,7 +244,7 @@ function Controller() {
     });
     $.__views.__alloyId124.add($.__views.new_password);
     $.__views.__alloyId126 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",

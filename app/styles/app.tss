@@ -3,7 +3,7 @@
 	color: "#e02222"
 },
 ".container": {
-	backgroundColor:"white",
+	backgroundImage:"/images/bg.jpg",
 	navBarHidden:true
 },
 "#header":{

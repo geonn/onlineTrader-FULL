@@ -53,7 +53,10 @@
         	 body{
 				color: #e02222;
 				font-size:14px;
+				background-image: url('../images/bg.jpg');
+				background-repeat: repeat;
 			}
+
 			 textarea.text-input , input.text-input {
 				width: 100%;
 				float: right;
@@ -214,7 +217,7 @@
 						if(res.status == 'success'){
 							
 							noty({"text":"Pos order added successfully!","layout":"center","type":"success","animateOpen":{"height":"toggle"},"animateClose":{"height":"toggle"},"speed":500,"timeout":4000,"closeButton":false,"closeOnSelfClick":true,"closeOnSelfOver":false,"modal":false});
-							setInterval(function(){Ti.App.fireEvent('addOrderComplete', {});},2000);
+							setTimeout(function(){Ti.App.fireEvent('addOrderComplete', {});},2000);
 							//;
 						}else{
 							$("#post_form").show();

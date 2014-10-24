@@ -14,11 +14,6 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dispatcher_home";
     if (arguments[0]) {
-<<<<<<< HEAD
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
-=======
         {
             __processArg(arguments[0], "__parentSymbol");
         }
@@ -28,13 +23,12 @@ function Controller() {
         {
             __processArg(arguments[0], "__itemTemplate");
         }
->>>>>>> FETCH_HEAD
     }
     var $ = this;
     var exports = {};
     var __defers = {};
     $.__views.dispatcher_home_win = Ti.UI.createWindow({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dispatcher_home_win"
     });

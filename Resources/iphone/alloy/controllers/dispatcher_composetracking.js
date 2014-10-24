@@ -59,7 +59,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.composetracking_win = Ti.UI.createWindow({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "composetracking_win"
     });

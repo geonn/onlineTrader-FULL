@@ -64,11 +64,6 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_summary";
     if (arguments[0]) {
-<<<<<<< HEAD
-        __processArg(arguments[0], "__parentSymbol");
-        __processArg(arguments[0], "$model");
-        __processArg(arguments[0], "__itemTemplate");
-=======
         {
             __processArg(arguments[0], "__parentSymbol");
         }
@@ -78,13 +73,12 @@ function Controller() {
         {
             __processArg(arguments[0], "__itemTemplate");
         }
->>>>>>> FETCH_HEAD
     }
     var $ = this;
     var exports = {};
     var __defers = {};
     $.__views.dealer_summary = Ti.UI.createWindow({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_summary"
     });

@@ -1,12 +1,78 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
+    function expandMoreMenu(e) {
+        if (expandMoreMenu.__isExecuting) return;
+        expandMoreMenu.__isExecuting = true;
+        if ("more" == e.source.mod) {
+            $.subfooter.animate({
+                bottom: 70,
+                duration: 500
+            }, function() {
+                expandMoreMenu.__isExecuting = false;
+            });
+            $.more.image = "/images/icons/icon-more-active.png";
+            e.source.mod = "more_active";
+            Ti.App.Properties.setString("module", "dealer_more");
+        } else {
+            $.subfooter.animate({
+                bottom: 0,
+                duration: 500
+            }, function() {
+                expandMoreMenu.__isExecuting = false;
+            });
+            $.more.image = "/images/icons/icon-more.png";
+            Ti.App.Properties.setString("module", "dealer_more");
+            e.source.mod = "more";
+        }
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "_dealer_footer";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
+    $.__views.subfooter = Ti.UI.createView({
+        height: Titanium.UI.SIZE,
+        bottom: 0,
+        id: "subfooter"
+    });
+    $.__views.subfooter && $.addTopLevelView($.__views.subfooter);
+    $.__views.settings = Ti.UI.createImageView({
+        width: "20%",
+        id: "settings",
+        mod: "settings",
+        left: "0",
+        image: "/images/icons/icon-setting.png"
+    });
+    $.__views.subfooter.add($.__views.settings);
+    goNav ? $.__views.settings.addEventListener("touchend", goNav) : __defers["$.__views.settings!touchend!goNav"] = true;
+    $.__views.logout = Ti.UI.createImageView({
+        width: "20%",
+        id: "logout",
+        mod: "logout",
+        left: "20%",
+        image: "/images/icons/icon-logout.png"
+    });
+    $.__views.subfooter.add($.__views.logout);
+    doLogout ? $.__views.logout.addEventListener("touchend", doLogout) : __defers["$.__views.logout!touchend!doLogout"] = true;
     $.__views.footer = Ti.UI.createView({
         height: Titanium.UI.SIZE,
         bottom: 0,
@@ -14,93 +80,60 @@ function Controller() {
         id: "footer"
     });
     $.__views.footer && $.addTopLevelView($.__views.footer);
-<<<<<<< HEAD
-    $.__views.__alloyId0 = Ti.UI.createImageView({
-=======
-    $.__views.__alloyId30 = Ti.UI.createImageView({
->>>>>>> master
+    $.__views.summary = Ti.UI.createImageView({
         width: "20%",
+        id: "summary",
         mod: "summary",
         left: "0",
-        image: "/images/icons/icon-summary.png",
-<<<<<<< HEAD
-        id: "__alloyId0"
+        image: "/images/icons/icon-summary.png"
     });
-    $.__views.footer.add($.__views.__alloyId0);
-    goNav ? $.__views.__alloyId0.addEventListener("click", goNav) : __defers["$.__views.__alloyId0!click!goNav"] = true;
-    $.__views.__alloyId1 = Ti.UI.createImageView({
+    $.__views.footer.add($.__views.summary);
+    goNav ? $.__views.summary.addEventListener("touchend", goNav) : __defers["$.__views.summary!touchend!goNav"] = true;
+    $.__views.orderlist = Ti.UI.createImageView({
         width: "20%",
+        id: "orderlist",
+        mod: "orderlist",
         left: "20%",
-        image: "/images/icons/icon-neworder.png",
-        id: "__alloyId1"
+        image: "/images/icons/icon-neworder.png"
     });
-    $.__views.footer.add($.__views.__alloyId1);
-    $.__views.__alloyId2 = Ti.UI.createImageView({
+    $.__views.footer.add($.__views.orderlist);
+    goNav ? $.__views.orderlist.addEventListener("touchend", goNav) : __defers["$.__views.orderlist!touchend!goNav"] = true;
+    $.__views.poslist = Ti.UI.createImageView({
         width: "20%",
+        id: "poslist",
+        mod: "poslist",
         left: "40%",
-        image: "/images/icons/icon-listing.png",
-        id: "__alloyId2"
+        image: "/images/icons/icon-pos.png"
     });
-    $.__views.footer.add($.__views.__alloyId2);
-    $.__views.__alloyId3 = Ti.UI.createImageView({
+    $.__views.footer.add($.__views.poslist);
+    goNav ? $.__views.poslist.addEventListener("touchend", goNav) : __defers["$.__views.poslist!touchend!goNav"] = true;
+    $.__views.statistic = Ti.UI.createImageView({
         width: "20%",
+        id: "statistic",
+        mod: "statistic",
         left: "60%",
-        image: "/images/icons/icon-pos.png",
-        id: "__alloyId3"
+        image: "/images/icons/icon-ranking.png"
     });
-    $.__views.footer.add($.__views.__alloyId3);
-    $.__views.__alloyId4 = Ti.UI.createImageView({
-=======
-        id: "__alloyId30"
-    });
-    $.__views.footer.add($.__views.__alloyId30);
-    goNav ? $.__views.__alloyId30.addEventListener("click", goNav) : __defers["$.__views.__alloyId30!click!goNav"] = true;
-    $.__views.__alloyId31 = Ti.UI.createImageView({
+    $.__views.footer.add($.__views.statistic);
+    goNav ? $.__views.statistic.addEventListener("touchend", goNav) : __defers["$.__views.statistic!touchend!goNav"] = true;
+    $.__views.more = Ti.UI.createImageView({
         width: "20%",
-        left: "20%",
-        image: "/images/icons/icon-neworder.png",
-        id: "__alloyId31"
-    });
-    $.__views.footer.add($.__views.__alloyId31);
-    $.__views.__alloyId32 = Ti.UI.createImageView({
-        width: "20%",
-        left: "40%",
-        image: "/images/icons/icon-listing.png",
-        id: "__alloyId32"
-    });
-    $.__views.footer.add($.__views.__alloyId32);
-    $.__views.__alloyId33 = Ti.UI.createImageView({
-        width: "20%",
-        left: "60%",
-        image: "/images/icons/icon-pos.png",
-        id: "__alloyId33"
-    });
-    $.__views.footer.add($.__views.__alloyId33);
-    $.__views.__alloyId34 = Ti.UI.createImageView({
->>>>>>> master
-        width: "20%",
-        mod: "settings",
+        id: "more",
+        mod: "more",
         left: "80%",
-        image: "/images/icons/icon-setting.png",
-<<<<<<< HEAD
-        id: "__alloyId4"
+        image: "/images/icons/icon-more.png"
     });
-    $.__views.footer.add($.__views.__alloyId4);
-    goNav ? $.__views.__alloyId4.addEventListener("click", goNav) : __defers["$.__views.__alloyId4!click!goNav"] = true;
+    $.__views.footer.add($.__views.more);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    __defers["$.__views.__alloyId0!click!goNav"] && $.__views.__alloyId0.addEventListener("click", goNav);
-    __defers["$.__views.__alloyId4!click!goNav"] && $.__views.__alloyId4.addEventListener("click", goNav);
-=======
-        id: "__alloyId34"
-    });
-    $.__views.footer.add($.__views.__alloyId34);
-    goNav ? $.__views.__alloyId34.addEventListener("click", goNav) : __defers["$.__views.__alloyId34!click!goNav"] = true;
-    exports.destroy = function() {};
-    _.extend($, $.__views);
-    __defers["$.__views.__alloyId30!click!goNav"] && $.__views.__alloyId30.addEventListener("click", goNav);
-    __defers["$.__views.__alloyId34!click!goNav"] && $.__views.__alloyId34.addEventListener("click", goNav);
->>>>>>> master
+    arguments[0] || {};
+    $.more.addEventListener("click", expandMoreMenu);
+    __defers["$.__views.settings!touchend!goNav"] && $.__views.settings.addEventListener("touchend", goNav);
+    __defers["$.__views.logout!touchend!doLogout"] && $.__views.logout.addEventListener("touchend", doLogout);
+    __defers["$.__views.summary!touchend!goNav"] && $.__views.summary.addEventListener("touchend", goNav);
+    __defers["$.__views.orderlist!touchend!goNav"] && $.__views.orderlist.addEventListener("touchend", goNav);
+    __defers["$.__views.poslist!touchend!goNav"] && $.__views.poslist.addEventListener("touchend", goNav);
+    __defers["$.__views.statistic!touchend!goNav"] && $.__views.statistic.addEventListener("touchend", goNav);
     _.extend($, exports);
 }
 

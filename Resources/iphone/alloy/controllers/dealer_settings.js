@@ -84,7 +84,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dealer_settings = Ti.UI.createWindow({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_settings"
     });
@@ -137,7 +137,7 @@ function Controller() {
     });
     $.__views.content.add($.__views.__alloyId49);
     $.__views.__alloyId50 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "vertical",
         top: "5",
@@ -162,7 +162,7 @@ function Controller() {
     });
     $.__views.__alloyId50.add($.__views.dealer_id);
     $.__views.__alloyId52 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
@@ -196,7 +196,7 @@ function Controller() {
     });
     $.__views.__alloyId52.add($.__views.fullname);
     $.__views.__alloyId54 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
@@ -231,7 +231,7 @@ function Controller() {
     });
     $.__views.__alloyId54.add($.__views.mobile);
     $.__views.__alloyId56 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
@@ -264,7 +264,7 @@ function Controller() {
     });
     $.__views.__alloyId56.add($.__views.address);
     $.__views.__alloyId58 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
@@ -297,7 +297,7 @@ function Controller() {
     });
     $.__views.__alloyId58.add($.__views.city);
     $.__views.__alloyId60 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
@@ -332,7 +332,7 @@ function Controller() {
     });
     $.__views.__alloyId60.add($.__views.postcode);
     $.__views.__alloyId62 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
@@ -367,7 +367,7 @@ function Controller() {
     $.__views.__alloyId62.add($.__views.state);
     chooseMState ? $.__views.state.addEventListener("click", chooseMState) : __defers["$.__views.state!click!chooseMState"] = true;
     $.__views.__alloyId64 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
@@ -402,7 +402,7 @@ function Controller() {
     $.__views.__alloyId64.add($.__views.prefer_state);
     chooseState ? $.__views.prefer_state.addEventListener("click", chooseState) : __defers["$.__views.prefer_state!click!chooseState"] = true;
     $.__views.__alloyId66 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
@@ -437,7 +437,7 @@ function Controller() {
     });
     $.__views.__alloyId66.add($.__views.new_password);
     $.__views.__alloyId68 = Ti.UI.createView({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",

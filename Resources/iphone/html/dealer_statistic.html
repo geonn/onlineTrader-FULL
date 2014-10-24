@@ -12,12 +12,15 @@
 		<meta name="viewport" content="initial-scale=1.0, width=device-width, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no" />
   		
   		<script>
+  			var currentOption = '';
 	  		Ti.App.addEventListener("app:getStatistic", function(e) {
 				var dateToday = todayDate();
   				$( "#datepicker" ).val(dateToday);
   				
 	            localStorage.setItem("session",e.session);
 	            localStorage.setItem("url", e.url);
+	            localStorage.setItem("m_url", e.m_url);
+	            localStorage.setItem("m_userstat", e.m_userstat);
 	            localStorage.setItem("userstat", e.userstat);
 	            localStorage.setItem("tableTitle", "Location");
 	            localStorage.setItem("targetURL", e.url); //Default
@@ -37,25 +40,18 @@
 			     });
 	        });
   			
-			
-			function loadList(){
-				Ti.App.addEventListener("app:getStatistic", function(e) {
-					var myDate = $( "#datepicker" ).val();
-            		localStorage.setItem("url", e.url);
-            		$("#dealer_statistic_list").html("<div style='display:inline;color:#243F8B;font-weight:bold;'>Loading...</div>");
-					drawTable(e.url+"&date="+myDate);
-				});
-			}
-			
 			function refreshTable(){
 				thedate =$( "#datepicker" ).val();
+				var month =$( "#month" ).val();
+				var year =$( "#year" ).val();
 				var dateRpt = localStorage.getItem("targetURL");
 				$("#dealer_statistic_list").html("<div style='display:inline;color:#243F8B;font-weight:bold;'>Loading...</div>");
 				
-				drawTable(dateRpt+"&date="+thedate);
+				drawTable(dateRpt+"&date="+thedate+"&month="+month+"&year="+year);
 			}
 			
 			function drawTable(queryUrl){
+				console.log(queryUrl);
 				$.getJSON(queryUrl, function( data ) {
 				   if(data.status == 'error'){
 				   	//getStateSelector();
@@ -80,16 +76,29 @@
 						  	}
 				   	 		
 				   	 	}else{
-				   	 		str += "<tr><th width='70%' id='titleName'>"+ localStorage.getItem("tableTitle")+"</th><th width='30%' id='titleTotal'>Total Order</th></tr>";
-					  	
-						  	if(data.data == ""){
-						  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
-						  	}else{
-						  		$.each( data.data, function( key, val ) {
-									str += "<tr><td width='70%'>"+key+". "+val.name+"</td><td width='30%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
-								});
-						  	}
-				   	 		
+				   	 		if(currentOption == "monthly_location"){
+				   	 			str += "<tr><th width='50%' id='titleName'>"+ localStorage.getItem("tableTitle")+"</th><th width='50%' id='titleTotal'>Completed / Total</th></tr>";
+				   	 			if(data.data == ""){
+							  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
+							  	}else{
+							  		
+							  		$.each( data.data, function( key, val ) {
+							  			key = key + 1;
+										str += "<tr><td width='50%'>"+key+". "+val.state+"</td><td width='50%' style='color:#525252;text-align:right;'> "+val.completed+"/"+val.total+"</td></tr>";
+									});
+							  	}
+				   	 		}else{
+					   	 		str += "<tr><th width='70%' id='titleName'>"+ localStorage.getItem("tableTitle")+"</th><th width='30%' id='titleTotal'>Total Order</th></tr>";
+						  	
+							  	if(data.data == ""){
+							  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
+							  	}else{
+							  		
+							  		$.each( data.data, function( key, val ) {
+										str += "<tr><td width='70%'>"+key+". "+val.name+"</td><td width='30%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
+									});
+							  	}
+				   	 		}
 				   	 	}
 				   	 	
 						  str += "</table>";
@@ -103,14 +112,31 @@
 			}
 			
 			function showContent(options){
+				currentOption = options;
 				if(options == "dealer"){
 					Ti.App.fireEvent('changeTitle', {title: "Top Sales Dealer"  });
 					localStorage.setItem("tableTitle", "Dealer");
 					localStorage.setItem("targetURL", localStorage.getItem("userstat"));
-				}else{
+					$("#monthyear").hide();
+	  				$("#datepicker").show();
+				}else if(options == "location"){
 					Ti.App.fireEvent('changeTitle', {title: "Top Sales Location"  });
 					localStorage.setItem("tableTitle", "Location");
 					localStorage.setItem("targetURL", localStorage.getItem("url"));
+					$("#monthyear").hide();
+	  				$("#datepicker").show();
+				}else if(options == "monthly_location"){
+					Ti.App.fireEvent('changeTitle', {title: "Top Monthly Sales Location"  });
+					localStorage.setItem("tableTitle", "Location");
+					localStorage.setItem("targetURL", localStorage.getItem("m_userstat"));
+					$("#monthyear").show();
+	  				$("#datepicker").hide();
+				}else if(options == "monthly_dealer"){
+					Ti.App.fireEvent('changeTitle', {title: "Top Monthly Sales Dealer"  });
+					localStorage.setItem("tableTitle", "Dealer");
+					localStorage.setItem("targetURL", localStorage.getItem("m_url"));
+					$("#monthyear").show();
+	  				$("#datepicker").hide();
 				}
 				refreshTable();
 				$('.floatMenu').toggle('slide', { direction: 'left' }, 300);
@@ -123,9 +149,50 @@
 				    $('.floatMenu').toggle('slide', { direction: 'left' }, 300);
 				});	
 				
+				var currentYear = new Date().getFullYear();
+  			
+	  			for(var year = 2014; year<=currentYear; year++){
+	  				$('#year').append($("<option/>", {
+				        value: year,
+				        text: year
+				    }));
+	  			}
+	  			
+	  			var currentMonth = new Date().getMonth();
+  			
+	  			for(var m = 1; m<=12; m++){
+	  				if(m == currentMonth+1){
+	  					$('#month').append($("<option/>", {
+					        value: m,
+					        selected: "selected",
+					        text: m
+					    }));
+	  				}else{
+		  				$('#month').append($("<option/>", {
+					        value: m,
+					        text: m
+					    }));
+				   	}
+	  			}
+	  			
+	  			$("#month").change(function(){
+	  				refreshTable();
+	  			});
+	  			
+	  			$("#year").change(function(){
+	  				refreshTable();
+	  			});
+	  			
+	  			$("#monthyear").hide();
+	  			
 		     });
 		</script>
 		<style>
+			body{ 
+				background-image: url('../images/bg.jpg');
+				background-repeat: repeat;
+			}
+
 			input.text-input {
 				width: 75%;
 				margin:0 auto;
@@ -163,11 +230,22 @@
     		<div class="floatContent" onClick="showContent('location')">Sales by Location</div>
     		<hr/>
     		<div class="floatContent"  onClick="showContent('dealer')">Sales by Dealer</div>
+    		<hr/>
+    		<div class="floatContent" onClick="showContent('monthly_location')">Monthly Sales by Location</div>
+    		<hr/>
+    		<div class="floatContent"  onClick="showContent('monthly_dealer')">Monthly Sales by Dealer</div>
     	</div>
     	<div class="staticBar" id="dateBar">
     		<img id="menuOptions" src="../images/menu.png"  style="float:left;width:30px;vertical-align: middle;padding-left:10px;padding-right:10px;">
     		<input class="text-input" name="senddate" readonly type="text" id="datepicker" value="" >
-    	
+    		<div id="monthyear" style="float:left">
+    			Month
+	    		<select name="month" id="month">
+	    		</select>
+	    		Year
+	    		<select id="year" name="year">
+	    		</select>
+    		</div>
     	</div>
     	<div id="dealer_statistic_list" style="padding-top:45px;display:block;"></div>	
 		

@@ -271,15 +271,15 @@ function deviceTokenError(e) {
 
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
-Ti.API.API_DOMAIN = "staging.onlinetrader.com.my";
+Ti.API.API_DOMAIN = "onlinetrader.com.my";
 
 Ti.API.USER = "biomas";
 
 Ti.API.KEY = "06b53047cf294f7207789ff5293ad2dc";
 
-Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.0.53&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.0.55&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
-Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.0.52&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
+Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.0.55&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
 
 Ti.API.LOGOUT = "http://" + Ti.API.API_DOMAIN + "/api/logoutUser?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
@@ -344,6 +344,10 @@ Ti.API.SETUNREAD = "http://" + Ti.API.API_DOMAIN + "/api/unsetUserNotification?u
 Ti.API.GETNOTISCOUNT = "http://" + Ti.API.API_DOMAIN + "/api/totalUserNotificationByUser?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
 Ti.API.GETDAILYSUMMARYBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getDailySummaryByMonth?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+
+Ti.API.GETDEALERRANKINGBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getMonthlyRankingByDealer?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+
+Ti.API.GETLOCATIONRANKINGBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getMonthlyRankingByLocation?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
 Ti.CURRENTWINDOW = "";
 

@@ -168,6 +168,7 @@
 							noty({"text":"Order added successfully!","layout":"center","type":"success","animateOpen":{"height":"toggle"},"animateClose":{"height":"toggle"},"speed":500,"timeout":4000,"closeButton":false,"closeOnSelfClick":true,"closeOnSelfOver":false,"modal":false});
 					
 							Ti.App.fireEvent('addOrderComplete', { });
+							setTimeout(function(){Ti.App.fireEvent('addOrderComplete', {});},2000);
 						}else{
 							$("#post_form").show();
 							$("#loading").hide();
