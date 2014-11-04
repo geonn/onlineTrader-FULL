@@ -1,7 +1,16 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function loadTableRow(data) {
         var tableData = [];
-        for (var i = 0; data.length > i; i++) {
+        for (var i = 0; i < data.length; i++) {
             var row = Ti.UI.createTableViewRow({
                 className: "forumEvent",
                 rowIndex: i,
@@ -67,9 +76,17 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_monthly_commission";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     $.__views.dealer_monthly_commission = Ti.UI.createWindow({
@@ -86,7 +103,7 @@ function Controller() {
         __parentSymbol: $.__views.dealer_monthly_commission
     });
     $.__views.footer.setParent($.__views.dealer_monthly_commission);
-    $.__views.__alloyId13 = Ti.UI.createView({
+    $.__views.__alloyId15 = Ti.UI.createView({
         top: "60dp",
         font: {
             fontSize: "14dp",
@@ -97,10 +114,10 @@ function Controller() {
         left: "5dp",
         right: "5dp",
         height: "88%",
-        id: "__alloyId13"
+        id: "__alloyId15"
     });
-    $.__views.dealer_monthly_commission.add($.__views.__alloyId13);
-    $.__views.__alloyId14 = Ti.UI.createLabel({
+    $.__views.dealer_monthly_commission.add($.__views.__alloyId15);
+    $.__views.__alloyId16 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -108,28 +125,32 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "DEALER - MONTHLY COMMISSION",
-        id: "__alloyId14"
+        id: "__alloyId16"
     });
-    $.__views.__alloyId13.add($.__views.__alloyId14);
-    $.__views.__alloyId15 = Ti.UI.createImageView({
+    $.__views.__alloyId15.add($.__views.__alloyId16);
+    $.__views.__alloyId17 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId15"
+        id: "__alloyId17"
     });
-    $.__views.__alloyId13.add($.__views.__alloyId15);
+    $.__views.__alloyId15.add($.__views.__alloyId17);
     $.__views.tableView = Ti.UI.createTableView({
         width: "100%",
         id: "tableView"
     });
-    $.__views.__alloyId13.add($.__views.tableView);
+    $.__views.__alloyId15.add($.__views.tableView);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
+    var clickTime = null;
     getSummary();
-    $.tableView.addEventListener("touchend", function(e) {
+    $.tableView.addEventListener("click", function(e) {
+        var currentTime = new Date();
+        if (1e3 > currentTime - clickTime) return;
+        clickTime = currentTime;
+        console.log(e.rowData);
         var prop = e.rowData.month;
-        console.log(prop);
         var param = {
             date: prop
         };

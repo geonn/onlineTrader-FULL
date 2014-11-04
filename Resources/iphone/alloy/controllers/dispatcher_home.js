@@ -1,12 +1,29 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function refreshPage() {
         Ti.App.fireEvent("app:refreshPage");
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dispatcher_home";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -23,23 +40,23 @@ function Controller() {
         id: "header"
     });
     $.__views.dispatcher_home_win.add($.__views.header);
-    $.__views.__alloyId94 = Ti.UI.createImageView({
+    $.__views.__alloyId96 = Ti.UI.createImageView({
         width: "7%",
         left: "10%",
         image: "/images/refresh-icon.png",
-        id: "__alloyId94"
+        id: "__alloyId96"
     });
-    $.__views.header.add($.__views.__alloyId94);
-    refreshPage ? $.__views.__alloyId94.addEventListener("touchend", refreshPage) : __defers["$.__views.__alloyId94!touchend!refreshPage"] = true;
-    $.__views.__alloyId95 = Ti.UI.createView({
+    $.__views.header.add($.__views.__alloyId96);
+    refreshPage ? $.__views.__alloyId96.addEventListener("touchend", refreshPage) : __defers["$.__views.__alloyId96!touchend!refreshPage"] = true;
+    $.__views.__alloyId97 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         left: "25%",
         top: "0%",
-        id: "__alloyId95"
+        id: "__alloyId97"
     });
-    $.__views.header.add($.__views.__alloyId95);
+    $.__views.header.add($.__views.__alloyId97);
     $.__views.appTitle = Ti.UI.createLabel({
         width: Titanium.UI.SIZE,
         color: "#fff",
@@ -62,7 +79,7 @@ function Controller() {
         id: "content"
     });
     $.__views.dispatcher_home_win.add($.__views.content);
-    $.__views.__alloyId96 = Ti.UI.createLabel({
+    $.__views.__alloyId98 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -70,16 +87,16 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "HOME - ALL TASK",
-        id: "__alloyId96"
+        id: "__alloyId98"
     });
-    $.__views.content.add($.__views.__alloyId96);
-    $.__views.__alloyId97 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId98);
+    $.__views.__alloyId99 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId97"
+        id: "__alloyId99"
     });
-    $.__views.content.add($.__views.__alloyId97);
+    $.__views.content.add($.__views.__alloyId99);
     $.__views.home_form = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
@@ -128,7 +145,7 @@ function Controller() {
             state: Ti.API.GETSTATE
         });
     });
-    __defers["$.__views.__alloyId94!touchend!refreshPage"] && $.__views.__alloyId94.addEventListener("touchend", refreshPage);
+    __defers["$.__views.__alloyId96!touchend!refreshPage"] && $.__views.__alloyId96.addEventListener("touchend", refreshPage);
     _.extend($, exports);
 }
 

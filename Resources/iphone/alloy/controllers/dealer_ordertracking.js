@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function construct() {
         Ti.App.fireEvent("app:trackingParam", {
@@ -7,9 +16,17 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_ordertracking";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -41,15 +58,15 @@ function Controller() {
     });
     $.__views.header.add($.__views.backTitle);
     goBack ? $.__views.backTitle.addEventListener("touchend", goBack) : __defers["$.__views.backTitle!touchend!goBack"] = true;
-    $.__views.__alloyId31 = Ti.UI.createView({
+    $.__views.__alloyId33 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         left: "25%",
         top: "0%",
-        id: "__alloyId31"
+        id: "__alloyId33"
     });
-    $.__views.header.add($.__views.__alloyId31);
+    $.__views.header.add($.__views.__alloyId33);
     $.__views.appTitle = Ti.UI.createLabel({
         width: Titanium.UI.SIZE,
         color: "#fff",
@@ -60,15 +77,15 @@ function Controller() {
         id: "appTitle"
     });
     $.__views.header.add($.__views.appTitle);
-    $.__views.__alloyId32 = Ti.UI.createView({
+    $.__views.__alloyId34 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         left: "75%",
         top: "0%",
-        id: "__alloyId32"
+        id: "__alloyId34"
     });
-    $.__views.header.add($.__views.__alloyId32);
+    $.__views.header.add($.__views.__alloyId34);
     $.__views.rightMenu = Ti.UI.createLabel({
         width: "25%",
         color: "#fff",
@@ -84,14 +101,14 @@ function Controller() {
     });
     $.__views.header.add($.__views.rightMenu);
     popup ? $.__views.rightMenu.addEventListener("touchend", popup) : __defers["$.__views.rightMenu!touchend!popup"] = true;
-    $.__views.__alloyId33 = Ti.UI.createImageView({
+    $.__views.__alloyId35 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
         bottom: "5",
-        id: "__alloyId33"
+        id: "__alloyId35"
     });
-    $.__views.tracking.add($.__views.__alloyId33);
+    $.__views.tracking.add($.__views.__alloyId35);
     $.__views.webview_tracking = Ti.UI.createWebView({
         id: "webview_tracking",
         width: "100%",

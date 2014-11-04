@@ -3,7 +3,7 @@
  * APP Settings and Configuration
  **************************/
 // APP api domain 
-Ti.API.API_DOMAIN  = 'staging.onlinetrader.com.my';
+Ti.API.API_DOMAIN  = 'www.onlinetrader.com.my';
 
 // APP authenticate user and key
 Ti.API.USER  = 'biomas';
@@ -46,8 +46,10 @@ Ti.API.GETNOTISCOUNT   = "http://"+Ti.API.API_DOMAIN+"/api/totalUserNotification
 Ti.API.GETDAILYSUMMARYBYMONTH = "http://"+Ti.API.API_DOMAIN+"/api/getDailySummaryByMonth?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETDEALERRANKINGBYMONTH = "http://"+Ti.API.API_DOMAIN+"/api/getMonthlyRankingByDealer?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETLOCATIONRANKINGBYMONTH = "http://"+Ti.API.API_DOMAIN+"/api/getMonthlyRankingByLocation?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
-Ti.CURRENTWINDOW = '';
+Ti.API.GETDEALERDAILYPROFIT = "http://"+Ti.API.API_DOMAIN+"/api/getDailyProfitList?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
+Ti.API.GETANNOUNCEMENT = "http://"+Ti.API.API_DOMAIN+"/api/getAnnoucement?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 
+Ti.CURRENTWINDOW = '';
 //Global Variable
 Ti.App.CURRENTWINDOW = '';
 Ti.App.WindowCabinet = [];

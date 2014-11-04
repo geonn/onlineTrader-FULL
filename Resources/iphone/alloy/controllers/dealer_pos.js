@@ -1,9 +1,26 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_pos";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     $.__views.dealer_pos = Ti.UI.createWindow({
@@ -12,11 +29,11 @@ function Controller() {
         id: "dealer_pos"
     });
     $.__views.dealer_pos && $.addTopLevelView($.__views.dealer_pos);
-    $.__views.__alloyId34 = Alloy.createController("_subheader", {
-        id: "__alloyId34",
+    $.__views.__alloyId36 = Alloy.createController("_subheader", {
+        id: "__alloyId36",
         __parentSymbol: $.__views.dealer_pos
     });
-    $.__views.__alloyId34.setParent($.__views.dealer_pos);
+    $.__views.__alloyId36.setParent($.__views.dealer_pos);
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -29,7 +46,7 @@ function Controller() {
         id: "content"
     });
     $.__views.dealer_pos.add($.__views.content);
-    $.__views.__alloyId35 = Ti.UI.createLabel({
+    $.__views.__alloyId37 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -37,31 +54,31 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "DEALER - COURIER",
-        id: "__alloyId35"
+        id: "__alloyId37"
     });
-    $.__views.content.add($.__views.__alloyId35);
-    $.__views.__alloyId36 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId37);
+    $.__views.__alloyId38 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId36"
+        id: "__alloyId38"
     });
-    $.__views.content.add($.__views.__alloyId36);
-    $.__views.__alloyId37 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId38);
+    $.__views.__alloyId39 = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
         bottom: 2,
         height: "90%",
         top: "90",
-        id: "__alloyId37"
+        id: "__alloyId39"
     });
-    $.__views.dealer_pos.add($.__views.__alloyId37);
+    $.__views.dealer_pos.add($.__views.__alloyId39);
     $.__views.posview = Ti.UI.createWebView({
         id: "posview",
         disableBounce: "true",
         url: "/html/dealer_pos.html"
     });
-    $.__views.__alloyId37.add($.__views.posview);
+    $.__views.__alloyId39.add($.__views.posview);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};

@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function doLogin() {
         $.activityIndicator.show();
@@ -16,7 +25,7 @@ function Controller() {
                     Ti.App.Properties.setString("roles", res.data.roles);
                     Ti.App.Properties.setString("session", res.data.session);
                     "android" == Alloy.Globals.osname && subscribeDeviceToken(dt, res.data.roles);
-                    if ("dealer" == res.data.roles) {
+                    if ("dealer" == res.data.roles || "staff" == res.data.roles) {
                         $.index.close();
                         var summary = Alloy.createController(res.data.roles + "_summary").getView();
                         setWindowRelationship(summary);
@@ -38,9 +47,17 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "index";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -80,23 +97,23 @@ function Controller() {
         id: "content"
     });
     $.__views.index.add($.__views.content);
-    $.__views.__alloyId137 = Ti.UI.createScrollView({
+    $.__views.__alloyId139 = Ti.UI.createScrollView({
         showVerticalScrollIndicator: "true",
         showHorizontalScrollIndicator: "true",
         height: "320",
         width: "100%",
-        id: "__alloyId137"
+        id: "__alloyId139"
     });
-    $.__views.content.add($.__views.__alloyId137);
-    $.__views.__alloyId138 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId139);
+    $.__views.__alloyId140 = Ti.UI.createLabel({
         width: "120",
         color: "#e02222",
         backgroundImage: "/images/online-trader-logo.png",
         height: "120",
         bottom: "150",
-        id: "__alloyId138"
+        id: "__alloyId140"
     });
-    $.__views.__alloyId137.add($.__views.__alloyId138);
+    $.__views.__alloyId139.add($.__views.__alloyId140);
     $.__views.username = Ti.UI.createTextField({
         height: "55dp",
         font: {
@@ -112,7 +129,7 @@ function Controller() {
         borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "username"
     });
-    $.__views.__alloyId137.add($.__views.username);
+    $.__views.__alloyId139.add($.__views.username);
     $.__views.usernamehint = Ti.UI.createLabel({
         width: "90%",
         color: "#333",
@@ -124,7 +141,7 @@ function Controller() {
         text: "Enter Username",
         id: "usernamehint"
     });
-    $.__views.__alloyId137.add($.__views.usernamehint);
+    $.__views.__alloyId139.add($.__views.usernamehint);
     $.__views.password = Ti.UI.createTextField({
         passwordMask: true,
         height: "55dp",
@@ -141,7 +158,7 @@ function Controller() {
         borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "password"
     });
-    $.__views.__alloyId137.add($.__views.password);
+    $.__views.__alloyId139.add($.__views.password);
     $.__views.passwordhint = Ti.UI.createLabel({
         width: "90%",
         color: "#333",
@@ -153,7 +170,7 @@ function Controller() {
         text: "Enter Password",
         id: "passwordhint"
     });
-    $.__views.__alloyId137.add($.__views.passwordhint);
+    $.__views.__alloyId139.add($.__views.passwordhint);
     $.__views.btnLogin = Ti.UI.createButton({
         backgroundImage: "/images/btn-login.png",
         width: "90%",
@@ -182,7 +199,7 @@ function Controller() {
                 var res = JSON.parse(this.responseText);
                 if ("success" == res.status) {
                     var rl = Ti.App.Properties.getString("roles");
-                    if ("dealer" == rl) {
+                    if ("dealer" == rl || "staff" == rl) {
                         $.index.close();
                         var summary = Alloy.createController(rl + "_summary").getView();
                         setWindowRelationship(summary);
@@ -208,7 +225,7 @@ function Controller() {
         $.password.focus();
     });
     $.password.addEventListener("blur", function() {
-        0 >= $.password.value && ($.passwordhint.visible = true);
+        $.password.value <= 0 && ($.passwordhint.visible = true);
     });
     $.password.addEventListener("focus", function() {
         $.passwordhint.visible = false;
@@ -219,7 +236,7 @@ function Controller() {
         $.username.focus();
     });
     $.username.addEventListener("blur", function() {
-        0 >= $.username.value && ($.usernamehint.visible = true);
+        $.username.value <= 0 && ($.usernamehint.visible = true);
     });
     $.username.addEventListener("focus", function() {
         $.usernamehint.visible = false;

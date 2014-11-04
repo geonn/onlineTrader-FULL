@@ -1,12 +1,29 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function refreshPage() {
         Ti.App.fireEvent("app:dispatchRefreshPage");
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dispatcher_orderlist";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -23,23 +40,23 @@ function Controller() {
         id: "header"
     });
     $.__views.dealer_orderlist.add($.__views.header);
-    $.__views.__alloyId109 = Ti.UI.createImageView({
+    $.__views.__alloyId111 = Ti.UI.createImageView({
         width: "7%",
         left: "10%",
         image: "/images/refresh-icon.png",
-        id: "__alloyId109"
+        id: "__alloyId111"
     });
-    $.__views.header.add($.__views.__alloyId109);
-    refreshPage ? $.__views.__alloyId109.addEventListener("touchend", refreshPage) : __defers["$.__views.__alloyId109!touchend!refreshPage"] = true;
-    $.__views.__alloyId110 = Ti.UI.createView({
+    $.__views.header.add($.__views.__alloyId111);
+    refreshPage ? $.__views.__alloyId111.addEventListener("touchend", refreshPage) : __defers["$.__views.__alloyId111!touchend!refreshPage"] = true;
+    $.__views.__alloyId112 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         left: "25%",
         top: "0%",
-        id: "__alloyId110"
+        id: "__alloyId112"
     });
-    $.__views.header.add($.__views.__alloyId110);
+    $.__views.header.add($.__views.__alloyId112);
     $.__views.appTitle = Ti.UI.createLabel({
         width: Titanium.UI.SIZE,
         color: "#fff",
@@ -62,7 +79,7 @@ function Controller() {
         id: "content"
     });
     $.__views.dealer_orderlist.add($.__views.content);
-    $.__views.__alloyId111 = Ti.UI.createLabel({
+    $.__views.__alloyId113 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -70,16 +87,16 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "DISPATCH - ORDER LIST",
-        id: "__alloyId111"
+        id: "__alloyId113"
     });
-    $.__views.content.add($.__views.__alloyId111);
-    $.__views.__alloyId112 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId113);
+    $.__views.__alloyId114 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId112"
+        id: "__alloyId114"
     });
-    $.__views.content.add($.__views.__alloyId112);
+    $.__views.content.add($.__views.__alloyId114);
     $.__views.list_form = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
@@ -130,8 +147,8 @@ function Controller() {
     $.dealer_orderlist.addEventListener("close", function() {
         Ti.App.removeEventListener("app:viewOrderDetail", goToDetails);
     });
-    "480" >= Alloy.Globals.deviceHeight && ($.list_form.height = "67%");
-    __defers["$.__views.__alloyId109!touchend!refreshPage"] && $.__views.__alloyId109.addEventListener("touchend", refreshPage);
+    Alloy.Globals.deviceHeight <= "480" && ($.list_form.height = "67%");
+    __defers["$.__views.__alloyId111!touchend!refreshPage"] && $.__views.__alloyId111.addEventListener("touchend", refreshPage);
     _.extend($, exports);
 }
 

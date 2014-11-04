@@ -1,4 +1,4 @@
-(function(window, undefined) {
+!function(window, undefined) {
     function isArraylike(obj) {
         var length = obj.length, type = jQuery.type(obj);
         if (jQuery.isWindow(obj)) return false;
@@ -892,7 +892,7 @@
                 try {
                     top = null == window.frameElement && document.documentElement;
                 } catch (e) {}
-                top && top.doScroll && function doScrollCheck() {
+                top && top.doScroll && !function doScrollCheck() {
                     if (!jQuery.isReady) {
                         try {
                             top.doScroll("left");
@@ -931,12 +931,12 @@
             add: function() {
                 if (list) {
                     var start = list.length;
-                    (function add(args) {
+                    !function add(args) {
                         jQuery.each(args, function(_, arg) {
                             var type = jQuery.type(arg);
                             "function" === type ? options.unique && self.has(arg) || list.push(arg) : arg && arg.length && "string" !== type && add(arg);
                         });
-                    })(arguments);
+                    }(arguments);
                     if (firing) firingLength = list.length; else if (memory) {
                         firingStart = start;
                         fire(memory);
@@ -1211,7 +1211,7 @@
                     data = jQuery.data(elem);
                     if (1 === elem.nodeType && !jQuery._data(elem, "parsedAttrs")) {
                         attrs = elem.attributes;
-                        for (;attrs.length > i; i++) {
+                        for (;i < attrs.length; i++) {
                             name = attrs[i].name;
                             if (!name.indexOf("data-")) {
                                 name = jQuery.camelCase(name.slice(5));
@@ -1284,7 +1284,7 @@
                 type = "fx";
                 setter--;
             }
-            if (setter > arguments.length) return jQuery.queue(this[0], type);
+            if (arguments.length < setter) return jQuery.queue(this[0], type);
             return data === undefined ? this : this.each(function() {
                 var queue = jQuery.queue(this, type, data);
                 jQuery._queueHooks(this, type);
@@ -1363,7 +1363,7 @@
                     cur = 1 === elem.nodeType && (elem.className ? (" " + elem.className + " ").replace(rclass, " ") : " ");
                     if (cur) {
                         j = 0;
-                        while (clazz = classes[j++]) 0 > cur.indexOf(" " + clazz + " ") && (cur += clazz + " ");
+                        while (clazz = classes[j++]) cur.indexOf(" " + clazz + " ") < 0 && (cur += clazz + " ");
                         elem.className = jQuery.trim(cur);
                     }
                 }
@@ -1739,7 +1739,7 @@
                 type = namespaces.shift();
                 namespaces.sort();
             }
-            ontype = 0 > type.indexOf(":") && "on" + type;
+            ontype = type.indexOf(":") < 0 && "on" + type;
             event = event[jQuery.expando] ? event : new jQuery.Event(type, "object" == typeof event && event);
             event.isTrigger = true;
             event.namespace = namespaces.join(".");
@@ -1818,7 +1818,7 @@
                     handlers: matches
                 });
             }
-            handlers.length > delegateCount && handlerQueue.push({
+            delegateCount < handlers.length && handlerQueue.push({
                 elem: this,
                 handlers: handlers.slice(delegateCount)
             });
@@ -2124,7 +2124,7 @@
             if (elem) return jQuery.event.trigger(type, data, elem, true);
         }
     });
-    (function(window, undefined) {
+    !function(window, undefined) {
         function isNative(fn) {
             return rnative.test(fn + "");
         }
@@ -2442,7 +2442,7 @@
             needsContext: new RegExp("^" + whitespace + "*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(" + whitespace + "*((?:-\\d)?\\d*)" + whitespace + "*\\)|)(?=[^-]|$)", "i")
         }, rsibling = /[\x20\t\r\n\f]*[+~]/, rnative = /^[^{]+\{\s*\[native code/, rquickExpr = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/, rinputs = /^(?:input|select|textarea|button)$/i, rheader = /^h\d$/i, rescape = /'|\\/g, rattributeQuotes = /\=[\x20\t\r\n\f]*([^'"\]]*)[\x20\t\r\n\f]*\]/g, runescape = /\\([\da-fA-F]{1,6}[\x20\t\r\n\f]?|.)/g, funescape = function(_, escaped) {
             var high = "0x" + escaped - 65536;
-            return high !== high ? escaped : 0 > high ? String.fromCharCode(high + 65536) : String.fromCharCode(55296 | high >> 10, 56320 | 1023 & high);
+            return high !== high ? escaped : 0 > high ? String.fromCharCode(high + 65536) : String.fromCharCode(high >> 10 | 55296, 1023 & high | 56320);
         };
         try {
             slice.call(preferredDoc.documentElement.childNodes, 0)[0].nodeType;
@@ -2757,7 +2757,7 @@
                                 if (node === elem) break;
                             }
                             diff -= last;
-                            return diff === first || 0 === diff % first && diff / first >= 0;
+                            return diff === first || diff % first === 0 && diff / first >= 0;
                         }
                     };
                 },
@@ -2884,7 +2884,7 @@
                 }),
                 gt: createPositionalPseudo(function(matchIndexes, length, argument) {
                     var i = 0 > argument ? argument + length : argument;
-                    for (;length > ++i; ) matchIndexes.push(i);
+                    for (;++i < length; ) matchIndexes.push(i);
                     return matchIndexes;
                 })
             }
@@ -2925,7 +2925,7 @@
         jQuery.text = Sizzle.getText;
         jQuery.isXMLDoc = Sizzle.isXML;
         jQuery.contains = Sizzle.contains;
-    })(window);
+    }(window);
     var runtil = /Until$/, rparentsprev = /^(?:parents|prev(?:Until|All))/, isSimple = /^.[^:#\[\.,]*$/, rneedsContext = jQuery.expr.match.needsContext, guaranteedUnique = {
         children: true,
         contents: true,
@@ -3527,7 +3527,7 @@
     });
     if (jQuery.expr && jQuery.expr.filters) {
         jQuery.expr.filters.hidden = function(elem) {
-            return 0 >= elem.offsetWidth && 0 >= elem.offsetHeight || !jQuery.support.reliableHiddenOffsets && "none" === (elem.style && elem.style.display || jQuery.css(elem, "display"));
+            return elem.offsetWidth <= 0 && elem.offsetHeight <= 0 || !jQuery.support.reliableHiddenOffsets && "none" === (elem.style && elem.style.display || jQuery.css(elem, "display"));
         };
         jQuery.expr.filters.visible = function(elem) {
             return !jQuery.expr.filters.hidden(elem);
@@ -4187,7 +4187,7 @@
     jQuery.fx.tick = function() {
         var timer, timers = jQuery.timers, i = 0;
         fxNow = jQuery.now();
-        for (;timers.length > i; i++) {
+        for (;i < timers.length; i++) {
             timer = timers[i];
             timer() || timers[i] !== timer || timers.splice(i--, 1);
         }
@@ -4320,4 +4320,4 @@
     "function" == typeof define && define.amd && define.amd.jQuery && define("jquery", [], function() {
         return jQuery;
     });
-})(window);
+}(window);

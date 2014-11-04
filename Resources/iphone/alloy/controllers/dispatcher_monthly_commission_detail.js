@@ -1,7 +1,16 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function loadTableRow(data) {
         var tableData = [];
-        for (var i = 0; data.length > i; i++) {
+        for (var i = 0; i < data.length; i++) {
             var row = Ti.UI.createTableViewRow({
                 className: "forumEvent",
                 rowIndex: i,
@@ -68,9 +77,17 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dispatcher_monthly_commission_detail";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     $.__views.dispatcher_monthly_commission_detail = Ti.UI.createWindow({
@@ -87,7 +104,7 @@ function Controller() {
         __parentSymbol: $.__views.dispatcher_monthly_commission_detail
     });
     $.__views.footer.setParent($.__views.dispatcher_monthly_commission_detail);
-    $.__views.__alloyId101 = Ti.UI.createView({
+    $.__views.__alloyId103 = Ti.UI.createView({
         top: "60dp",
         font: {
             fontSize: "14dp",
@@ -98,10 +115,10 @@ function Controller() {
         left: "5dp",
         right: "5dp",
         height: "88%",
-        id: "__alloyId101"
+        id: "__alloyId103"
     });
-    $.__views.dispatcher_monthly_commission_detail.add($.__views.__alloyId101);
-    $.__views.__alloyId102 = Ti.UI.createLabel({
+    $.__views.dispatcher_monthly_commission_detail.add($.__views.__alloyId103);
+    $.__views.__alloyId104 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -109,21 +126,21 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "MONTHLY COMMISSION DETAIL",
-        id: "__alloyId102"
+        id: "__alloyId104"
     });
-    $.__views.__alloyId101.add($.__views.__alloyId102);
-    $.__views.__alloyId103 = Ti.UI.createImageView({
+    $.__views.__alloyId103.add($.__views.__alloyId104);
+    $.__views.__alloyId105 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId103"
+        id: "__alloyId105"
     });
-    $.__views.__alloyId101.add($.__views.__alloyId103);
+    $.__views.__alloyId103.add($.__views.__alloyId105);
     $.__views.tableView = Ti.UI.createTableView({
         width: "100%",
         id: "tableView"
     });
-    $.__views.__alloyId101.add($.__views.tableView);
+    $.__views.__alloyId103.add($.__views.tableView);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

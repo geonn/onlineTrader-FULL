@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function orderCancel() {
         var dialog = Ti.UI.createAlertDialog({
@@ -33,9 +42,17 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_orderdetail";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -45,11 +62,11 @@ function Controller() {
         id: "orderdetail_win"
     });
     $.__views.orderdetail_win && $.addTopLevelView($.__views.orderdetail_win);
-    $.__views.__alloyId22 = Alloy.createController("_orderdetailheader", {
-        id: "__alloyId22",
+    $.__views.__alloyId24 = Alloy.createController("_orderdetailheader", {
+        id: "__alloyId24",
         __parentSymbol: $.__views.orderdetail_win
     });
-    $.__views.__alloyId22.setParent($.__views.orderdetail_win);
+    $.__views.__alloyId24.setParent($.__views.orderdetail_win);
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -62,7 +79,7 @@ function Controller() {
         id: "content"
     });
     $.__views.orderdetail_win.add($.__views.content);
-    $.__views.__alloyId23 = Ti.UI.createLabel({
+    $.__views.__alloyId25 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -70,16 +87,16 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "ORDER DETAILS",
-        id: "__alloyId23"
+        id: "__alloyId25"
     });
-    $.__views.content.add($.__views.__alloyId23);
-    $.__views.__alloyId24 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId25);
+    $.__views.__alloyId26 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId24"
+        id: "__alloyId26"
     });
-    $.__views.content.add($.__views.__alloyId24);
+    $.__views.content.add($.__views.__alloyId26);
     $.__views.details_formView = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
@@ -117,15 +134,15 @@ function Controller() {
     });
     $.__views.footer.add($.__views.btncancel);
     orderCancel ? $.__views.btncancel.addEventListener("touchend", orderCancel) : __defers["$.__views.btncancel!touchend!orderCancel"] = true;
-    $.__views.__alloyId25 = Ti.UI.createView({
+    $.__views.__alloyId27 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         left: "33%",
         top: "0%",
-        id: "__alloyId25"
+        id: "__alloyId27"
     });
-    $.__views.footer.add($.__views.__alloyId25);
+    $.__views.footer.add($.__views.__alloyId27);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

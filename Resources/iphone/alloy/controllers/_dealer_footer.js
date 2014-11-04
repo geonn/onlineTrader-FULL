@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function expandMoreMenu(e) {
         if (expandMoreMenu.__isExecuting) return;
@@ -26,9 +35,17 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "_dealer_footer";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -56,6 +73,15 @@ function Controller() {
     });
     $.__views.subfooter.add($.__views.logout);
     doLogout ? $.__views.logout.addEventListener("touchend", doLogout) : __defers["$.__views.logout!touchend!doLogout"] = true;
+    $.__views.daily_profit = Ti.UI.createImageView({
+        width: "20%",
+        id: "daily_profit",
+        mod: "daily_profit",
+        left: "40%",
+        image: "/images/icons/icon-setting.png"
+    });
+    $.__views.subfooter.add($.__views.daily_profit);
+    goNav ? $.__views.daily_profit.addEventListener("touchend", goNav) : __defers["$.__views.daily_profit!touchend!goNav"] = true;
     $.__views.footer = Ti.UI.createView({
         height: Titanium.UI.SIZE,
         bottom: 0,
@@ -113,6 +139,7 @@ function Controller() {
     $.more.addEventListener("click", expandMoreMenu);
     __defers["$.__views.settings!touchend!goNav"] && $.__views.settings.addEventListener("touchend", goNav);
     __defers["$.__views.logout!touchend!doLogout"] && $.__views.logout.addEventListener("touchend", doLogout);
+    __defers["$.__views.daily_profit!touchend!goNav"] && $.__views.daily_profit.addEventListener("touchend", goNav);
     __defers["$.__views.summary!touchend!goNav"] && $.__views.summary.addEventListener("touchend", goNav);
     __defers["$.__views.orderlist!touchend!goNav"] && $.__views.orderlist.addEventListener("touchend", goNav);
     __defers["$.__views.poslist!touchend!goNav"] && $.__views.poslist.addEventListener("touchend", goNav);

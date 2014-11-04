@@ -22,6 +22,9 @@ function goBack() {
 }
 
 function popup(event) {
+    var currentTime = new Date();
+    if (1e3 > currentTime - clickTime) return;
+    clickTime = currentTime;
     var page = event.source.mod;
     var module = Ti.App.Properties.getString("module");
     var roles = Ti.App.Properties.getString("roles");
@@ -44,7 +47,7 @@ function removeWindowRelationship() {
 
 function removeAllWindow() {
     var tempArr = Ti.App.WindowCabinet;
-    if (tempArr.length > 0) for (var a = 0; tempArr.length > a; a++) tempArr[a].close();
+    if (tempArr.length > 0) for (var a = 0; a < tempArr.length; a++) tempArr[a].close();
 }
 
 function setWindowRelationship(current) {
@@ -268,7 +271,7 @@ function deviceTokenError(e) {
 
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
-Ti.API.API_DOMAIN = "onlinetrader.com.my";
+Ti.API.API_DOMAIN = "www.onlinetrader.com.my";
 
 Ti.API.USER = "biomas";
 
@@ -342,6 +345,14 @@ Ti.API.GETNOTISCOUNT = "http://" + Ti.API.API_DOMAIN + "/api/totalUserNotificati
 
 Ti.API.GETDAILYSUMMARYBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getDailySummaryByMonth?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
+Ti.API.GETDEALERRANKINGBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getMonthlyRankingByDealer?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+
+Ti.API.GETLOCATIONRANKINGBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getMonthlyRankingByLocation?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+
+Ti.API.GETDEALERDAILYPROFIT = "http://" + Ti.API.API_DOMAIN + "/api/getDailyProfitList?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+
+Ti.API.GETANNOUNCEMENT = "http://" + Ti.API.API_DOMAIN + "/api/getAnnoucement?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+
 Ti.CURRENTWINDOW = "";
 
 Ti.App.CURRENTWINDOW = "";
@@ -365,6 +376,8 @@ var notificationNumber = 0;
 var app_status = "";
 
 xhr.clean();
+
+var clickTime = null;
 
 if ("android" == Alloy.Globals.osname) {
     var CloudPush = require("ti.cloudpush");

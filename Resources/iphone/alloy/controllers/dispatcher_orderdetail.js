@@ -1,3 +1,12 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     function orderCancel() {
         var dialog = Ti.UI.createAlertDialog({
@@ -68,9 +77,17 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dispatcher_orderdetail";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -80,11 +97,11 @@ function Controller() {
         id: "dis_orderdetail_win"
     });
     $.__views.dis_orderdetail_win && $.addTopLevelView($.__views.dis_orderdetail_win);
-    $.__views.__alloyId104 = Alloy.createController("_orderdetailheader", {
-        id: "__alloyId104",
+    $.__views.__alloyId106 = Alloy.createController("_orderdetailheader", {
+        id: "__alloyId106",
         __parentSymbol: $.__views.dis_orderdetail_win
     });
-    $.__views.__alloyId104.setParent($.__views.dis_orderdetail_win);
+    $.__views.__alloyId106.setParent($.__views.dis_orderdetail_win);
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -97,7 +114,7 @@ function Controller() {
         id: "content"
     });
     $.__views.dis_orderdetail_win.add($.__views.content);
-    $.__views.__alloyId105 = Ti.UI.createLabel({
+    $.__views.__alloyId107 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -105,16 +122,16 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "ORDER DETAILS",
-        id: "__alloyId105"
+        id: "__alloyId107"
     });
-    $.__views.content.add($.__views.__alloyId105);
-    $.__views.__alloyId106 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId107);
+    $.__views.__alloyId108 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId106"
+        id: "__alloyId108"
     });
-    $.__views.content.add($.__views.__alloyId106);
+    $.__views.content.add($.__views.__alloyId108);
     $.__views.details_formView = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
@@ -153,15 +170,15 @@ function Controller() {
     });
     $.__views.footer.add($.__views.btnrelease);
     orderRelease ? $.__views.btnrelease.addEventListener("touchend", orderRelease) : __defers["$.__views.btnrelease!touchend!orderRelease"] = true;
-    $.__views.__alloyId107 = Ti.UI.createView({
+    $.__views.__alloyId109 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         left: "33%",
         top: "0%",
-        id: "__alloyId107"
+        id: "__alloyId109"
     });
-    $.__views.footer.add($.__views.__alloyId107);
+    $.__views.footer.add($.__views.__alloyId109);
     $.__views.btncancel = Ti.UI.createLabel({
         width: "33%",
         color: "#fff",
@@ -176,15 +193,15 @@ function Controller() {
     });
     $.__views.footer.add($.__views.btncancel);
     orderCancel ? $.__views.btncancel.addEventListener("touchend", orderCancel) : __defers["$.__views.btncancel!touchend!orderCancel"] = true;
-    $.__views.__alloyId108 = Ti.UI.createView({
+    $.__views.__alloyId110 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         left: "66%",
         top: "0%",
-        id: "__alloyId108"
+        id: "__alloyId110"
     });
-    $.__views.footer.add($.__views.__alloyId108);
+    $.__views.footer.add($.__views.__alloyId110);
     $.__views.btncomplete = Ti.UI.createLabel({
         width: "33%",
         color: "#fff",
