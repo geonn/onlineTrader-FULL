@@ -64,7 +64,7 @@
 				   	 	
 				   	 	str += "<table cellpadding='0' cellspacing='0' style='width:100%;' class='bordered'>";
 				   	 	
-				   	 	if(tableTitle == "Dealer"){
+				   	 	if(tableTitle == "Staff"){
 				   	 		str += "<tr><th width='100%' id='titleName'>"+ localStorage.getItem("tableTitle")+"</th></tr>";
 					  	
 						  	if(data.data == ""){
@@ -84,7 +84,7 @@
 							  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
 							  	}else{
 							  		var counter =1;
-							  		$.each( data.data, function( key, val ) { 
+							  		$.each( data.data, function( key, val ) {
 										str += "<tr><td width='50%'>"+counter+". "+val.state+"</td><td width='50%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
 										counter++;
 									});
@@ -95,16 +95,10 @@
 							  	if(data.data == ""){
 							  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
 							  	}else{
-<<<<<<< HEAD
-							  		
-							  		$.each( data.data, function( key, val ) {
-										str += "<tr><td width='70%'>"+(key+1)+". "+val.name+"</td><td width='30%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
-=======
 							  		var counter =1;
-							  		$.each( data.data, function( key, val ) { 
+							  		$.each( data.data, function( key, val ) {
 										str += "<tr><td width='70%'>"+counter+". "+val.name+"</td><td width='30%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
 										counter++;
->>>>>>> FETCH_HEAD
 									});
 							  	}
 				   	 		}
@@ -122,9 +116,9 @@
 			
 			function showContent(options){
 				currentOption = options;
-				if(options == "dealer"){
-					Ti.App.fireEvent('changeTitle', {title: "Top Sales Dealer"  });
-					localStorage.setItem("tableTitle", "Dealer");
+				if(options == "staff"){
+					Ti.App.fireEvent('changeTitle', {title: "Top Sales Staff"  });
+					localStorage.setItem("tableTitle", "Staff");
 					localStorage.setItem("targetURL", localStorage.getItem("userstat"));
 					$("#monthyear").hide();
 	  				$("#datepicker").show();
@@ -141,8 +135,8 @@
 					$("#monthyear").show();
 	  				$("#datepicker").hide();
 				}else if(options == "monthly_dealer"){
-					Ti.App.fireEvent('changeTitle', {title: "Top Monthly Sales Dealer"  });
-					localStorage.setItem("tableTitle", "Dealer");
+					Ti.App.fireEvent('changeTitle', {title: "Top Monthly Sales Staff"  });
+					localStorage.setItem("tableTitle", "Staff");
 					localStorage.setItem("targetURL", localStorage.getItem("m_url"));
 					$("#monthyear").show();
 	  				$("#datepicker").hide();
@@ -238,11 +232,11 @@
     	<div class="floatMenu" id="floatMenu">
     		<div class="floatContent" onClick="showContent('location')">Sales by Location</div>
     		<hr/>
-    		<div class="floatContent"  onClick="showContent('dealer')">Sales by Dealer</div>
+    		<div class="floatContent"  onClick="showContent('staff')">Sales by Staff</div>
     		<hr/>
     		<div class="floatContent" onClick="showContent('monthly_location')">Monthly Sales by Location</div>
     		<hr/>
-    		<div class="floatContent"  onClick="showContent('monthly_dealer')">Monthly Sales by Dealer</div>
+    		<div class="floatContent"  onClick="showContent('monthly_dealer')">Monthly Sales by Staff</div>
     	</div>
     	<div class="staticBar" id="dateBar">
     		<img id="menuOptions" src="../images/menu.png"  style="float:left;width:30px;vertical-align: middle;padding-left:10px;padding-right:10px;">

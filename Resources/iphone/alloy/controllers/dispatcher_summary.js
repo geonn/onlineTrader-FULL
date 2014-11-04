@@ -58,7 +58,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dispatcher_summary = Ti.UI.createWindow({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dispatcher_summary"
     });

@@ -125,7 +125,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dealer_summary = Ti.UI.createWindow({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_summary"
     });
@@ -148,8 +148,13 @@ function Controller() {
         layout: "vertical",
         left: "5dp",
         right: "5dp",
+<<<<<<< HEAD
         height: "130",
         id: "__alloyId74"
+=======
+        height: "150dp",
+        id: "__alloyId72"
+>>>>>>> FETCH_HEAD
     });
     $.__views.dealer_summary.add($.__views.__alloyId74);
     $.__views.__alloyId75 = Ti.UI.createLabel({
@@ -219,9 +224,15 @@ function Controller() {
         mod: "daily_commission",
         id: "__alloyId79"
     });
+<<<<<<< HEAD
     $.__views.__alloyId77.add($.__views.__alloyId79);
     popup ? $.__views.__alloyId79.addEventListener("click", popup) : __defers["$.__views.__alloyId79!click!popup"] = true;
     $.__views.__alloyId80 = Ti.UI.createView({
+=======
+    $.__views.__alloyId75.add($.__views.__alloyId77);
+    popup ? $.__views.__alloyId77.addEventListener("click", popup) : __defers["$.__views.__alloyId77!click!popup"] = true;
+    $.__views.__alloyId78 = Ti.UI.createView({
+>>>>>>> FETCH_HEAD
         height: "30",
         id: "__alloyId80"
     });
@@ -269,9 +280,15 @@ function Controller() {
         mod: "monthly_commission",
         id: "__alloyId82"
     });
+<<<<<<< HEAD
     $.__views.__alloyId80.add($.__views.__alloyId82);
     popup ? $.__views.__alloyId82.addEventListener("click", popup) : __defers["$.__views.__alloyId82!click!popup"] = true;
     $.__views.__alloyId83 = Ti.UI.createLabel({
+=======
+    $.__views.__alloyId78.add($.__views.__alloyId80);
+    popup ? $.__views.__alloyId80.addEventListener("click", popup) : __defers["$.__views.__alloyId80!click!popup"] = true;
+    $.__views.__alloyId81 = Ti.UI.createLabel({
+>>>>>>> FETCH_HEAD
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -289,10 +306,17 @@ function Controller() {
         backgroundColor: "#9d0404",
         id: "__alloyId84"
     });
+<<<<<<< HEAD
     $.__views.__alloyId74.add($.__views.__alloyId84);
     $.__views.__alloyId85 = Ti.UI.createView({
         top: "175",
         id: "__alloyId85"
+=======
+    $.__views.__alloyId72.add($.__views.activityIndicator);
+    $.__views.__alloyId83 = Ti.UI.createView({
+        top: "150dp",
+        id: "__alloyId83"
+>>>>>>> FETCH_HEAD
     });
     $.__views.dealer_summary.add($.__views.__alloyId85);
     $.__views.__alloyId86 = Ti.UI.createScrollView({
@@ -361,8 +385,13 @@ function Controller() {
         Ti.App.removeEventListener("app:removeLoading", removeLoading);
     };
     Ti.App.addEventListener("app:removeLoading", removeLoading);
+<<<<<<< HEAD
     __defers["$.__views.__alloyId79!click!popup"] && $.__views.__alloyId79.addEventListener("click", popup);
     __defers["$.__views.__alloyId82!click!popup"] && $.__views.__alloyId82.addEventListener("click", popup);
+=======
+    __defers["$.__views.__alloyId77!click!popup"] && $.__views.__alloyId77.addEventListener("click", popup);
+    __defers["$.__views.__alloyId80!click!popup"] && $.__views.__alloyId80.addEventListener("click", popup);
+>>>>>>> FETCH_HEAD
     _.extend($, exports);
 }
 

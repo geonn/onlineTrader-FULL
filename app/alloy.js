@@ -10,8 +10,8 @@ Ti.API.USER  = 'biomas';
 Ti.API.KEY   = '06b53047cf294f7207789ff5293ad2dc';
 
 // APP URL called
-Ti.API.CHECKSESSION = "http://"+Ti.API.API_DOMAIN+"/api/checkSession?version=1.0.52&user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
-Ti.API.LOGIN        = "http://"+Ti.API.API_DOMAIN+"/api/loginUser?version=1.0.52&user="+Ti.API.USER+"&key="+Ti.API.KEY;
+Ti.API.CHECKSESSION = "http://"+Ti.API.API_DOMAIN+"/api/checkSession?version=1.0.55&user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
+Ti.API.LOGIN        = "http://"+Ti.API.API_DOMAIN+"/api/loginUser?version=1.0.55&user="+Ti.API.USER+"&key="+Ti.API.KEY;
 Ti.API.LOGOUT	    = "http://"+Ti.API.API_DOMAIN+"/api/logoutUser?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETDAILYSUMMARY   = "http://"+Ti.API.API_DOMAIN+"/api/getDailySummaryByDealer?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETSUMMARY   = "http://"+Ti.API.API_DOMAIN+"/api/getSummaryByDealer?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";

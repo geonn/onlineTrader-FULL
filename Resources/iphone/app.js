@@ -277,9 +277,9 @@ Ti.API.USER = "biomas";
 
 Ti.API.KEY = "06b53047cf294f7207789ff5293ad2dc";
 
-Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.0.52&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.0.55&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
-Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.0.52&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
+Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.0.55&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
 
 Ti.API.LOGOUT = "http://" + Ti.API.API_DOMAIN + "/api/logoutUser?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
@@ -349,10 +349,13 @@ Ti.API.GETDEALERRANKINGBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getMonthl
 
 Ti.API.GETLOCATIONRANKINGBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getMonthlyRankingByLocation?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
+<<<<<<< HEAD
 Ti.API.GETDEALERDAILYPROFIT = "http://" + Ti.API.API_DOMAIN + "/api/getDailyProfitList?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
 Ti.API.GETANNOUNCEMENT = "http://" + Ti.API.API_DOMAIN + "/api/getAnnoucement?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
+=======
+>>>>>>> FETCH_HEAD
 Ti.CURRENTWINDOW = "";
 
 Ti.App.CURRENTWINDOW = "";

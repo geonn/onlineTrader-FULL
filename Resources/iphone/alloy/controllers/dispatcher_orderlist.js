@@ -28,7 +28,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dealer_orderlist = Ti.UI.createWindow({
-        backgroundColor: "white",
+        backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_orderlist"
     });
@@ -148,7 +148,11 @@ function Controller() {
         Ti.App.removeEventListener("app:viewOrderDetail", goToDetails);
     });
     Alloy.Globals.deviceHeight <= "480" && ($.list_form.height = "67%");
+<<<<<<< HEAD
     __defers["$.__views.__alloyId111!touchend!refreshPage"] && $.__views.__alloyId111.addEventListener("touchend", refreshPage);
+=======
+    __defers["$.__views.__alloyId109!touchend!refreshPage"] && $.__views.__alloyId109.addEventListener("touchend", refreshPage);
+>>>>>>> FETCH_HEAD
     _.extend($, exports);
 }
 

@@ -1,9 +1,26 @@
+function __processArg(obj, key) {
+    var arg = null;
+    if (obj) {
+        arg = obj[key] || null;
+        delete obj[key];
+    }
+    return arg;
+}
+
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "_dispatcher_footer";
-    arguments[0] ? arguments[0]["__parentSymbol"] : null;
-    arguments[0] ? arguments[0]["$model"] : null;
-    arguments[0] ? arguments[0]["__itemTemplate"] : null;
+    if (arguments[0]) {
+        {
+            __processArg(arguments[0], "__parentSymbol");
+        }
+        {
+            __processArg(arguments[0], "$model");
+        }
+        {
+            __processArg(arguments[0], "__itemTemplate");
+        }
+    }
     var $ = this;
     var exports = {};
     var __defers = {};
@@ -14,79 +31,49 @@ function Controller() {
         id: "footer"
     });
     $.__views.footer && $.addTopLevelView($.__views.footer);
-<<<<<<< HEAD
-    $.__views.__alloyId5 = Ti.UI.createImageView({
-=======
-    $.__views.__alloyId35 = Ti.UI.createImageView({
->>>>>>> master
+    $.__views.home = Ti.UI.createImageView({
         width: "20%",
+        id: "home",
+        mod: "home",
+        left: "10%",
+        image: "/images/icons/icon-dispatcher-task.png"
+    });
+    $.__views.footer.add($.__views.home);
+    goNav ? $.__views.home.addEventListener("click", goNav) : __defers["$.__views.home!click!goNav"] = true;
+    $.__views.orderlist = Ti.UI.createImageView({
+        width: "20%",
+        id: "orderlist",
+        mod: "orderlist",
+        left: "30%",
+        image: "/images/icons/icon-dispatcher-mytask.png"
+    });
+    $.__views.footer.add($.__views.orderlist);
+    goNav ? $.__views.orderlist.addEventListener("click", goNav) : __defers["$.__views.orderlist!click!goNav"] = true;
+    $.__views.summary = Ti.UI.createImageView({
+        width: "20%",
+        id: "summary",
         mod: "summary",
-        left: "0",
-        image: "/images/icons/icon-summary.png",
-<<<<<<< HEAD
-        id: "__alloyId5"
-    });
-    $.__views.footer.add($.__views.__alloyId5);
-    goNav ? $.__views.__alloyId5.addEventListener("click", goNav) : __defers["$.__views.__alloyId5!click!goNav"] = true;
-    $.__views.__alloyId6 = Ti.UI.createImageView({
-        width: "20%",
-        left: "25%",
-        image: "/images/icons/icon-neworder.png",
-        id: "__alloyId6"
-    });
-    $.__views.footer.add($.__views.__alloyId6);
-    $.__views.__alloyId7 = Ti.UI.createImageView({
-        width: "20%",
         left: "50%",
-        image: "/images/icons/icon-listing.png",
-        id: "__alloyId7"
+        image: "/images/icons/icon-summary.png"
     });
-    $.__views.footer.add($.__views.__alloyId7);
-    $.__views.__alloyId8 = Ti.UI.createImageView({
-=======
-        id: "__alloyId35"
-    });
-    $.__views.footer.add($.__views.__alloyId35);
-    goNav ? $.__views.__alloyId35.addEventListener("click", goNav) : __defers["$.__views.__alloyId35!click!goNav"] = true;
-    $.__views.__alloyId36 = Ti.UI.createImageView({
+    $.__views.footer.add($.__views.summary);
+    goNav ? $.__views.summary.addEventListener("click", goNav) : __defers["$.__views.summary!click!goNav"] = true;
+    $.__views.logout = Ti.UI.createImageView({
         width: "20%",
-        left: "25%",
-        image: "/images/icons/icon-neworder.png",
-        id: "__alloyId36"
+        id: "logout",
+        mod: "logout",
+        left: "70%",
+        image: "/images/icons/icon-logout.png"
     });
-    $.__views.footer.add($.__views.__alloyId36);
-    $.__views.__alloyId37 = Ti.UI.createImageView({
-        width: "20%",
-        left: "50%",
-        image: "/images/icons/icon-listing.png",
-        id: "__alloyId37"
-    });
-    $.__views.footer.add($.__views.__alloyId37);
-    $.__views.__alloyId38 = Ti.UI.createImageView({
->>>>>>> master
-        width: "20%",
-        mod: "settings",
-        left: "75%",
-        image: "/images/icons/icon-setting.png",
-<<<<<<< HEAD
-        id: "__alloyId8"
-    });
-    $.__views.footer.add($.__views.__alloyId8);
-    goNav ? $.__views.__alloyId8.addEventListener("click", goNav) : __defers["$.__views.__alloyId8!click!goNav"] = true;
+    $.__views.footer.add($.__views.logout);
+    doLogout ? $.__views.logout.addEventListener("click", doLogout) : __defers["$.__views.logout!click!doLogout"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    __defers["$.__views.__alloyId5!click!goNav"] && $.__views.__alloyId5.addEventListener("click", goNav);
-    __defers["$.__views.__alloyId8!click!goNav"] && $.__views.__alloyId8.addEventListener("click", goNav);
-=======
-        id: "__alloyId38"
-    });
-    $.__views.footer.add($.__views.__alloyId38);
-    goNav ? $.__views.__alloyId38.addEventListener("click", goNav) : __defers["$.__views.__alloyId38!click!goNav"] = true;
-    exports.destroy = function() {};
-    _.extend($, $.__views);
-    __defers["$.__views.__alloyId35!click!goNav"] && $.__views.__alloyId35.addEventListener("click", goNav);
-    __defers["$.__views.__alloyId38!click!goNav"] && $.__views.__alloyId38.addEventListener("click", goNav);
->>>>>>> master
+    arguments[0] || {};
+    __defers["$.__views.home!click!goNav"] && $.__views.home.addEventListener("click", goNav);
+    __defers["$.__views.orderlist!click!goNav"] && $.__views.orderlist.addEventListener("click", goNav);
+    __defers["$.__views.summary!click!goNav"] && $.__views.summary.addEventListener("click", goNav);
+    __defers["$.__views.logout!click!doLogout"] && $.__views.logout.addEventListener("click", doLogout);
     _.extend($, exports);
 }
 

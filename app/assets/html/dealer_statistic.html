@@ -70,20 +70,23 @@
 						  	if(data.data == ""){
 						  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
 						  	}else{
+						  		var counter =1;
 						  		$.each( data.data, function( key, val ) {
-									str += "<tr><td width='100%'>"+key+". "+val.name+"</td></tr>";
+									str += "<tr><td width='100%'>"+counter+". "+val.name+"</td></tr>";
+									counter++;
 								});
 						  	}
 				   	 		
 				   	 	}else{
 				   	 		if(currentOption == "monthly_location"){
-				   	 			str += "<tr><th width='60%' id='titleName'>"+ localStorage.getItem("tableTitle")+"</th><th width='40%' id='titleTotal'>Total / Completed</th></tr>";
+				   	 			str += "<tr><th width='50%' id='titleName'>"+ localStorage.getItem("tableTitle")+"</th><th width='50%' id='titleTotal'>Total</th></tr>";
 				   	 			if(data.data == ""){
 							  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
 							  	}else{
-							  		
-							  		$.each( data.data, function( key, val ) {
-										str += "<tr><td width='60%'>"+key+". "+val.state+"</td><td width='40%' style='color:#525252;text-align:right;'> "+val.total+"/"+val.completed+"</td></tr>";
+							  		var counter =1;
+							  		$.each( data.data, function( key, val ) { 
+										str += "<tr><td width='50%'>"+counter+". "+val.state+"</td><td width='50%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
+										counter++;
 									});
 							  	}
 				   	 		}else{
@@ -95,6 +98,7 @@
 							  		
 							  		$.each( data.data, function( key, val ) {
 										str += "<tr><td width='70%'>"+(key+1)+". "+val.name+"</td><td width='30%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
+
 									});
 							  	}
 				   	 		}
@@ -187,6 +191,11 @@
 		     });
 		</script>
 		<style>
+			body{ 
+				background-image: url('../images/bg.jpg');
+				background-repeat: repeat;
+			}
+
 			input.text-input {
 				width: 75%;
 				margin:0 auto;
