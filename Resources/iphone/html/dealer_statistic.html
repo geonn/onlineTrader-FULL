@@ -79,6 +79,7 @@
 				   	 		
 				   	 	}else{
 				   	 		if(currentOption == "monthly_location"){
+<<<<<<< HEAD
 				   	 			str += "<tr><th width='50%' id='titleName'>"+ localStorage.getItem("tableTitle")+"</th><th width='50%' id='titleTotal'>Total</th></tr>";
 				   	 			if(data.data == ""){
 							  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
@@ -87,6 +88,24 @@
 							  		$.each( data.data, function( key, val ) { 
 										str += "<tr><td width='50%'>"+counter+". "+val.state+"</td><td width='50%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
 										counter++;
+=======
+<<<<<<< HEAD
+				   	 			str += "<tr><th width='60%' id='titleName'>"+ localStorage.getItem("tableTitle")+"</th><th width='40%' id='titleTotal'>Total / Completed</th></tr>";
+=======
+				   	 			str += "<tr><th width='50%' id='titleName'>"+ localStorage.getItem("tableTitle")+"</th><th width='50%' id='titleTotal'>Completed / Total</th></tr>";
+>>>>>>> FETCH_HEAD
+				   	 			if(data.data == ""){
+							  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
+							  	}else{
+							  		
+							  		$.each( data.data, function( key, val ) {
+<<<<<<< HEAD
+										str += "<tr><td width='60%'>"+key+". "+val.state+"</td><td width='40%' style='color:#525252;text-align:right;'> "+val.total+"/"+val.completed+"</td></tr>";
+=======
+							  			key = key + 1;
+										str += "<tr><td width='50%'>"+key+". "+val.state+"</td><td width='50%' style='color:#525252;text-align:right;'> "+val.completed+"/"+val.total+"</td></tr>";
+>>>>>>> FETCH_HEAD
+>>>>>>> FETCH_HEAD
 									});
 							  	}
 				   	 		}else{
@@ -95,10 +114,20 @@
 							  	if(data.data == ""){
 							  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
 							  	}else{
+<<<<<<< HEAD
 							  		var counter =1;
 							  		$.each( data.data, function( key, val ) { 
 										str += "<tr><td width='70%'>"+counter+". "+val.name+"</td><td width='30%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
 										counter++;
+=======
+							  		
+							  		$.each( data.data, function( key, val ) {
+<<<<<<< HEAD
+										str += "<tr><td width='70%'>"+(key+1)+". "+val.name+"</td><td width='30%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
+=======
+										str += "<tr><td width='70%'>"+key+". "+val.name+"</td><td width='30%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
+>>>>>>> FETCH_HEAD
+>>>>>>> FETCH_HEAD
 									});
 							  	}
 				   	 		}

@@ -73,6 +73,15 @@ function Controller() {
     });
     $.__views.subfooter.add($.__views.logout);
     doLogout ? $.__views.logout.addEventListener("touchend", doLogout) : __defers["$.__views.logout!touchend!doLogout"] = true;
+    $.__views.daily_profit = Ti.UI.createImageView({
+        width: "20%",
+        id: "daily_profit",
+        mod: "daily_profit",
+        left: "40%",
+        image: "/images/icons/icon-setting.png"
+    });
+    $.__views.subfooter.add($.__views.daily_profit);
+    goNav ? $.__views.daily_profit.addEventListener("touchend", goNav) : __defers["$.__views.daily_profit!touchend!goNav"] = true;
     $.__views.footer = Ti.UI.createView({
         height: Titanium.UI.SIZE,
         bottom: 0,
@@ -130,6 +139,7 @@ function Controller() {
     $.more.addEventListener("click", expandMoreMenu);
     __defers["$.__views.settings!touchend!goNav"] && $.__views.settings.addEventListener("touchend", goNav);
     __defers["$.__views.logout!touchend!doLogout"] && $.__views.logout.addEventListener("touchend", doLogout);
+    __defers["$.__views.daily_profit!touchend!goNav"] && $.__views.daily_profit.addEventListener("touchend", goNav);
     __defers["$.__views.summary!touchend!goNav"] && $.__views.summary.addEventListener("touchend", goNav);
     __defers["$.__views.orderlist!touchend!goNav"] && $.__views.orderlist.addEventListener("touchend", goNav);
     __defers["$.__views.poslist!touchend!goNav"] && $.__views.poslist.addEventListener("touchend", goNav);

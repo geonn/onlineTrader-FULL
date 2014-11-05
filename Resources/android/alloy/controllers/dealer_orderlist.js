@@ -48,23 +48,23 @@ function Controller() {
         id: "header"
     });
     $.__views.dealer_orderlist.add($.__views.header);
-    $.__views.__alloyId26 = Ti.UI.createImageView({
+    $.__views.__alloyId28 = Ti.UI.createImageView({
         width: "7%",
         left: "10%",
         image: "/images/refresh-icon.png",
-        id: "__alloyId26"
+        id: "__alloyId28"
     });
-    $.__views.header.add($.__views.__alloyId26);
-    refreshPage ? $.__views.__alloyId26.addEventListener("touchend", refreshPage) : __defers["$.__views.__alloyId26!touchend!refreshPage"] = true;
-    $.__views.__alloyId27 = Ti.UI.createView({
+    $.__views.header.add($.__views.__alloyId28);
+    refreshPage ? $.__views.__alloyId28.addEventListener("touchend", refreshPage) : __defers["$.__views.__alloyId28!touchend!refreshPage"] = true;
+    $.__views.__alloyId29 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         left: "25%",
         top: "0%",
-        id: "__alloyId27"
+        id: "__alloyId29"
     });
-    $.__views.header.add($.__views.__alloyId27);
+    $.__views.header.add($.__views.__alloyId29);
     $.__views.appTitle = Ti.UI.createLabel({
         width: Titanium.UI.SIZE,
         color: "#fff",
@@ -75,15 +75,15 @@ function Controller() {
         id: "appTitle"
     });
     $.__views.header.add($.__views.appTitle);
-    $.__views.__alloyId28 = Ti.UI.createView({
+    $.__views.__alloyId30 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         left: "75%",
         top: "0%",
-        id: "__alloyId28"
+        id: "__alloyId30"
     });
-    $.__views.header.add($.__views.__alloyId28);
+    $.__views.header.add($.__views.__alloyId30);
     $.__views.rightNav = Ti.UI.createLabel({
         width: "25%",
         color: "#fff",
@@ -111,7 +111,7 @@ function Controller() {
         id: "content"
     });
     $.__views.dealer_orderlist.add($.__views.content);
-    $.__views.__alloyId29 = Ti.UI.createLabel({
+    $.__views.__alloyId31 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -119,16 +119,16 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "DEALER - ORDER LIST",
-        id: "__alloyId29"
+        id: "__alloyId31"
     });
-    $.__views.content.add($.__views.__alloyId29);
-    $.__views.__alloyId30 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId31);
+    $.__views.__alloyId32 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId30"
+        id: "__alloyId32"
     });
-    $.__views.content.add($.__views.__alloyId30);
+    $.__views.content.add($.__views.__alloyId32);
     $.__views.list_form = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
@@ -209,7 +209,7 @@ function Controller() {
         Ti.App.removeEventListener("Ti:clearCache", clearCache);
         Ti.App.removeEventListener("app:viewOrderDetail", goToDetails);
     });
-    __defers["$.__views.__alloyId26!touchend!refreshPage"] && $.__views.__alloyId26.addEventListener("touchend", refreshPage);
+    __defers["$.__views.__alloyId28!touchend!refreshPage"] && $.__views.__alloyId28.addEventListener("touchend", refreshPage);
     __defers["$.__views.rightNav!touchend!popup"] && $.__views.rightNav.addEventListener("touchend", popup);
     _.extend($, exports);
 }

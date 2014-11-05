@@ -29,11 +29,11 @@ function Controller() {
         id: "dealer_newpost"
     });
     $.__views.dealer_newpost && $.addTopLevelView($.__views.dealer_newpost);
-    $.__views.__alloyId19 = Alloy.createController("_subheader", {
-        id: "__alloyId19",
+    $.__views.__alloyId21 = Alloy.createController("_subheader", {
+        id: "__alloyId21",
         __parentSymbol: $.__views.dealer_newpost
     });
-    $.__views.__alloyId19.setParent($.__views.dealer_newpost);
+    $.__views.__alloyId21.setParent($.__views.dealer_newpost);
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -57,28 +57,28 @@ function Controller() {
         id: "titleHeader"
     });
     $.__views.content.add($.__views.titleHeader);
-    $.__views.__alloyId20 = Ti.UI.createImageView({
+    $.__views.__alloyId22 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId20"
+        id: "__alloyId22"
     });
-    $.__views.content.add($.__views.__alloyId20);
-    $.__views.__alloyId21 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId22);
+    $.__views.__alloyId23 = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
         bottom: 2,
         height: "89%",
         top: "90",
-        id: "__alloyId21"
+        id: "__alloyId23"
     });
-    $.__views.dealer_newpost.add($.__views.__alloyId21);
+    $.__views.dealer_newpost.add($.__views.__alloyId23);
     $.__views.newpostview = Ti.UI.createWebView({
         id: "newpostview",
         disableBounce: "true",
         url: "/html/dealer_newpost.html"
     });
-    $.__views.__alloyId21.add($.__views.newpostview);
+    $.__views.__alloyId23.add($.__views.newpostview);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};

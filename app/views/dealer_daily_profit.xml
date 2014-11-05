@@ -1,0 +1,14 @@
+<Alloy>
+	<Window class="container" id="dealer_daily_profit">
+		<Require src="_header" id="footer"></Require>
+		<View class="content_post" id="content">
+			<Label class="h2" id="titleHeader">Dealer Daily Profit</Label>
+			<ImageView class="separator" ></ImageView>
+		</View>
+		<View class="list_form"  >
+			<WebView id="daily_profit" disableBounce="true"   url="/html/dealer_daily_profit.html" />
+		</View>
+		<Require src="_dealer_subfooter" id="r_sub_footer"></Require>
+		<Require src="_dealer_footer" id="footer"></Require>
+	</Window>
+</Alloy>

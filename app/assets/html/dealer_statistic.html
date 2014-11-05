@@ -95,10 +95,10 @@
 							  	if(data.data == ""){
 							  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
 							  	}else{
-							  		var counter =1;
-							  		$.each( data.data, function( key, val ) { 
-										str += "<tr><td width='70%'>"+counter+". "+val.name+"</td><td width='30%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
-										counter++;
+							  		
+							  		$.each( data.data, function( key, val ) {
+										str += "<tr><td width='70%'>"+(key+1)+". "+val.name+"</td><td width='30%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
+
 									});
 							  	}
 				   	 		}

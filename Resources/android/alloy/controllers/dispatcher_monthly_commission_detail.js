@@ -104,7 +104,7 @@ function Controller() {
         __parentSymbol: $.__views.dispatcher_monthly_commission_detail
     });
     $.__views.footer.setParent($.__views.dispatcher_monthly_commission_detail);
-    $.__views.__alloyId101 = Ti.UI.createView({
+    $.__views.__alloyId106 = Ti.UI.createView({
         top: "60dp",
         font: {
             fontSize: "14dp",
@@ -115,10 +115,10 @@ function Controller() {
         left: "5dp",
         right: "5dp",
         height: "88%",
-        id: "__alloyId101"
+        id: "__alloyId106"
     });
-    $.__views.dispatcher_monthly_commission_detail.add($.__views.__alloyId101);
-    $.__views.__alloyId102 = Ti.UI.createLabel({
+    $.__views.dispatcher_monthly_commission_detail.add($.__views.__alloyId106);
+    $.__views.__alloyId107 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -126,21 +126,21 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "MONTHLY COMMISSION DETAIL",
-        id: "__alloyId102"
+        id: "__alloyId107"
     });
-    $.__views.__alloyId101.add($.__views.__alloyId102);
-    $.__views.__alloyId103 = Ti.UI.createImageView({
+    $.__views.__alloyId106.add($.__views.__alloyId107);
+    $.__views.__alloyId108 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId103"
+        id: "__alloyId108"
     });
-    $.__views.__alloyId101.add($.__views.__alloyId103);
+    $.__views.__alloyId106.add($.__views.__alloyId108);
     $.__views.tableView = Ti.UI.createTableView({
         width: "100%",
         id: "tableView"
     });
-    $.__views.__alloyId101.add($.__views.tableView);
+    $.__views.__alloyId106.add($.__views.tableView);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

@@ -99,23 +99,23 @@ function Controller() {
         id: "content"
     });
     $.__views.index.add($.__views.content);
-    $.__views.__alloyId137 = Ti.UI.createScrollView({
+    $.__views.__alloyId139 = Ti.UI.createScrollView({
         showVerticalScrollIndicator: "true",
         showHorizontalScrollIndicator: "true",
         height: "320",
         width: "100%",
-        id: "__alloyId137"
+        id: "__alloyId139"
     });
-    $.__views.content.add($.__views.__alloyId137);
-    $.__views.__alloyId138 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId139);
+    $.__views.__alloyId140 = Ti.UI.createLabel({
         width: "120",
         color: "#e02222",
         backgroundImage: "/images/online-trader-logo.png",
         height: "120",
         bottom: "150",
-        id: "__alloyId138"
+        id: "__alloyId140"
     });
-    $.__views.__alloyId137.add($.__views.__alloyId138);
+    $.__views.__alloyId139.add($.__views.__alloyId140);
     $.__views.username = Ti.UI.createTextField({
         height: "55dp",
         font: {
@@ -131,7 +131,7 @@ function Controller() {
         borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "username"
     });
-    $.__views.__alloyId137.add($.__views.username);
+    $.__views.__alloyId139.add($.__views.username);
     $.__views.usernamehint = Ti.UI.createLabel({
         width: "90%",
         color: "#333",
@@ -143,7 +143,7 @@ function Controller() {
         text: "Enter Username",
         id: "usernamehint"
     });
-    $.__views.__alloyId137.add($.__views.usernamehint);
+    $.__views.__alloyId139.add($.__views.usernamehint);
     $.__views.password = Ti.UI.createTextField({
         passwordMask: true,
         height: "55dp",
@@ -160,7 +160,7 @@ function Controller() {
         borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "password"
     });
-    $.__views.__alloyId137.add($.__views.password);
+    $.__views.__alloyId139.add($.__views.password);
     $.__views.passwordhint = Ti.UI.createLabel({
         width: "90%",
         color: "#333",
@@ -172,7 +172,7 @@ function Controller() {
         text: "Enter Password",
         id: "passwordhint"
     });
-    $.__views.__alloyId137.add($.__views.passwordhint);
+    $.__views.__alloyId139.add($.__views.passwordhint);
     $.__views.btnLogin = Ti.UI.createButton({
         backgroundImage: "/images/btn-login.png",
         width: "90%",

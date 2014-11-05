@@ -271,7 +271,7 @@ function deviceTokenError(e) {
 
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
-Ti.API.API_DOMAIN = "onlinetrader.com.my";
+Ti.API.API_DOMAIN = "www.onlinetrader.com.my";
 
 Ti.API.USER = "biomas";
 
@@ -349,6 +349,13 @@ Ti.API.GETDEALERRANKINGBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getMonthl
 
 Ti.API.GETLOCATIONRANKINGBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getMonthlyRankingByLocation?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
+<<<<<<< HEAD
+Ti.API.GETDEALERDAILYPROFIT = "http://" + Ti.API.API_DOMAIN + "/api/getDailyProfitList?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+
+Ti.API.GETANNOUNCEMENT = "http://" + Ti.API.API_DOMAIN + "/api/getAnnoucement?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+
+=======
+>>>>>>> FETCH_HEAD
 Ti.CURRENTWINDOW = "";
 
 Ti.App.CURRENTWINDOW = "";
