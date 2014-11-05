@@ -1,6 +1,7 @@
 var args = arguments[0] || {};
 getSummary();
 getDailySummary();
+getAnnouncement();
 
 //Active icon displayed
 var summary = $.footer.getView('summary'); 
@@ -20,8 +21,7 @@ if (day < 10) day = '0' + day;
 var today = year+'-'+month+'-'+day;
 
 function getDailySummary(e) {
-	var url = Ti.API.GETDAILYSUMMARY + Ti.App.Properties.getString('session');
-	console.log(url);
+	var url = Ti.API.GETDAILYSUMMARY + Ti.App.Properties.getString('session'); 
 	var client = Ti.Network.createHTTPClient({
 	     // function called when the response data is available
 	     onload : function(e) {
@@ -58,8 +58,7 @@ function getDailySummary(e) {
 				
 //$.mySession.text = model;
 function getSummary(e) {
-	var url = Ti.API.GETSUMMARY + Ti.App.Properties.getString('session');
-	console.log("getsummary "+url);
+	var url = Ti.API.GETSUMMARY + Ti.App.Properties.getString('session'); 
 	var client = Ti.Network.createHTTPClient({
 	     // function called when the response data is available
 	     onload : function(e) {
@@ -86,6 +85,78 @@ function getSummary(e) {
 	     // function called when an error occurs, including a timeout
 	     onerror : function(e) {
 	         getSummary(e);
+	     },
+	     timeout : 5000  // in milliseconds
+	 });
+	 // Prepare the connection.
+	 client.open("GET", url);
+	 // Send the request.
+	 client.send(); 
+  
+}
+
+
+function getAnnouncement(e) {
+	var url = Ti.API.GETANNOUNCEMENT + Ti.App.Properties.getString('session'); 
+	var totalWidth = 0;
+	var text = "";
+	var screenWidth = PixelsToDPUnits(Ti.Platform.displayCaps.platformWidth);
+
+	var client = Ti.Network.createHTTPClient({
+	     // function called when the response data is available
+	     onload : function(e) {
+	         var res = JSON.parse(this.responseText);
+	         if(res.status == "success"){
+	         	
+	         	var count =1;
+				for (var key in res.data){
+					var obj = res.data[key];
+					var totalAnnouncement = res.data.length;
+					var seperator = "";
+					if(totalAnnouncement > count){
+						seperator = " | ";
+					}
+					text = text + obj.message +seperator;
+					count++;
+				}
+				
+				var label = Titanium.UI.createLabel({
+					    height: 18,
+					    left: 50,
+					    top:1,
+					    font: {
+					        fontSize: '12'
+					    },
+					    color:'black',
+					    width: Ti.UI.FIT,
+					    wordWrap : false, 
+                		horizontalWrap: false,
+					    text: text
+					});
+					
+				label.addEventListener('postlayout', function(e) { // not called ...
+				  totalWidth = e.source.rect.width;
+				  var screenWidthDP = Ti.Platform.displayCaps.platformWidth / (Titanium.Platform.displayCaps.dpi / 160);
+
+				  var animation = Titanium.UI.createAnimation({
+					    right:screenWidthDP,
+					    duration:6000,
+        				curve: Titanium.UI.ANIMATION_CURVE_LINEAR
+					});
+					animation.addEventListener('complete',function() {
+					    e.source.right = 0;
+					    e.source.animate(animation); 
+					});
+				   e.source.animate(animation);
+				});
+				$.noticeBoard.add(label);
+	         }else{
+	         	getAnnouncement(e);
+	         }
+	     },
+	     // function called when an error occurs, including a timeout
+	     onerror : function(e) {
+	         getAnnouncement(e);
 	     },
 	     timeout : 5000  // in milliseconds
 	 });

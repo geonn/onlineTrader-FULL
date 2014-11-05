@@ -20,10 +20,11 @@
 			 
 		</View>
 		<View top="150dp" >
-			<ScrollView height="77%" layout="vertical" >
+			<ScrollView height="77%" layout="vertical" overScrollMode="Titanium.UI.Android.OVER_SCROLL_NEVER">
 				<WebView id="webview" layout="vertical" height="auto" disableBounce="true" loading="true"  width="100%" url="/html/dealer_summary_inventory.html" />
 			</ScrollView>	
 		</View>
+		<ScrollView id="noticeBoard" bottom="60" backgroundColor="#E3F5FE" layout="horizontal" scrollType="horizontal" height="20" overScrollMode="Titanium.UI.Android.OVER_SCROLL_NEVER"></ScrollView>
 		<Require src="_dealer_footer" id="footer"></Require>
 		
 	</Window>

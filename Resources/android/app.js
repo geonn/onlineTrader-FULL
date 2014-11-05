@@ -267,21 +267,27 @@ function deviceTokenError(e) {
     alert("Failed to register for push! " + e.error);
 }
 
+function PixelsToDPUnits(ThePixels) {
+    return ThePixels / (Titanium.Platform.displayCaps.dpi / 160);
+}
+
+function GetWidth(value) {
+    var screenWidth = Ti.Platform.displayCaps.platformWidth;
+    var temp = 100 * value / 320;
+    return parseInt(screenWidth * temp / 100);
+}
+
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
-<<<<<<< HEAD
 Ti.API.API_DOMAIN = "www.onlinetrader.com.my";
-=======
-Ti.API.API_DOMAIN = "onlinetrader.com.my";
->>>>>>> FETCH_HEAD
 
 Ti.API.USER = "biomas";
 
 Ti.API.KEY = "06b53047cf294f7207789ff5293ad2dc";
 
-Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.0.55&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.0.56&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
-Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.0.55&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
+Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.0.56&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
 
 Ti.API.LOGOUT = "http://" + Ti.API.API_DOMAIN + "/api/logoutUser?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 

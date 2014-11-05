@@ -18,8 +18,8 @@
 	            localStorage.setItem("session",e.session);
 	            localStorage.setItem("url", e.url);
 	            localStorage.setItem("targetURL", e.url); //Default
-	            drawTable(e.url+"&month="+month+"&year="+year);
-	            
+	            //drawTable(e.url+"&month="+month+"&year="+year);
+	            refreshTable();
 	        });
   			
 			function refreshTable(){
@@ -89,6 +89,8 @@
 				   	}
 	  			}
 	  			
+	  			
+
 	  			$("#month").change(function(){
 	  				refreshTable();
 	  			});
@@ -134,7 +136,7 @@
     <body>
     	<div class="staticBar" id="dateBar">
     		
-    		<div id="monthyear" style="float:left">
+    		<div id="monthyear" style="text-align:center;">
     			Month
 	    		<select name="month" id="month">
 	    		</select>

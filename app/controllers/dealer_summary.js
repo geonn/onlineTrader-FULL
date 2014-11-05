@@ -29,17 +29,6 @@ var label = Titanium.UI.createLabel({
 });
  
 
-function PixelsToDPUnits(ThePixels)
-{
-  return (ThePixels / (Titanium.Platform.displayCaps.dpi / 160));
-}
-
-function GetWidth(value) {
-	var screenWidth = Ti.Platform.displayCaps.platformWidth;
-    var temp = (value * 100) / 320;
-    return parseInt((screenWidth * temp) / 100);
-};
-
 function getDailySummary(e) {
 	var url = Ti.API.GETDAILYSUMMARY + Ti.App.Properties.getString('session');
 	var client = Ti.Network.createHTTPClient({
@@ -78,8 +67,7 @@ function getDailySummary(e) {
 				
 //$.mySession.text = model;
 function getSummary(e) {
-	var url = Ti.API.GETSUMMARY + Ti.App.Properties.getString('session');
-	console.log("getsummary "+url);
+	var url = Ti.API.GETSUMMARY + Ti.App.Properties.getString('session');  
 	var client = Ti.Network.createHTTPClient({
 	     // function called when the response data is available
 	     onload : function(e) {
@@ -117,8 +105,7 @@ function getSummary(e) {
 }
 
 function getAnnouncement(e) {
-	var url = Ti.API.GETANNOUNCEMENT + Ti.App.Properties.getString('session');
-	console.log(url);
+	var url = Ti.API.GETANNOUNCEMENT + Ti.App.Properties.getString('session'); 
 	var totalWidth = 0;
 	var text = "";
 	var screenWidth = PixelsToDPUnits(Ti.Platform.displayCaps.platformWidth);
@@ -129,18 +116,29 @@ function getAnnouncement(e) {
 	         var res = JSON.parse(this.responseText);
 	         if(res.status == "success"){
 	         	
+	         	var count =1;
 				for (var key in res.data){
 					var obj = res.data[key];
-					console.log(obj.message+" "+text);
-					text = text + obj.message+" | ";
-		       		
+					var totalAnnouncement = res.data.length;
+					var seperator = "";
+					if(totalAnnouncement > count){
+						seperator = " | ";
+					}
+					text = text + obj.message +seperator;
+					count++;
 				}
 				
 				var label = Titanium.UI.createLabel({
-					    height: 20,
-					    left: 0,
+					    height: 18,
+					    left: 50,
+					    top:1,
+					    font: {
+					        fontSize: '12'
+					    },
 					    color:'black',
-					    width: Ti.UI.FILL,
+					    width: Ti.UI.FIT,
+					    wordWrap : false, 
+                		horizontalWrap: false,
 					    text: text
 					});
 					
@@ -149,12 +147,12 @@ function getAnnouncement(e) {
 				  var screenWidthDP = Ti.Platform.displayCaps.platformWidth / (Titanium.Platform.displayCaps.dpi / 160);
 
 				  var animation = Titanium.UI.createAnimation({
-					    left:screenWidthDP,
-					    duration:3000,
+					    right:screenWidthDP,
+					    duration:6000,
         				curve: Titanium.UI.ANIMATION_CURVE_LINEAR
 					});
 					animation.addEventListener('complete',function() {
-					    e.source.left = 0;
+					    e.source.right = 0;
 					    e.source.animate(animation); 
 					});
 				   e.source.animate(animation);

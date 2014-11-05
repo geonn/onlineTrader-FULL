@@ -119,15 +119,9 @@ function Controller() {
         width: "100%",
         id: "__alloyId122"
     });
-<<<<<<< HEAD
     $.__views.content.add($.__views.__alloyId122);
     $.__views.__alloyId123 = Ti.UI.createView({
-        backgroundColor: "white",
-=======
-    $.__views.content.add($.__views.__alloyId117);
-    $.__views.__alloyId118 = Ti.UI.createView({
         backgroundImage: "/images/bg.jpg",
->>>>>>> FETCH_HEAD
         navBarHidden: true,
         layout: "horizontal",
         top: "5",
@@ -156,15 +150,9 @@ function Controller() {
         value: "",
         hintText: "Enter Fullname"
     });
-<<<<<<< HEAD
     $.__views.__alloyId123.add($.__views.fullname);
     $.__views.__alloyId125 = Ti.UI.createView({
-        backgroundColor: "white",
-=======
-    $.__views.__alloyId118.add($.__views.fullname);
-    $.__views.__alloyId120 = Ti.UI.createView({
         backgroundImage: "/images/bg.jpg",
->>>>>>> FETCH_HEAD
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
@@ -192,15 +180,9 @@ function Controller() {
         id: "mobile",
         value: ""
     });
-<<<<<<< HEAD
     $.__views.__alloyId125.add($.__views.mobile);
     $.__views.__alloyId127 = Ti.UI.createView({
-        backgroundColor: "white",
-=======
-    $.__views.__alloyId120.add($.__views.mobile);
-    $.__views.__alloyId122 = Ti.UI.createView({
         backgroundImage: "/images/bg.jpg",
->>>>>>> FETCH_HEAD
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
@@ -230,13 +212,8 @@ function Controller() {
     });
     $.__views.__alloyId127.add($.__views.prefer_state);
     chooseState ? $.__views.prefer_state.addEventListener("click", chooseState) : __defers["$.__views.prefer_state!click!chooseState"] = true;
-<<<<<<< HEAD
     $.__views.__alloyId129 = Ti.UI.createView({
-        backgroundColor: "white",
-=======
-    $.__views.__alloyId124 = Ti.UI.createView({
         backgroundImage: "/images/bg.jpg",
->>>>>>> FETCH_HEAD
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
@@ -265,15 +242,9 @@ function Controller() {
         hintText: "Enter New Password",
         value: ""
     });
-<<<<<<< HEAD
     $.__views.__alloyId129.add($.__views.new_password);
     $.__views.__alloyId131 = Ti.UI.createView({
-        backgroundColor: "white",
-=======
-    $.__views.__alloyId124.add($.__views.new_password);
-    $.__views.__alloyId126 = Ti.UI.createView({
         backgroundImage: "/images/bg.jpg",
->>>>>>> FETCH_HEAD
         navBarHidden: true,
         layout: "horizontal",
         height: "60",

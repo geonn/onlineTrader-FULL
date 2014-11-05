@@ -8,9 +8,6 @@ function __processArg(obj, key) {
 }
 
 function Controller() {
-    function PixelsToDPUnits(ThePixels) {
-        return ThePixels / (Titanium.Platform.displayCaps.dpi / 160);
-    }
     function getDailySummary() {
         var url = Ti.API.GETDAILYSUMMARY + Ti.App.Properties.getString("session");
         var client = Ti.Network.createHTTPClient({
@@ -38,7 +35,6 @@ function Controller() {
     }
     function getSummary() {
         var url = Ti.API.GETSUMMARY + Ti.App.Properties.getString("session");
-        console.log("getsummary " + url);
         var client = Ti.Network.createHTTPClient({
             onload: function(e) {
                 var res = JSON.parse(this.responseText);
@@ -65,7 +61,6 @@ function Controller() {
     }
     function getAnnouncement() {
         var url = Ti.API.GETANNOUNCEMENT + Ti.App.Properties.getString("session");
-        console.log(url);
         var totalWidth = 0;
         var text = "";
         PixelsToDPUnits(Ti.Platform.displayCaps.platformWidth);
@@ -73,28 +68,38 @@ function Controller() {
             onload: function(e) {
                 var res = JSON.parse(this.responseText);
                 if ("success" == res.status) {
+                    var count = 1;
                     for (var key in res.data) {
                         var obj = res.data[key];
-                        console.log(obj.message + " " + text);
-                        text = text + obj.message + " | ";
+                        var totalAnnouncement = res.data.length;
+                        var seperator = "";
+                        totalAnnouncement > count && (seperator = " | ");
+                        text = text + obj.message + seperator;
+                        count++;
                     }
                     var label = Titanium.UI.createLabel({
-                        height: 20,
-                        left: 0,
+                        height: 18,
+                        left: 50,
+                        top: 1,
+                        font: {
+                            fontSize: "12"
+                        },
                         color: "black",
-                        width: Ti.UI.FILL,
+                        width: Ti.UI.FIT,
+                        wordWrap: false,
+                        horizontalWrap: false,
                         text: text
                     });
                     label.addEventListener("postlayout", function(e) {
                         totalWidth = e.source.rect.width;
                         var screenWidthDP = Ti.Platform.displayCaps.platformWidth / (Titanium.Platform.displayCaps.dpi / 160);
                         var animation = Titanium.UI.createAnimation({
-                            left: screenWidthDP,
-                            duration: 3e3,
+                            right: screenWidthDP,
+                            duration: 6e3,
                             curve: Titanium.UI.ANIMATION_CURVE_LINEAR
                         });
                         animation.addEventListener("complete", function() {
-                            e.source.left = 0;
+                            e.source.right = 0;
                             e.source.animate(animation);
                         });
                         e.source.animate(animation);
@@ -337,6 +342,7 @@ function Controller() {
         height: "74%",
         top: "0",
         layout: "vertical",
+        overScrollMode: Titanium.UI.Android.OVER_SCROLL_NEVER,
         id: "__alloyId89"
     });
     $.__views.__alloyId88.add($.__views.__alloyId89);
@@ -351,10 +357,14 @@ function Controller() {
         url: "/html/dealer_summary_inventory.html"
     });
     $.__views.__alloyId89.add($.__views.webview);
-    $.__views.noticeBoard = Ti.UI.createView({
-        bottom: "70",
+    $.__views.noticeBoard = Ti.UI.createScrollView({
+        id: "noticeBoard",
+        bottom: "60",
+        backgroundColor: "#E3F5FE",
+        layout: "horizontal",
+        scrollType: "horizontal",
         height: "20",
-        id: "noticeBoard"
+        overScrollMode: Titanium.UI.Android.OVER_SCROLL_NEVER
     });
     $.__views.dealer_summary.add($.__views.noticeBoard);
     $.__views.footer = Alloy.createController("_dealer_footer", {
