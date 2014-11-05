@@ -160,7 +160,7 @@ hr {
     background-color:#F8E0E0;	
 }
 .bordered tbody tr:hover:nth-child(even) td,.bordered tbody tr:hover.even td,.bordered tbody tr:hover:nth-child(even) th,.bordered tbody tr:hover.even th{
-     background: #DF0101;
+     background: #D9EEFF;
 }
 
 .bordered th {

@@ -18,8 +18,10 @@ function Controller() {
         }
         var dt = Ti.App.Properties.getString("deviceToken");
         var url = Ti.API.LOGIN + "&username=" + username + "&password=" + password + "&deviceToken=" + dt;
+        console.log(url);
         var client = Ti.Network.createHTTPClient({
-            onload: function() {
+            onload: function(e) {
+                console.log(e);
                 var res = JSON.parse(this.responseText);
                 if ("success" == res.status) if ("admin" == res.data.roles) createAlert("Roles declined", "Your roles(admin) is not authorize for this app"); else {
                     Ti.App.Properties.setString("roles", res.data.roles);
@@ -194,7 +196,6 @@ function Controller() {
     var payload = Ti.App.Payload;
     if (null == ses) $.index.open(); else {
         var url = Ti.API.CHECKSESSION + ses;
-        console.log(url);
         var client = Ti.Network.createHTTPClient({
             onload: function() {
                 var res = JSON.parse(this.responseText);
@@ -212,10 +213,11 @@ function Controller() {
                     "" != payload;
                 } else $.index.open();
             },
-            onerror: function() {
+            onerror: function(e) {
+                console.log(e);
                 $.index.open();
             },
-            timeout: 1e4
+            timeout: 1e5
         });
         client.open("GET", url);
         client.send();

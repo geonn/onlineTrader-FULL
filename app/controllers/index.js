@@ -11,12 +11,12 @@ if(ses == null){
 }else{
 	//console.log("other");
 	var url = Ti.API.CHECKSESSION +ses;
-	console.log(url);
+	//console.log(url);
 	var client = Ti.Network.createHTTPClient({
 	     // function called when the response data is available
 	     onload : function(e) {
 	         var res = JSON.parse(this.responseText);
-	        
+	        //console.log(res);
 	         if(res.status == "success"){
 	         	var rl = Ti.App.Properties.getString('roles');
 	
@@ -47,9 +47,10 @@ if(ses == null){
 	     },
 	     // function called when an error occurs, including a timeout
 	     onerror : function(e) {
+	     	console.log(e);
 	         $.index.open();
 	     },
-	     timeout : 10000  // in milliseconds
+	     timeout : 100000  // in milliseconds
 	 });
 	 // Prepare the connection.
 	 client.open("GET", url);
@@ -71,10 +72,11 @@ function doLogin(e) {
 	}
 	var dt = Ti.App.Properties.getString('deviceToken');
 	var url = Ti.API.LOGIN +"&username="+username+"&password="+password+"&deviceToken="+dt;
-	
+	console.log(url);
 	var client = Ti.Network.createHTTPClient({
      // function called when the response data is available
      onload : function(e) {
+     	console.log(e);
          var res = JSON.parse(this.responseText);
          if(res.status == "success"){
          	 if(res.data.roles == "admin"){
@@ -110,6 +112,7 @@ function doLogin(e) {
      },
      // function called when an error occurs, including a timeout
      onerror : function(e) {
+     	
          createAlert('Network declined','Failed to contact with server. Please make sure your device are connected to internet.');
      },
      timeout : 10000  // in milliseconds

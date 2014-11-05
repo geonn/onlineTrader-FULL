@@ -70,21 +70,23 @@
 						  	if(data.data == ""){
 						  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
 						  	}else{
+						  		var counter =1;
 						  		$.each( data.data, function( key, val ) {
-									str += "<tr><td width='100%'>"+key+". "+val.name+"</td></tr>";
+									str += "<tr><td width='100%'>"+counter+". "+val.name+"</td></tr>";
+									counter++;
 								});
 						  	}
 				   	 		
 				   	 	}else{
 				   	 		if(currentOption == "monthly_location"){
-				   	 			str += "<tr><th width='50%' id='titleName'>"+ localStorage.getItem("tableTitle")+"</th><th width='50%' id='titleTotal'>Completed / Total</th></tr>";
+				   	 			str += "<tr><th width='50%' id='titleName'>"+ localStorage.getItem("tableTitle")+"</th><th width='50%' id='titleTotal'>Total</th></tr>";
 				   	 			if(data.data == ""){
 							  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
 							  	}else{
-							  		
-							  		$.each( data.data, function( key, val ) {
-							  			key = key + 1;
-										str += "<tr><td width='50%'>"+key+". "+val.state+"</td><td width='50%' style='color:#525252;text-align:right;'> "+val.completed+"/"+val.total+"</td></tr>";
+							  		var counter =1;
+							  		$.each( data.data, function( key, val ) { 
+										str += "<tr><td width='50%'>"+counter+". "+val.state+"</td><td width='50%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
+										counter++;
 									});
 							  	}
 				   	 		}else{
@@ -93,9 +95,10 @@
 							  	if(data.data == ""){
 							  		str += "<tr><td colspan='2' style='text-align:center;'>No records found</td></tr>";
 							  	}else{
-							  		
-							  		$.each( data.data, function( key, val ) {
-										str += "<tr><td width='70%'>"+key+". "+val.name+"</td><td width='30%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
+							  		var counter =1;
+							  		$.each( data.data, function( key, val ) { 
+										str += "<tr><td width='70%'>"+counter+". "+val.name+"</td><td width='30%' style='color:#525252;text-align:right;'> "+val.total+"</td></tr>";
+										counter++;
 									});
 							  	}
 				   	 		}
