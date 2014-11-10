@@ -45,12 +45,13 @@
 				   	 	var tableTitle = localStorage.getItem("tableTitle");
 
 				   	 	str += "<table cellpadding='0' cellspacing='0' style='width:100%;' class='bordered'>";
-				   	 	str += "<tr><td width='25%'>Date</td><td width='19%'>Courier</td><td width='18%'>COD</td><td width='19%'>Ads</td><td width='19%'>Others</td></tr>";
+				   	 	str += "<tr><td width='25%'>Date</td><td width='15%'>Courier</td><td width='15%'>COD</td><td width='15%'>Ads</td><td width='15%'>Others</td><td width='15%'>Total</td></tr>";
 						if(data.data == ""){
 					  		str += "<tr><td colspan='5' style='text-align:center;'>No records found</td></tr>";
 					  	}else{
 					  		$.each( data.data, function( key, val ) {
-								str += "<tr><td>"+val.date+"</td><td>"+val.courier+"</td><td>"+val.cod+"</td><td>"+val.ads_cost+"</td><td>"+val.other_cost+"</td></tr>";
+					  			var total = val.courier + val.cod - val.ads_cost - val.other_cost;
+								str += "<tr><td>"+val.date+"</td><td>"+val.courier+"</td><td>"+val.cod+"</td><td>"+val.ads_cost+"</td><td>"+val.other_cost+"</td><td>"+total+"</td></tr>";
 							});
 					  	}
 					  	$("#dealer_statistic_list").html(str);
