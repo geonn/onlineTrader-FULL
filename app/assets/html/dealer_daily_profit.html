@@ -45,7 +45,7 @@
 				   	 	var tableTitle = localStorage.getItem("tableTitle");
 
 				   	 	str += "<table cellpadding='0' cellspacing='0' style='width:100%;' class='bordered'>";
-				   	 	str += "<tr><td width='25%'>Date</td><td width='19%'>Courier</td><td width='18%'>COD</td><td width='19%'>Ads</td><td width='19%'>Others</td></tr>";
+				   	 	str += "<tr><td width='25%'>Date</td><td width='15%'>Courier</td><td width='15%'>COD</td><td width='15%'>Ads</td><td width='15%'>Others</td><td width='15%'>Total</td></tr>";
 						if(data.data == ""){
 					  		str += "<tr><td colspan='5' style='text-align:center;'>No records found</td></tr>";
 					  	}else{
@@ -54,11 +54,16 @@
 					  		var total_ads_cost =0;
 					  		var total_other_cost=0;
 					  		$.each( data.data, function( key, val ) {
+<<<<<<< HEAD
 					  			total_courier += val.courier;
 					  			total_cod += val.cod;
 					  			total_ads_cost += val.ads_cost;
 					  			total_other_cost += val.other_cost;
 								str += "<tr><td>"+val.convertedDate+"</td><td style='text-align:right;'>"+val.courier+"</td><td style='text-align:right;'>"+val.cod+"</td><td style='text-align:right;'>"+val.ads_cost+"</td><td style='text-align:right;'>"+val.other_cost+"</td></tr>";
+=======
+					  			var total = val.courier + val.cod - val.ads_cost - val.other_cost;
+								str += "<tr><td>"+val.date+"</td><td>"+val.courier+"</td><td>"+val.cod+"</td><td>"+val.ads_cost+"</td><td>"+val.other_cost+"</td><td>"+total+"</td></tr>";
+>>>>>>> FETCH_HEAD
 							});
 					  	}
 					  	str += "<tr><td width='25%'>TOTAL</td><td width='19%'>"+total_courier+"</td><td width='18%'>"+total_cod+"</td><td width='19%'>"+total_ads_cost+"</td><td width='19%'>"+total_other_cost+"</td></tr>";
