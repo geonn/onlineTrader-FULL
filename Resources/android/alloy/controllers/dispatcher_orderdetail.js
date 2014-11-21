@@ -97,11 +97,11 @@ function Controller() {
         id: "dis_orderdetail_win"
     });
     $.__views.dis_orderdetail_win && $.addTopLevelView($.__views.dis_orderdetail_win);
-    $.__views.__alloyId109 = Alloy.createController("_orderdetailheader", {
-        id: "__alloyId109",
+    $.__views.__alloyId113 = Alloy.createController("_orderdetailheader", {
+        id: "__alloyId113",
         __parentSymbol: $.__views.dis_orderdetail_win
     });
-    $.__views.__alloyId109.setParent($.__views.dis_orderdetail_win);
+    $.__views.__alloyId113.setParent($.__views.dis_orderdetail_win);
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -114,7 +114,7 @@ function Controller() {
         id: "content"
     });
     $.__views.dis_orderdetail_win.add($.__views.content);
-    $.__views.__alloyId110 = Ti.UI.createLabel({
+    $.__views.__alloyId114 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -122,16 +122,16 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "ORDER DETAILS",
-        id: "__alloyId110"
+        id: "__alloyId114"
     });
-    $.__views.content.add($.__views.__alloyId110);
-    $.__views.__alloyId111 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId114);
+    $.__views.__alloyId115 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId111"
+        id: "__alloyId115"
     });
-    $.__views.content.add($.__views.__alloyId111);
+    $.__views.content.add($.__views.__alloyId115);
     $.__views.details_formView = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
@@ -170,15 +170,15 @@ function Controller() {
     });
     $.__views.footer.add($.__views.btnrelease);
     orderRelease ? $.__views.btnrelease.addEventListener("touchend", orderRelease) : __defers["$.__views.btnrelease!touchend!orderRelease"] = true;
-    $.__views.__alloyId112 = Ti.UI.createView({
+    $.__views.__alloyId116 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         left: "33%",
         top: "0%",
-        id: "__alloyId112"
+        id: "__alloyId116"
     });
-    $.__views.footer.add($.__views.__alloyId112);
+    $.__views.footer.add($.__views.__alloyId116);
     $.__views.btncancel = Ti.UI.createLabel({
         width: "33%",
         color: "#fff",
@@ -193,15 +193,15 @@ function Controller() {
     });
     $.__views.footer.add($.__views.btncancel);
     orderCancel ? $.__views.btncancel.addEventListener("touchend", orderCancel) : __defers["$.__views.btncancel!touchend!orderCancel"] = true;
-    $.__views.__alloyId113 = Ti.UI.createView({
+    $.__views.__alloyId117 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         left: "66%",
         top: "0%",
-        id: "__alloyId113"
+        id: "__alloyId117"
     });
-    $.__views.footer.add($.__views.__alloyId113);
+    $.__views.footer.add($.__views.__alloyId117);
     $.__views.btncomplete = Ti.UI.createLabel({
         width: "33%",
         color: "#fff",

@@ -1,14 +1,19 @@
 <Alloy>
-	<Window class="container">
-		<Require src="_subheader" id="footer"></Require>
-		<View class="content" height="88%">
+	<Window class="container" id="staff_monthly_commission_detail">
+		<Require src="_subheader"></Require>
+		<View class="content_post" id="content">
 			<Label class="h2"> MONTHLY COMMISSION DETAIL</Label>
-			<ImageView class="separator"></ImageView>
-			<TableView id="tableView">
-				
-		    </TableView>
-			
-		</View>	
-		
+			<ImageView class="separator" ></ImageView>
+		</View>
+		<View class="list_form" height="85%" >
+			<WebView id="dateSelector" disableBounce="true" height="50"  url="/html/dealer_monthly_commission_detail.html" />
+			<View height="40"><Label left="10" text="Total :" /><Label class="summary_figure" id="totalCommission">0</Label></View>
+			<TableView id="tableView"></TableView>
+		</View>
+		<View layout="vertical" id="loadingBar" height="0" width="100" borderRadius="15" top="0" opacity="1" backgroundColor="#2E2E2E" >
+			<ActivityIndicator  id="activityIndicator" />
+			<Label text="Loading" left="20" top="10" color="#ffffff" />
+		</View>
+	 
 	</Window>
 </Alloy>

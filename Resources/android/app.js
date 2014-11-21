@@ -106,7 +106,6 @@ function doLogout() {
             var url = Ti.API.LOGOUT + Ti.App.Properties.getString("session");
             var client = Ti.Network.createHTTPClient({
                 onload: function() {
-                    console.log("logout success");
                     JSON.parse(this.responseText);
                     removeAllWindow();
                     Ti.App.Properties.removeProperty("session");
@@ -124,7 +123,6 @@ function doLogout() {
             client.send();
         }
     });
-    console.log("dialog show");
     dialog.show();
 }
 
@@ -167,7 +165,6 @@ function getNotificationNumber(payload) {
         onload: function() {
             var res = JSON.parse(this.responseText);
             "success" == res.status && (notificationNumber = res.data.total);
-            console.log("notification number: " + notificationNumber);
             if (notificationNumber > 1) target = "group"; else {
                 target = payload.target;
                 extra = payload.extra;
@@ -187,7 +184,6 @@ function notificationNav(target, extra) {
     var param = {
         o_id: extra
     };
-    console.log("o_id = " + extra);
     if ("dealer_ordertracking" == target) {
         removeAllWindow();
         Ti.App.Properties.setString("module", target);
@@ -215,7 +211,6 @@ function notificationNav(target, extra) {
         } else if ("dispatcher" == roles) {
             target = roles + "_home";
             Ti.App.Properties.setString("module", target);
-            console.log("order_list:" + target);
             var targetWindow = Alloy.createController(target, param).getView();
             setWindowRelationship(targetWindow);
         }
@@ -285,9 +280,9 @@ Ti.API.USER = "biomas";
 
 Ti.API.KEY = "06b53047cf294f7207789ff5293ad2dc";
 
-Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.0.56&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.0.57&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
-Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.0.56&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
+Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.0.57&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
 
 Ti.API.LOGOUT = "http://" + Ti.API.API_DOMAIN + "/api/logoutUser?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
@@ -391,7 +386,6 @@ if ("android" == Alloy.Globals.osname) {
     var CloudPush = require("ti.cloudpush");
     var Cloud = require("ti.cloud");
     CloudPush.addEventListener("callback", function(evt) {
-        console.log("call back!");
         var payload = JSON.parse(evt.payload);
         Ti.App.Payload = payload;
         if (redirect) if ("not_running" == app_status) ; else {
@@ -399,20 +393,17 @@ if ("android" == Alloy.Globals.osname) {
             getNotificationNumber(payload);
         } else {
             var current_controller = Ti.App.Properties.getString("controller");
-            console.log(current_controller + "-" + payload.target);
             current_controller == payload.target && Ti.App.fireEvent("app:refresh");
         }
     });
     CloudPush.addEventListener("trayClickLaunchedApp", function() {
         redirect = true;
         app_status = "not_running";
-        console.log("app not running");
         getNotificationNumber(Ti.App.Payload);
     });
     CloudPush.addEventListener("trayClickFocusedApp", function() {
         redirect = true;
         app_status = "running";
-        console.log("app running");
     });
     CloudPush.retrieveDeviceToken({
         success: deviceTokenSuccess,

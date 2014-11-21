@@ -62,21 +62,26 @@ if(ses == null){
 //Ti.App.Properties.removeProperty('session');
 Ti.App.Properties.setString('module', 'index');
 function doLogin(e) {
-	$.activityIndicator.show();
+	$.activityIndicator.show(); 
+	$.loadingBar.opacity = "1";
+	$.loadingBar.height = "100";
 	var username = $.username.value;
 	var password = $.password.value;
 	
 	if(username == "" || password == ""){
+		$.activityIndicator.hide(); 
+		$.loadingBar.opacity = "0";
+		$.loadingBar.height = "0";
 		createAlert('Authentication warning','Please fill in username and password');
 		return;
 	}
 	var dt = Ti.App.Properties.getString('deviceToken');
 	var url = Ti.API.LOGIN +"&username="+username+"&password="+password+"&deviceToken="+dt;
-	console.log(url);
+ 
 	var client = Ti.Network.createHTTPClient({
      // function called when the response data is available
      onload : function(e) {
-     	console.log(e);
+     	 
          var res = JSON.parse(this.responseText);
          if(res.status == "success"){
          	 if(res.data.roles == "admin"){
@@ -106,14 +111,23 @@ function doLogin(e) {
 				}
          	 }
          	 
+         	 $.activityIndicator.hide(); 
+			 $.loadingBar.opacity = "0";
+			 $.loadingBar.height = "0";
+			
          }else{
          	createAlert('Authentication warning',res.data);
+         	$.activityIndicator.hide(); 
+			$.loadingBar.opacity = "0";
+			$.loadingBar.height = "0";
          }
      },
      // function called when an error occurs, including a timeout
      onerror : function(e) {
-     	
-         createAlert('Network declined','Failed to contact with server. Please make sure your device are connected to internet.');
+     	$.activityIndicator.hide(); 
+		$.loadingBar.opacity = "0";
+		$.loadingBar.height = "0";
+        createAlert('Network declined','Failed to contact with server. Please make sure your device are connected to internet.');
      },
      timeout : 10000  // in milliseconds
  });

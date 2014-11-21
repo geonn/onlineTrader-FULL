@@ -85,15 +85,15 @@ function Controller() {
     });
     $.__views.header.add($.__views.backTitle);
     goBack ? $.__views.backTitle.addEventListener("touchend", goBack) : __defers["$.__views.backTitle!touchend!goBack"] = true;
-    $.__views.__alloyId87 = Ti.UI.createView({
+    $.__views.__alloyId95 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         left: "25%",
         top: "0%",
-        id: "__alloyId87"
+        id: "__alloyId95"
     });
-    $.__views.header.add($.__views.__alloyId87);
+    $.__views.header.add($.__views.__alloyId95);
     $.__views.appTitle = Ti.UI.createLabel({
         width: Titanium.UI.SIZE,
         color: "#fff",
@@ -104,15 +104,15 @@ function Controller() {
         id: "appTitle"
     });
     $.__views.header.add($.__views.appTitle);
-    $.__views.__alloyId88 = Ti.UI.createView({
+    $.__views.__alloyId96 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         left: "75%",
         top: "0%",
-        id: "__alloyId88"
+        id: "__alloyId96"
     });
-    $.__views.header.add($.__views.__alloyId88);
+    $.__views.header.add($.__views.__alloyId96);
     $.__views.rightMenu = Ti.UI.createLabel({
         width: "25%",
         color: "#fff",
@@ -140,7 +140,7 @@ function Controller() {
         id: "content"
     });
     $.__views.composetracking_win.add($.__views.content);
-    $.__views.__alloyId89 = Ti.UI.createLabel({
+    $.__views.__alloyId97 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -148,25 +148,25 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "ADD TRACKING",
-        id: "__alloyId89"
+        id: "__alloyId97"
     });
-    $.__views.content.add($.__views.__alloyId89);
-    $.__views.__alloyId90 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId97);
+    $.__views.__alloyId98 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId90"
+        id: "__alloyId98"
     });
-    $.__views.content.add($.__views.__alloyId90);
-    $.__views.__alloyId91 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId98);
+    $.__views.__alloyId99 = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
         bottom: 2,
         height: "90%",
         top: "90",
-        id: "__alloyId91"
+        id: "__alloyId99"
     });
-    $.__views.composetracking_win.add($.__views.__alloyId91);
+    $.__views.composetracking_win.add($.__views.__alloyId99);
     $.__views.trackingMessage = Ti.UI.createTextArea({
         id: "trackingMessage",
         suppressReturn: "false",
@@ -180,7 +180,7 @@ function Controller() {
         width: "90%",
         height: "150"
     });
-    $.__views.__alloyId91.add($.__views.trackingMessage);
+    $.__views.__alloyId99.add($.__views.trackingMessage);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};

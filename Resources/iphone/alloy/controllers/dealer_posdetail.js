@@ -29,11 +29,11 @@ function Controller() {
         id: "posdetail_win"
     });
     $.__views.posdetail_win && $.addTopLevelView($.__views.posdetail_win);
-    $.__views.__alloyId40 = Alloy.createController("_subheader", {
-        id: "__alloyId40",
+    $.__views.__alloyId45 = Alloy.createController("_subheader", {
+        id: "__alloyId45",
         __parentSymbol: $.__views.posdetail_win
     });
-    $.__views.__alloyId40.setParent($.__views.posdetail_win);
+    $.__views.__alloyId45.setParent($.__views.posdetail_win);
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -46,7 +46,7 @@ function Controller() {
         id: "content"
     });
     $.__views.posdetail_win.add($.__views.content);
-    $.__views.__alloyId41 = Ti.UI.createLabel({
+    $.__views.__alloyId46 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -54,31 +54,31 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "POS DETAILS",
-        id: "__alloyId41"
+        id: "__alloyId46"
     });
-    $.__views.content.add($.__views.__alloyId41);
-    $.__views.__alloyId42 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId46);
+    $.__views.__alloyId47 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId42"
+        id: "__alloyId47"
     });
-    $.__views.content.add($.__views.__alloyId42);
-    $.__views.__alloyId43 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId47);
+    $.__views.__alloyId48 = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
         bottom: 2,
         height: "90%",
         top: "90",
-        id: "__alloyId43"
+        id: "__alloyId48"
     });
-    $.__views.posdetail_win.add($.__views.__alloyId43);
+    $.__views.posdetail_win.add($.__views.__alloyId48);
     $.__views.posdetailview = Ti.UI.createWebView({
         id: "posdetailview",
         disableBounce: "true",
         url: "/html/dealer_posdetail.html"
     });
-    $.__views.__alloyId43.add($.__views.posdetailview);
+    $.__views.__alloyId48.add($.__views.posdetailview);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

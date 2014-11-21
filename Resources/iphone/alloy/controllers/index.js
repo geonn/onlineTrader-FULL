@@ -10,36 +10,52 @@ function __processArg(obj, key) {
 function Controller() {
     function doLogin() {
         $.activityIndicator.show();
+        $.loadingBar.opacity = "1";
+        $.loadingBar.height = "100";
         var username = $.username.value;
         var password = $.password.value;
         if ("" == username || "" == password) {
+            $.activityIndicator.hide();
+            $.loadingBar.opacity = "0";
+            $.loadingBar.height = "0";
             createAlert("Authentication warning", "Please fill in username and password");
             return;
         }
         var dt = Ti.App.Properties.getString("deviceToken");
         var url = Ti.API.LOGIN + "&username=" + username + "&password=" + password + "&deviceToken=" + dt;
-        console.log(url);
         var client = Ti.Network.createHTTPClient({
-            onload: function(e) {
-                console.log(e);
+            onload: function() {
                 var res = JSON.parse(this.responseText);
-                if ("success" == res.status) if ("admin" == res.data.roles) createAlert("Roles declined", "Your roles(admin) is not authorize for this app"); else {
-                    Ti.App.Properties.setString("roles", res.data.roles);
-                    Ti.App.Properties.setString("session", res.data.session);
-                    "android" == Alloy.Globals.osname && subscribeDeviceToken(dt, res.data.roles);
-                    if ("dealer" == res.data.roles || "staff" == res.data.roles) {
-                        $.index.close();
-                        var summary = Alloy.createController(res.data.roles + "_summary").getView();
-                        setWindowRelationship(summary);
-                    } else {
-                        $.index.close();
-                        var home = Alloy.createController(res.data.roles + "_home").getView();
-                        setWindowRelationship(home);
+                if ("success" == res.status) {
+                    if ("admin" == res.data.roles) createAlert("Roles declined", "Your roles(admin) is not authorize for this app"); else {
+                        Ti.App.Properties.setString("roles", res.data.roles);
+                        Ti.App.Properties.setString("session", res.data.session);
+                        "android" == Alloy.Globals.osname && subscribeDeviceToken(dt, res.data.roles);
+                        if ("dealer" == res.data.roles || "staff" == res.data.roles) {
+                            $.index.close();
+                            var summary = Alloy.createController(res.data.roles + "_summary").getView();
+                            setWindowRelationship(summary);
+                        } else {
+                            $.index.close();
+                            var home = Alloy.createController(res.data.roles + "_home").getView();
+                            setWindowRelationship(home);
+                        }
+                        null != payload && getNotificationNumber(payload);
                     }
-                    null != payload && getNotificationNumber(payload);
-                } else createAlert("Authentication warning", res.data);
+                    $.activityIndicator.hide();
+                    $.loadingBar.opacity = "0";
+                    $.loadingBar.height = "0";
+                } else {
+                    createAlert("Authentication warning", res.data);
+                    $.activityIndicator.hide();
+                    $.loadingBar.opacity = "0";
+                    $.loadingBar.height = "0";
+                }
             },
             onerror: function() {
+                $.activityIndicator.hide();
+                $.loadingBar.opacity = "0";
+                $.loadingBar.height = "0";
                 createAlert("Network declined", "Failed to contact with server. Please make sure your device are connected to internet.");
             },
             timeout: 1e4
@@ -86,6 +102,34 @@ function Controller() {
         id: "appTitle"
     });
     $.__views.header.add($.__views.appTitle);
+    $.__views.loadingBar = Ti.UI.createView({
+        layout: "vertical",
+        id: "loadingBar",
+        height: "0",
+        width: "100",
+        borderRadius: "15",
+        top: "230",
+        zIndex: "99",
+        opacity: "1",
+        backgroundColor: "#2E2E2E"
+    });
+    $.__views.index.add($.__views.loadingBar);
+    $.__views.activityIndicator = Ti.UI.createActivityIndicator({
+        top: 15,
+        left: 20,
+        width: 60,
+        id: "activityIndicator"
+    });
+    $.__views.loadingBar.add($.__views.activityIndicator);
+    $.__views.__alloyId147 = Ti.UI.createLabel({
+        width: Titanium.UI.FILL,
+        color: "#ffffff",
+        text: "Loading",
+        left: "20",
+        top: "10",
+        id: "__alloyId147"
+    });
+    $.__views.loadingBar.add($.__views.__alloyId147);
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -99,23 +143,23 @@ function Controller() {
         id: "content"
     });
     $.__views.index.add($.__views.content);
-    $.__views.__alloyId139 = Ti.UI.createScrollView({
+    $.__views.__alloyId148 = Ti.UI.createScrollView({
         showVerticalScrollIndicator: "true",
         showHorizontalScrollIndicator: "true",
         height: "320",
         width: "100%",
-        id: "__alloyId139"
+        id: "__alloyId148"
     });
-    $.__views.content.add($.__views.__alloyId139);
-    $.__views.__alloyId140 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId148);
+    $.__views.__alloyId149 = Ti.UI.createLabel({
         width: "120",
         color: "#e02222",
         backgroundImage: "/images/online-trader-logo.png",
         height: "120",
         bottom: "150",
-        id: "__alloyId140"
+        id: "__alloyId149"
     });
-    $.__views.__alloyId139.add($.__views.__alloyId140);
+    $.__views.__alloyId148.add($.__views.__alloyId149);
     $.__views.username = Ti.UI.createTextField({
         height: "55dp",
         font: {
@@ -131,7 +175,7 @@ function Controller() {
         borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "username"
     });
-    $.__views.__alloyId139.add($.__views.username);
+    $.__views.__alloyId148.add($.__views.username);
     $.__views.usernamehint = Ti.UI.createLabel({
         width: "90%",
         color: "#333",
@@ -143,7 +187,7 @@ function Controller() {
         text: "Enter Username",
         id: "usernamehint"
     });
-    $.__views.__alloyId139.add($.__views.usernamehint);
+    $.__views.__alloyId148.add($.__views.usernamehint);
     $.__views.password = Ti.UI.createTextField({
         passwordMask: true,
         height: "55dp",
@@ -160,7 +204,7 @@ function Controller() {
         borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "password"
     });
-    $.__views.__alloyId139.add($.__views.password);
+    $.__views.__alloyId148.add($.__views.password);
     $.__views.passwordhint = Ti.UI.createLabel({
         width: "90%",
         color: "#333",
@@ -172,7 +216,7 @@ function Controller() {
         text: "Enter Password",
         id: "passwordhint"
     });
-    $.__views.__alloyId139.add($.__views.passwordhint);
+    $.__views.__alloyId148.add($.__views.passwordhint);
     $.__views.btnLogin = Ti.UI.createButton({
         backgroundImage: "/images/btn-login.png",
         width: "90%",
@@ -181,12 +225,6 @@ function Controller() {
     });
     $.__views.content.add($.__views.btnLogin);
     doLogin ? $.__views.btnLogin.addEventListener("click", doLogin) : __defers["$.__views.btnLogin!click!doLogin"] = true;
-    $.__views.activityIndicator = Ti.UI.createActivityIndicator({
-        color: "#888",
-        id: "activityIndicator",
-        message: "Loading..."
-    });
-    $.__views.content.add($.__views.activityIndicator);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};

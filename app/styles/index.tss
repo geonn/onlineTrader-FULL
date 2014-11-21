@@ -49,7 +49,4 @@
 	backgroundImage : "/images/btn-login.png", 
 	width  : "90%",
 	left:10
-},
-"#activityIndicator" :{
-	color: "#888"
-}
+} 

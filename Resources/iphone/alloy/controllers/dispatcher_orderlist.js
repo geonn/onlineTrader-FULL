@@ -40,23 +40,23 @@ function Controller() {
         id: "header"
     });
     $.__views.dealer_orderlist.add($.__views.header);
-    $.__views.__alloyId111 = Ti.UI.createImageView({
+    $.__views.__alloyId119 = Ti.UI.createImageView({
         width: "7%",
         left: "10%",
         image: "/images/refresh-icon.png",
-        id: "__alloyId111"
+        id: "__alloyId119"
     });
-    $.__views.header.add($.__views.__alloyId111);
-    refreshPage ? $.__views.__alloyId111.addEventListener("touchend", refreshPage) : __defers["$.__views.__alloyId111!touchend!refreshPage"] = true;
-    $.__views.__alloyId112 = Ti.UI.createView({
+    $.__views.header.add($.__views.__alloyId119);
+    refreshPage ? $.__views.__alloyId119.addEventListener("touchend", refreshPage) : __defers["$.__views.__alloyId119!touchend!refreshPage"] = true;
+    $.__views.__alloyId120 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         left: "25%",
         top: "0%",
-        id: "__alloyId112"
+        id: "__alloyId120"
     });
-    $.__views.header.add($.__views.__alloyId112);
+    $.__views.header.add($.__views.__alloyId120);
     $.__views.appTitle = Ti.UI.createLabel({
         width: Titanium.UI.SIZE,
         color: "#fff",
@@ -79,7 +79,7 @@ function Controller() {
         id: "content"
     });
     $.__views.dealer_orderlist.add($.__views.content);
-    $.__views.__alloyId113 = Ti.UI.createLabel({
+    $.__views.__alloyId121 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -87,16 +87,16 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "DISPATCH - ORDER LIST",
-        id: "__alloyId113"
+        id: "__alloyId121"
     });
-    $.__views.content.add($.__views.__alloyId113);
-    $.__views.__alloyId114 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId121);
+    $.__views.__alloyId122 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId114"
+        id: "__alloyId122"
     });
-    $.__views.content.add($.__views.__alloyId114);
+    $.__views.content.add($.__views.__alloyId122);
     $.__views.list_form = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
@@ -148,11 +148,7 @@ function Controller() {
         Ti.App.removeEventListener("app:viewOrderDetail", goToDetails);
     });
     Alloy.Globals.deviceHeight <= "480" && ($.list_form.height = "67%");
-<<<<<<< HEAD
-    __defers["$.__views.__alloyId111!touchend!refreshPage"] && $.__views.__alloyId111.addEventListener("touchend", refreshPage);
-=======
-    __defers["$.__views.__alloyId109!touchend!refreshPage"] && $.__views.__alloyId109.addEventListener("touchend", refreshPage);
->>>>>>> FETCH_HEAD
+    __defers["$.__views.__alloyId119!touchend!refreshPage"] && $.__views.__alloyId119.addEventListener("touchend", refreshPage);
     _.extend($, exports);
 }
 

@@ -1,6 +1,14 @@
 var args = arguments[0] || {};
-getSummary();
-getDailySummary();
+
+setTimeout(function(){
+	getSummary(); 
+	getProfitSummary();
+}, 1000);
+
+$.activityIndicator.show();
+$.loadingBar.opacity = "1";
+$.loadingBar.height = "100";
+$.loadingBar.top = "50";
 getAnnouncement();
 
 //Active icon displayed
@@ -8,9 +16,11 @@ var summary = $.footer.getView('summary');
 summary.image = "/images/icons/icon-summary-active.png";
 Ti.App.Properties.setString('module', 'dealer_summary');
 
-var currentTime = new Date();
-var monthCommission = 0;
+var pHeight = PixelsToDPUnits(Ti.Platform.displayCaps.platformHeight);
+$.webview.height = pHeight - 200 -105;
+$.webview.top = 200;
 
+var currentTime = new Date();
 var month = currentTime.getMonth() + 1;
 var day = currentTime.getDate();
 var year = currentTime.getFullYear();
@@ -28,33 +38,29 @@ var label = Titanium.UI.createLabel({
     text:'horizontal auto scrolling text'
 });
  
-
-function getDailySummary(e) {
-	var url = Ti.API.GETDAILYSUMMARY + Ti.App.Properties.getString('session');
+function getProfitSummary(e){
+	var url = Ti.API.GETDEALERDAILYPROFIT + Ti.App.Properties.getString('session');
 	var client = Ti.Network.createHTTPClient({
 	     // function called when the response data is available
 	     onload : function(e) {
 	         var res = JSON.parse(this.responseText);
-	         
-	         if(res.status == "Success"){
+	        
+	         if(res.status == "success"){
+	         	var dailyProfit = 0;
 	         	
 				for (var key in res.data){
 					var obj = res.data[key];
-
-					if(obj.created == today){
-		       			var todaycomm = parseFloat(obj.commission);
-		       			$.todayCommission.text = todaycomm.toFixed(2);
-		       		}
-		       		monthCommission += parseFloat(obj.commission);
+		       		dailyProfit += (parseFloat(obj.courier) + parseFloat(obj.cod) -parseFloat(obj.ads_cost) -parseFloat(obj.other_cost) )  ;
 				}
-				$.monthCommission.text = monthCommission.toFixed(2);
+				$.dailyProfit.text = dailyProfit.toFixed(2);
+				
 	         }else{
-	         	getSummary(e);
+	         	getProfitSummary(e);
 	         }
 	     },
 	     // function called when an error occurs, including a timeout
 	     onerror : function(e) {
-	         getSummary(e);
+	         getProfitSummary(e);
 	     },
 	     timeout : 5000  // in milliseconds
 	 });
@@ -62,12 +68,11 @@ function getDailySummary(e) {
 	 client.open("GET", url);
 	 // Send the request.
 	 client.send(); 
-  
 }
-				
+		
 //$.mySession.text = model;
 function getSummary(e) {
-	var url = Ti.API.GETSUMMARY + Ti.App.Properties.getString('session');  
+	var url = Ti.API.GETDAILYSUMMARYBYMONTH + Ti.App.Properties.getString('session')+ "&date=" + year+'-'+month;
 	var client = Ti.Network.createHTTPClient({
 	     // function called when the response data is available
 	     onload : function(e) {
@@ -82,20 +87,23 @@ function getSummary(e) {
 		       			var todaycomm = parseFloat(obj.commission);
 		       			$.todayCommission.text = todaycomm.toFixed(2);
 		       		}
-		   
-		       		monthCommission += parseFloat(obj.commission);
+		    
 				}
-				
-				$.monthCommission.text = monthCommission.toFixed(2);
+				//
+				$.monthCommission.text = res.total;
+				$.activityIndicator.hide();
+				$.loadingBar.opacity = "0";
+				$.loadingBar.height = "0";
 	         }else{
 	         	getSummary(e);
 	         }
+	         
 	     },
 	     // function called when an error occurs, including a timeout
 	     onerror : function(e) {
 	         getSummary(e);
 	     },
-	     timeout : 5000  // in milliseconds
+	     timeout : 10000  // in milliseconds
 	 });
 	 // Prepare the connection.
 	 client.open("GET", url);
@@ -148,7 +156,7 @@ function getAnnouncement(e) {
 
 				  var animation = Titanium.UI.createAnimation({
 					    right:screenWidthDP,
-					    duration:6000,
+					    duration:8000,
         				curve: Titanium.UI.ANIMATION_CURVE_LINEAR
 					});
 					animation.addEventListener('complete',function() {
@@ -156,10 +164,12 @@ function getAnnouncement(e) {
 					    e.source.animate(animation); 
 					});
 				   e.source.animate(animation);
+				  
 				});
+			//	createAlert("Announcement",text);
 				$.noticeBoard.add(label);
 	         }else{
-	         	getAnnouncement(e);
+	          	getAnnouncement(e);
 	         }
 	     },
 	     // function called when an error occurs, including a timeout
@@ -176,11 +186,10 @@ function getAnnouncement(e) {
 }
 
 function goDailyReport(){
-	var roles = Ti.App.Properties.getString('roles');
-	
-	var monthCommission = Alloy.createController(roles + "_monthly_commission").getView();
+	var roles = Ti.App.Properties.getString('roles'); 
+	var monthCommissions = Alloy.createController(roles + "_monthly_commission_detail").getView();
 
-    setWindowRelationship(monthCommission);
+    setWindowRelationship(monthCommissions);
 }
 
 $.webview.addEventListener('load', function() {

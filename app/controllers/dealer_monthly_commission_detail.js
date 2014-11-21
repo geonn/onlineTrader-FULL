@@ -2,7 +2,7 @@ var args = arguments[0] || {};
 var date = args.date || '';
 var clickTime = null;
 getSummary();
-
+Ti.App.Properties.setString('module', 'dealer_summary');
 //Active icon displayed
 /**var summary = $.footer.getView('summary'); 
 summary.image = "/images/icons/icon-summary-active.png";
@@ -51,21 +51,28 @@ function getSummary(e) {
 
 	var url = Ti.API.GETDAILYSUMMARYBYMONTH + Ti.App.Properties.getString('session') + "&date=" + date;
 	var data = [];
-
+	$.activityIndicator.show();
+	$.loadingBar.opacity = "1";
+	$.loadingBar.height = "100";
+	$.loadingBar.top = (PixelsToDPUnits(Ti.Platform.displayCaps.platformHeight)/2);
 	var client = Ti.Network.createHTTPClient({
 	     // function called when the response data is available
 	     onload : function(e) {
-	         var res = JSON.parse(this.responseText);
-	         console.log(this.responseText);
+	         var res = JSON.parse(this.responseText); 
 	         if(res.status == "Success"){
 	         	
-				
-			for (var key in res.data){
-				var obj = res.data[key];
-				data.push({date: obj.date, value: obj.commission });
-			}
-				
+				var totalCommission = 0;
+				for (var key in res.data){
+					var obj = res.data[key];
+					data.push({date: obj.date, value: obj.commission });
+					totalCommission += parseFloat(obj.commission);
+				}
+				$.totalCommission.text = totalCommission;
 				loadTableRow(data);
+				data = null;
+				$.activityIndicator.hide();
+				$.loadingBar.opacity = "0";
+				$.loadingBar.height = "0";
 	         }else{
 	         	alert(res.status);
 	         	createAlert('Error',res.status);
@@ -75,7 +82,7 @@ function getSummary(e) {
 	     onerror : function(e) {
 	         createAlert('Network declined','Failed to contact with server. Please make sure your device are connected to internet.');
 	     },
-	     timeout : 10000  // in milliseconds
+	     timeout : 60000  // in milliseconds
 	 });
 	 // Prepare the connection.
 	 client.open("GET", url);
@@ -100,4 +107,19 @@ $.tableView.addEventListener("click", function(e){
 	    
 	    setWindowRelationship(dailyCommission);
    }
+});
+
+$.dateSelector.addEventListener('load', function(data) { 
+   
+});
+	
+var getDate = function(e) { 
+	date = e.year+"-"+e.month;
+	getSummary(e); 
+};
+Ti.App.addEventListener('app:getDate', getDate);
+
+$.dealer_monthly_commission_detail.addEventListener("close", function(){
+    $.destroy();
+    Ti.App.removeEventListener('app:getDate', getDate); 
 });

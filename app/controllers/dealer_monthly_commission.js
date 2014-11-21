@@ -61,6 +61,7 @@ function getSummary(e) {
 				
 			for (var key in res.data){
 				var obj = res.data[key];
+				
 				data.push({date: obj.created, value: obj.commission });
 			}
 				
@@ -87,8 +88,7 @@ $.tableView.addEventListener("click", function(e){
 	if (currentTime - clickTime < 1000) {
 	    return;
 	}else{
-		clickTime = currentTime;
-		console.log(e.rowData);
+		clickTime = currentTime; 
 	    var prop = e.rowData.month;
 	   
 	    var param = {

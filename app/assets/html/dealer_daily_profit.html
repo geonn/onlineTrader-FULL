@@ -49,10 +49,20 @@
 						if(data.data == ""){
 					  		str += "<tr><td colspan='5' style='text-align:center;'>No records found</td></tr>";
 					  	}else{
+					  		var total_courier = 0;
+					  		var total_cod =0;
+					  		var total_ads_cost =0;
+					  		var total_other_cost=0;
 					  		$.each( data.data, function( key, val ) {
-								str += "<tr><td>"+val.date+"</td><td>"+val.courier+"</td><td>"+val.cod+"</td><td>"+val.ads_cost+"</td><td>"+val.other_cost+"</td></tr>";
+					  			total_courier += val.courier;
+					  			total_cod += val.cod;
+					  			total_ads_cost += val.ads_cost;
+					  			total_other_cost += val.other_cost;
+								str += "<tr><td>"+val.convertedDate+"</td><td style='text-align:right;'>"+val.courier+"</td><td style='text-align:right;'>"+val.cod+"</td><td style='text-align:right;'>"+val.ads_cost+"</td><td style='text-align:right;'>"+val.other_cost+"</td></tr>";
 							});
 					  	}
+					  	str += "<tr><td width='25%'>TOTAL</td><td width='19%'>"+total_courier+"</td><td width='18%'>"+total_cod+"</td><td width='19%'>"+total_ads_cost+"</td><td width='19%'>"+total_other_cost+"</td></tr>";
+					  	str += "<table>";
 					  	$("#dealer_statistic_list").html(str);
 					  }
 				   }
@@ -138,10 +148,10 @@
     		
     		<div id="monthyear" style="text-align:center;">
     			Month
-	    		<select name="month" id="month">
+	    		<select name="month" id="month" style="width:40px;">
 	    		</select>
 	    		Year
-	    		<select id="year" name="year">
+	    		<select id="year" name="year" style="width:40px;">
 	    		</select>
     		</div>
     	</div>

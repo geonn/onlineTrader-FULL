@@ -49,19 +49,29 @@ function Controller() {
     function getSummary() {
         var url = Ti.API.GETDAILYSUMMARYBYMONTH + Ti.App.Properties.getString("session") + "&date=" + date;
         var data = [];
+        $.activityIndicator.show();
+        $.loadingBar.opacity = "1";
+        $.loadingBar.height = "100";
+        $.loadingBar.top = PixelsToDPUnits(Ti.Platform.displayCaps.platformHeight) / 2;
         var client = Ti.Network.createHTTPClient({
             onload: function() {
                 var res = JSON.parse(this.responseText);
-                console.log(this.responseText);
                 if ("Success" == res.status) {
+                    var totalCommission = 0;
                     for (var key in res.data) {
                         var obj = res.data[key];
                         data.push({
                             date: obj.date,
                             value: obj.commission
                         });
+                        totalCommission += parseFloat(obj.commission);
                     }
+                    $.totalCommission.text = totalCommission;
                     loadTableRow(data);
+                    data = null;
+                    $.activityIndicator.hide();
+                    $.loadingBar.opacity = "0";
+                    $.loadingBar.height = "0";
                 } else {
                     alert(res.status);
                     createAlert("Error", res.status);
@@ -70,7 +80,7 @@ function Controller() {
             onerror: function() {
                 createAlert("Network declined", "Failed to contact with server. Please make sure your device are connected to internet.");
             },
-            timeout: 1e4
+            timeout: 6e4
         });
         client.open("GET", url);
         client.send();
@@ -96,29 +106,24 @@ function Controller() {
         id: "dealer_monthly_commission_detail"
     });
     $.__views.dealer_monthly_commission_detail && $.addTopLevelView($.__views.dealer_monthly_commission_detail);
-    $.__views.footer = Alloy.createController("_subheader", {
-        height: Titanium.UI.SIZE,
-        bottom: 0,
-        backgroundColor: "#e02222",
-        id: "footer",
+    $.__views.__alloyId19 = Alloy.createController("_subheader", {
+        id: "__alloyId19",
         __parentSymbol: $.__views.dealer_monthly_commission_detail
     });
-    $.__views.footer.setParent($.__views.dealer_monthly_commission_detail);
-    $.__views.__alloyId18 = Ti.UI.createView({
+    $.__views.__alloyId19.setParent($.__views.dealer_monthly_commission_detail);
+    $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
-            fontSize: "14dp",
-            fontFamily: "sans-serif"
+            fontSize: "16dp"
         },
-        color: "#525252",
+        color: "#e02222",
         layout: "vertical",
         left: "5dp",
         right: "5dp",
-        height: "88%",
-        id: "__alloyId18"
+        id: "content"
     });
-    $.__views.dealer_monthly_commission_detail.add($.__views.__alloyId18);
-    $.__views.__alloyId19 = Ti.UI.createLabel({
+    $.__views.dealer_monthly_commission_detail.add($.__views.content);
+    $.__views.__alloyId20 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -126,27 +131,95 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "MONTHLY COMMISSION DETAIL",
-        id: "__alloyId19"
+        id: "__alloyId20"
     });
-    $.__views.__alloyId18.add($.__views.__alloyId19);
-    $.__views.__alloyId20 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId20);
+    $.__views.__alloyId21 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId20"
+        id: "__alloyId21"
     });
-    $.__views.__alloyId18.add($.__views.__alloyId20);
+    $.__views.content.add($.__views.__alloyId21);
+    $.__views.__alloyId22 = Ti.UI.createView({
+        layout: "vertical",
+        width: "100%",
+        bottom: 2,
+        height: "85%",
+        top: "90",
+        id: "__alloyId22"
+    });
+    $.__views.dealer_monthly_commission_detail.add($.__views.__alloyId22);
+    $.__views.dateSelector = Ti.UI.createWebView({
+        id: "dateSelector",
+        disableBounce: "true",
+        height: "50",
+        url: "/html/dealer_monthly_commission_detail.html"
+    });
+    $.__views.__alloyId22.add($.__views.dateSelector);
+    $.__views.__alloyId23 = Ti.UI.createView({
+        height: "40",
+        id: "__alloyId23"
+    });
+    $.__views.__alloyId22.add($.__views.__alloyId23);
+    $.__views.__alloyId24 = Ti.UI.createLabel({
+        width: Titanium.UI.FILL,
+        color: "#e02222",
+        left: "10",
+        text: "Total :",
+        id: "__alloyId24"
+    });
+    $.__views.__alloyId23.add($.__views.__alloyId24);
+    $.__views.totalCommission = Ti.UI.createLabel({
+        width: "20%",
+        color: "#e02222",
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+        top: "10dp",
+        left: "80%",
+        text: "0",
+        id: "totalCommission"
+    });
+    $.__views.__alloyId23.add($.__views.totalCommission);
     $.__views.tableView = Ti.UI.createTableView({
         width: "100%",
         id: "tableView"
     });
-    $.__views.__alloyId18.add($.__views.tableView);
+    $.__views.__alloyId22.add($.__views.tableView);
+    $.__views.loadingBar = Ti.UI.createView({
+        layout: "vertical",
+        id: "loadingBar",
+        height: "0",
+        width: "100",
+        borderRadius: "15",
+        top: "0",
+        opacity: "1",
+        backgroundColor: "#2E2E2E"
+    });
+    $.__views.dealer_monthly_commission_detail.add($.__views.loadingBar);
+    $.__views.activityIndicator = Ti.UI.createActivityIndicator({
+        style: Ti.UI.ActivityIndicatorStyle.BIG,
+        top: 15,
+        left: 20,
+        width: 60,
+        id: "activityIndicator"
+    });
+    $.__views.loadingBar.add($.__views.activityIndicator);
+    $.__views.__alloyId25 = Ti.UI.createLabel({
+        width: Titanium.UI.FILL,
+        color: "#ffffff",
+        text: "Loading",
+        left: "20",
+        top: "10",
+        id: "__alloyId25"
+    });
+    $.__views.loadingBar.add($.__views.__alloyId25);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};
     var date = args.date || "";
     var clickTime = null;
     getSummary();
+    Ti.App.Properties.setString("module", "dealer_summary");
     $.tableView.addEventListener("click", function(e) {
         var currentTime = new Date();
         if (1e3 > currentTime - clickTime) return;
@@ -158,6 +231,16 @@ function Controller() {
         };
         var dailyCommission = Alloy.createController("dealer_daily_commission", param).getView();
         setWindowRelationship(dailyCommission);
+    });
+    $.dateSelector.addEventListener("load", function() {});
+    var getDate = function(e) {
+        date = e.year + "-" + e.month;
+        getSummary(e);
+    };
+    Ti.App.addEventListener("app:getDate", getDate);
+    $.dealer_monthly_commission_detail.addEventListener("close", function() {
+        $.destroy();
+        Ti.App.removeEventListener("app:getDate", getDate);
     });
     _.extend($, exports);
 }

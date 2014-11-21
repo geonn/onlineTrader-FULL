@@ -103,7 +103,7 @@ function Controller() {
         __parentSymbol: $.__views.dealer_monthly_commission
     });
     $.__views.footer.setParent($.__views.dealer_monthly_commission);
-    $.__views.__alloyId15 = Ti.UI.createView({
+    $.__views.__alloyId16 = Ti.UI.createView({
         top: "60dp",
         font: {
             fontSize: "14dp",
@@ -114,10 +114,10 @@ function Controller() {
         left: "5dp",
         right: "5dp",
         height: "88%",
-        id: "__alloyId15"
+        id: "__alloyId16"
     });
-    $.__views.dealer_monthly_commission.add($.__views.__alloyId15);
-    $.__views.__alloyId16 = Ti.UI.createLabel({
+    $.__views.dealer_monthly_commission.add($.__views.__alloyId16);
+    $.__views.__alloyId17 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -125,21 +125,21 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "DEALER - MONTHLY COMMISSION",
-        id: "__alloyId16"
+        id: "__alloyId17"
     });
-    $.__views.__alloyId15.add($.__views.__alloyId16);
-    $.__views.__alloyId17 = Ti.UI.createImageView({
+    $.__views.__alloyId16.add($.__views.__alloyId17);
+    $.__views.__alloyId18 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId17"
+        id: "__alloyId18"
     });
-    $.__views.__alloyId15.add($.__views.__alloyId17);
+    $.__views.__alloyId16.add($.__views.__alloyId18);
     $.__views.tableView = Ti.UI.createTableView({
         width: "100%",
         id: "tableView"
     });
-    $.__views.__alloyId15.add($.__views.tableView);
+    $.__views.__alloyId16.add($.__views.tableView);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
@@ -149,7 +149,6 @@ function Controller() {
         var currentTime = new Date();
         if (1e3 > currentTime - clickTime) return;
         clickTime = currentTime;
-        console.log(e.rowData);
         var prop = e.rowData.month;
         var param = {
             date: prop

@@ -108,7 +108,6 @@ function doLogout() {
             var url = Ti.API.LOGOUT + Ti.App.Properties.getString("session");
             var client = Ti.Network.createHTTPClient({
                 onload: function() {
-                    console.log("logout success");
                     JSON.parse(this.responseText);
                     removeAllWindow();
                     Ti.App.Properties.removeProperty("session");
@@ -126,7 +125,6 @@ function doLogout() {
             client.send();
         }
     });
-    console.log("dialog show");
     dialog.show();
 }
 
@@ -169,7 +167,6 @@ function getNotificationNumber(payload) {
         onload: function() {
             var res = JSON.parse(this.responseText);
             "success" == res.status && (notificationNumber = res.data.total);
-            console.log("notification number: " + notificationNumber);
             if (notificationNumber > 1) target = "group"; else {
                 target = payload.target;
                 extra = payload.extra;
@@ -189,7 +186,6 @@ function notificationNav(target, extra) {
     var param = {
         o_id: extra
     };
-    console.log("o_id = " + extra);
     if ("dealer_ordertracking" == target) {
         removeAllWindow();
         Ti.App.Properties.setString("module", target);
@@ -217,7 +213,6 @@ function notificationNav(target, extra) {
         } else if ("dispatcher" == roles) {
             target = roles + "_home";
             Ti.App.Properties.setString("module", target);
-            console.log("order_list:" + target);
             var targetWindow = Alloy.createController(target, param).getView();
             setWindowRelationship(targetWindow);
         }
@@ -269,6 +264,16 @@ function deviceTokenError(e) {
     alert("Failed to register for push! " + e.error);
 }
 
+function PixelsToDPUnits(ThePixels) {
+    return ThePixels / (Titanium.Platform.displayCaps.dpi / 160);
+}
+
+function GetWidth(value) {
+    var screenWidth = Ti.Platform.displayCaps.platformWidth;
+    var temp = 100 * value / 320;
+    return parseInt(screenWidth * temp / 100);
+}
+
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 Ti.API.API_DOMAIN = "www.onlinetrader.com.my";
@@ -277,9 +282,9 @@ Ti.API.USER = "biomas";
 
 Ti.API.KEY = "06b53047cf294f7207789ff5293ad2dc";
 
-Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.0.55&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.0.56&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
-Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.0.55&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
+Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.0.56&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
 
 Ti.API.LOGOUT = "http://" + Ti.API.API_DOMAIN + "/api/logoutUser?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
@@ -349,13 +354,10 @@ Ti.API.GETDEALERRANKINGBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getMonthl
 
 Ti.API.GETLOCATIONRANKINGBYMONTH = "http://" + Ti.API.API_DOMAIN + "/api/getMonthlyRankingByLocation?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
-<<<<<<< HEAD
 Ti.API.GETDEALERDAILYPROFIT = "http://" + Ti.API.API_DOMAIN + "/api/getDailyProfitList?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
 Ti.API.GETANNOUNCEMENT = "http://" + Ti.API.API_DOMAIN + "/api/getAnnoucement?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
-=======
->>>>>>> FETCH_HEAD
 Ti.CURRENTWINDOW = "";
 
 Ti.App.CURRENTWINDOW = "";
@@ -386,7 +388,6 @@ if ("android" == Alloy.Globals.osname) {
     var CloudPush = require("ti.cloudpush");
     var Cloud = require("ti.cloud");
     CloudPush.addEventListener("callback", function(evt) {
-        console.log("call back!");
         var payload = JSON.parse(evt.payload);
         Ti.App.Payload = payload;
         if (redirect) if ("not_running" == app_status) ; else {
@@ -394,20 +395,17 @@ if ("android" == Alloy.Globals.osname) {
             getNotificationNumber(payload);
         } else {
             var current_controller = Ti.App.Properties.getString("controller");
-            console.log(current_controller + "-" + payload.target);
             current_controller == payload.target && Ti.App.fireEvent("app:refresh");
         }
     });
     CloudPush.addEventListener("trayClickLaunchedApp", function() {
         redirect = true;
         app_status = "not_running";
-        console.log("app not running");
         getNotificationNumber(Ti.App.Payload);
     });
     CloudPush.addEventListener("trayClickFocusedApp", function() {
         redirect = true;
         app_status = "running";
-        console.log("app running");
     });
     CloudPush.retrieveDeviceToken({
         success: deviceTokenSuccess,

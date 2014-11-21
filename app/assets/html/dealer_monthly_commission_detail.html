@@ -1,0 +1,105 @@
+<html>
+    <head>
+    	<title>Order List</title>
+    	 <link rel="stylesheet" href="js/jquery-ui.css">
+    	 <link rel="stylesheet" href="js/noty.css">
+    	 <link rel="stylesheet" href="js/noty_theme_default.css">
+    	 <link rel="stylesheet" href="css/main.css">
+  		 <script src="js/jquery-1.9.1.js"></script>
+  		 <script src="js/jquery-ui.js"></script>
+  		 <script src="js/noty.js"></script>
+   		 <script src="js/main.js" type="text/javascript"></script>
+		<meta name="viewport" content="initial-scale=1.0, width=device-width, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no" />
+  		
+  		<script>
+  			 
+			$(document).ready(function(){
+				
+				var currentYear = new Date().getFullYear();
+  			
+	  			for(var year = 2014; year<=currentYear; year++){
+	  				$('#year').append($("<option/>", {
+				        value: year,
+				        text: year
+				    }));
+	  			}
+	  			
+	  			var currentMonth = new Date().getMonth();
+  			
+	  			for(var m = 1; m<=12; m++){
+	  				if(m == currentMonth+1){
+	  					$('#month').append($("<option/>", {
+					        value: m,
+					        selected: "selected",
+					        text: m
+					    }));
+	  				}else{
+		  				$('#month').append($("<option/>", {
+					        value: m,
+					        text: m
+					    }));
+				   	}
+	  			}
+	  			
+	  			$("#month").change(function(){ 
+	  				var month = $(this).val();
+	  				var year = $('#year').val();
+	  				Ti.App.fireEvent('app:getDate', {month:month, year:year});
+	  				 
+	  			});
+	  			
+	  			$("#year").change(function(){
+	  				var year = $(this).val();
+	  				var month = $('#month').val();
+	  				Ti.App.fireEvent('app:getDate', {month:month, year:year});
+	  			});
+		     });
+		</script>
+		<style>
+			input.text-input {
+				width: 75%;
+				margin:0 auto;
+				-moz-border-radius: 4px;
+			    -webkit-border-radius: 4px;
+				border-radius: 4px;
+				background: #fff;
+				border: solid 1px #BDBDBD;
+				color: #555;
+				height:34px;
+				font-size: 13px;
+				float:left;
+			}
+  			
+			.staticBar{
+				-webkit-box-shadow: 0px 1px 3px rgba(59,57,59,1);
+				-moz-box-shadow:  0px 1px 3px rgba(59,57,59,1);
+				box-shadow: 0px 1px 3px rgba(59,57,59,1);
+				width:100%;	
+				position:inline;
+				height:100px;
+				top:0;
+				background-color:#D8D8D8;
+				left:0;
+				padding-top:5px;
+				padding-bottom:5px;
+				text-align:center;
+				index:99;
+			}
+		</style>
+  </head>
+    
+    <body>
+    	<div class="staticBar" id="dateBar"> 
+    		<div id="monthyear" style="text-align:center;">
+    			Month
+	    		<select name="month" id="month" style="width:40px;">
+	    		</select>
+	    		Year
+	    		<select id="year" name="year" style="width:40px;">
+	    		</select>
+    		</div>
+    	</div>
+    	 
+	</body>
+	
+</html>

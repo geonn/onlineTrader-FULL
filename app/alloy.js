@@ -10,8 +10,8 @@ Ti.API.USER  = 'biomas';
 Ti.API.KEY   = '06b53047cf294f7207789ff5293ad2dc';
 
 // APP URL called
-Ti.API.CHECKSESSION = "http://"+Ti.API.API_DOMAIN+"/api/checkSession?version=1.0.56&user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
-Ti.API.LOGIN        = "http://"+Ti.API.API_DOMAIN+"/api/loginUser?version=1.0.56&user="+Ti.API.USER+"&key="+Ti.API.KEY;
+Ti.API.CHECKSESSION = "http://"+Ti.API.API_DOMAIN+"/api/checkSession?version=1.0.57&user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
+Ti.API.LOGIN        = "http://"+Ti.API.API_DOMAIN+"/api/loginUser?version=1.0.57&user="+Ti.API.USER+"&key="+Ti.API.KEY;
 Ti.API.LOGOUT	    = "http://"+Ti.API.API_DOMAIN+"/api/logoutUser?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETDAILYSUMMARY   = "http://"+Ti.API.API_DOMAIN+"/api/getDailySummaryByDealer?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETSUMMARY   = "http://"+Ti.API.API_DOMAIN+"/api/getSummaryByDealer?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
@@ -124,7 +124,7 @@ function popup(event){
 	var module = Ti.App.Properties.getString('module');
 	var roles = Ti.App.Properties.getString('roles');
 	page = roles + "_" + page;
-	if(module != page){
+	if(module != page){ 
 		var navigate = Alloy.createController(page).getView();
 	   // navigate.open();
 	   setWindowRelationship(navigate);
@@ -231,8 +231,7 @@ function doLogout(e) {
 			var url = Ti.API.LOGOUT + Ti.App.Properties.getString('session');
 			var client = Ti.Network.createHTTPClient({
 			     // function called when the response data is available
-			     onload : function(e) {
-			     	 console.log("logout success");
+			     onload : function(e) { 
 			         var res = JSON.parse(this.responseText);
 			         removeAllWindow();
 			         Ti.App.Properties.removeProperty('session');
@@ -251,7 +250,7 @@ function doLogout(e) {
 			 client.send(); 
 	    }
 	 });
-	 console.log("dialog show");
+ 
 	dialog.show();
 }
 
@@ -302,7 +301,7 @@ if(Alloy.Globals.osname == "android"){
 	
 	// notification callback function (important)
 	CloudPush.addEventListener('callback', function (evt) {
-		console.log('call back!');
+ 
 		var payload = JSON.parse(evt.payload);
 
 		Ti.App.Payload = payload;
@@ -316,7 +315,7 @@ if(Alloy.Globals.osname == "android"){
 			}
 		}else{
 			var current_controller = Ti.App.Properties.getString('controller');
-			console.log(current_controller+"-"+payload.target);
+			
 			if(current_controller == payload.target){
 				Ti.App.fireEvent("app:refresh");
 			}
@@ -325,14 +324,12 @@ if(Alloy.Globals.osname == "android"){
 	
 	CloudPush.addEventListener('trayClickLaunchedApp', function (evt) {
 		redirect = true;
-		app_status = "not_running";
-	    console.log('app not running');
+		app_status = "not_running"; 
 	    getNotificationNumber(Ti.App.Payload);
 	});
 	CloudPush.addEventListener('trayClickFocusedApp', function (evt) {
 		redirect = true;
-		app_status = "running";
-	    console.log('app running');
+		app_status = "running"; 
 	});
 	
 	function getNotificationNumber(payload){
@@ -349,7 +346,7 @@ if(Alloy.Globals.osname == "android"){
 		         if(res.status == "success"){
 		         	notificationNumber = res.data.total;
 		         } 
-		         console.log("notification number: "+notificationNumber);
+		         
 
 					if(notificationNumber > 1){
 						target = "group";
@@ -381,8 +378,7 @@ if(Alloy.Globals.osname == "android"){
 	function notificationNav(target, extra){
 		var param = {
 	        o_id: extra,
-	    };
-	   	console.log("o_id = "+extra);
+	    }; 
 	   	
 	    if(target == "dealer_ordertracking"){
 		    removeAllWindow();
@@ -416,8 +412,7 @@ if(Alloy.Globals.osname == "android"){
 			    setWindowRelationship(targetWindow);
 	    	}else if(roles == "dispatcher"){
 	    		target = roles+"_home";
-	    		Ti.App.Properties.setString('module', target);
-			    console.log("order_list:"+target);
+	    		Ti.App.Properties.setString('module', target); 
 			    var targetWindow = Alloy.createController(target, param).getView();
 			    setWindowRelationship(targetWindow);
 	    	}
