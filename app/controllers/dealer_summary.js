@@ -166,8 +166,7 @@ function getAnnouncement(e) {
 				   e.source.animate(animation);
 				  
 				});
-			//	createAlert("Announcement",text);
-			//	$.noticeBoard.add(label);
+				$.noticeBoard.add(label);
 	         }else{
 	          	getAnnouncement(e);
 	         }
