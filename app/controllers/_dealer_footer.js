@@ -1,7 +1,7 @@
 var args = arguments[0] || {};
 
 /** For footer More options**/
-$.more.addEventListener('click', expandMoreMenu);
+//$.more.addEventListener('click', expandMoreMenu);
 
 function expandMoreMenu(e){
 	if(expandMoreMenu.__isExecuting) {

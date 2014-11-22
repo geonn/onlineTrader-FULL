@@ -137,11 +137,11 @@ function getAnnouncement(e) {
 				}
 				
 				var label = Titanium.UI.createLabel({
-					    height: 18,
+					    height: 25,
 					    left: 50,
-					    top:1,
+					    top:3,
 					    font: {
-					        fontSize: '12'
+					        fontSize: '16'
 					    },
 					    color:'black',
 					    width: Ti.UI.FIT,

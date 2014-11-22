@@ -30,7 +30,11 @@ function Controller() {
     });
     $.__views.dealer_statistic && $.addTopLevelView($.__views.dealer_statistic);
     $.__views.footer = Alloy.createController("_header", {
-        height: Titanium.UI.SIZE,
+        height: 64,
+        width: Titanium.UI.FILL,
+        contentHeight: Ti.UI.SIZE,
+        contentWidth: Ti.UI.SIZE,
+        layout: "horizontal",
         bottom: 0,
         backgroundColor: "#e02222",
         id: "footer",
@@ -88,7 +92,11 @@ function Controller() {
     });
     $.__views.r_sub_footer.setParent($.__views.dealer_statistic);
     $.__views.footer = Alloy.createController("_dealer_footer", {
-        height: Titanium.UI.SIZE,
+        height: 64,
+        width: Titanium.UI.FILL,
+        contentHeight: Ti.UI.SIZE,
+        contentWidth: Ti.UI.SIZE,
+        layout: "horizontal",
         bottom: 0,
         backgroundColor: "#e02222",
         id: "footer",

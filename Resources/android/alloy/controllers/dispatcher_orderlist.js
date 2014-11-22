@@ -113,7 +113,11 @@ function Controller() {
     });
     $.__views.list_form.add($.__views.orderlistview);
     $.__views.footer = Alloy.createController("_dispatcher_footer", {
-        height: Titanium.UI.SIZE,
+        height: 64,
+        width: Titanium.UI.FILL,
+        contentHeight: Ti.UI.SIZE,
+        contentWidth: Ti.UI.SIZE,
+        layout: "horizontal",
         bottom: 0,
         backgroundColor: "#e02222",
         id: "footer",

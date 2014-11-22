@@ -1,8 +1,6 @@
 var args = arguments[0] || {};
 
 //Active icon displayed
-var more = $.footer.getView('more'); 
-more.image = "/images/icons/icon-more-active.png";
 var settings = $.footer.getView('settings'); 
 settings.image = "/images/icons/icon-setting-active.png";
 

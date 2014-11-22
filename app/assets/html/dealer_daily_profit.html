@@ -54,16 +54,9 @@
 					  		var total_ads_cost =0;
 					  		var total_other_cost=0;
 					  		$.each( data.data, function( key, val ) {
-<<<<<<< HEAD
-					  			total_courier += val.courier;
-					  			total_cod += val.cod;
-					  			total_ads_cost += val.ads_cost;
-					  			total_other_cost += val.other_cost;
-								str += "<tr><td>"+val.convertedDate+"</td><td style='text-align:right;'>"+val.courier+"</td><td style='text-align:right;'>"+val.cod+"</td><td style='text-align:right;'>"+val.ads_cost+"</td><td style='text-align:right;'>"+val.other_cost+"</td></tr>";
-=======
+
 					  			var total = val.courier + val.cod - val.ads_cost - val.other_cost;
 								str += "<tr><td>"+val.date+"</td><td>"+val.courier+"</td><td>"+val.cod+"</td><td>"+val.ads_cost+"</td><td>"+val.other_cost+"</td><td>"+total+"</td></tr>";
->>>>>>> FETCH_HEAD
 							});
 					  	}
 					  	str += "<tr><td width='25%'>TOTAL</td><td width='19%'>"+total_courier+"</td><td width='18%'>"+total_cod+"</td><td width='19%'>"+total_ads_cost+"</td><td width='19%'>"+total_other_cost+"</td></tr>";

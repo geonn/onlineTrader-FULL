@@ -32,7 +32,7 @@
 		 
 		<WebView height="" id="webview" layout="vertical" height="auto" disableBounce="true" loading="true"  width="100%" url="/html/dealer_summary_inventory.html" />
 		 
-		<ScrollView id="noticeBoard" bottom="70" backgroundColor="#E3F5FE" layout="horizontal" scrollType="horizontal" height="20"  ></ScrollView>
+		<ScrollView id="noticeBoard" bottom="64" backgroundColor="#E3F5FE" layout="horizontal" scrollType="horizontal" height="28"  ></ScrollView>
 		
 		<Require src="_dealer_footer" id="footer"></Require>
 		
