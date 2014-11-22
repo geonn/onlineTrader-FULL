@@ -102,7 +102,6 @@ function Controller() {
                         });
                         e.source.animate(animation);
                     });
-                    $.noticeBoard.add(label);
                 } else getAnnouncement(e);
             },
             onerror: function(e) {

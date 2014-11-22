@@ -11,7 +11,7 @@
 		<View id="footer" opacity="0" height="62">
 			<Label id="btnrelease" onTouchend="orderRelease">ORDER \nRELEASE</Label>
 			<View class="border-line" left="33%" top="0%"></View>
-			<Label id="btncancel" onTouchend="orderCancel">ORDER \nCANCEL</Label>
+			<Label id="btncancel" onTouchend="orderCancel">REQUEST \nCANCEL</Label>
 			<View class="border-line" left="66%" top="0%"></View>
 			<Label id="btncomplete" onTouchend="orderComplete">ORDER \nCOMPLETE</Label>
 		</View>

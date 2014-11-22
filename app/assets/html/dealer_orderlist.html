@@ -17,20 +17,41 @@
 			  	Ti.App.addEventListener("app:orderListParam", orderListParam);
 				//Ti.App.addEventListener("app:refresh", refresh);
 				
-			    $( "#datepicker" ).datepicker({
-				    onSelect: function(dateText) {
-				    	$("#dealer_order_list").html("<div style='display:inline;color:#243F8B;font-weight:bold;'>Loading...</div>");
-				        thedate =$( "#datepicker" ).val();
-				       
-	        			$( "#datepicker" ).val(thedate);
-				        var reloadURL = localStorage.getItem("listUrl");
-						//Ti.App.fireEvent('Ti:clearCache', { 
-						//	queryUrl: reloadURL+"&date="+thedate
-						//});
-				        drawTable(reloadURL+"&date="+thedate);
-				    },
-				     dateFormat: 'dd/mm/yy'
-			     });
+			    var currentYear = new Date().getFullYear();
+  			
+		  			for(var year = 2014; year<=currentYear; year++){
+		  				$('#year').append($("<option/>", {
+					        value: year,
+					        text: year
+					    }));
+		  			}
+		  			
+		  			var currentMonth = new Date().getMonth();
+	  			
+		  			for(var m = 1; m<=12; m++){
+		  				if(m == currentMonth+1){
+		  					$('#month').append($("<option/>", {
+						        value: m,
+						        selected: "selected",
+						        text: m
+						    }));
+		  				}else{
+			  				$('#month').append($("<option/>", {
+						        value: m,
+						        text: m
+						    }));
+					   	}
+		  			}
+		  			
+		  			$("#month").change(function(){ 
+		  				refreshPage();
+		  				 
+		  			});
+		  			
+		  			$("#year").change(function(){
+		  				refreshPage();
+		  			});
+			     
 			  });
 		</script>
 		<style>
@@ -156,28 +177,25 @@
 			function refreshPage(e){
 				noty({"text":"Refreshing list...","layout":"top","type":"success","animateOpen":{"height":"toggle"},"animateClose":{"height":"toggle"},"speed":100,"timeout":3000,"closeButton":false,"closeOnSelfClick":true,"closeOnSelfOver":false,"modal":false});
         		var listUrl = localStorage.getItem("listUrl");
-        		var thedate =$( "#datepicker" ).val();
-        			
-        		if(thedate == 'All Date'){
-        			thedate = "";
-        		}
+        		var year =$( "#year" ).val();
+        		var month =$( "#month" ).val();
+        		 
         		//alert(listUrl+"&date="+thedate);
         		Ti.App.fireEvent('Ti:clearCache', { 
-						queryUrl: listUrl+"&date="+thedate
+						queryUrl: listUrl+"&month="+month+"&year="+year
 					});
-        		drawTable(listUrl+"&date="+thedate);
+        		drawTable(listUrl+"&month="+month+"&year="+year);
 			}
 			
 			function orderListParam(e){
 				localStorage.setItem("session",e.session);
 				
         		localStorage.setItem("listUrl", e.url);
-        		var thedate =$( "#datepicker" ).val();
-        		if(thedate == 'All Date'){
-        			thedate = "";
-        		}
+        		var year =$( "#year" ).val();
+        		var month =$( "#month" ).val();
         		$("#dealer_order_list").html("<div style='display:inline;color:#243F8B;font-weight:bold;'>Loading...</div>");
-				drawTable(e.url+"&date="+thedate);
+				 
+				drawTable(e.url+"&month="+month+"&year="+year);
 
 			}
 			
@@ -185,10 +203,12 @@
 				var total_item = 0;
 				//var data = e.data;
 				var str = "";
+			 
 				$.getJSON(queryUrl, function( data ) {
-				   	
+				   
 				   	 if(data.status == 'success'){
 				   	 	//loop date
+				   	  
 					     $.each( data.data, function( key, items ) {
 					     	
 					    	 var day_item   = 0;
@@ -202,6 +222,7 @@
 						     	if(val.order.status == "Cancelled"){
 						     		isCancelled = "cancelled";
 						     	}
+						     		
 							 statusIcon = "<img src='../images/status-"+val.order.status+".png'  style='width:70px; float:right;'>";
 						     str += "<table onClick='return orderDetail("+val.order.o_id+");' class='table_"+index+" boxes "+unread+" "+isCancelled+"' width='100%' id='table_"+ val.order.o_id+"'>";
 						     str += "<tr><th width='20%'>Inv. No.</th><td width='70%' style='color:#525252'> : "+ val.order.o_id+"</td><td rowspan=4 valign=middle>"+statusIcon+"</td></tr>";
@@ -212,25 +233,26 @@
 						      	}else{
 						      		str += "<tr><th width='20%' valign=top>Location</th><td valign=top style='color:#525252'> : "+ val.order.location+", "+val.order.area+"</td></tr>";
 						      	}
-						      	
+						     
 						      	str += "<tr><th width='20%'>Post On</th><td valign=top style='color:#525252'> : "+ val.order.created+"</td></tr>";
 								var prod_text = "";
 								var prod_counter = 1;
 								// loop product
-								$.each( val.order.product, function( prod_key, prod ) {
+								$.each( val.product, function( prod_key, prod ) {
 									
 									prod_text += prod.name + "("+prod.quantity+")";
 
-									if(prod_counter !== val.order.product.length){
+									if(prod_counter !== val.product.length){
 										prod_text += ", "; 
 									}
 									
 									prod_counter++;
 								});
-
+							 
 								str += "<tr><th width='20%' valign='top'>Products</th><td valign=top style='color:#525252'> : "+ prod_text +"</td></tr>";
 									
 						      	str += "</table>";
+						      	
 						      	total_item++;
 						      	day_item++;
 						     });
@@ -240,7 +262,9 @@
 						}else{
 						 	str = "<div style='height:500px'>No record found</div>";
 						}
+					 
 						$("#total_item").val(total_item);
+						
 					 	$("#dealer_order_list").html(str);
 
 					});
@@ -264,7 +288,14 @@
     <body id='getheight'>
     	<input type="hidden" name="total_item" id="total_item" value="0">
     	<div class="staticBar" id="inputdatepick">
-			<input class="text-input" name="senddate" readonly type="text" id="datepicker" value="All Date" > <div style="float:right; border-left:1px solid #555; padding:0 15px; line-height: 34px; font-size:13px; " onClick="resetDate();">All</div>
+			<div id="monthyear" style="text-align:center;">
+    			Month
+	    		<select name="month" id="month" style="width:60px;">
+	    		</select>
+	    		Year
+	    		<select id="year" name="year" style="width:80px;">
+	    		</select>
+    		</div>
 		</div>
     	<div id="dealer_order_list" style="padding-top:40px;display:block;"></div>	
 	</body>

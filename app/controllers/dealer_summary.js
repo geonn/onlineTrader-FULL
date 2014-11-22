@@ -167,7 +167,7 @@ function getAnnouncement(e) {
 				  
 				});
 			//	createAlert("Announcement",text);
-				$.noticeBoard.add(label);
+			//	$.noticeBoard.add(label);
 	         }else{
 	          	getAnnouncement(e);
 	         }

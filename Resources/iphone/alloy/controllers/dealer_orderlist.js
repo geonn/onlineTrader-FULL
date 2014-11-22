@@ -196,7 +196,7 @@ function Controller() {
     $.orderlistview.addEventListener("load", function() {
         Ti.App.fireEvent("app:orderListParam", {
             session: Ti.App.Properties.getString("session"),
-            url: Ti.API.GETDEALERORD + Ti.App.Properties.getString("session") + "&test"
+            url: Ti.API.GETDEALERORD + Ti.App.Properties.getString("session")
         });
     });
     $.dealer_orderlist.addEventListener("close", function() {

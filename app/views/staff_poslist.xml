@@ -8,7 +8,7 @@
 			<Label class="rightNav" id="rightNav" mod="pos" onTouchend="popup">ADD</Label>
 		</View>
 		<View class="content_post" id="content">
-			<Label class="h2">COURIER LIST</Label>
+			<Label class="h2">STAFF - COURIER LIST</Label>
 			<ImageView class="separator" ></ImageView>
 			
 		</View>
