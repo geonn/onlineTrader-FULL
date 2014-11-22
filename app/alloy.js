@@ -29,6 +29,7 @@ Ti.API.GETPOS       = "http://"+Ti.API.API_DOMAIN+"/api/getPos?user="+Ti.API.USE
 Ti.API.GETPOSDETAIL = "http://"+Ti.API.API_DOMAIN+"/api/getPosDetails?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.PICKORDER    = "http://"+Ti.API.API_DOMAIN+"/api/pickOrder?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.CANCELORDER  = "http://"+Ti.API.API_DOMAIN+"/api/cancelOrder?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
+Ti.API.REQUESTCANCEL= "http://"+Ti.API.API_DOMAIN+"/api/requestCancel?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.COMPLETEORDER= "http://"+Ti.API.API_DOMAIN+"/api/completeOrder?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETDEALERORD = "http://"+Ti.API.API_DOMAIN+"/api/getOrder?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&type=dealer_id&session=";
 Ti.API.GETDISPATCHORD= "http://"+Ti.API.API_DOMAIN+"/api/getOrder?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&type=dispatch_id&session=";

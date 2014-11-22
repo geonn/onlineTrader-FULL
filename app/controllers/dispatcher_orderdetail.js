@@ -25,7 +25,7 @@ function orderCancel(){
 		  //Do nothing
 		}
 		if (e.index === 1){
-			callOrderAction(Ti.API.CANCELORDER);
+			callOrderAction(Ti.API.REQUESTCANCEL);
 		}
 	});
 	
@@ -105,7 +105,7 @@ $.orderdetailview.addEventListener('load', function(data) {
 		update: Ti.API.UPDATEORDER + Ti.App.Properties.getString('session'),
 		details: Ti.API.GETORDDETAILS + Ti.App.Properties.getString('session')+"&o_id=" + o_id,
 		complete: Ti.API.COMPLETEORDER + Ti.App.Properties.getString('session')+"&o_id=" + o_id,
-		cancel: Ti.API.CANCELORDER + Ti.App.Properties.getString('session')+"&o_id=" + o_id,
+		cancel: Ti.API.REQUESTCANCEL + Ti.App.Properties.getString('session')+"&o_id=" + o_id,
 		state: Ti.API.GETSTATE,  
 		product :Ti.API.GETPRODUCT
 	});
@@ -118,7 +118,7 @@ function construct() {
 		update: Ti.API.UPDATEORDER + Ti.App.Properties.getString('session'), 
 		details: Ti.API.GETORDDETAILS + Ti.App.Properties.getString('session')+"&o_id=" + o_id,
 		complete: Ti.API.COMPLETEORDER + Ti.App.Properties.getString('session')+"&o_id=" + o_id,
-		cancel: Ti.API.CANCELORDER + Ti.App.Properties.getString('session')+"&o_id=" + o_id,
+		cancel: Ti.API.REQUESTCANCEL + Ti.App.Properties.getString('session')+"&o_id=" + o_id,
 		state: Ti.API.GETSTATE,  
 		product :Ti.API.GETPRODUCT
 	});

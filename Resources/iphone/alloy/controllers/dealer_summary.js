@@ -376,13 +376,6 @@ function Controller() {
         id: "__alloyId93"
     });
     $.__views.loadingBar.add($.__views.__alloyId93);
-    $.__views.__alloyId94 = Ti.UI.createScrollView({
-        height: "70%",
-        top: "200",
-        layout: "vertical",
-        id: "__alloyId94"
-    });
-    $.__views.dealer_summary.add($.__views.__alloyId94);
     $.__views.webview = Ti.UI.createWebView({
         top: 0,
         height: "auto",
@@ -393,7 +386,7 @@ function Controller() {
         width: "100%",
         url: "/html/dealer_summary_inventory.html"
     });
-    $.__views.__alloyId94.add($.__views.webview);
+    $.__views.dealer_summary.add($.__views.webview);
     $.__views.noticeBoard = Ti.UI.createScrollView({
         id: "noticeBoard",
         bottom: "70",
@@ -426,6 +419,9 @@ function Controller() {
     var summary = $.footer.getView("summary");
     summary.image = "/images/icons/icon-summary-active.png";
     Ti.App.Properties.setString("module", "dealer_summary");
+    var pHeight = PixelsToDPUnits(Ti.Platform.displayCaps.platformHeight);
+    $.webview.height = pHeight - 200 - 105;
+    $.webview.top = 200;
     var currentTime = new Date();
     var month = currentTime.getMonth() + 1;
     var day = currentTime.getDate();
