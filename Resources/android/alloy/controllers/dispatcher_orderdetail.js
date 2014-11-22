@@ -17,7 +17,7 @@ function Controller() {
         });
         dialog.addEventListener("click", function(e) {
             e.index === e.source.cancel;
-            1 === e.index && callOrderAction(Ti.API.CANCELORDER);
+            1 === e.index && callOrderAction(Ti.API.REQUESTCANCEL);
         });
         dialog.show();
     }
@@ -70,7 +70,7 @@ function Controller() {
             update: Ti.API.UPDATEORDER + Ti.App.Properties.getString("session"),
             details: Ti.API.GETORDDETAILS + Ti.App.Properties.getString("session") + "&o_id=" + o_id,
             complete: Ti.API.COMPLETEORDER + Ti.App.Properties.getString("session") + "&o_id=" + o_id,
-            cancel: Ti.API.CANCELORDER + Ti.App.Properties.getString("session") + "&o_id=" + o_id,
+            cancel: Ti.API.REQUESTCANCEL + Ti.App.Properties.getString("session") + "&o_id=" + o_id,
             state: Ti.API.GETSTATE,
             product: Ti.API.GETPRODUCT
         });
@@ -237,7 +237,7 @@ function Controller() {
             update: Ti.API.UPDATEORDER + Ti.App.Properties.getString("session"),
             details: Ti.API.GETORDDETAILS + Ti.App.Properties.getString("session") + "&o_id=" + o_id,
             complete: Ti.API.COMPLETEORDER + Ti.App.Properties.getString("session") + "&o_id=" + o_id,
-            cancel: Ti.API.CANCELORDER + Ti.App.Properties.getString("session") + "&o_id=" + o_id,
+            cancel: Ti.API.REQUESTCANCEL + Ti.App.Properties.getString("session") + "&o_id=" + o_id,
             state: Ti.API.GETSTATE,
             product: Ti.API.GETPRODUCT
         });

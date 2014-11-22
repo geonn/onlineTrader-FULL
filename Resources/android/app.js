@@ -318,6 +318,8 @@ Ti.API.PICKORDER = "http://" + Ti.API.API_DOMAIN + "/api/pickOrder?user=" + Ti.A
 
 Ti.API.CANCELORDER = "http://" + Ti.API.API_DOMAIN + "/api/cancelOrder?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
+Ti.API.REQUESTCANCEL = "http://" + Ti.API.API_DOMAIN + "/api/requestCancel?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+
 Ti.API.COMPLETEORDER = "http://" + Ti.API.API_DOMAIN + "/api/completeOrder?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
 Ti.API.GETDEALERORD = "http://" + Ti.API.API_DOMAIN + "/api/getOrder?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&type=dealer_id&session=";

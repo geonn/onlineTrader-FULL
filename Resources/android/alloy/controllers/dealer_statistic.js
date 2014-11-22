@@ -75,7 +75,7 @@ function Controller() {
         layout: "vertical",
         width: "100%",
         bottom: 2,
-        height: "70%",
+        height: Ti.UI.FILL,
         top: "90",
         id: "__alloyId78"
     });
@@ -83,6 +83,7 @@ function Controller() {
     $.__views.salessatisticview = Ti.UI.createWebView({
         id: "salessatisticview",
         disableBounce: "true",
+        height: Ti.UI.FILL,
         url: "/html/dealer_statistic.html"
     });
     $.__views.__alloyId78.add($.__views.salessatisticview);
