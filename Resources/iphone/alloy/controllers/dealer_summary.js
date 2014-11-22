@@ -76,11 +76,11 @@ function Controller() {
                         count++;
                     }
                     var label = Titanium.UI.createLabel({
-                        height: 18,
+                        height: 25,
                         left: 50,
-                        top: 1,
+                        top: 3,
                         font: {
-                            fontSize: "12"
+                            fontSize: "16"
                         },
                         color: "black",
                         width: Ti.UI.FIT,
@@ -102,6 +102,7 @@ function Controller() {
                         });
                         e.source.animate(animation);
                     });
+                    $.noticeBoard.add(label);
                 } else getAnnouncement(e);
             },
             onerror: function(e) {
@@ -388,15 +389,19 @@ function Controller() {
     $.__views.dealer_summary.add($.__views.webview);
     $.__views.noticeBoard = Ti.UI.createScrollView({
         id: "noticeBoard",
-        bottom: "70",
+        bottom: "64",
         backgroundColor: "#E3F5FE",
         layout: "horizontal",
         scrollType: "horizontal",
-        height: "20"
+        height: "28"
     });
     $.__views.dealer_summary.add($.__views.noticeBoard);
     $.__views.footer = Alloy.createController("_dealer_footer", {
-        height: Titanium.UI.SIZE,
+        height: 64,
+        width: Titanium.UI.FILL,
+        contentHeight: Ti.UI.SIZE,
+        contentWidth: Ti.UI.SIZE,
+        layout: "horizontal",
         bottom: 0,
         backgroundColor: "#e02222",
         id: "footer",

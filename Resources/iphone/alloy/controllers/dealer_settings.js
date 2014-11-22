@@ -90,7 +90,11 @@ function Controller() {
     });
     $.__views.dealer_settings && $.addTopLevelView($.__views.dealer_settings);
     $.__views.footer = Alloy.createController("_header", {
-        height: Titanium.UI.SIZE,
+        height: 64,
+        width: Titanium.UI.FILL,
+        contentHeight: Ti.UI.SIZE,
+        contentWidth: Ti.UI.SIZE,
+        layout: "horizontal",
         bottom: 0,
         backgroundColor: "#e02222",
         id: "footer",
@@ -485,7 +489,11 @@ function Controller() {
     });
     $.__views.r_sub_footer.setParent($.__views.dealer_settings);
     $.__views.footer = Alloy.createController("_dealer_footer", {
-        height: Titanium.UI.SIZE,
+        height: 64,
+        width: Titanium.UI.FILL,
+        contentHeight: Ti.UI.SIZE,
+        contentWidth: Ti.UI.SIZE,
+        layout: "horizontal",
         bottom: 0,
         backgroundColor: "#e02222",
         id: "footer",
@@ -495,8 +503,6 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
-    var more = $.footer.getView("more");
-    more.image = "/images/icons/icon-more-active.png";
     var settings = $.footer.getView("settings");
     settings.image = "/images/icons/icon-setting-active.png";
     Ti.App.Properties.setString("module", "dealer_settings");

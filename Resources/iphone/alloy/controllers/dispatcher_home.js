@@ -123,7 +123,11 @@ function Controller() {
     });
     $.__views.orderlistable.add($.__views.dis_home);
     $.__views.footer = Alloy.createController("_dispatcher_footer", {
-        height: Titanium.UI.SIZE,
+        height: 64,
+        width: Titanium.UI.FILL,
+        contentHeight: Ti.UI.SIZE,
+        contentWidth: Ti.UI.SIZE,
+        layout: "horizontal",
         bottom: 0,
         backgroundColor: "#e02222",
         id: "footer",

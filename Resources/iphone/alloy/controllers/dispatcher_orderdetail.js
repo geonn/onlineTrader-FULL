@@ -150,6 +150,10 @@ function Controller() {
     construct ? $.__views.orderdetailview.addEventListener("load", construct) : __defers["$.__views.orderdetailview!load!construct"] = true;
     $.__views.footer = Ti.UI.createView({
         height: "62",
+        width: Titanium.UI.FILL,
+        contentHeight: Ti.UI.SIZE,
+        contentWidth: Ti.UI.SIZE,
+        layout: "horizontal",
         bottom: 0,
         backgroundColor: "#e02222",
         id: "footer",

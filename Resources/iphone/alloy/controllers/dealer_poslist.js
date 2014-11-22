@@ -155,7 +155,11 @@ function Controller() {
     });
     $.__views.poslistable.add($.__views.poslistview);
     $.__views.footer = Alloy.createController("_dealer_footer", {
-        height: Titanium.UI.SIZE,
+        height: 64,
+        width: Titanium.UI.FILL,
+        contentHeight: Ti.UI.SIZE,
+        contentWidth: Ti.UI.SIZE,
+        layout: "horizontal",
         bottom: 0,
         backgroundColor: "#e02222",
         id: "footer",

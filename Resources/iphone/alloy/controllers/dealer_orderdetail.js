@@ -114,6 +114,10 @@ function Controller() {
     $.__views.details_formView.add($.__views.orderdetailview);
     $.__views.footer = Ti.UI.createView({
         height: "62",
+        width: Titanium.UI.FILL,
+        contentHeight: Ti.UI.SIZE,
+        contentWidth: Ti.UI.SIZE,
+        layout: "horizontal",
         bottom: 0,
         backgroundColor: "#e02222",
         id: "footer",
