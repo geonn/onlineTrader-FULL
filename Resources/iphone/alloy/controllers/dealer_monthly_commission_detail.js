@@ -106,11 +106,11 @@ function Controller() {
         id: "dealer_monthly_commission_detail"
     });
     $.__views.dealer_monthly_commission_detail && $.addTopLevelView($.__views.dealer_monthly_commission_detail);
-    $.__views.__alloyId19 = Alloy.createController("_subheader", {
-        id: "__alloyId19",
+    $.__views.__alloyId25 = Alloy.createController("_subheader", {
+        id: "__alloyId25",
         __parentSymbol: $.__views.dealer_monthly_commission_detail
     });
-    $.__views.__alloyId19.setParent($.__views.dealer_monthly_commission_detail);
+    $.__views.__alloyId25.setParent($.__views.dealer_monthly_commission_detail);
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -123,7 +123,7 @@ function Controller() {
         id: "content"
     });
     $.__views.dealer_monthly_commission_detail.add($.__views.content);
-    $.__views.__alloyId20 = Ti.UI.createLabel({
+    $.__views.__alloyId26 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -131,45 +131,45 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "MONTHLY COMMISSION DETAIL",
-        id: "__alloyId20"
+        id: "__alloyId26"
     });
-    $.__views.content.add($.__views.__alloyId20);
-    $.__views.__alloyId21 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId26);
+    $.__views.__alloyId27 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId21"
+        id: "__alloyId27"
     });
-    $.__views.content.add($.__views.__alloyId21);
-    $.__views.__alloyId22 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId27);
+    $.__views.__alloyId28 = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
         bottom: 2,
         height: "85%",
         top: "90",
-        id: "__alloyId22"
+        id: "__alloyId28"
     });
-    $.__views.dealer_monthly_commission_detail.add($.__views.__alloyId22);
+    $.__views.dealer_monthly_commission_detail.add($.__views.__alloyId28);
     $.__views.dateSelector = Ti.UI.createWebView({
         id: "dateSelector",
         disableBounce: "true",
         height: "50",
         url: "/html/dealer_monthly_commission_detail.html"
     });
-    $.__views.__alloyId22.add($.__views.dateSelector);
-    $.__views.__alloyId23 = Ti.UI.createView({
+    $.__views.__alloyId28.add($.__views.dateSelector);
+    $.__views.__alloyId29 = Ti.UI.createView({
         height: "40",
-        id: "__alloyId23"
+        id: "__alloyId29"
     });
-    $.__views.__alloyId22.add($.__views.__alloyId23);
-    $.__views.__alloyId24 = Ti.UI.createLabel({
+    $.__views.__alloyId28.add($.__views.__alloyId29);
+    $.__views.__alloyId30 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         left: "10",
         text: "Total :",
-        id: "__alloyId24"
+        id: "__alloyId30"
     });
-    $.__views.__alloyId23.add($.__views.__alloyId24);
+    $.__views.__alloyId29.add($.__views.__alloyId30);
     $.__views.totalCommission = Ti.UI.createLabel({
         width: "20%",
         color: "#e02222",
@@ -179,12 +179,12 @@ function Controller() {
         text: "0",
         id: "totalCommission"
     });
-    $.__views.__alloyId23.add($.__views.totalCommission);
+    $.__views.__alloyId29.add($.__views.totalCommission);
     $.__views.tableView = Ti.UI.createTableView({
         width: "100%",
         id: "tableView"
     });
-    $.__views.__alloyId22.add($.__views.tableView);
+    $.__views.__alloyId28.add($.__views.tableView);
     $.__views.loadingBar = Ti.UI.createView({
         layout: "vertical",
         id: "loadingBar",
@@ -203,15 +203,15 @@ function Controller() {
         id: "activityIndicator"
     });
     $.__views.loadingBar.add($.__views.activityIndicator);
-    $.__views.__alloyId25 = Ti.UI.createLabel({
+    $.__views.__alloyId31 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#ffffff",
         text: "Loading",
         left: "20",
         top: "10",
-        id: "__alloyId25"
+        id: "__alloyId31"
     });
-    $.__views.loadingBar.add($.__views.__alloyId25);
+    $.__views.loadingBar.add($.__views.__alloyId31);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

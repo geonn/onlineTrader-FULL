@@ -54,6 +54,14 @@ function Controller() {
     });
     $.__views.footer.add($.__views.orderlist);
     goNav ? $.__views.orderlist.addEventListener("click", goNav) : __defers["$.__views.orderlist!click!goNav"] = true;
+    $.__views.feed = Ti.UI.createImageView({
+        width: "64",
+        id: "feed",
+        mod: "feed",
+        image: "/images/icons/icon-feed.png"
+    });
+    $.__views.footer.add($.__views.feed);
+    goNav ? $.__views.feed.addEventListener("click", goNav) : __defers["$.__views.feed!click!goNav"] = true;
     $.__views.summary = Ti.UI.createImageView({
         width: "64",
         id: "summary",
@@ -75,6 +83,7 @@ function Controller() {
     arguments[0] || {};
     __defers["$.__views.home!click!goNav"] && $.__views.home.addEventListener("click", goNav);
     __defers["$.__views.orderlist!click!goNav"] && $.__views.orderlist.addEventListener("click", goNav);
+    __defers["$.__views.feed!click!goNav"] && $.__views.feed.addEventListener("click", goNav);
     __defers["$.__views.summary!click!goNav"] && $.__views.summary.addEventListener("click", goNav);
     __defers["$.__views.logout!click!doLogout"] && $.__views.logout.addEventListener("click", doLogout);
     _.extend($, exports);

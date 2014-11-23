@@ -71,7 +71,7 @@ function Controller() {
         __parentSymbol: $.__views.dispatcher_summary
     });
     $.__views.header.setParent($.__views.dispatcher_summary);
-    $.__views.__alloyId137 = Ti.UI.createView({
+    $.__views.__alloyId153 = Ti.UI.createView({
         top: "60dp",
         font: {
             fontSize: "14dp",
@@ -82,10 +82,10 @@ function Controller() {
         left: "5dp",
         right: "5dp",
         height: "500",
-        id: "__alloyId137"
+        id: "__alloyId153"
     });
-    $.__views.dispatcher_summary.add($.__views.__alloyId137);
-    $.__views.__alloyId138 = Ti.UI.createLabel({
+    $.__views.dispatcher_summary.add($.__views.__alloyId153);
+    $.__views.__alloyId154 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -94,22 +94,22 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "DISPATCH - COMMISSION",
-        id: "__alloyId138"
+        id: "__alloyId154"
     });
-    $.__views.__alloyId137.add($.__views.__alloyId138);
-    $.__views.__alloyId139 = Ti.UI.createImageView({
+    $.__views.__alloyId153.add($.__views.__alloyId154);
+    $.__views.__alloyId155 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId139"
+        id: "__alloyId155"
     });
-    $.__views.__alloyId137.add($.__views.__alloyId139);
-    $.__views.__alloyId140 = Ti.UI.createView({
+    $.__views.__alloyId153.add($.__views.__alloyId155);
+    $.__views.__alloyId156 = Ti.UI.createView({
         height: "30",
-        id: "__alloyId140"
+        id: "__alloyId156"
     });
-    $.__views.__alloyId137.add($.__views.__alloyId140);
-    $.__views.__alloyId141 = Ti.UI.createLabel({
+    $.__views.__alloyId153.add($.__views.__alloyId156);
+    $.__views.__alloyId157 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#000",
         font: {
@@ -119,9 +119,9 @@ function Controller() {
         text: "Today Commission",
         top: "10dp",
         left: "10dp",
-        id: "__alloyId141"
+        id: "__alloyId157"
     });
-    $.__views.__alloyId140.add($.__views.__alloyId141);
+    $.__views.__alloyId156.add($.__views.__alloyId157);
     $.__views.todayCommission = Ti.UI.createLabel({
         width: "20%",
         color: "#000",
@@ -135,8 +135,8 @@ function Controller() {
         text: "0",
         id: "todayCommission"
     });
-    $.__views.__alloyId140.add($.__views.todayCommission);
-    $.__views.__alloyId142 = Ti.UI.createLabel({
+    $.__views.__alloyId156.add($.__views.todayCommission);
+    $.__views.__alloyId158 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#fff",
         font: {
@@ -150,16 +150,16 @@ function Controller() {
         top: "10dp",
         left: "80%",
         mod: "daily_commission",
-        id: "__alloyId142"
+        id: "__alloyId158"
     });
-    $.__views.__alloyId140.add($.__views.__alloyId142);
-    popup ? $.__views.__alloyId142.addEventListener("touchend", popup) : __defers["$.__views.__alloyId142!touchend!popup"] = true;
-    $.__views.__alloyId143 = Ti.UI.createView({
+    $.__views.__alloyId156.add($.__views.__alloyId158);
+    popup ? $.__views.__alloyId158.addEventListener("touchend", popup) : __defers["$.__views.__alloyId158!touchend!popup"] = true;
+    $.__views.__alloyId159 = Ti.UI.createView({
         height: "30",
-        id: "__alloyId143"
+        id: "__alloyId159"
     });
-    $.__views.__alloyId137.add($.__views.__alloyId143);
-    $.__views.__alloyId144 = Ti.UI.createLabel({
+    $.__views.__alloyId153.add($.__views.__alloyId159);
+    $.__views.__alloyId160 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#000",
         font: {
@@ -169,9 +169,9 @@ function Controller() {
         text: "Monthly Commission",
         top: "10dp",
         left: "10dp",
-        id: "__alloyId144"
+        id: "__alloyId160"
     });
-    $.__views.__alloyId143.add($.__views.__alloyId144);
+    $.__views.__alloyId159.add($.__views.__alloyId160);
     $.__views.monthCommission = Ti.UI.createLabel({
         width: "20%",
         color: "#000",
@@ -185,8 +185,8 @@ function Controller() {
         text: "0",
         id: "monthCommission"
     });
-    $.__views.__alloyId143.add($.__views.monthCommission);
-    $.__views.__alloyId145 = Ti.UI.createLabel({
+    $.__views.__alloyId159.add($.__views.monthCommission);
+    $.__views.__alloyId161 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#fff",
         font: {
@@ -200,15 +200,15 @@ function Controller() {
         top: "10dp",
         left: "80%",
         mod: "monthly_commission",
-        id: "__alloyId145"
+        id: "__alloyId161"
     });
-    $.__views.__alloyId143.add($.__views.__alloyId145);
-    popup ? $.__views.__alloyId145.addEventListener("touchend", popup) : __defers["$.__views.__alloyId145!touchend!popup"] = true;
+    $.__views.__alloyId159.add($.__views.__alloyId161);
+    popup ? $.__views.__alloyId161.addEventListener("touchend", popup) : __defers["$.__views.__alloyId161!touchend!popup"] = true;
     $.__views.list_form = Ti.UI.createScrollView({
         height: "auto",
         id: "list_form"
     });
-    $.__views.__alloyId137.add($.__views.list_form);
+    $.__views.__alloyId153.add($.__views.list_form);
     $.__views.donelistview = Ti.UI.createWebView({
         id: "donelistview",
         showHorizontalScrollIndicator: "false",
@@ -241,8 +241,8 @@ function Controller() {
             url: Ti.API.GETDONELIST + Ti.App.Properties.getString("session")
         });
     });
-    __defers["$.__views.__alloyId142!touchend!popup"] && $.__views.__alloyId142.addEventListener("touchend", popup);
-    __defers["$.__views.__alloyId145!touchend!popup"] && $.__views.__alloyId145.addEventListener("touchend", popup);
+    __defers["$.__views.__alloyId158!touchend!popup"] && $.__views.__alloyId158.addEventListener("touchend", popup);
+    __defers["$.__views.__alloyId161!touchend!popup"] && $.__views.__alloyId161.addEventListener("touchend", popup);
     _.extend($, exports);
 }
 

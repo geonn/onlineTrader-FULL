@@ -8,7 +8,7 @@ setTimeout(function(){
 $.activityIndicator.show();
 $.loadingBar.opacity = "1";
 $.loadingBar.height = "100";
-$.loadingBar.top = "50";
+$.loadingBar.top = ((PixelsToDPUnits(Ti.Platform.displayCaps.platformHeight)/2)-($.loadingBar.getHeight()/2));
 getAnnouncement();
 
 //Active icon displayed

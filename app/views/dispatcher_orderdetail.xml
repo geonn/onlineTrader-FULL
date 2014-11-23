@@ -9,11 +9,11 @@
 			<WebView id="orderdetailview" disableBounce="true" onLoad="construct"  url="/html/dispatcher_orderdetail.html" />
 		</View>
 		<View id="footer" opacity="0" height="62">
-			<Label id="btnrelease" onTouchend="orderRelease">ORDER \nRELEASE</Label>
-			<View class="border-line" left="33%" top="0%"></View>
-			<Label id="btncancel" onTouchend="orderCancel">REQUEST \nCANCEL</Label>
-			<View class="border-line" left="66%" top="0%"></View>
-			<Label id="btncomplete" onTouchend="orderComplete">ORDER \nCOMPLETE</Label>
+			<View width="33%" bottom="20" layout="horizontal"><Label id="btnrelease" onTouchend="orderRelease" border>ORDER \nRELEASE</Label></View>
+			 <View class="border-line"></View>
+			<View width="33%" bottom="20" layout="horizontal" ><Label   id="btncancel" onTouchend="orderCancel">REQUEST \nCANCEL</Label><Label class="border-line"  top="0%"></Label></View>
+			 <View class="border-line"></View>
+			<View width="33%" bottom="20"><Label id="btncomplete" onTouchend="orderComplete">ORDER \nCOMPLETE</Label></View>
 		</View>
 	</Window>
 </Alloy>

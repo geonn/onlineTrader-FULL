@@ -1,0 +1,24 @@
+<Alloy>
+	<Window class="container" id="feedsWin">
+		<View id="header">
+			<ImageView width="7%" left="10%" onTouchend="refreshPage" image="/images/refresh-icon.png" />
+			<View class="border-line" left="25%" top="0%"></View>
+			<Label class="h1" id="appTitle">ONLINE TRADER</Label>
+		</View>
+		<View class="content" height="88%">
+			
+			<Label class="h2">NEWS FEED</Label>
+			<ImageView class="separator"></ImageView>
+			 
+			<TableView id="tableView">
+
+		    </TableView>
+			
+		</View>	
+		<View layout="vertical" id="loadingBar" height="0" width="100" borderRadius="15" top="0" opacity="1" backgroundColor="#2E2E2E" >
+				<ActivityIndicator  id="activityIndicator" />
+				<Label text="Loading" left="20" top="10" color="#ffffff" />
+			</View>
+		<Require type="view" src="_dealer_footer" id="footer"/>
+	</Window>
+</Alloy>

@@ -64,29 +64,29 @@ function Controller() {
         id: "titleHeader"
     });
     $.__views.content.add($.__views.titleHeader);
-    $.__views.__alloyId77 = Ti.UI.createImageView({
+    $.__views.__alloyId83 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId77"
+        id: "__alloyId83"
     });
-    $.__views.content.add($.__views.__alloyId77);
-    $.__views.__alloyId78 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId83);
+    $.__views.__alloyId84 = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
         bottom: 2,
         height: Ti.UI.FILL,
         top: "90",
-        id: "__alloyId78"
+        id: "__alloyId84"
     });
-    $.__views.dealer_statistic.add($.__views.__alloyId78);
+    $.__views.dealer_statistic.add($.__views.__alloyId84);
     $.__views.salessatisticview = Ti.UI.createWebView({
         id: "salessatisticview",
         disableBounce: "true",
         height: Ti.UI.FILL,
         url: "/html/dealer_statistic.html"
     });
-    $.__views.__alloyId78.add($.__views.salessatisticview);
+    $.__views.__alloyId84.add($.__views.salessatisticview);
     $.__views.r_sub_footer = Alloy.createController("_dealer_subfooter", {
         id: "r_sub_footer",
         __parentSymbol: $.__views.dealer_statistic

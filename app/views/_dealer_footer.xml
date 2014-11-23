@@ -4,6 +4,7 @@
 		<!--<ImageView width="20%" id="newpost" mod="newpost" onTouchend="goNav" left="20%" image="/images/icons/icon-neworder.png" /> listing-->
 		<ImageView width="64" id="orderlist" mod="orderlist" onClick="goNav" image="/images/icons/icon-neworder.png" />
 		<ImageView width="64" id="poslist" mod="poslist" onClick="goNav" image="/images/icons/icon-pos.png" />
+		<ImageView width="64" id="feed" mod="feed" onClick="goNav" image="/images/icons/icon-feed.png" />
 		<ImageView width="64" id="statistic" mod="statistic" onClick="goNav" image="/images/icons/icon-ranking.png" />
 		<ImageView width="64" id="settings" mod="settings" onClick="goNav" image="/images/icons/icon-setting.png" />
 		<ImageView width="64" id="logout" mod="logout" onClick="doLogout" image="/images/icons/icon-logout.png" />

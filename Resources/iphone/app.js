@@ -205,17 +205,10 @@ function notificationNav(target, extra) {
     } else if ("group" == target) {
         removeAllWindow();
         var roles = Ti.App.Properties.getString("roles");
-        if ("dealer" == roles) {
-            target = roles + "_orderlist";
-            Ti.App.Properties.setString("module", target);
-            var targetWindow = Alloy.createController(target, param).getView();
-            setWindowRelationship(targetWindow);
-        } else if ("dispatcher" == roles) {
-            target = roles + "_home";
-            Ti.App.Properties.setString("module", target);
-            var targetWindow = Alloy.createController(target, param).getView();
-            setWindowRelationship(targetWindow);
-        }
+        target = roles + "_feed";
+        Ti.App.Properties.setString("module", target);
+        var targetWindow = Alloy.createController(target, param).getView();
+        setWindowRelationship(targetWindow);
     } else if ("dispatcher_home" == target) {
         removeAllWindow();
         Ti.App.Properties.setString("module", target);
@@ -347,6 +340,8 @@ Ti.API.GETDATELIST = "http://" + Ti.API.API_DOMAIN + "/api/getMonthYear?user=" +
 Ti.API.GETDONELIST = "http://" + Ti.API.API_DOMAIN + "/api/getDoneList?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
 Ti.API.SETUNREAD = "http://" + Ti.API.API_DOMAIN + "/api/unsetUserNotification?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+
+Ti.API.GETFEED = "http://" + Ti.API.API_DOMAIN + "/api/getNotificationByUser?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
 Ti.API.GETNOTISCOUNT = "http://" + Ti.API.API_DOMAIN + "/api/totalUserNotificationByUser?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 

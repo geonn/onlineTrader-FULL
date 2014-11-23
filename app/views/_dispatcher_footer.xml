@@ -2,6 +2,7 @@
 	<ScrollView id="footer" horizontalWrap="false" showHorizontalScrollIndicator="true" showVerticalScrollIndicator="false">
 		<ImageView width="64" id="home" mod="home" onClick="goNav" image="/images/icons/icon-dispatcher-task.png" />
 		<ImageView width="64" id="orderlist" mod="orderlist" onClick="goNav" image="/images/icons/icon-dispatcher-mytask.png" />
+		<ImageView width="64" id="feed" mod="feed" onClick="goNav" image="/images/icons/icon-feed.png" />
 		<ImageView width="64" id="summary" mod="summary" onClick="goNav" image="/images/icons/icon-summary.png" />
 		<ImageView width="64" id="logout" mod="logout" onClick="doLogout" image="/images/icons/icon-logout.png" />
 <!--	<ImageView width="20%" id="settings" mod="settings" onClick="goNav" left="60%" image="/images/icons/icon-setting.png" />-->
