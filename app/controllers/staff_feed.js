@@ -14,6 +14,7 @@ setTimeout(function(){
 	getFeed();
 }, 300);
 
+
 function getFeed(){
 	var url = Ti.API.GETFEED + Ti.App.Properties.getString('session');
 	 
@@ -56,6 +57,7 @@ var generateFeed = function(res){
 			    height: 90,
 			    source: entry.o_id,
 			    selectedBackgroundColor: "#FFE1E1",
+			    backgroundColor: '#FEFEFB',
 				backgroundGradient: {
 			      type: 'linear',
 			      colors: ['#FEFEFB','#F7F7F6'],
@@ -86,7 +88,7 @@ var generateFeed = function(res){
 					width:'85%',
 					top:32,
 					left:10,
-					height:12
+					height:15
 			});
 				
 			var Contact =  Titanium.UI.createLabel({
@@ -98,7 +100,7 @@ var generateFeed = function(res){
 					textAlign:'left',
 					top:50,
 					left:10,
-					height:12
+					height:15
 			});
 			
 			
@@ -111,7 +113,7 @@ var generateFeed = function(res){
 					textAlign:'left', 
 					top:70,
 					left:10 ,
-					height:12
+					height:15
 			});
 			
 			var rightForwardBtn =  Titanium.UI.createImageView({
@@ -121,13 +123,21 @@ var generateFeed = function(res){
 					right:20 
 			});		
 				
-			 
+			var Seperator =  Titanium.UI.createView({ 
+					source: entry.o_id, 
+					width:'100%',
+					backgroundColor: "#A4A4A4",
+					textAlign:'left',  
+					height:1,
+					bottom:0
+			});
 				
 			row.add(Title);	
 			row.add(Location);	
 			row.add(Contact);	
 			row.add(Tracking);	
 			row.add(rightForwardBtn);
+			row.add(Seperator);
 			data.push(row);
 		});			
 		
@@ -136,6 +146,7 @@ var generateFeed = function(res){
 	   			
 	}
 };
+
 
 
 function refreshPage(){

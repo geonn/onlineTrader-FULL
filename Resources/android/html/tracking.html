@@ -37,12 +37,15 @@
 		        }
 		        
 	     function loadTrackingTable(){
-	     	tracking = localStorage.getItem("trackingurl");
-	     	//alert(tracking);
+	     	tracking = localStorage.getItem("trackingurl"); 
 	     	$.getJSON(tracking, function( data ) {
 	     			
 	            	if(data.status == 'success'){
 	            		 var trk_tbl = "";
+	            		 $("#refno").html(data.order.o_id);
+	            		 $("#customer").html(data.order.name);
+	            		 $("#location").html(data.order.location + ", "+ data.order.state);
+	            		 $("#mobile").html(data.order.mobile);
 						 $.each( data.data, function( times, arr ) {
 						 	
 						 	trk_tbl += "<div class='tableTitle'>"+times+"</div>";
@@ -71,7 +74,12 @@
     </head>
 	<body onload="toBottom();">
 		<div id="track_data" style="display:inline;color:#243F8B;font-weight:bold;">Collecting tracking info...</div>
-		<div style="border-bottom:1px solid #555; padding-bottom:10px; margin-bottom: 10px;width:90%">Reference ID : <span id="refno"></span></div>
+		<div style="border-bottom:1px solid #555; padding-bottom:10px; margin-bottom: 10px;width:90%">
+			Reference ID : <span id="refno"></span><br/>
+			Customer Name : <span id="customer"></span><br/>
+			Location : <span id="location"></span><br/>
+			Mobile : <span id="mobile"></span>
+		</div>
 		<div id="trackingTable" style="margin:0 auto; width:90%;"></div>
 		
 	</body>

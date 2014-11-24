@@ -10,7 +10,7 @@ Ti.App.fireEvent("getSession", {session:Ti.App.Properties.getString("session")})
 /**End**/
 
 Ti.App.addEventListener("app:viewPosDetail", goPosDetails);
-
+Ti.UI.Android.hideSoftKeyboard(); 
 
 function goPosDetails(e){
 	

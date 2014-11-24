@@ -62,6 +62,14 @@ function Controller() {
     });
     $.__views.footer.add($.__views.poslist);
     goNav ? $.__views.poslist.addEventListener("click", goNav) : __defers["$.__views.poslist!click!goNav"] = true;
+    $.__views.feed = Ti.UI.createImageView({
+        width: "64",
+        id: "feed",
+        mod: "feed",
+        image: "/images/icons/icon-feed.png"
+    });
+    $.__views.footer.add($.__views.feed);
+    goNav ? $.__views.feed.addEventListener("click", goNav) : __defers["$.__views.feed!click!goNav"] = true;
     $.__views.statistic = Ti.UI.createImageView({
         width: "64",
         id: "statistic",
@@ -92,6 +100,7 @@ function Controller() {
     __defers["$.__views.summary!click!goNav"] && $.__views.summary.addEventListener("click", goNav);
     __defers["$.__views.orderlist!click!goNav"] && $.__views.orderlist.addEventListener("click", goNav);
     __defers["$.__views.poslist!click!goNav"] && $.__views.poslist.addEventListener("click", goNav);
+    __defers["$.__views.feed!click!goNav"] && $.__views.feed.addEventListener("click", goNav);
     __defers["$.__views.statistic!click!goNav"] && $.__views.statistic.addEventListener("click", goNav);
     __defers["$.__views.settings!click!goNav"] && $.__views.settings.addEventListener("click", goNav);
     __defers["$.__views.logout!click!doLogout"] && $.__views.logout.addEventListener("click", doLogout);

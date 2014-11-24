@@ -10,7 +10,7 @@
 			<Label class="h2">NEWS FEED</Label>
 			<ImageView class="separator"></ImageView>
 			 
-			<TableView id="tableView">
+			<TableView id="tableView" bottom="135">
 
 		    </TableView>
 			

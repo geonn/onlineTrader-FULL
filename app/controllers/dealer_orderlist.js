@@ -11,7 +11,7 @@ Ti.App.fireEvent("getSession", {session:Ti.App.Properties.getString("session")})
 /**End**/
 
 Ti.App.addEventListener("app:viewOrderDetail", goToDetails);
-
+ 
 //$.ptr.init($.tableView);
 
 var actualHeight = $.orderlistview.evalJS("document.height;");

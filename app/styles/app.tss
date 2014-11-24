@@ -100,7 +100,7 @@
 
 },
 "#activityIndicator" : { 
-//	  style: Ti.UI.ActivityIndicatorStyle.BIG,
+ 	style: Ti.UI.ActivityIndicatorStyle.BIG,
 	 top:15,
 	 left:20,
 	 width:60,

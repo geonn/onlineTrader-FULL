@@ -20,32 +20,23 @@
 					noty({"text":"Refreshing list...","layout":"top","type":"success","animateOpen":{"height":"toggle"},"animateClose":{"height":"toggle"},"speed":100,"timeout":3000,"closeButton":false,"closeOnSelfClick":true,"closeOnSelfOver":false,"modal":false});
         		
             		var listUrl = localStorage.getItem("posUrl");
-            		var thedate =$( "#datepicker" ).val();
-            		
-            		if(thedate == 'All Date'){
-            			thedate = "";
-            		}
-            		
-            		//Ti.App.fireEvent('Ti:clearCache', { 
-					//		queryUrl: listUrl+"&date="+thedate
-					//	});
-            		drawTable(listUrl+"&date="+thedate);
+            		var year =$( "#year" ).val();
+        			var month =$( "#month" ).val();
+            		drawTable(listUrl+"&month="+month+"&year="+year);
 				}
 				
 				function posListParam(e){
 					localStorage.setItem("session",e.session);
 					
             		localStorage.setItem("posUrl", e.posUrl);
-            		var thedate =$( "#datepicker" ).val();
-            		if(thedate == 'All Date'){
-            			thedate = "";
-            		}
+            		var year =$( "#year" ).val();
+        			var month =$( "#month" ).val();
             		$("#dealer_order_list").html("<div style='display:inline;color:#243F8B;font-weight:bold;'>Loading...</div>");
             		
             		//Ti.App.fireEvent('Ti:clearCache', { 
 					//		queryUrl: e.posUrl+"&date="+thedate
 					//	});
-					drawTable(e.posUrl+"&date="+thedate);
+					drawTable(e.posUrl+"&month="+month+"&year="+year);
 
 				}
 				
@@ -55,21 +46,40 @@
 				    Ti.App.removeEventListener("html:realDrawTable", realDrawTable);
 				});
 
-			    $( "#datepicker" ).datepicker({
-				    onSelect: function(dateText) {
-				    	$("#dealer_order_list").html("<div style='display:inline;color:#243F8B;font-weight:bold;'>Loading...</div>");
-				        thedate =$( "#datepicker" ).val();
-				       
-	        			$( "#datepicker" ).val(thedate);
-				        var reloadURL = localStorage.getItem("posUrl");
-						
-						//Ti.App.fireEvent('Ti:clearCache', { 
-						//	queryUrl: reloadURL+"&date="+thedate
-						//});
-				        drawTable(reloadURL+"&date="+thedate);
-				    },
-				     dateFormat: 'dd/mm/yy'
-			     });
+			    var currentYear = new Date().getFullYear();
+  			
+				for(var year = 2014; year<=currentYear; year++){
+					$('#year').append($("<option/>", {
+				        value: year,
+				        text: year
+				    }));
+				}
+				
+				var currentMonth = new Date().getMonth();
+				
+				for(var m = 1; m<=12; m++){
+					if(m == currentMonth+1){
+						$('#month').append($("<option/>", {
+					        value: m,
+					        selected: "selected",
+					        text: m
+					    }));
+					}else{
+						$('#month').append($("<option/>", {
+					        value: m,
+					        text: m
+					    }));
+				   	}
+				}
+				
+				$("#month").change(function(){ 
+					refreshPage();
+					 
+				});
+				
+				$("#year").change(function(){
+					refreshPage();
+				});
 			  });
 		</script>
 		<style>
@@ -259,7 +269,14 @@
     <body>
     	<input type="hidden" name="total_item" id="total_item" value="0">
     	<div class="staticBar">
-			<input class="text-input" name="senddate" readonly type="text" id="datepicker" value="All Date" > <div style="float:right; border-left:1px solid #555; padding:0 15px; line-height: 34px; font-size:13px; " onClick="resetDate();">All</div>
+			<div id="monthyear" style="text-align:center;">
+    			Month
+	    		<select name="month" id="month" style="width:60px;">
+	    		</select>
+	    		Year
+	    		<select id="year" name="year" style="width:80px;">
+	    		</select>
+    		</div>
 		</div>
     	<div id="dealer_order_list" style="padding-top:40px;display:block;min-height: 300px;"></div>	
 	</body>

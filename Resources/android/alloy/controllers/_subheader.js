@@ -49,6 +49,7 @@ function Controller() {
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
+        right: 0,
         left: "25%",
         top: "0%",
         id: "__alloyId3"
