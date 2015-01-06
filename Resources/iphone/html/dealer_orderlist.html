@@ -203,14 +203,14 @@
 				var total_item = 0;
 				//var data = e.data;
 				var str = "";
-			 
+			 	console.log(queryUrl);
 				$.getJSON(queryUrl, function( data ) {
 				   
 				   	 if(data.status == 'success'){
 				   	 	//loop date
 				   	  
 					     $.each( data.data, function( key, items ) {
-					     	
+					     	console.log(items);
 					    	 var day_item   = 0;
 						     str += "<div id='div_"+key+"' class='tableTitle'>"+key+"</div>";
 						     

@@ -58,7 +58,7 @@ var onErrorCallback = function(e) {
 Ti.App.addEventListener('Ti:getData', getData); 
 Ti.App.addEventListener('Ti:clearCache', clearCache);
  
-$.orderlistview.addEventListener('load', function(data) { 
+$.orderlistview.addEventListener('load', function(data) {  
   	Ti.App.fireEvent('app:orderListParam', { 
 		session: Ti.App.Properties.getString('session'), 
 		url: Ti.API.GETDEALERORD + Ti.App.Properties.getString('session'),

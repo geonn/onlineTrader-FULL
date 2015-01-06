@@ -49,10 +49,18 @@
 			    var currentYear = new Date().getFullYear();
   			
 				for(var year = 2014; year<=currentYear; year++){
-					$('#year').append($("<option/>", {
-				        value: year,
-				        text: year
-				    }));
+					if(year == currentYear){
+						$('#year').append($("<option/>", {
+					        value: year,
+					        selected: "selected",
+					        text: year
+					    }));
+					}else{
+						$('#year').append($("<option/>", {
+					        value: year,
+					        text: year
+					    }));
+					}
 				}
 				
 				var currentMonth = new Date().getMonth();

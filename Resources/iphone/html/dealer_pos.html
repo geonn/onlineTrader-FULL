@@ -202,16 +202,16 @@
 			//Ti.App.addEventListener("app:newPostParam", function(e) {
 				//alert(e.url);
 				var ret = validatePosForm();
-				
+				alert("ass");
 				if(ret === false){
 					$("#post_form").show();
 					$("#loading").hide();
 					return false;
 				}
 				var str = $("#post_form").serialize();
-			
-				var addPostUrl = localStorage.getItem("url")+localStorage.getItem("session");
 				
+				var addPostUrl = localStorage.getItem("url")+localStorage.getItem("session");
+					alert(addPostUrl+"?"+str);
 					$.post(addPostUrl,str, function( data ) {
 						var res = JSON.parse(data);
 						if(res.status == 'success'){

@@ -45,9 +45,9 @@
 				   	 	var tableTitle = localStorage.getItem("tableTitle");
 
 				   	 	str += "<table cellpadding='0' cellspacing='0' style='width:100%;' class='bordered'>";
-				   	 	str += "<tr><td width='25%'>Date</td><td width='15%'>Courier</td><td width='15%'>COD</td><td width='15%'>Ads</td><td width='15%'>Others</td><td width='15%'>Total</td></tr>";
+				   	 	str += "<tr><td width='25%'>Date</td><td width='15%'>Courier</td><td width='15%'>COD</td><td width='15%'>Ads</td><td width='15%'>Others</td></tr>";
 						if(data.data == ""){
-					  		str += "<tr><td colspan='5' style='text-align:center;'>No records found</td></tr>";
+					  		str += "<tr><td colspan='6' style='text-align:center;'>No records found</td></tr>";
 					  	}else{
 					  		var total_courier = 0;
 					  		var total_cod =0;
@@ -77,10 +77,18 @@
 				var currentYear = new Date().getFullYear();
   			
 	  			for(var year = 2014; year<=currentYear; year++){
-	  				$('#year').append($("<option/>", {
-				        value: year,
-				        text: year
-				    }));
+	  				if(year == currentYear){
+						$('#year').append($("<option/>", {
+					        value: year,
+					        selected: "selected",
+					        text: year
+					    }));
+					}else{
+						$('#year').append($("<option/>", {
+					        value: year,
+					        text: year
+					    }));
+					}
 	  			}
 	  			
 	  			var currentMonth = new Date().getMonth();
