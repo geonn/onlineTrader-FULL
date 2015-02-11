@@ -57,6 +57,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.orderdetail_win = Ti.UI.createWindow({
+        fullscreen: true,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "orderdetail_win"

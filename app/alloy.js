@@ -78,22 +78,21 @@ var clickTime = null;
  * GLOBAL FUNCTIONS
  **************************/
 function goNav(event){
+	
 	checkSession();
+
 	if(goNav.__isExecuting) {
         return;
     }
+    
     goNav.__isExecuting = true;
 	var page  = event.source.mod;
 	var module = Ti.App.Properties.getString('module');
 	var roles = Ti.App.Properties.getString('roles');
 	page = roles + "_" + page;
-
+ 
 	if(module != page){
 		var navigate = Alloy.createController(page).getView();
-		/** set nagivation page with effect**/
-		//navigate.top = 0;
-		//navigate.left = 320;
-        //effect = slideEffect();
         
         /** close current window and after launch new page **/
 		if(Ti.App.CURRENTWINDOW != ''){
@@ -101,6 +100,8 @@ function goNav(event){
 	   	}
 	   	setWindowRelationship(navigate);
 	}
+	 
+	
 	setTimeout(function(){
 	    goNav.__isExecuting = false;
 	}, 200);
@@ -134,7 +135,9 @@ function popup(event){
 }
 
 function removeWindowRelationship(){
-    Ti.App.CURRENTWINDOW.close({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT});
+	//alert("removeWindow");
+	return false;
+    Ti.App.CURRENTWINDOW.close();
     var tempArr = Ti.App.WindowCabinet;
 	 tempArr.splice((tempArr.length-1), 1);
 	 Ti.App.WindowCabinet = tempArr;
@@ -153,7 +156,7 @@ function removeAllWindow(){
 
 function setWindowRelationship(current){
  	var tempArr = Ti.App.WindowCabinet;
- 	 current.open();//{transition:Ti.UI.iPhone.AnimationStyle.CURL_DOWN}
+ 	 current.open(); 
 
 	 Ti.App.CURRENTWINDOW = current;
 	 var tempArr = Ti.App.WindowCabinet;
@@ -238,7 +241,7 @@ function doLogout(e) {
 			         removeAllWindow();
 			         Ti.App.Properties.removeProperty('session');
 			       	 var login = Alloy.createController('index').getView();
-			         login.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+			         login.open();
 			     },
 			     // function called when an error occurs, including a timeout
 			     onerror : function(e) {
@@ -260,7 +263,7 @@ function checkSession(){
 	var ses = Ti.App.Properties.getString('session');
 	if(ses == null){
 		var login = Alloy.createController('index').getView();
-		login.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+		login.open();
 	}else{
 		var url = Ti.API.CHECKSESSION +ses;
 		
@@ -274,7 +277,7 @@ function checkSession(){
 		         }else{
 		         	createAlert("Session End","Your account are login at another device. Please login again.");
 		         	var login = Alloy.createController('index').getView();
-					login.open({transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+					login.open();
 		         }
 		         
 		     },

@@ -1,3 +1,6 @@
+"Window":{
+	fullscreen: true
+},
 "Label":{
 	width: Titanium.UI.FILL,
 	color: "#e02222"

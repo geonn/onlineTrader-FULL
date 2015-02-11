@@ -80,6 +80,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.index = Ti.UI.createWindow({
+        fullscreen: true,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "index"

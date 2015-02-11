@@ -36,13 +36,7 @@ function popup(event) {
 }
 
 function removeWindowRelationship() {
-    Ti.App.CURRENTWINDOW.close({
-        transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT
-    });
-    var tempArr = Ti.App.WindowCabinet;
-    tempArr.splice(tempArr.length - 1, 1);
-    Ti.App.WindowCabinet = tempArr;
-    Ti.App.CURRENTWINDOW = tempArr[tempArr.length - 1];
+    return false;
 }
 
 function removeAllWindow() {
@@ -110,9 +104,7 @@ function doLogout() {
                     removeAllWindow();
                     Ti.App.Properties.removeProperty("session");
                     var login = Alloy.createController("index").getView();
-                    login.open({
-                        transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
-                    });
+                    login.open();
                 },
                 onerror: function() {
                     createAlert("Network declined", "Failed to contact with server. Please make sure your device are connected to internet.");
@@ -130,9 +122,7 @@ function checkSession() {
     var ses = Ti.App.Properties.getString("session");
     if (null == ses) {
         var login = Alloy.createController("index").getView();
-        login.open({
-            transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
-        });
+        login.open();
     } else {
         var url = Ti.API.CHECKSESSION + ses;
         var client = Ti.Network.createHTTPClient({
@@ -141,9 +131,7 @@ function checkSession() {
                 if ("success" == res.status) ; else {
                     createAlert("Session End", "Your account are login at another device. Please login again.");
                     var login = Alloy.createController("index").getView();
-                    login.open({
-                        transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
-                    });
+                    login.open();
                 }
             },
             onerror: function() {

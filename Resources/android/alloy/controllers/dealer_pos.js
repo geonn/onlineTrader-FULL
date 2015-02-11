@@ -24,6 +24,7 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.dealer_pos = Ti.UI.createWindow({
+        fullscreen: true,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_pos"

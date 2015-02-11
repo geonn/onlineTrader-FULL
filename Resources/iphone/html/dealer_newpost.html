@@ -30,11 +30,13 @@
   	var dateToday = todayDate();
   	$( "#datepicker" ).val(dateToday);
     $( "#datepicker" ).datepicker({
-	    onSelect: function(dateText) {
+    	dateFormat: 'dd/mm/yy',
+	    onSelect: function(dateText) { 
 	        thedate =$( "#datepicker" ).val();
 	        var dateResult = thedate.split("/");
-	        $( "#datepicker" ).val(dateResult[1]+"/"+dateResult[0]+"/"+dateResult[2]);
+	        $( "#datepicker" ).val(dateResult[0]+"/"+dateResult[1]+"/"+dateResult[2]);
 	    },
+	   
 	    minDate: 0
      });
   });

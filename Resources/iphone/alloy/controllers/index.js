@@ -115,6 +115,7 @@ function Controller() {
     });
     $.__views.index.add($.__views.loadingBar);
     $.__views.activityIndicator = Ti.UI.createActivityIndicator({
+        style: Ti.UI.ActivityIndicatorStyle.BIG,
         top: 15,
         left: 20,
         width: 60,

@@ -28,6 +28,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dealer_orderlist = Ti.UI.createWindow({
+        fullscreen: true,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_orderlist"

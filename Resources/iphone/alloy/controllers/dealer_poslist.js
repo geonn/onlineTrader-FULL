@@ -178,6 +178,7 @@ function Controller() {
         session: Ti.App.Properties.getString("session")
     });
     Ti.App.addEventListener("app:viewPosDetail", goPosDetails);
+    Ti.UI.Android.hideSoftKeyboard();
     var getData = function(data) {
         Titanium.API.info("POS: getData");
         var url = data.queryUrl;

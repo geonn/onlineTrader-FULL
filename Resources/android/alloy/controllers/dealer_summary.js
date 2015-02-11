@@ -130,6 +130,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dealer_summary = Ti.UI.createWindow({
+        fullscreen: true,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_summary"

@@ -91,6 +91,7 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.dispatcher_monthly_commission_detail = Ti.UI.createWindow({
+        fullscreen: true,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dispatcher_monthly_commission_detail"
