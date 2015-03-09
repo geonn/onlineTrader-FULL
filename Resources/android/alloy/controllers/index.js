@@ -123,15 +123,15 @@ function Controller() {
         id: "activityIndicator"
     });
     $.__views.loadingBar.add($.__views.activityIndicator);
-    $.__views.__alloyId162 = Ti.UI.createLabel({
+    $.__views.__alloyId160 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#ffffff",
         text: "Loading",
         left: "20",
         top: "10",
-        id: "__alloyId162"
+        id: "__alloyId160"
     });
-    $.__views.loadingBar.add($.__views.__alloyId162);
+    $.__views.loadingBar.add($.__views.__alloyId160);
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -145,23 +145,23 @@ function Controller() {
         id: "content"
     });
     $.__views.index.add($.__views.content);
-    $.__views.__alloyId163 = Ti.UI.createScrollView({
+    $.__views.__alloyId161 = Ti.UI.createScrollView({
         showVerticalScrollIndicator: "true",
         showHorizontalScrollIndicator: "true",
         height: "320",
         width: "100%",
-        id: "__alloyId163"
+        id: "__alloyId161"
     });
-    $.__views.content.add($.__views.__alloyId163);
-    $.__views.__alloyId164 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId161);
+    $.__views.__alloyId162 = Ti.UI.createLabel({
         width: "120",
         color: "#e02222",
         backgroundImage: "/images/online-trader-logo.png",
         height: "120",
         bottom: "150",
-        id: "__alloyId164"
+        id: "__alloyId162"
     });
-    $.__views.__alloyId163.add($.__views.__alloyId164);
+    $.__views.__alloyId161.add($.__views.__alloyId162);
     $.__views.username = Ti.UI.createTextField({
         height: "55dp",
         font: {
@@ -177,7 +177,7 @@ function Controller() {
         borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "username"
     });
-    $.__views.__alloyId163.add($.__views.username);
+    $.__views.__alloyId161.add($.__views.username);
     $.__views.usernamehint = Ti.UI.createLabel({
         width: "90%",
         color: "#333",
@@ -189,7 +189,7 @@ function Controller() {
         text: "Enter Username",
         id: "usernamehint"
     });
-    $.__views.__alloyId163.add($.__views.usernamehint);
+    $.__views.__alloyId161.add($.__views.usernamehint);
     $.__views.password = Ti.UI.createTextField({
         passwordMask: true,
         height: "55dp",
@@ -206,7 +206,7 @@ function Controller() {
         borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "password"
     });
-    $.__views.__alloyId163.add($.__views.password);
+    $.__views.__alloyId161.add($.__views.password);
     $.__views.passwordhint = Ti.UI.createLabel({
         width: "90%",
         color: "#333",
@@ -218,7 +218,7 @@ function Controller() {
         text: "Enter Password",
         id: "passwordhint"
     });
-    $.__views.__alloyId163.add($.__views.passwordhint);
+    $.__views.__alloyId161.add($.__views.passwordhint);
     $.__views.btnLogin = Ti.UI.createButton({
         backgroundImage: "/images/btn-login.png",
         width: "90%",

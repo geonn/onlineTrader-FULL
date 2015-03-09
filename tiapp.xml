@@ -49,7 +49,7 @@
         </plist>
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-       <!-- <manifest>
+        <!-- <manifest>
             <application>
                 <activity android:windowSoftInputMode="stateVisible|adjustPan"/>
                 <activity
@@ -74,24 +74,24 @@
         <tool-api-level>16</tool-api-level>
         <manifest>
             <application android:theme="@style/Theme.NoActionBar">
-            	<activity android:windowSoftInputMode="stateVisible|adjustPan"/>
-					<activity
-					    android:configChanges="keyboardHidden|orientation"
-					    android:name="org.appcelerator.titanium.TiActivity" android:screenOrientation="portrait"/>
-					<activity
-					    android:configChanges="keyboardHidden|orientation"
-					    android:name="org.appcelerator.titanium.TiTranslucentActivity"
-					    android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent"/>
-					<activity
-					    android:configChanges="keyboardHidden|orientation"
-					    android:name="org.appcelerator.titanium.TiModalActivity"
-					    android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent"/>
-					<activity
-					    android:configChanges="keyboardHidden|orientation"
-					    android:name="ti.modules.titanium.ui.TiTabActivity" android:screenOrientation="portrait"/>
-					<activity
-					    android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" android:screenOrientation="portrait"/>
-				</application>    
+                <activity android:windowSoftInputMode="stateVisible|adjustPan"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="org.appcelerator.titanium.TiActivity" android:screenOrientation="portrait"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="org.appcelerator.titanium.TiTranslucentActivity"
+                    android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="org.appcelerator.titanium.TiModalActivity"
+                    android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent"/>
+                <activity
+                    android:configChanges="keyboardHidden|orientation"
+                    android:name="ti.modules.titanium.ui.TiTabActivity" android:screenOrientation="portrait"/>
+                <activity
+                    android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" android:screenOrientation="portrait"/>
+            </application>
             <uses-sdk android:minSdkVersion="14"/>
         </manifest>
     </android>

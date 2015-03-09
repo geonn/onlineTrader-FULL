@@ -6,7 +6,8 @@ var args = arguments[0] || {};
 //Ti.App.Properties.setString('module', 'dealer_newpost');
 /**Experiment**/
 Ti.App.fireEvent("getSession", {session:Ti.App.Properties.getString("session")});
-
+ 
+//$.postScrollView.height =  PixelsToDPUnits(Ti.Platform.displayCaps.platformHeight) - 70; 
 var addOrderComplete = function(e) {
 	goBack();
 	
@@ -15,9 +16,8 @@ Ti.App.addEventListener('addOrderComplete', addOrderComplete);
 /**End**/
 
 
-$.newpostview.addEventListener('load', function(data) { 
-	//$.newpostview.evalJS("var message='George Milano';");
-	
+$.newpostview.addEventListener('load', function(data) {  
+   $.newpostview.height = Ti.Platform.displayCaps.platformHeight;
    Ti.App.fireEvent('app:newPostParam', { 
 		session: Ti.App.Properties.getString('session'), 
 		url: Ti.API.ADDORDER, 
@@ -28,10 +28,12 @@ $.newpostview.addEventListener('load', function(data) {
 
 $.dealer_newpost.addEventListener('close', function(e){				// when this window close, trigger this event to remove the event.
 	Ti.App.removeEventListener('addOrderComplete',addOrderComplete);
+	 
 });
 
 var triggerAlert = function(e) {
 	createAlert(e.tt,e.msg);
 	Ti.App.removeEventListener('app:triggerAlert',triggerAlert);
 };
-Ti.App.addEventListener('app:triggerAlert', triggerAlert);
+ 
+Ti.App.addEventListener('app:triggerAlert', triggerAlert); 

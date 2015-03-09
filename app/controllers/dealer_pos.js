@@ -16,8 +16,8 @@ Ti.App.addEventListener('addOrderComplete', addOrderComplete);
 /**End**/
 
 $.posview.addEventListener('load', function(data) { 
-	//$.newpostview.evalJS("var message='George Milano';");
-	
+	//$.newpostview.evalJS("var message='George Milano';"); 
+	$.posview.height =  Ti.Platform.displayCaps.platformHeight + 600; 
    Ti.App.fireEvent('app:PosParam', { 
 		session: Ti.App.Properties.getString('session'), 
 		url: Ti.API.ADDPOS, 

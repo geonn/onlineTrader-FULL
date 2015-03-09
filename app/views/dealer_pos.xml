@@ -5,9 +5,9 @@
 			<Label class="h2">DEALER - COURIER</Label>
 			<ImageView class="separator" ></ImageView>
 		</View>
-		<View class="post_form"  >
-			<WebView id="posview" disableBounce="true" url="/html/dealer_pos.html" />
-		</View>
+		<ScrollView class="post_form" id="posScrollview"  height="auto">
+			<WebView id="posview" height="Ti.UI.SIZE" url="/html/dealer_pos.html" />
+		</ScrollView>
 		
 	</Window>
 </Alloy>

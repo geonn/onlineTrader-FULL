@@ -5,9 +5,9 @@
 			<Label id="titleHeader" class="h2">NEW POST</Label>
 			<ImageView class="separator" ></ImageView>
 		</View>
-		<View class="post_form"  >
-			<WebView id="newpostview" disableBounce="true" url="/html/dealer_newpost.html" />
-		</View>
+		<ScrollView class="post_form" id="postScrollView" height="auto" >
+			<WebView id="newpostview"  url="/html/dealer_newpost.html" />
+		</ScrollView>
 		
 	</Window>
 </Alloy>

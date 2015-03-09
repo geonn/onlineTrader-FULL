@@ -20,13 +20,21 @@
             localStorage.setItem("productURL", e.product);
         });
     
-   /** $(".auto").focus(function(){
-    	Ti.App.fireEvent('hideFooter', {  });
+    $(".auto").focus(function(){
+    	
+    	// if (document.height > document.body.offsetHeight) { 
+    		// window.scrollTo(0, 400);
+    		// Ti.App.fireEvent('scrollTo');
+		// }
+    	// //$('body').css('height',document.height - 500 );
+    	// $("#blankCont").show();
+    	
     });
     $(".auto").blur(function(){
-    	Ti.App.fireEvent('showFooter', {  });
+    	//$("#blankCont").hide();
+    	//$('body').css('height',document.height + 500);
     });
-    **/
+   /** **/
   	var dateToday = todayDate();
   	$( "#datepicker" ).val(dateToday);
     $( "#datepicker" ).datepicker({
@@ -255,6 +263,7 @@
     	</table>    	
     </form>
     <div id="loading" style="display:none;margin:0 auto;width:100%;text-align: center;"><img src="../images/loading.gif"></div>
+   
     <script>
        $(document).ready(function(){
     		orderDetailListener("app:newPostParam");

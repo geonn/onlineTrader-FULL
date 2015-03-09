@@ -36,7 +36,11 @@ function popup(event) {
 }
 
 function removeWindowRelationship() {
-    return false;
+    var tempArr = Ti.App.WindowCabinet;
+    tempArr.length > 1 && Ti.App.CURRENTWINDOW.close();
+    tempArr.splice(tempArr.length - 1, 1);
+    Ti.App.WindowCabinet = tempArr;
+    Ti.App.CURRENTWINDOW = tempArr[tempArr.length - 1];
 }
 
 function removeAllWindow() {
@@ -245,6 +249,10 @@ function deviceTokenError(e) {
 
 function PixelsToDPUnits(ThePixels) {
     return ThePixels / (Titanium.Platform.displayCaps.dpi / 160);
+}
+
+function DPUnitsToPixels(TheDPUnits) {
+    return TheDPUnits * (Titanium.Platform.displayCaps.dpi / 160);
 }
 
 function GetWidth(value) {

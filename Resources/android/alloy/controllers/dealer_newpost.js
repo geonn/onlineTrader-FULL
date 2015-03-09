@@ -65,21 +65,20 @@ function Controller() {
         id: "__alloyId33"
     });
     $.__views.content.add($.__views.__alloyId33);
-    $.__views.__alloyId34 = Ti.UI.createView({
+    $.__views.postScrollView = Ti.UI.createScrollView({
         layout: "vertical",
         width: "100%",
         bottom: 2,
-        height: "89%",
+        height: "auto",
         top: "90",
-        id: "__alloyId34"
+        id: "postScrollView"
     });
-    $.__views.dealer_newpost.add($.__views.__alloyId34);
+    $.__views.dealer_newpost.add($.__views.postScrollView);
     $.__views.newpostview = Ti.UI.createWebView({
         id: "newpostview",
-        disableBounce: "true",
         url: "/html/dealer_newpost.html"
     });
-    $.__views.__alloyId34.add($.__views.newpostview);
+    $.__views.postScrollView.add($.__views.newpostview);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
@@ -91,6 +90,7 @@ function Controller() {
     };
     Ti.App.addEventListener("addOrderComplete", addOrderComplete);
     $.newpostview.addEventListener("load", function() {
+        $.newpostview.height = Ti.Platform.displayCaps.platformHeight;
         Ti.App.fireEvent("app:newPostParam", {
             session: Ti.App.Properties.getString("session"),
             url: Ti.API.ADDORDER,

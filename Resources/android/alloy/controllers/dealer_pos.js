@@ -30,11 +30,11 @@ function Controller() {
         id: "dealer_pos"
     });
     $.__views.dealer_pos && $.addTopLevelView($.__views.dealer_pos);
-    $.__views.__alloyId47 = Alloy.createController("_subheader", {
-        id: "__alloyId47",
+    $.__views.__alloyId46 = Alloy.createController("_subheader", {
+        id: "__alloyId46",
         __parentSymbol: $.__views.dealer_pos
     });
-    $.__views.__alloyId47.setParent($.__views.dealer_pos);
+    $.__views.__alloyId46.setParent($.__views.dealer_pos);
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -47,7 +47,7 @@ function Controller() {
         id: "content"
     });
     $.__views.dealer_pos.add($.__views.content);
-    $.__views.__alloyId48 = Ti.UI.createLabel({
+    $.__views.__alloyId47 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -55,31 +55,31 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "DEALER - COURIER",
-        id: "__alloyId48"
+        id: "__alloyId47"
     });
-    $.__views.content.add($.__views.__alloyId48);
-    $.__views.__alloyId49 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId47);
+    $.__views.__alloyId48 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId49"
+        id: "__alloyId48"
     });
-    $.__views.content.add($.__views.__alloyId49);
-    $.__views.__alloyId50 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId48);
+    $.__views.posScrollview = Ti.UI.createScrollView({
         layout: "vertical",
         width: "100%",
         bottom: 2,
-        height: "90%",
+        height: "auto",
         top: "90",
-        id: "__alloyId50"
+        id: "posScrollview"
     });
-    $.__views.dealer_pos.add($.__views.__alloyId50);
+    $.__views.dealer_pos.add($.__views.posScrollview);
     $.__views.posview = Ti.UI.createWebView({
         id: "posview",
-        disableBounce: "true",
+        height: Ti.UI.SIZE,
         url: "/html/dealer_pos.html"
     });
-    $.__views.__alloyId50.add($.__views.posview);
+    $.__views.posScrollview.add($.__views.posview);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
@@ -93,6 +93,7 @@ function Controller() {
     };
     Ti.App.addEventListener("addOrderComplete", addOrderComplete);
     $.posview.addEventListener("load", function() {
+        $.posview.height = Ti.Platform.displayCaps.platformHeight + 600;
         Ti.App.fireEvent("app:PosParam", {
             session: Ti.App.Properties.getString("session"),
             url: Ti.API.ADDPOS,

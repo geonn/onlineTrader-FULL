@@ -135,10 +135,11 @@ function popup(event){
 }
 
 function removeWindowRelationship(){
-	//alert("removeWindow");
-	return false;
-    Ti.App.CURRENTWINDOW.close();
+ 
     var tempArr = Ti.App.WindowCabinet;
+     if(tempArr.length > 1){
+	 	Ti.App.CURRENTWINDOW.close();
+	 }
 	 tempArr.splice((tempArr.length-1), 1);
 	 Ti.App.WindowCabinet = tempArr;
 	 Ti.App.CURRENTWINDOW = tempArr[(tempArr.length-1)];
@@ -494,6 +495,10 @@ if(Alloy.Globals.osname == "android"){
 
 function PixelsToDPUnits(ThePixels){
   return (ThePixels / (Titanium.Platform.displayCaps.dpi / 160));
+}
+
+function DPUnitsToPixels(TheDPUnits){
+  return (TheDPUnits * (Titanium.Platform.displayCaps.dpi / 160));
 }
 
 function GetWidth(value) {
