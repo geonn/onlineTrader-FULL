@@ -8,6 +8,7 @@ function goNav(event) {
     page = roles + "_" + page;
     if (module != page) {
         var navigate = Alloy.createController(page).getView();
+        console.log(navigate);
         "" != Ti.App.CURRENTWINDOW && removeWindowRelationship();
         setWindowRelationship(navigate);
     }
@@ -37,10 +38,19 @@ function popup(event) {
 
 function removeWindowRelationship() {
     var tempArr = Ti.App.WindowCabinet;
-    tempArr.length > 1 && Ti.App.CURRENTWINDOW.close();
-    tempArr.splice(tempArr.length - 1, 1);
-    Ti.App.WindowCabinet = tempArr;
-    Ti.App.CURRENTWINDOW = tempArr[tempArr.length - 1];
+    if (tempArr.length > 1) {
+        console.log("window close start");
+        Ti.App.CURRENTWINDOW.close();
+        tempArr.splice(tempArr.length - 1, 1);
+        Ti.App.WindowCabinet = tempArr;
+        Ti.App.CURRENTWINDOW = tempArr[tempArr.length - 1];
+    } else if (1 == tempArr.length) {
+        console.log("1");
+        Ti.App.CURRENTWINDOW.close();
+        Ti.App.WindowCabinet = [];
+        Ti.App.CURRENTWINDOW = "";
+        console.log("closing parent window");
+    }
 }
 
 function removeAllWindow() {
@@ -49,11 +59,16 @@ function removeAllWindow() {
 }
 
 function setWindowRelationship(current) {
+    console.log("2");
+    console.log(Ti.App.WindowCabinet);
     var tempArr = Ti.App.WindowCabinet;
+    console.log("2.5");
     current.open();
+    console.log("3");
     Ti.App.CURRENTWINDOW = current;
     var tempArr = Ti.App.WindowCabinet;
     tempArr.push(current);
+    console.log("4");
     Ti.App.WindowCabinet = tempArr;
 }
 

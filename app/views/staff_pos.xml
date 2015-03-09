@@ -1,5 +1,5 @@
 <Alloy>
-	<Window class="container" id="dealer_pos">
+	<Window class="container" id="dealer_pos" fullscreen="false">
 		<Require src="_subheader"></Require>
 		<View class="content_post" id="content">
 			<Label class="h2">STAFF - COURIER</Label>

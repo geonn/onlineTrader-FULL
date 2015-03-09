@@ -207,11 +207,13 @@ function Controller() {
         });
     });
     $.dealer_orderlist.addEventListener("close", function() {
+        console.log("close");
         Ti.App.removeEventListener("Ti:getData", getData);
         Ti.App.removeEventListener("Ti:clearCache", clearCache);
         Ti.App.removeEventListener("app:viewOrderDetail", goToDetails);
     });
     $.dealer_orderlist.addEventListener("androidback", function() {
+        console.log("androidback");
         Ti.App.removeEventListener("Ti:getData", getData);
         Ti.App.removeEventListener("Ti:clearCache", clearCache);
         Ti.App.removeEventListener("app:viewOrderDetail", goToDetails);
