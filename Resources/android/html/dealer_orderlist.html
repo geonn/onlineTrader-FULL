@@ -20,6 +20,7 @@
 			    var currentYear = new Date().getFullYear();
   			
 		  			for(var year = 2014; year<=currentYear; year++){
+<<<<<<< Updated upstream
 		  				if(year == currentYear){
 		  					$('#year').append($("<option/>", {
 						        value: year,
@@ -32,6 +33,12 @@
 						        text: year
 						    }));
 					   	}
+=======
+		  				$('#year').append($("<option/>", {
+					        value: year,
+					        text: year
+					    }));
+>>>>>>> Stashed changes
 		  			}
 		  			
 		  			var currentMonth = new Date().getMonth();
@@ -211,7 +218,11 @@
 				var total_item = 0;
 				//var data = e.data;
 				var str = "";
+<<<<<<< Updated upstream
 			 	console.log(queryUrl);
+=======
+			 
+>>>>>>> Stashed changes
 				$.getJSON(queryUrl, function( data ) {
 				   
 				   	 if(data.status == 'success'){

@@ -49,6 +49,7 @@
 			    var currentYear = new Date().getFullYear();
   			
 				for(var year = 2014; year<=currentYear; year++){
+<<<<<<< Updated upstream
 					if(year == currentYear){
 						$('#year').append($("<option/>", {
 					        value: year,
@@ -61,6 +62,12 @@
 					        text: year
 					    }));
 					}
+=======
+					$('#year').append($("<option/>", {
+				        value: year,
+				        text: year
+				    }));
+>>>>>>> Stashed changes
 				}
 				
 				var currentMonth = new Date().getMonth();
