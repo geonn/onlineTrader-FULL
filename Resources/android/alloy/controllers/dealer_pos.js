@@ -24,7 +24,7 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.dealer_pos = Ti.UI.createWindow({
-        fullscreen: true,
+        fullscreen: "false",
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_pos"
@@ -65,21 +65,17 @@ function Controller() {
         id: "__alloyId48"
     });
     $.__views.content.add($.__views.__alloyId48);
-    $.__views.posScrollview = Ti.UI.createScrollView({
+    $.__views.posview = Ti.UI.createWebView({
         layout: "vertical",
         width: "100%",
         bottom: 2,
-        height: "auto",
-        top: "90",
-        id: "posScrollview"
-    });
-    $.__views.dealer_pos.add($.__views.posScrollview);
-    $.__views.posview = Ti.UI.createWebView({
-        id: "posview",
         height: Ti.UI.SIZE,
-        url: "/html/dealer_pos.html"
+        top: "90",
+        id: "posview",
+        url: "/html/dealer_pos.html",
+        softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_HIDE_ON_FOCUS
     });
-    $.__views.posScrollview.add($.__views.posview);
+    $.__views.dealer_pos.add($.__views.posview);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
@@ -93,7 +89,6 @@ function Controller() {
     };
     Ti.App.addEventListener("addOrderComplete", addOrderComplete);
     $.posview.addEventListener("load", function() {
-        $.posview.height = Ti.Platform.displayCaps.platformHeight + 600;
         Ti.App.fireEvent("app:PosParam", {
             session: Ti.App.Properties.getString("session"),
             url: Ti.API.ADDPOS,

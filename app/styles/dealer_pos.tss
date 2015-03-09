@@ -13,6 +13,6 @@
 	layout: "vertical",
 	width : "100%",
 	bottom: 2,
-	height: "90%", 
+	height: "auto", 
 	top : "90"
 }

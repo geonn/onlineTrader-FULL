@@ -1,13 +1,11 @@
 <Alloy>
-	<Window class="container" id="dealer_newpost">
+	<Window class="container" id="dealer_newpost" fullscreen="false">
 		<Require src="_subheader"></Require>
 		<View class="content_post" id="content">
 			<Label id="titleHeader" class="h2">NEW POST</Label>
 			<ImageView class="separator" ></ImageView>
 		</View>
-		<ScrollView class="post_form" id="postScrollView" height="auto" >
-			<WebView id="newpostview"  url="/html/dealer_newpost.html" />
-		</ScrollView>
+		<WebView class="post_form" id="newpostview"  url="/html/dealer_newpost.html" softKeyboardOnFocus="Ti.UI.Android.SOFT_KEYBOARD_HIDE_ON_FOCUS" />
 		
 	</Window>
 </Alloy>

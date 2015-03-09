@@ -269,11 +269,7 @@ Ti.API.USER = "biomas";
 
 Ti.API.KEY = "06b53047cf294f7207789ff5293ad2dc";
 
-<<<<<<< Updated upstream
 Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.1.1&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
-=======
-Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.1&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
->>>>>>> Stashed changes
 
 Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.1&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
 

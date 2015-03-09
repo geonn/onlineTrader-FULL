@@ -17,7 +17,7 @@ Ti.App.addEventListener('addOrderComplete', addOrderComplete);
 
 
 $.newpostview.addEventListener('load', function(data) {  
-   $.newpostview.height = Ti.Platform.displayCaps.platformHeight;
+   //$.newpostview.height = Ti.Platform.displayCaps.platformHeight;
    Ti.App.fireEvent('app:newPostParam', { 
 		session: Ti.App.Properties.getString('session'), 
 		url: Ti.API.ADDORDER, 

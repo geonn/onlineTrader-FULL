@@ -74,7 +74,7 @@
         <tool-api-level>16</tool-api-level>
         <manifest>
             <application android:theme="@style/Theme.NoActionBar">
-                <activity android:windowSoftInputMode="stateVisible|adjustPan"/>
+                <activity android:windowSoftInputMode="adjustResize"/>
                 <activity
                     android:configChanges="keyboardHidden|orientation"
                     android:name="org.appcelerator.titanium.TiActivity" android:screenOrientation="portrait"/>

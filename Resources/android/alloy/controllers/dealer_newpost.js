@@ -24,7 +24,7 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.dealer_newpost = Ti.UI.createWindow({
-        fullscreen: true,
+        fullscreen: "false",
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_newpost"
@@ -65,20 +65,17 @@ function Controller() {
         id: "__alloyId33"
     });
     $.__views.content.add($.__views.__alloyId33);
-    $.__views.postScrollView = Ti.UI.createScrollView({
+    $.__views.newpostview = Ti.UI.createWebView({
         layout: "vertical",
         width: "100%",
         bottom: 2,
         height: "auto",
         top: "90",
-        id: "postScrollView"
-    });
-    $.__views.dealer_newpost.add($.__views.postScrollView);
-    $.__views.newpostview = Ti.UI.createWebView({
         id: "newpostview",
-        url: "/html/dealer_newpost.html"
+        url: "/html/dealer_newpost.html",
+        softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_HIDE_ON_FOCUS
     });
-    $.__views.postScrollView.add($.__views.newpostview);
+    $.__views.dealer_newpost.add($.__views.newpostview);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};
@@ -90,7 +87,6 @@ function Controller() {
     };
     Ti.App.addEventListener("addOrderComplete", addOrderComplete);
     $.newpostview.addEventListener("load", function() {
-        $.newpostview.height = Ti.Platform.displayCaps.platformHeight;
         Ti.App.fireEvent("app:newPostParam", {
             session: Ti.App.Properties.getString("session"),
             url: Ti.API.ADDORDER,
