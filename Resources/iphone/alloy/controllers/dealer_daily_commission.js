@@ -24,16 +24,17 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.dealer_orderlist = Ti.UI.createWindow({
+        fullscreen: false,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_orderlist"
     });
     $.__views.dealer_orderlist && $.addTopLevelView($.__views.dealer_orderlist);
-    $.__views.__alloyId9 = Alloy.createController("_subheader", {
-        id: "__alloyId9",
+    $.__views.__alloyId10 = Alloy.createController("_subheader", {
+        id: "__alloyId10",
         __parentSymbol: $.__views.dealer_orderlist
     });
-    $.__views.__alloyId9.setParent($.__views.dealer_orderlist);
+    $.__views.__alloyId10.setParent($.__views.dealer_orderlist);
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -47,7 +48,7 @@ function Controller() {
         id: "content"
     });
     $.__views.dealer_orderlist.add($.__views.content);
-    $.__views.__alloyId10 = Ti.UI.createLabel({
+    $.__views.__alloyId11 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -55,31 +56,31 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "DAILY COMMISSION LIST",
-        id: "__alloyId10"
-    });
-    $.__views.content.add($.__views.__alloyId10);
-    $.__views.__alloyId11 = Ti.UI.createImageView({
-        width: "100%",
-        height: 1,
-        backgroundColor: "#9d0404",
         id: "__alloyId11"
     });
     $.__views.content.add($.__views.__alloyId11);
-    $.__views.__alloyId12 = Ti.UI.createView({
+    $.__views.__alloyId12 = Ti.UI.createImageView({
+        width: "100%",
+        height: 1,
+        backgroundColor: "#9d0404",
+        id: "__alloyId12"
+    });
+    $.__views.content.add($.__views.__alloyId12);
+    $.__views.__alloyId13 = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
         bottom: 2,
         height: "89%",
-        id: "__alloyId12"
+        id: "__alloyId13"
     });
-    $.__views.content.add($.__views.__alloyId12);
+    $.__views.content.add($.__views.__alloyId13);
     $.__views.orderlistview = Ti.UI.createWebView({
         id: "orderlistview",
         height: "auto",
         disableBounce: "true",
         url: "/html/dealer_dailylist.html"
     });
-    $.__views.__alloyId12.add($.__views.orderlistview);
+    $.__views.__alloyId13.add($.__views.orderlistview);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

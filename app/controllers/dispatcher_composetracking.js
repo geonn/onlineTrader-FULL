@@ -15,28 +15,38 @@ function sendTracking(){
 	      //Do nothing
 	    }
 	    if (e.index === 1){
+	    	
 	    	var message = $.trackingMessage.getValue();
 	    	if(message == ""){
 	    		createAlert("Submit Error","Please enter tracking message");
 	    		return;
 	    	}
-	    	var strForm = "&o_id="+o_id+"&msg="+encodeURIComponent(message);
-			
-	    	
+	    	$.activityIndicator.show(); 
+			$.loadingBar.opacity = "1";
+			$.loadingBar.height = "100";
+	    	var strForm = "&o_id="+o_id+"&msg="+encodeURIComponent(message); 
 			var url = Ti.API.ADDTRACKING + Ti.App.Properties.getString('session')+strForm;
-			
+			console.log(url);
 	    	var client = Ti.Network.createHTTPClient({
 			     // function called when the response data is available
 			     onload : function(e) {
+			     	 
 			         alert("Tracking message submitted!");
+			         $.activityIndicator.hide(); 
+					 $.loadingBar.opacity = "0";
+					 $.loadingBar.height = "0";
 			         Ti.App.fireEvent('app:loadTrackingTable');
 	    			 goBack();
 			     },
 			     // function called when an error occurs, including a timeout
 			     onerror : function(e) {
-			        createAlert('Network declined','Failed to contact with server. Please make sure your device are connected to internet.');
+			     	$.activityIndicator.hide(); 
+					$.loadingBar.opacity = "0";
+					$.loadingBar.height = "0";
+			        Ti.App.fireEvent('app:loadTrackingTable');
+	    			 goBack();
 			     },
-			     timeout : 5000  // in milliseconds
+			     timeout : 6000  // in milliseconds
 			 });
 			 // Prepare the connection.
 			 client.open("GET", url);

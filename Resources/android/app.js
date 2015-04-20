@@ -49,12 +49,11 @@ function removeAllWindow() {
 }
 
 function setWindowRelationship(current) {
-    var tempArr = Ti.App.WindowCabinet;
-    current.open();
     Ti.App.CURRENTWINDOW = current;
     var tempArr = Ti.App.WindowCabinet;
     tempArr.push(current);
     Ti.App.WindowCabinet = tempArr;
+    current.open();
 }
 
 function slideEffect() {
@@ -113,7 +112,7 @@ function doLogout() {
                 onerror: function() {
                     createAlert("Network declined", "Failed to contact with server. Please make sure your device are connected to internet.");
                 },
-                timeout: 5e3
+                timeout: 6e4
             });
             client.open("GET", url);
             client.send();
@@ -141,7 +140,7 @@ function checkSession() {
             onerror: function() {
                 createAlert("Network declined", "Failed to contact with server. Please make sure your device are connected to internet.");
             },
-            timeout: 1e4
+            timeout: 6e4
         });
         client.open("GET", url);
         client.send();
@@ -166,7 +165,7 @@ function getNotificationNumber(payload) {
         onerror: function() {
             createAlert("Network declined", "Failed to contact with server. Please make sure your device are connected to internet.");
         },
-        timeout: 1e4
+        timeout: 6e4
     });
     client.open("GET", url);
     client.send();
@@ -269,9 +268,9 @@ Ti.API.USER = "biomas";
 
 Ti.API.KEY = "06b53047cf294f7207789ff5293ad2dc";
 
-Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.1.1&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.6&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
-Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.1&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
+Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.6&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
 
 Ti.API.LOGOUT = "http://" + Ti.API.API_DOMAIN + "/api/logoutUser?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
@@ -357,6 +356,16 @@ Ti.App.WindowCabinet = [];
 
 Ti.App.Payload = "";
 
+Ti.App.dealer_orderlist = false;
+
+Ti.App.dealer_poslist = false;
+
+Ti.App.staff_orderlist = false;
+
+Ti.App.staff_poslist = false;
+
+Ti.App.dispatch_orderlist = false;
+
 Alloy.Globals.deviceHeight = Ti.Platform.displayCaps.platformHeight;
 
 Alloy.Globals.osname = "android";
@@ -381,6 +390,7 @@ if ("android" == Alloy.Globals.osname) {
     CloudPush.addEventListener("callback", function(evt) {
         var payload = JSON.parse(evt.payload);
         Ti.App.Payload = payload;
+        console.log("alloy:" + payload);
         if (redirect) if ("not_running" == app_status) ; else {
             redirect = false;
             getNotificationNumber(payload);

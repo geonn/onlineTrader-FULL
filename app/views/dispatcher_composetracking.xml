@@ -11,6 +11,10 @@
 			<Label class="h2">ADD TRACKING</Label>
 			<ImageView class="separator" ></ImageView>
 		</View>
+		<View layout="vertical" id="loadingBar" height="0" width="100" borderRadius="15" top="230" zIndex="99" opacity="0" backgroundColor="#2E2E2E" >
+				<ActivityIndicator  id="activityIndicator" />
+				<Label text="Loading" left="20" top="10" color="#ffffff" />
+		</View>
 		<View class="details_form"  >
 			<TextArea id="textArea" id="trackingMessage" suppressReturn="false"
             borderWidth="2" borderColor="#bbb" borderRadius="2"

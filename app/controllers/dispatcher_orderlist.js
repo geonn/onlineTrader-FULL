@@ -18,7 +18,15 @@ var goToDetails = function(e){
 	
 	setWindowRelationship(orderdetail);
 };
-Ti.App.addEventListener("app:viewOrderDetail", goToDetails);
+
+
+
+if(!Ti.App.dispatch_orderlist ){
+	Ti.App.addEventListener("app:viewOrderDetail", goToDetails);
+	Ti.App.dispatch_orderlist = true;
+}  
+
+
 //Ti.App.removeEventListener('app:viewOrderDetail',goToDetails);
 
 $.orderlistview.addEventListener('load', function(data) { 

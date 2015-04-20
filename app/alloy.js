@@ -10,8 +10,8 @@ Ti.API.USER  = 'biomas';
 Ti.API.KEY   = '06b53047cf294f7207789ff5293ad2dc';
 
 // APP URL called
-Ti.API.CHECKSESSION = "http://"+Ti.API.API_DOMAIN+"/api/checkSession?version=1.1.1&user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
-Ti.API.LOGIN        = "http://"+Ti.API.API_DOMAIN+"/api/loginUser?version=1.1&user="+Ti.API.USER+"&key="+Ti.API.KEY;
+Ti.API.CHECKSESSION = "http://"+Ti.API.API_DOMAIN+"/api/checkSession?version=1.6&user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
+Ti.API.LOGIN        = "http://"+Ti.API.API_DOMAIN+"/api/loginUser?version=1.6&user="+Ti.API.USER+"&key="+Ti.API.KEY;
 Ti.API.LOGOUT	    = "http://"+Ti.API.API_DOMAIN+"/api/logoutUser?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETDAILYSUMMARY   = "http://"+Ti.API.API_DOMAIN+"/api/getDailySummaryByDealer?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETSUMMARY   = "http://"+Ti.API.API_DOMAIN+"/api/getSummaryByDealer?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
@@ -56,6 +56,12 @@ Ti.CURRENTWINDOW = '';
 Ti.App.CURRENTWINDOW = '';
 Ti.App.WindowCabinet = [];
 Ti.App.Payload  = '';
+//overcome eventlistener
+Ti.App.dealer_orderlist = false;
+Ti.App.dealer_poslist = false;
+Ti.App.staff_orderlist = false;
+Ti.App.staff_poslist = false;
+Ti.App.dispatch_orderlist = false;
 
 Alloy.Globals.deviceHeight = Ti.Platform.displayCaps.platformHeight;
 Alloy.Globals.osname       = Ti.Platform.osname;
@@ -111,7 +117,7 @@ function goNav(event){
 function goBack(){
 	var windowtree = Ti.App.WindowCabinet;
 	
-	if((windowtree.length-1) >= 0){	
+	if((windowtree.length-1) >= 0){	 
 		removeWindowRelationship();
    	}
    	
@@ -156,14 +162,13 @@ function removeAllWindow(){
 
 
 function setWindowRelationship(current){
- 	var tempArr = Ti.App.WindowCabinet;
- 	 current.open(); 
-
+ 	 
 	 Ti.App.CURRENTWINDOW = current;
 	 var tempArr = Ti.App.WindowCabinet;
 	 tempArr.push(current);
 	 
 	 Ti.App.WindowCabinet = tempArr;
+	 current.open(); 
 }
 
 function slideEffect(){
@@ -248,7 +253,7 @@ function doLogout(e) {
 			     onerror : function(e) {
 			        createAlert('Network declined','Failed to contact with server. Please make sure your device are connected to internet.');
 			     },
-			     timeout : 5000  // in milliseconds
+			     timeout : 60000  // in milliseconds
 			 });
 			 // Prepare the connection.
 			 client.open("GET", url);
@@ -287,7 +292,7 @@ function checkSession(){
 		     	createAlert("Network declined","Failed to contact with server. Please make sure your device are connected to internet.");
 		        
 		     },
-		     timeout : 10000  // in milliseconds
+		     timeout : 60000  // in milliseconds
 		 });
 		 // Prepare the connection.
 		 client.open("GET", url);
@@ -311,6 +316,7 @@ if(Alloy.Globals.osname == "android"){
 		var payload = JSON.parse(evt.payload);
 
 		Ti.App.Payload = payload;
+		console.log("alloy:"+payload);
 		// if trayClickLaunchedApp or trayClickFocusedApp set redirect as true
 		if(redirect){
 			if(app_status == "not_running"){
@@ -373,7 +379,7 @@ if(Alloy.Globals.osname == "android"){
 		     	createAlert("Network declined","Failed to contact with server. Please make sure your device are connected to internet.");
 		        
 		     },
-		     timeout : 10000  // in milliseconds
+		     timeout : 60000  // in milliseconds
 		 });
 		 // Prepare the connection.
 		 client.open("GET", url);

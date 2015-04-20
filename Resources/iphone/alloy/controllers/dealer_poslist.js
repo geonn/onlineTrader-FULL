@@ -36,6 +36,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dealer_poslist = Ti.UI.createWindow({
+        fullscreen: false,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_poslist"
@@ -48,24 +49,24 @@ function Controller() {
         id: "header"
     });
     $.__views.dealer_poslist.add($.__views.header);
-    $.__views.__alloyId55 = Ti.UI.createImageView({
+    $.__views.__alloyId54 = Ti.UI.createImageView({
         width: "7%",
         left: "10%",
         image: "/images/refresh-icon.png",
-        id: "__alloyId55"
+        id: "__alloyId54"
     });
-    $.__views.header.add($.__views.__alloyId55);
-    refreshPage ? $.__views.__alloyId55.addEventListener("touchend", refreshPage) : __defers["$.__views.__alloyId55!touchend!refreshPage"] = true;
-    $.__views.__alloyId56 = Ti.UI.createView({
+    $.__views.header.add($.__views.__alloyId54);
+    refreshPage ? $.__views.__alloyId54.addEventListener("touchend", refreshPage) : __defers["$.__views.__alloyId54!touchend!refreshPage"] = true;
+    $.__views.__alloyId55 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         right: 0,
         left: "25%",
         top: "0%",
-        id: "__alloyId56"
+        id: "__alloyId55"
     });
-    $.__views.header.add($.__views.__alloyId56);
+    $.__views.header.add($.__views.__alloyId55);
     $.__views.appTitle = Ti.UI.createLabel({
         width: Titanium.UI.SIZE,
         color: "#fff",
@@ -76,16 +77,16 @@ function Controller() {
         id: "appTitle"
     });
     $.__views.header.add($.__views.appTitle);
-    $.__views.__alloyId57 = Ti.UI.createView({
+    $.__views.__alloyId56 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         right: 0,
         left: "75%",
         top: "0%",
-        id: "__alloyId57"
+        id: "__alloyId56"
     });
-    $.__views.header.add($.__views.__alloyId57);
+    $.__views.header.add($.__views.__alloyId56);
     $.__views.rightNav = Ti.UI.createLabel({
         width: "25%",
         color: "#fff",
@@ -113,7 +114,7 @@ function Controller() {
         id: "content"
     });
     $.__views.dealer_poslist.add($.__views.content);
-    $.__views.__alloyId58 = Ti.UI.createLabel({
+    $.__views.__alloyId57 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -121,16 +122,16 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "COURIER LIST",
-        id: "__alloyId58"
+        id: "__alloyId57"
     });
-    $.__views.content.add($.__views.__alloyId58);
-    $.__views.__alloyId59 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId57);
+    $.__views.__alloyId58 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId59"
+        id: "__alloyId58"
     });
-    $.__views.content.add($.__views.__alloyId59);
+    $.__views.content.add($.__views.__alloyId58);
     $.__views.list_form = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
@@ -177,44 +178,22 @@ function Controller() {
     Ti.App.fireEvent("getSession", {
         session: Ti.App.Properties.getString("session")
     });
-    Ti.App.addEventListener("app:viewPosDetail", goPosDetails);
     Ti.UI.Android.hideSoftKeyboard();
-    var getData = function(data) {
-        Titanium.API.info("POS: getData");
-        var url = data.queryUrl;
-        xhr.get(url, onSuccessCallback, onErrorCallback, {
-            ttl: 60
-        });
-    };
-    var clearCache = function(data) {
-        Titanium.API.info("POS: clearCache");
-        xhr.clear(data.queryUrl);
-    };
-    var onSuccessCallback = function(e) {
-        Ti.App.fireEvent("html:realDrawTable", {
-            data: JSON.parse(e.data)
-        });
-    };
-    var onErrorCallback = function() {
-        alert("no cache or connection lost");
-    };
-    Ti.App.addEventListener("Ti:getData", getData);
-    Ti.App.addEventListener("Ti:clearCache", clearCache);
     $.poslistview.addEventListener("load", function() {
         Ti.App.fireEvent("app:posListParam", {
             session: Ti.App.Properties.getString("session"),
             posUrl: Ti.API.GETPOS + Ti.App.Properties.getString("session")
         });
     });
+    if (!Ti.App.dealer_poslist) {
+        Ti.App.addEventListener("app:viewPosDetail", goPosDetails);
+        Ti.App.dealer_poslist = true;
+    }
     $.dealer_poslist.addEventListener("close", function() {
         Ti.App.removeEventListener("app:viewPosDetail", goPosDetails);
-        Ti.App.removeEventListener("Ti:getData", getData);
-        Ti.App.removeEventListener("Ti:clearCache", clearCache);
     });
     $.dealer_poslist.addEventListener("androidback", function() {
         Ti.App.removeEventListener("app:viewPosDetail", goPosDetails);
-        Ti.App.removeEventListener("Ti:getData", getData);
-        Ti.App.removeEventListener("Ti:clearCache", clearCache);
     });
     $.rightNav.addEventListener("touchstart", function() {
         this.setBackgroundColor("#fff");
@@ -224,7 +203,7 @@ function Controller() {
         this.setBackgroundColor("transparent");
         this.setColor("#fff");
     });
-    __defers["$.__views.__alloyId55!touchend!refreshPage"] && $.__views.__alloyId55.addEventListener("touchend", refreshPage);
+    __defers["$.__views.__alloyId54!touchend!refreshPage"] && $.__views.__alloyId54.addEventListener("touchend", refreshPage);
     __defers["$.__views.rightNav!touchend!popup"] && $.__views.rightNav.addEventListener("touchend", popup);
     _.extend($, exports);
 }

@@ -45,7 +45,7 @@ function getSummary() {
 	     onerror : function(e) {
 	         getSummary();
 	     },
-	     timeout : 5000  // in milliseconds
+	     timeout : 60000  // in milliseconds
 	 });
 	 // Prepare the connection.
 	 client.open("GET", url);

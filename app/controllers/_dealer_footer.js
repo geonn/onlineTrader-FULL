@@ -1,5 +1,9 @@
 var args = arguments[0] || {};
 
+// function goNav(event){
+	// alert("footer");
+// }
+
 /** For footer More options**/
 //$.more.addEventListener('click', expandMoreMenu);
 

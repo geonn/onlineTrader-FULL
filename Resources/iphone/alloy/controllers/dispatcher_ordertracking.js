@@ -32,9 +32,9 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.tracking = Ti.UI.createWindow({
+        fullscreen: true,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
-        fullscreen: true,
         id: "tracking"
     });
     $.__views.tracking && $.addTopLevelView($.__views.tracking);

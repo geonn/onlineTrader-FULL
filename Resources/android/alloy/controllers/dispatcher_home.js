@@ -28,7 +28,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dispatcher_home_win = Ti.UI.createWindow({
-        fullscreen: true,
+        fullscreen: false,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dispatcher_home_win"
@@ -41,24 +41,24 @@ function Controller() {
         id: "header"
     });
     $.__views.dispatcher_home_win.add($.__views.header);
-    $.__views.__alloyId113 = Ti.UI.createImageView({
+    $.__views.__alloyId115 = Ti.UI.createImageView({
         width: "7%",
         left: "10%",
         image: "/images/refresh-icon.png",
-        id: "__alloyId113"
+        id: "__alloyId115"
     });
-    $.__views.header.add($.__views.__alloyId113);
-    refreshPage ? $.__views.__alloyId113.addEventListener("touchend", refreshPage) : __defers["$.__views.__alloyId113!touchend!refreshPage"] = true;
-    $.__views.__alloyId114 = Ti.UI.createView({
+    $.__views.header.add($.__views.__alloyId115);
+    refreshPage ? $.__views.__alloyId115.addEventListener("touchend", refreshPage) : __defers["$.__views.__alloyId115!touchend!refreshPage"] = true;
+    $.__views.__alloyId116 = Ti.UI.createView({
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         right: 0,
         left: "25%",
         top: "0%",
-        id: "__alloyId114"
+        id: "__alloyId116"
     });
-    $.__views.header.add($.__views.__alloyId114);
+    $.__views.header.add($.__views.__alloyId116);
     $.__views.appTitle = Ti.UI.createLabel({
         width: Titanium.UI.SIZE,
         color: "#fff",
@@ -81,7 +81,7 @@ function Controller() {
         id: "content"
     });
     $.__views.dispatcher_home_win.add($.__views.content);
-    $.__views.__alloyId115 = Ti.UI.createLabel({
+    $.__views.__alloyId117 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -89,16 +89,16 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "HOME - ALL TASK",
-        id: "__alloyId115"
+        id: "__alloyId117"
     });
-    $.__views.content.add($.__views.__alloyId115);
-    $.__views.__alloyId116 = Ti.UI.createImageView({
+    $.__views.content.add($.__views.__alloyId117);
+    $.__views.__alloyId118 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId116"
+        id: "__alloyId118"
     });
-    $.__views.content.add($.__views.__alloyId116);
+    $.__views.content.add($.__views.__alloyId118);
     $.__views.home_form = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
@@ -151,7 +151,7 @@ function Controller() {
             state: Ti.API.GETSTATE
         });
     });
-    __defers["$.__views.__alloyId113!touchend!refreshPage"] && $.__views.__alloyId113.addEventListener("touchend", refreshPage);
+    __defers["$.__views.__alloyId115!touchend!refreshPage"] && $.__views.__alloyId115.addEventListener("touchend", refreshPage);
     _.extend($, exports);
 }
 

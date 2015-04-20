@@ -46,7 +46,7 @@ function Controller() {
             onerror: function(e) {
                 alert(JSON.stringify(e));
             },
-            timeout: 5e3
+            timeout: 6e4
         });
         client.open("GET", url);
         client.send();
@@ -68,6 +68,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dispatcher_settings = Ti.UI.createWindow({
+        fullscreen: false,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dispatcher_settings"
@@ -312,7 +313,7 @@ function Controller() {
         onerror: function(e) {
             alert(e);
         },
-        timeout: 5e3
+        timeout: 6e4
     });
     client.open("GET", url);
     client.send();

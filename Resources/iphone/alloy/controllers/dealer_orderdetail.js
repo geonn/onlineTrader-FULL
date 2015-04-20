@@ -35,7 +35,7 @@ function Controller() {
             onerror: function() {
                 alert("An known error occur. Please try again.");
             },
-            timeout: 5e3
+            timeout: 6e4
         });
         client.open("GET", url);
         client.send();
@@ -57,6 +57,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.orderdetail_win = Ti.UI.createWindow({
+        fullscreen: false,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "orderdetail_win"

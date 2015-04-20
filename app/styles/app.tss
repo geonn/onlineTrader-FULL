@@ -1,5 +1,5 @@
 "Window":{
-	fullscreen: true
+	fullscreen: false
 },
 "Label":{
 	width: Titanium.UI.FILL,
@@ -103,9 +103,9 @@
 
 },
 "#activityIndicator" : { 
- 	style: Ti.UI.ActivityIndicatorStyle.BIG,
-	 top:15,
-	 left:20,
-	 width:60,
+	style: Ti.UI.ActivityIndicatorStyle.BIG,
+	top:15,
+	left:20,
+	width:60,
 }
 

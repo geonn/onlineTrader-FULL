@@ -24,16 +24,17 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.dealer_newpost = Ti.UI.createWindow({
+        fullscreen: "false",
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_newpost"
     });
     $.__views.dealer_newpost && $.addTopLevelView($.__views.dealer_newpost);
-    $.__views.__alloyId32 = Alloy.createController("_subheader", {
-        id: "__alloyId32",
+    $.__views.__alloyId33 = Alloy.createController("_subheader", {
+        id: "__alloyId33",
         __parentSymbol: $.__views.dealer_newpost
     });
-    $.__views.__alloyId32.setParent($.__views.dealer_newpost);
+    $.__views.__alloyId33.setParent($.__views.dealer_newpost);
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -57,28 +58,24 @@ function Controller() {
         id: "titleHeader"
     });
     $.__views.content.add($.__views.titleHeader);
-    $.__views.__alloyId33 = Ti.UI.createImageView({
+    $.__views.__alloyId34 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId33"
+        id: "__alloyId34"
     });
-    $.__views.content.add($.__views.__alloyId33);
-    $.__views.__alloyId34 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId34);
+    $.__views.newpostview = Ti.UI.createWebView({
         layout: "vertical",
         width: "100%",
         bottom: 2,
-        height: "89%",
+        height: "auto",
         top: "90",
-        id: "__alloyId34"
-    });
-    $.__views.dealer_newpost.add($.__views.__alloyId34);
-    $.__views.newpostview = Ti.UI.createWebView({
         id: "newpostview",
-        disableBounce: "true",
-        url: "/html/dealer_newpost.html"
+        url: "/html/dealer_newpost.html",
+        softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_HIDE_ON_FOCUS
     });
-    $.__views.__alloyId34.add($.__views.newpostview);
+    $.__views.dealer_newpost.add($.__views.newpostview);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};

@@ -23,6 +23,7 @@ function Controller() {
         }
         var dt = Ti.App.Properties.getString("deviceToken");
         var url = Ti.API.LOGIN + "&username=" + username + "&password=" + password + "&deviceToken=" + dt;
+        console.log(url);
         var client = Ti.Network.createHTTPClient({
             onload: function() {
                 var res = JSON.parse(this.responseText);
@@ -32,11 +33,9 @@ function Controller() {
                         Ti.App.Properties.setString("session", res.data.session);
                         "android" == Alloy.Globals.osname && subscribeDeviceToken(dt, res.data.roles);
                         if ("dealer" == res.data.roles || "staff" == res.data.roles) {
-                            $.index.close();
                             var summary = Alloy.createController(res.data.roles + "_summary").getView();
                             setWindowRelationship(summary);
                         } else {
-                            $.index.close();
                             var home = Alloy.createController(res.data.roles + "_home").getView();
                             setWindowRelationship(home);
                         }
@@ -58,7 +57,7 @@ function Controller() {
                 $.loadingBar.height = "0";
                 createAlert("Network declined", "Failed to contact with server. Please make sure your device are connected to internet.");
             },
-            timeout: 1e4
+            timeout: 6e4
         });
         client.open("GET", url);
         client.send();
@@ -80,7 +79,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.index = Ti.UI.createWindow({
-        fullscreen: true,
+        fullscreen: false,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "index"
@@ -123,15 +122,15 @@ function Controller() {
         id: "activityIndicator"
     });
     $.__views.loadingBar.add($.__views.activityIndicator);
-    $.__views.__alloyId160 = Ti.UI.createLabel({
+    $.__views.__alloyId162 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#ffffff",
         text: "Loading",
         left: "20",
         top: "10",
-        id: "__alloyId160"
+        id: "__alloyId162"
     });
-    $.__views.loadingBar.add($.__views.__alloyId160);
+    $.__views.loadingBar.add($.__views.__alloyId162);
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -145,23 +144,23 @@ function Controller() {
         id: "content"
     });
     $.__views.index.add($.__views.content);
-    $.__views.__alloyId161 = Ti.UI.createScrollView({
+    $.__views.__alloyId163 = Ti.UI.createScrollView({
         showVerticalScrollIndicator: "true",
         showHorizontalScrollIndicator: "true",
         height: "320",
         width: "100%",
-        id: "__alloyId161"
+        id: "__alloyId163"
     });
-    $.__views.content.add($.__views.__alloyId161);
-    $.__views.__alloyId162 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId163);
+    $.__views.__alloyId164 = Ti.UI.createLabel({
         width: "120",
         color: "#e02222",
         backgroundImage: "/images/online-trader-logo.png",
         height: "120",
         bottom: "150",
-        id: "__alloyId162"
+        id: "__alloyId164"
     });
-    $.__views.__alloyId161.add($.__views.__alloyId162);
+    $.__views.__alloyId163.add($.__views.__alloyId164);
     $.__views.username = Ti.UI.createTextField({
         height: "55dp",
         font: {
@@ -177,7 +176,7 @@ function Controller() {
         borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "username"
     });
-    $.__views.__alloyId161.add($.__views.username);
+    $.__views.__alloyId163.add($.__views.username);
     $.__views.usernamehint = Ti.UI.createLabel({
         width: "90%",
         color: "#333",
@@ -189,7 +188,7 @@ function Controller() {
         text: "Enter Username",
         id: "usernamehint"
     });
-    $.__views.__alloyId161.add($.__views.usernamehint);
+    $.__views.__alloyId163.add($.__views.usernamehint);
     $.__views.password = Ti.UI.createTextField({
         passwordMask: true,
         height: "55dp",
@@ -206,7 +205,7 @@ function Controller() {
         borderStyle: Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
         id: "password"
     });
-    $.__views.__alloyId161.add($.__views.password);
+    $.__views.__alloyId163.add($.__views.password);
     $.__views.passwordhint = Ti.UI.createLabel({
         width: "90%",
         color: "#333",
@@ -218,7 +217,7 @@ function Controller() {
         text: "Enter Password",
         id: "passwordhint"
     });
-    $.__views.__alloyId161.add($.__views.passwordhint);
+    $.__views.__alloyId163.add($.__views.passwordhint);
     $.__views.btnLogin = Ti.UI.createButton({
         backgroundImage: "/images/btn-login.png",
         width: "90%",
@@ -242,11 +241,9 @@ function Controller() {
                 if ("success" == res.status) {
                     var rl = Ti.App.Properties.getString("roles");
                     if ("dealer" == rl || "staff" == rl) {
-                        $.index.close();
                         var summary = Alloy.createController(rl + "_summary").getView();
                         setWindowRelationship(summary);
                     } else {
-                        $.index.close();
                         var home = Alloy.createController(rl + "_home").getView();
                         setWindowRelationship(home);
                     }

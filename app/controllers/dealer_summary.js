@@ -62,7 +62,7 @@ function getProfitSummary(e){
 	     onerror : function(e) {
 	         getProfitSummary(e);
 	     },
-	     timeout : 5000  // in milliseconds
+	     timeout : 60000  // in milliseconds
 	 });
 	 // Prepare the connection.
 	 client.open("GET", url);
@@ -103,7 +103,7 @@ function getSummary(e) {
 	     onerror : function(e) {
 	         getSummary(e);
 	     },
-	     timeout : 10000  // in milliseconds
+	     timeout : 60000  // in milliseconds
 	 });
 	 // Prepare the connection.
 	 client.open("GET", url);
@@ -175,7 +175,7 @@ function getAnnouncement(e) {
 	     onerror : function(e) {
 	         getAnnouncement(e);
 	     },
-	     timeout : 5000  // in milliseconds
+	     timeout : 60000  // in milliseconds
 	 });
 	 // Prepare the connection.
 	 client.open("GET", url);

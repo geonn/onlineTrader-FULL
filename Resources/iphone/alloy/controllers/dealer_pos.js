@@ -24,6 +24,7 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.dealer_pos = Ti.UI.createWindow({
+        fullscreen: "false",
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_pos"
@@ -64,21 +65,17 @@ function Controller() {
         id: "__alloyId49"
     });
     $.__views.content.add($.__views.__alloyId49);
-    $.__views.__alloyId50 = Ti.UI.createView({
+    $.__views.posview = Ti.UI.createWebView({
         layout: "vertical",
         width: "100%",
         bottom: 2,
-        height: "90%",
+        height: Ti.UI.SIZE,
         top: "90",
-        id: "__alloyId50"
-    });
-    $.__views.dealer_pos.add($.__views.__alloyId50);
-    $.__views.posview = Ti.UI.createWebView({
         id: "posview",
-        disableBounce: "true",
-        url: "/html/dealer_pos.html"
+        url: "/html/dealer_pos.html",
+        softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_HIDE_ON_FOCUS
     });
-    $.__views.__alloyId50.add($.__views.posview);
+    $.__views.dealer_pos.add($.__views.posview);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};

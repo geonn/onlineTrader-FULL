@@ -21,12 +21,12 @@ if(ses == null){
 	         	var rl = Ti.App.Properties.getString('roles');
 	
 				if(rl == 'dealer' || rl == 'staff'){
-					$.index.close();
+					//$.index.close();
 					var summary = Alloy.createController(rl + '_summary').getView();
 				   	
 					setWindowRelationship(summary);
 				}else{
-					$.index.close();
+					//$.index.close();
 					var home = Alloy.createController(rl + '_home').getView();
 				   	
 				   	setWindowRelationship(home);
@@ -77,7 +77,7 @@ function doLogin(e) {
 	}
 	var dt = Ti.App.Properties.getString('deviceToken');
 	var url = Ti.API.LOGIN +"&username="+username+"&password="+password+"&deviceToken="+dt;
- 
+ 	console.log(url);
 	var client = Ti.Network.createHTTPClient({
      // function called when the response data is available
      onload : function(e) {
@@ -87,24 +87,23 @@ function doLogin(e) {
          	 if(res.data.roles == "admin"){
          	 	createAlert('Roles declined','Your roles(admin) is not authorize for this app');         	 	
          	 }else{
-         	 	 Ti.App.Properties.setString('roles',res.data.roles);
-         	 	 Ti.App.Properties.setString('session',res.data.session);
-         	 	 
+         	 	Ti.App.Properties.setString('roles',res.data.roles);
+         	 	Ti.App.Properties.setString('session',res.data.session);
+         	
          	 	 if(Alloy.Globals.osname == "android"){
          	 	 	subscribeDeviceToken(dt,res.data.roles);
          	 	 }
          	 	 
          	 	 if(res.data.roles == 'dealer' || res.data.roles == 'staff'){
-         	 	 	$.index.close();
-         	 	 	var summary = Alloy.createController(res.data.roles + '_summary').getView();
-         	 	 	
+         	 	 	// $.index.close();
+         	 	 	var summary = Alloy.createController(res.data.roles + '_summary').getView(); 
 	    	     	setWindowRelationship(summary);
-         	 	 }else{
-	    	     	$.index.close();
-         	 	 	var home = Alloy.createController(res.data.roles + '_home').getView();
-
-			        setWindowRelationship(home);
-         	 	 }
+         	 	  }else{ 
+//          	 	 	 
+	    	     	// $.index.close(); 
+         	 	 	var home = Alloy.createController(res.data.roles + '_home').getView(); 
+			      	setWindowRelationship(home);
+         	 	  }
 	       		 if(payload != null){
 					getNotificationNumber(payload);	
 					//Ti.App.Payload = '';
@@ -129,7 +128,7 @@ function doLogin(e) {
 		$.loadingBar.height = "0";
         createAlert('Network declined','Failed to contact with server. Please make sure your device are connected to internet.');
      },
-     timeout : 10000  // in milliseconds
+     timeout : 60000  // in milliseconds
  });
  // Prepare the connection.
  client.open("GET", url);

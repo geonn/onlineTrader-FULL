@@ -9,7 +9,6 @@ Ti.App.Properties.setString('module', 'dealer_poslist');
 Ti.App.fireEvent("getSession", {session:Ti.App.Properties.getString("session")});
 /**End**/
 
-Ti.App.addEventListener("app:viewPosDetail", goPosDetails);
 Ti.UI.Android.hideSoftKeyboard(); 
 
 function goPosDetails(e){
@@ -27,17 +26,7 @@ function refreshPage(e){
 	Ti.App.fireEvent('app:refreshPage');
 }
 ///////////function////////////
-var getData = function (data){
-	Titanium.API.info("POS: getData");
-	var url = data.queryUrl;
-	xhr.get(url, onSuccessCallback, onErrorCallback, { ttl: 60 });
-};
-
-var clearCache = function (data){
-	Titanium.API.info("POS: clearCache");
-	xhr.clear(data.queryUrl);
-};
-
+ 
 
 var onSuccessCallback = function(e) {
 	Ti.App.fireEvent('html:realDrawTable', { 
@@ -50,8 +39,6 @@ var onErrorCallback = function(e) {
 	// Handle your errors in here
 };
  
-Ti.App.addEventListener('Ti:getData', getData); 
-Ti.App.addEventListener('Ti:clearCache', clearCache);
  
  	      
 $.poslistview.addEventListener('load', function(data) { 
@@ -63,16 +50,18 @@ $.poslistview.addEventListener('load', function(data) {
 	
 });
 
+if(!Ti.App.dealer_poslist ){
+	Ti.App.addEventListener("app:viewPosDetail", goPosDetails); 
+	Ti.App.dealer_poslist = true;
+}  
+
+
 $.dealer_poslist.addEventListener('close', function(e){				// when this window close, trigger this event to remove the event.
-	Ti.App.removeEventListener('app:viewPosDetail',goPosDetails);
-	Ti.App.removeEventListener('Ti:getData', getData); 
-	Ti.App.removeEventListener('Ti:clearCache', clearCache);
+	Ti.App.removeEventListener('app:viewPosDetail',goPosDetails); 
 });
 
 $.dealer_poslist.addEventListener('androidback', function(e){				// when this window close, trigger this event to remove the event.
-	Ti.App.removeEventListener('app:viewPosDetail',goPosDetails);
-	Ti.App.removeEventListener('Ti:getData', getData); 
-	Ti.App.removeEventListener('Ti:clearCache', clearCache);
+	Ti.App.removeEventListener('app:viewPosDetail',goPosDetails); 
 });
 
 $.rightNav.addEventListener("touchstart", function(e){
