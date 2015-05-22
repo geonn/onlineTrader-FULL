@@ -141,14 +141,6 @@ function Controller() {
         id: "list_form"
     });
     $.__views.dealer_orderlist.add($.__views.list_form);
-    $.__views.orderlistable = Ti.UI.createScrollView({
-        separatorStyle: Titanium.UI.iPhone.TableViewSeparatorStyle.NONE,
-        separatorColor: "transparent",
-        height: "auto",
-        id: "orderlistable",
-        layout: "vertical"
-    });
-    $.__views.list_form.add($.__views.orderlistable);
     $.__views.orderlistview = Ti.UI.createWebView({
         layout: "vertical",
         id: "orderlistview",
@@ -156,7 +148,7 @@ function Controller() {
         disableBounce: "true",
         url: "/html/dealer_orderlist.html"
     });
-    $.__views.orderlistable.add($.__views.orderlistview);
+    $.__views.list_form.add($.__views.orderlistview);
     $.__views.footer = Alloy.createController("_dealer_footer", {
         height: 64,
         width: Titanium.UI.FILL,

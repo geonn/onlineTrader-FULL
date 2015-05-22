@@ -13,10 +13,8 @@
 			<Label class="h2">DEALER - ORDER LIST</Label>
 			<ImageView class="separator" ></ImageView>
 		</View>
-		<View class="list_form" id="list_form" >
-			<ScrollView height="auto" id="orderlistable"  layout="vertical" >
-	        	<WebView layout="vertical" id="orderlistview" height="auto" disableBounce="true" url="/html/dealer_orderlist.html" />
-	        </ScrollView>	 
+		<View class="list_form" id="list_form">
+        	<WebView layout="vertical" id="orderlistview" height="auto" disableBounce="true" url="/html/dealer_orderlist.html" />
 		</View>
 		<Require type="view" src="_dealer_footer" id="footer"/>
 	
