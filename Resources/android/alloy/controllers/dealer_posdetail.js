@@ -24,7 +24,11 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.posdetail_win = Ti.UI.createWindow({
+<<<<<<< HEAD
         fullscreen: false,
+=======
+        fullscreen: "false",
+>>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "posdetail_win"

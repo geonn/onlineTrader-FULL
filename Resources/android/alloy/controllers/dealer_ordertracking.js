@@ -31,7 +31,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.tracking = Ti.UI.createWindow({
-        fullscreen: true,
+        fullscreen: "false",
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "tracking"

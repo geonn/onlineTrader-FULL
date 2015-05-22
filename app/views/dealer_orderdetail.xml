@@ -1,5 +1,5 @@
 <Alloy>
-	<Window class="container" id="orderdetail_win">
+	<Window class="container" id="orderdetail_win" fullscreen="false">
 		<Require src="_orderdetailheader"></Require>
 		<View class="content_post" id="content">
 			<Label class="h2">ORDER DETAILS</Label>

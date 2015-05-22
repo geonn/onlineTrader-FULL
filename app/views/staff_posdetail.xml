@@ -1,5 +1,5 @@
 <Alloy>
-	<Window class="container" id="posdetail_win">
+	<Window class="container" id="posdetail_win" fullscreen="false">
 		<Require src="_subheader"></Require>
 		<View class="content_post" id="content">
 			<Label class="h2">POS DETAILS</Label>

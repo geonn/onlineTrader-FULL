@@ -1,6 +1,6 @@
 
 <Alloy>
-	<Window class="container" id="tracking">
+	<Window class="container" id="tracking" fullscreen="false">
 		<View id="header">
 				<Label id="backTitle" onTouchend="goBack" >BACK</Label>
 				<View class="border-line" left="25%" top="0%"></View>
