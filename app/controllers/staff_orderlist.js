@@ -9,11 +9,7 @@ Ti.App.Properties.setString('controller', "dealer_orderlist");
 /**Experiment**/
 Ti.App.fireEvent("getSession", {session:Ti.App.Properties.getString("session")});
 /**End**/
-
-Ti.App.addEventListener("app:viewOrderDetail", goToDetails);
-
-//$.ptr.init($.tableView);
-
+ 
 var actualHeight = $.orderlistview.evalJS("document.height;");
 
 function goToDetails(e){
@@ -33,16 +29,7 @@ function refreshPage(e){
 }
 
 ///////////function////////////
-var getData = function (data){
-	var url = data.queryUrl;
-	xhr.get(url, onSuccessCallback, onErrorCallback, { ttl: 60 });
-};
-
-var clearCache = function (data){
-	xhr.clear(data.queryUrl);
-};
-
-
+ 
 var onSuccessCallback = function(e) {
 	
 	Ti.App.fireEvent('html:realDrawTable', { 
@@ -55,8 +42,11 @@ var onErrorCallback = function(e) {
 	// Handle your errors in here
 };
  
-Ti.App.addEventListener('Ti:getData', getData); 
-Ti.App.addEventListener('Ti:clearCache', clearCache);
+if(!Ti.App.staff_orderlist ){
+	Ti.App.addEventListener("app:viewOrderDetail", goToDetails); 
+	Ti.App.staff_orderlist = true;
+} 
+ 
  
 $.orderlistview.addEventListener('load', function(data) { 
   	Ti.App.fireEvent('app:orderListParam', { 
@@ -65,15 +55,11 @@ $.orderlistview.addEventListener('load', function(data) {
 	});
 });
 
-$.dealer_orderlist.addEventListener('close', function(e){				// when this window close, trigger this event to remove the event.
-	Ti.App.removeEventListener('Ti:getData', getData);
-	Ti.App.removeEventListener('Ti:clearCache', clearCache);
+$.dealer_orderlist.addEventListener('close', function(e){		 
 	Ti.App.removeEventListener('app:viewOrderDetail',goToDetails);
 
 });
 
-$.dealer_orderlist.addEventListener('androidback', function(e){				// when this window close, trigger this event to remove the event.
-	Ti.App.removeEventListener('Ti:getData', getData);
-	Ti.App.removeEventListener('Ti:clearCache', clearCache);
+$.dealer_orderlist.addEventListener('androidback', function(e){	 
 	Ti.App.removeEventListener('app:viewOrderDetail',goToDetails);
 });

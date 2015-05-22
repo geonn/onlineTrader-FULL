@@ -36,7 +36,7 @@ function Controller() {
             onerror: function() {
                 getSummary();
             },
-            timeout: 5e3
+            timeout: 6e4
         });
         client.open("GET", url);
         client.send();
@@ -58,7 +58,11 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dispatcher_summary = Ti.UI.createWindow({
+<<<<<<< HEAD
         fullscreen: true,
+=======
+        fullscreen: false,
+>>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dispatcher_summary"

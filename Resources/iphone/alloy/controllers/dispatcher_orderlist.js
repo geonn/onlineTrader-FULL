@@ -28,7 +28,11 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dealer_orderlist = Ti.UI.createWindow({
+<<<<<<< HEAD
         fullscreen: true,
+=======
+        fullscreen: false,
+>>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_orderlist"
@@ -143,7 +147,10 @@ function Controller() {
         var orderdetail = Alloy.createController(roles + "_orderdetail", param).getView();
         setWindowRelationship(orderdetail);
     };
-    Ti.App.addEventListener("app:viewOrderDetail", goToDetails);
+    if (!Ti.App.dispatch_orderlist) {
+        Ti.App.addEventListener("app:viewOrderDetail", goToDetails);
+        Ti.App.dispatch_orderlist = true;
+    }
     $.orderlistview.addEventListener("load", function() {
         Ti.App.fireEvent("app:dispatchrorderListParam", {
             session: Ti.App.Properties.getString("session"),

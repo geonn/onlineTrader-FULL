@@ -64,7 +64,11 @@ function Controller() {
         backgroundColor: "#9d0404",
         id: "__alloyId48"
     });
+<<<<<<< HEAD
     $.__views.content.add($.__views.__alloyId48);
+=======
+    $.__views.content.add($.__views.__alloyId49);
+>>>>>>> origin/master
     $.__views.posview = Ti.UI.createWebView({
         layout: "vertical",
         width: "100%",

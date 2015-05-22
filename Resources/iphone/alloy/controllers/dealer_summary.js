@@ -25,7 +25,7 @@ function Controller() {
             onerror: function(e) {
                 getProfitSummary(e);
             },
-            timeout: 5e3
+            timeout: 6e4
         });
         client.open("GET", url);
         client.send();
@@ -52,7 +52,7 @@ function Controller() {
             onerror: function(e) {
                 getSummary(e);
             },
-            timeout: 1e4
+            timeout: 6e4
         });
         client.open("GET", url);
         client.send();
@@ -108,7 +108,7 @@ function Controller() {
             onerror: function(e) {
                 getAnnouncement(e);
             },
-            timeout: 5e3
+            timeout: 6e4
         });
         client.open("GET", url);
         client.send();
@@ -130,7 +130,11 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dealer_summary = Ti.UI.createWindow({
+<<<<<<< HEAD
         fullscreen: true,
+=======
+        fullscreen: false,
+>>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_summary"
@@ -144,6 +148,7 @@ function Controller() {
         __parentSymbol: $.__views.dealer_summary
     });
     $.__views.header.setParent($.__views.dealer_summary);
+<<<<<<< HEAD
     $.__views.__alloyId83 = Ti.UI.createView({
         width: Ti.UI.FILL,
         height: Ti.UI.FILL,
@@ -153,6 +158,8 @@ function Controller() {
         id: "__alloyId83"
     });
     $.__views.dealer_summary.add($.__views.__alloyId83);
+=======
+>>>>>>> origin/master
     $.__views.__alloyId84 = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -166,7 +173,11 @@ function Controller() {
         height: "170",
         id: "__alloyId84"
     });
+<<<<<<< HEAD
     $.__views.__alloyId83.add($.__views.__alloyId84);
+=======
+    $.__views.dealer_summary.add($.__views.__alloyId84);
+>>>>>>> origin/master
     $.__views.__alloyId85 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
@@ -353,8 +364,45 @@ function Controller() {
         height: 1,
         backgroundColor: "#9d0404",
         id: "__alloyId97"
+<<<<<<< HEAD
     });
     $.__views.__alloyId84.add($.__views.__alloyId97);
+=======
+    });
+    $.__views.__alloyId84.add($.__views.__alloyId97);
+    $.__views.loadingBar = Ti.UI.createView({
+        layout: "vertical",
+        id: "loadingBar",
+        height: "0",
+        width: "100",
+        borderRadius: "15",
+        top: "0",
+        opacity: "1",
+        backgroundColor: "#2E2E2E"
+    });
+    $.__views.dealer_summary.add($.__views.loadingBar);
+    $.__views.activityIndicator = Ti.UI.createActivityIndicator({
+        style: Ti.UI.ActivityIndicatorStyle.BIG,
+        top: 15,
+        left: 20,
+        width: 60,
+        id: "activityIndicator"
+    });
+    $.__views.loadingBar.add($.__views.activityIndicator);
+    $.__views.__alloyId98 = Ti.UI.createLabel({
+        width: Titanium.UI.FILL,
+        color: "#ffffff",
+        font: {
+            fontSize: "12dp",
+            fontFamily: "sans-serif"
+        },
+        text: "Loading",
+        left: "20",
+        top: "10",
+        id: "__alloyId98"
+    });
+    $.__views.loadingBar.add($.__views.__alloyId98);
+>>>>>>> origin/master
     $.__views.webview = Ti.UI.createWebView({
         top: 0,
         id: "webview",

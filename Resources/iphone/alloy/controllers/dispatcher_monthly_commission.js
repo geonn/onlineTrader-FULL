@@ -69,7 +69,7 @@ function Controller() {
             onerror: function() {
                 createAlert("Network declined", "Failed to contact with server. Please make sure your device are connected to internet.");
             },
-            timeout: 1e4
+            timeout: 6e4
         });
         client.open("GET", url);
         client.send();
@@ -90,7 +90,11 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.dispatcher_monthly_commission = Ti.UI.createWindow({
+<<<<<<< HEAD
         fullscreen: true,
+=======
+        fullscreen: false,
+>>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dispatcher_monthly_commission"

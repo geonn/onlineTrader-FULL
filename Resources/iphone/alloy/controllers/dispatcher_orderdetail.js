@@ -58,7 +58,7 @@ function Controller() {
             onerror: function() {
                 alert("An known error occur. Please try again.");
             },
-            timeout: 5e3
+            timeout: 6e4
         });
         client.open("GET", url);
         client.send();
@@ -92,7 +92,11 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dis_orderdetail_win = Ti.UI.createWindow({
+<<<<<<< HEAD
         fullscreen: true,
+=======
+        fullscreen: false,
+>>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dis_orderdetail_win"

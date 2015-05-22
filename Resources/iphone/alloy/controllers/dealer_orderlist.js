@@ -36,7 +36,11 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dealer_orderlist = Ti.UI.createWindow({
+<<<<<<< HEAD
         fullscreen: true,
+=======
+        fullscreen: false,
+>>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_orderlist"
@@ -179,27 +183,11 @@ function Controller() {
     Ti.App.fireEvent("getSession", {
         session: Ti.App.Properties.getString("session")
     });
-    Ti.App.addEventListener("app:viewOrderDetail", goToDetails);
     $.orderlistview.evalJS("document.height;");
-    var getData = function(data) {
-        var url = data.queryUrl;
-        xhr.get(url, onSuccessCallback, onErrorCallback, {
-            ttl: 60
-        });
-    };
-    var clearCache = function(data) {
-        xhr.clear(data.queryUrl);
-    };
-    var onSuccessCallback = function(e) {
-        Ti.App.fireEvent("html:realDrawTable", {
-            data: JSON.parse(e.data)
-        });
-    };
-    var onErrorCallback = function() {
-        alert("no cache or connection lost");
-    };
-    Ti.App.addEventListener("Ti:getData", getData);
-    Ti.App.addEventListener("Ti:clearCache", clearCache);
+    if (!Ti.App.dealer_orderlist) {
+        Ti.App.addEventListener("app:viewOrderDetail", goToDetails);
+        Ti.App.dealer_orderlist = true;
+    }
     $.orderlistview.addEventListener("load", function() {
         Ti.App.fireEvent("app:orderListParam", {
             session: Ti.App.Properties.getString("session"),
@@ -207,13 +195,9 @@ function Controller() {
         });
     });
     $.dealer_orderlist.addEventListener("close", function() {
-        Ti.App.removeEventListener("Ti:getData", getData);
-        Ti.App.removeEventListener("Ti:clearCache", clearCache);
         Ti.App.removeEventListener("app:viewOrderDetail", goToDetails);
     });
     $.dealer_orderlist.addEventListener("androidback", function() {
-        Ti.App.removeEventListener("Ti:getData", getData);
-        Ti.App.removeEventListener("Ti:clearCache", clearCache);
         Ti.App.removeEventListener("app:viewOrderDetail", goToDetails);
     });
     __defers["$.__views.__alloyId38!touchend!refreshPage"] && $.__views.__alloyId38.addEventListener("touchend", refreshPage);

@@ -24,7 +24,11 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.dealer_orderlist = Ti.UI.createWindow({
+<<<<<<< HEAD
         fullscreen: true,
+=======
+        fullscreen: false,
+>>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_orderlist"
@@ -94,7 +98,6 @@ function Controller() {
         var today = day + "/" + month + "/" + year;
     }
     $.orderlistview.addEventListener("load", function() {
-        console.log(Ti.API.GETCOMMISSION + Ti.App.Properties.getString("session") + "&date=" + today);
         Ti.App.fireEvent("app:orderListParam", {
             session: Ti.App.Properties.getString("session"),
             url: Ti.API.GETCOMMISSION + Ti.App.Properties.getString("session") + "&date=" + today

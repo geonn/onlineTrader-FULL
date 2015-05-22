@@ -34,9 +34,14 @@ function sendTracking(){
 			     },
 			     // function called when an error occurs, including a timeout
 			     onerror : function(e) {
-			        createAlert('Network declined','Failed to contact with server. Please make sure your device are connected to internet.');
+			        //createAlert('Network declined','Failed to contact with server. Please make sure your device are connected to internet.');
+			     	$.activityIndicator.hide(); 
+					$.loadingBar.opacity = "0";
+					$.loadingBar.height = "0";
+			        Ti.App.fireEvent('app:loadTrackingTable');
+	    			 goBack();
 			     },
-			     timeout : 5000  // in milliseconds
+			     timeout : 6000  // in milliseconds
 			 });
 			 // Prepare the connection.
 			 client.open("GET", url);

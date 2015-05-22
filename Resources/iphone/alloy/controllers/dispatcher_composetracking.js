@@ -23,18 +23,29 @@ function Controller() {
                     createAlert("Submit Error", "Please enter tracking message");
                     return;
                 }
+                $.activityIndicator.show();
+                $.loadingBar.opacity = "1";
+                $.loadingBar.height = "100";
                 var strForm = "&o_id=" + o_id + "&msg=" + encodeURIComponent(message);
                 var url = Ti.API.ADDTRACKING + Ti.App.Properties.getString("session") + strForm;
+                console.log(url);
                 var client = Ti.Network.createHTTPClient({
                     onload: function() {
                         alert("Tracking message submitted!");
+                        $.activityIndicator.hide();
+                        $.loadingBar.opacity = "0";
+                        $.loadingBar.height = "0";
                         Ti.App.fireEvent("app:loadTrackingTable");
                         goBack();
                     },
                     onerror: function() {
-                        createAlert("Network declined", "Failed to contact with server. Please make sure your device are connected to internet.");
+                        $.activityIndicator.hide();
+                        $.loadingBar.opacity = "0";
+                        $.loadingBar.height = "0";
+                        Ti.App.fireEvent("app:loadTrackingTable");
+                        goBack();
                     },
-                    timeout: 5e3
+                    timeout: 6e3
                 });
                 client.open("GET", url);
                 client.send();
@@ -59,7 +70,11 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.composetracking_win = Ti.UI.createWindow({
+<<<<<<< HEAD
         fullscreen: true,
+=======
+        fullscreen: false,
+>>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "composetracking_win"
@@ -159,9 +174,44 @@ function Controller() {
         height: 1,
         backgroundColor: "#9d0404",
         id: "__alloyId102"
+<<<<<<< HEAD
     });
     $.__views.content.add($.__views.__alloyId102);
     $.__views.__alloyId103 = Ti.UI.createView({
+=======
+    });
+    $.__views.content.add($.__views.__alloyId102);
+    $.__views.loadingBar = Ti.UI.createView({
+        layout: "vertical",
+        id: "loadingBar",
+        height: "0",
+        width: "100",
+        borderRadius: "15",
+        top: "230",
+        zIndex: "99",
+        opacity: "0",
+        backgroundColor: "#2E2E2E"
+    });
+    $.__views.composetracking_win.add($.__views.loadingBar);
+    $.__views.activityIndicator = Ti.UI.createActivityIndicator({
+        style: Ti.UI.ActivityIndicatorStyle.BIG,
+        top: 15,
+        left: 20,
+        width: 60,
+        id: "activityIndicator"
+    });
+    $.__views.loadingBar.add($.__views.activityIndicator);
+    $.__views.__alloyId103 = Ti.UI.createLabel({
+        width: Titanium.UI.FILL,
+        color: "#ffffff",
+        text: "Loading",
+        left: "20",
+        top: "10",
+        id: "__alloyId103"
+    });
+    $.__views.loadingBar.add($.__views.__alloyId103);
+    $.__views.__alloyId104 = Ti.UI.createView({
+>>>>>>> origin/master
         layout: "vertical",
         width: "100%",
         bottom: 2,

@@ -24,7 +24,11 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.dealer_statistic = Ti.UI.createWindow({
+<<<<<<< HEAD
         fullscreen: true,
+=======
+        fullscreen: false,
+>>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_statistic"
@@ -65,6 +69,7 @@ function Controller() {
         id: "titleHeader"
     });
     $.__views.content.add($.__views.titleHeader);
+<<<<<<< HEAD
     $.__views.__alloyId81 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
@@ -73,21 +78,41 @@ function Controller() {
     });
     $.__views.content.add($.__views.__alloyId81);
     $.__views.__alloyId82 = Ti.UI.createView({
+=======
+    $.__views.__alloyId82 = Ti.UI.createImageView({
+        width: "100%",
+        height: 1,
+        backgroundColor: "#9d0404",
+        id: "__alloyId82"
+    });
+    $.__views.content.add($.__views.__alloyId82);
+    $.__views.__alloyId83 = Ti.UI.createView({
+>>>>>>> origin/master
         layout: "vertical",
         width: "100%",
         bottom: 2,
         height: Ti.UI.FILL,
         top: "90",
+<<<<<<< HEAD
         id: "__alloyId82"
     });
     $.__views.dealer_statistic.add($.__views.__alloyId82);
+=======
+        id: "__alloyId83"
+    });
+    $.__views.dealer_statistic.add($.__views.__alloyId83);
+>>>>>>> origin/master
     $.__views.salessatisticview = Ti.UI.createWebView({
         id: "salessatisticview",
         disableBounce: "true",
         height: Ti.UI.FILL,
         url: "/html/dealer_statistic.html"
     });
+<<<<<<< HEAD
     $.__views.__alloyId82.add($.__views.salessatisticview);
+=======
+    $.__views.__alloyId83.add($.__views.salessatisticview);
+>>>>>>> origin/master
     $.__views.r_sub_footer = Alloy.createController("_dealer_subfooter", {
         id: "r_sub_footer",
         __parentSymbol: $.__views.dealer_statistic

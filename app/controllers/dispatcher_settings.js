@@ -19,7 +19,7 @@ var client = Ti.Network.createHTTPClient({
      onerror : function(e) {
          alert(e);
      },
-     timeout : 5000  // in milliseconds
+     timeout : 60000  // in milliseconds
  });
  // Prepare the connection.
  client.open("GET", url);
@@ -76,7 +76,7 @@ function doUpdates(e){
 	     onerror : function(e) {
 	         alert(JSON.stringify(e));
 	     },
-	     timeout : 5000  // in milliseconds
+	     timeout : 60000  // in milliseconds
 	 });
 	 // Prepare the connection.
 	 client.open("GET", url);

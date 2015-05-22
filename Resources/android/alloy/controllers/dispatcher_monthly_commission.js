@@ -69,7 +69,7 @@ function Controller() {
             onerror: function() {
                 createAlert("Network declined", "Failed to contact with server. Please make sure your device are connected to internet.");
             },
-            timeout: 1e4
+            timeout: 6e4
         });
         client.open("GET", url);
         client.send();
@@ -90,7 +90,7 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.dispatcher_monthly_commission = Ti.UI.createWindow({
-        fullscreen: true,
+        fullscreen: false,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dispatcher_monthly_commission"
@@ -108,7 +108,11 @@ function Controller() {
         __parentSymbol: $.__views.dispatcher_monthly_commission
     });
     $.__views.footer.setParent($.__views.dispatcher_monthly_commission);
+<<<<<<< HEAD
     $.__views.__alloyId118 = Ti.UI.createView({
+=======
+    $.__views.__alloyId119 = Ti.UI.createView({
+>>>>>>> origin/master
         top: "60dp",
         font: {
             fontSize: "14dp",
@@ -119,10 +123,17 @@ function Controller() {
         left: "5dp",
         right: "5dp",
         height: "88%",
+<<<<<<< HEAD
         id: "__alloyId118"
     });
     $.__views.dispatcher_monthly_commission.add($.__views.__alloyId118);
     $.__views.__alloyId119 = Ti.UI.createLabel({
+=======
+        id: "__alloyId119"
+    });
+    $.__views.dispatcher_monthly_commission.add($.__views.__alloyId119);
+    $.__views.__alloyId120 = Ti.UI.createLabel({
+>>>>>>> origin/master
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -130,6 +141,7 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "DISPATCH - MONTHLY COMMISSION",
+<<<<<<< HEAD
         id: "__alloyId119"
     });
     $.__views.__alloyId118.add($.__views.__alloyId119);
@@ -140,11 +152,27 @@ function Controller() {
         id: "__alloyId120"
     });
     $.__views.__alloyId118.add($.__views.__alloyId120);
+=======
+        id: "__alloyId120"
+    });
+    $.__views.__alloyId119.add($.__views.__alloyId120);
+    $.__views.__alloyId121 = Ti.UI.createImageView({
+        width: "100%",
+        height: 1,
+        backgroundColor: "#9d0404",
+        id: "__alloyId121"
+    });
+    $.__views.__alloyId119.add($.__views.__alloyId121);
+>>>>>>> origin/master
     $.__views.tableView = Ti.UI.createTableView({
         width: "100%",
         id: "tableView"
     });
+<<<<<<< HEAD
     $.__views.__alloyId118.add($.__views.tableView);
+=======
+    $.__views.__alloyId119.add($.__views.tableView);
+>>>>>>> origin/master
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};

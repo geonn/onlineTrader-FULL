@@ -13,19 +13,11 @@ if(args.from == "monthlyCommission"){
 	if (month < 10) month = '0' + month;
 	if (day < 10) day = '0' + day;
 	var today = day+'/'+month+'/'+year;
-}
+} 
 
-
-
-//Active icon displayed
-/**var summary = $.footer.getView('summary'); 
-summary.image = "/images/icons/icon-summary-active.png";
-Ti.App.Properties.setString('module', 'dealer_daily_commission');
-**/
-
-
+//Active icon displayed 
 $.orderlistview.addEventListener('load', function(data) { 
-	console.log(Ti.API.GETCOMMISSION + Ti.App.Properties.getString('session')+"&date="+today);
+	//console.log(Ti.API.GETCOMMISSION + Ti.App.Properties.getString('session')+"&date="+today);
   	Ti.App.fireEvent('app:orderListParam', { 
 		session: Ti.App.Properties.getString('session'), 
 		url: Ti.API.GETCOMMISSION + Ti.App.Properties.getString('session')+"&date="+today,

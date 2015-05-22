@@ -23,6 +23,7 @@ function Controller() {
         }
         var dt = Ti.App.Properties.getString("deviceToken");
         var url = Ti.API.LOGIN + "&username=" + username + "&password=" + password + "&deviceToken=" + dt;
+        console.log(url);
         var client = Ti.Network.createHTTPClient({
             onload: function() {
                 var res = JSON.parse(this.responseText);
@@ -32,11 +33,9 @@ function Controller() {
                         Ti.App.Properties.setString("session", res.data.session);
                         "android" == Alloy.Globals.osname && subscribeDeviceToken(dt, res.data.roles);
                         if ("dealer" == res.data.roles || "staff" == res.data.roles) {
-                            $.index.close();
                             var summary = Alloy.createController(res.data.roles + "_summary").getView();
                             setWindowRelationship(summary);
                         } else {
-                            $.index.close();
                             var home = Alloy.createController(res.data.roles + "_home").getView();
                             setWindowRelationship(home);
                         }
@@ -58,7 +57,7 @@ function Controller() {
                 $.loadingBar.height = "0";
                 createAlert("Network declined", "Failed to contact with server. Please make sure your device are connected to internet.");
             },
-            timeout: 1e4
+            timeout: 6e4
         });
         client.open("GET", url);
         client.send();
@@ -80,7 +79,11 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.index = Ti.UI.createWindow({
+<<<<<<< HEAD
         fullscreen: true,
+=======
+        fullscreen: false,
+>>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "index"
@@ -242,11 +245,9 @@ function Controller() {
                 if ("success" == res.status) {
                     var rl = Ti.App.Properties.getString("roles");
                     if ("dealer" == rl || "staff" == rl) {
-                        $.index.close();
                         var summary = Alloy.createController(rl + "_summary").getView();
                         setWindowRelationship(summary);
                     } else {
-                        $.index.close();
                         var home = Alloy.createController(rl + "_home").getView();
                         setWindowRelationship(home);
                     }

@@ -28,7 +28,11 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dispatcher_home_win = Ti.UI.createWindow({
+<<<<<<< HEAD
         fullscreen: true,
+=======
+        fullscreen: false,
+>>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dispatcher_home_win"

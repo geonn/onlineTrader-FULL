@@ -17,20 +17,31 @@ function Controller() {
         });
         dialog.addEventListener("click", function(e) {
             e.index === e.source.cancel;
-            1 === e.index && callOrderAction(Ti.API.REQUESTCANCEL);
+            1 === e.index && callOrderAction(Ti.API.REQUESTCANCEL, "cancel", "");
         });
         dialog.show();
     }
     function orderRelease() {
+        var textfield = Ti.UI.createTextField();
         var dialog = Ti.UI.createAlertDialog({
             cancel: 1,
+            androidView: textfield,
             buttonNames: [ "No", "Yes" ],
-            message: "Are you sure want to release the order?",
-            title: "Order Delivery Status"
+            message: "Please fill in reason of release",
+            title: "Release Order"
         });
         dialog.addEventListener("click", function(e) {
             e.index === e.source.cancel;
-            1 === e.index && callOrderAction(Ti.API.RELEASEORDER);
+            if (1 === e.index) {
+                reasonField = textfield.value;
+                if ("" == reasonField.trim()) {
+                    alert("Please fill in release reason.");
+                    return false;
+                }
+                callOrderAction(Ti.API.RELEASEORDER, "release", {
+                    reason: reasonField
+                });
+            }
         });
         dialog.show();
     }
@@ -43,13 +54,12 @@ function Controller() {
         });
         dialog.addEventListener("click", function(e) {
             e.index === e.source.cancel;
-            1 === e.index && callOrderAction(Ti.API.COMPLETEORDER);
+            1 === e.index && callOrderAction(Ti.API.COMPLETEORDER, "complete", "");
         });
         dialog.show();
     }
-    function callOrderAction(action) {
-        var url = action + Ti.App.Properties.getString("session") + "&o_id=" + o_id;
-        console.log(url);
+    function callOrderAction(action, actionName, params) {
+        if ("release" == actionName) var url = action + Ti.App.Properties.getString("session") + "&o_id=" + o_id + "&reason=" + params.reason; else var url = action + Ti.App.Properties.getString("session") + "&o_id=" + o_id;
         var client = Ti.Network.createHTTPClient({
             onload: function() {
                 var res = JSON.parse(this.responseText);
@@ -58,7 +68,7 @@ function Controller() {
             onerror: function() {
                 alert("An known error occur. Please try again.");
             },
-            timeout: 5e3
+            timeout: 6e4
         });
         client.open("GET", url);
         client.send();
@@ -92,17 +102,25 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.dis_orderdetail_win = Ti.UI.createWindow({
-        fullscreen: true,
+        fullscreen: false,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dis_orderdetail_win"
     });
     $.__views.dis_orderdetail_win && $.addTopLevelView($.__views.dis_orderdetail_win);
+<<<<<<< HEAD
     $.__views.__alloyId124 = Alloy.createController("_orderdetailheader", {
         id: "__alloyId124",
         __parentSymbol: $.__views.dis_orderdetail_win
     });
     $.__views.__alloyId124.setParent($.__views.dis_orderdetail_win);
+=======
+    $.__views.__alloyId125 = Alloy.createController("_orderdetailheader", {
+        id: "__alloyId125",
+        __parentSymbol: $.__views.dis_orderdetail_win
+    });
+    $.__views.__alloyId125.setParent($.__views.dis_orderdetail_win);
+>>>>>>> origin/master
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -115,7 +133,11 @@ function Controller() {
         id: "content"
     });
     $.__views.dis_orderdetail_win.add($.__views.content);
+<<<<<<< HEAD
     $.__views.__alloyId125 = Ti.UI.createLabel({
+=======
+    $.__views.__alloyId126 = Ti.UI.createLabel({
+>>>>>>> origin/master
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -123,6 +145,7 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "ORDER DETAILS",
+<<<<<<< HEAD
         id: "__alloyId125"
     });
     $.__views.content.add($.__views.__alloyId125);
@@ -133,6 +156,18 @@ function Controller() {
         id: "__alloyId126"
     });
     $.__views.content.add($.__views.__alloyId126);
+=======
+        id: "__alloyId126"
+    });
+    $.__views.content.add($.__views.__alloyId126);
+    $.__views.__alloyId127 = Ti.UI.createImageView({
+        width: "100%",
+        height: 1,
+        backgroundColor: "#9d0404",
+        id: "__alloyId127"
+    });
+    $.__views.content.add($.__views.__alloyId127);
+>>>>>>> origin/master
     $.__views.details_formView = Ti.UI.createView({
         layout: "vertical",
         width: "100%",
@@ -161,6 +196,7 @@ function Controller() {
         opacity: "0"
     });
     $.__views.dis_orderdetail_win.add($.__views.footer);
+<<<<<<< HEAD
     $.__views.__alloyId127 = Ti.UI.createView({
         width: "33%",
         bottom: "20",
@@ -168,6 +204,15 @@ function Controller() {
         id: "__alloyId127"
     });
     $.__views.footer.add($.__views.__alloyId127);
+=======
+    $.__views.__alloyId128 = Ti.UI.createView({
+        width: "33%",
+        bottom: "20",
+        layout: "horizontal",
+        id: "__alloyId128"
+    });
+    $.__views.footer.add($.__views.__alloyId128);
+>>>>>>> origin/master
     $.__views.btnrelease = Ti.UI.createLabel({
         width: "100%",
         color: "#fff",
@@ -180,13 +225,20 @@ function Controller() {
         id: "btnrelease",
         border: "border"
     });
+<<<<<<< HEAD
     $.__views.__alloyId127.add($.__views.btnrelease);
     orderRelease ? $.__views.btnrelease.addEventListener("touchend", orderRelease) : __defers["$.__views.btnrelease!touchend!orderRelease"] = true;
     $.__views.__alloyId128 = Ti.UI.createView({
+=======
+    $.__views.__alloyId128.add($.__views.btnrelease);
+    orderRelease ? $.__views.btnrelease.addEventListener("touchend", orderRelease) : __defers["$.__views.btnrelease!touchend!orderRelease"] = true;
+    $.__views.__alloyId129 = Ti.UI.createView({
+>>>>>>> origin/master
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         right: 0,
+<<<<<<< HEAD
         id: "__alloyId128"
     });
     $.__views.footer.add($.__views.__alloyId128);
@@ -197,6 +249,18 @@ function Controller() {
         id: "__alloyId129"
     });
     $.__views.footer.add($.__views.__alloyId129);
+=======
+        id: "__alloyId129"
+    });
+    $.__views.footer.add($.__views.__alloyId129);
+    $.__views.__alloyId130 = Ti.UI.createView({
+        width: "33%",
+        bottom: "20",
+        layout: "horizontal",
+        id: "__alloyId130"
+    });
+    $.__views.footer.add($.__views.__alloyId130);
+>>>>>>> origin/master
     $.__views.btncancel = Ti.UI.createLabel({
         width: "100%",
         color: "#fff",
@@ -208,23 +272,37 @@ function Controller() {
         text: "REQUEST \nCANCEL",
         id: "btncancel"
     });
+<<<<<<< HEAD
     $.__views.__alloyId129.add($.__views.btncancel);
     orderCancel ? $.__views.btncancel.addEventListener("touchend", orderCancel) : __defers["$.__views.btncancel!touchend!orderCancel"] = true;
     $.__views.__alloyId130 = Ti.UI.createLabel({
+=======
+    $.__views.__alloyId130.add($.__views.btncancel);
+    orderCancel ? $.__views.btncancel.addEventListener("touchend", orderCancel) : __defers["$.__views.btncancel!touchend!orderCancel"] = true;
+    $.__views.__alloyId131 = Ti.UI.createLabel({
+>>>>>>> origin/master
         width: 1,
         color: "#e02222",
         backgroundColor: "#e8e8e8",
         height: Titanium.UI.FILL,
         right: 0,
         top: "0%",
+<<<<<<< HEAD
         id: "__alloyId130"
     });
     $.__views.__alloyId129.add($.__views.__alloyId130);
     $.__views.__alloyId131 = Ti.UI.createView({
+=======
+        id: "__alloyId131"
+    });
+    $.__views.__alloyId130.add($.__views.__alloyId131);
+    $.__views.__alloyId132 = Ti.UI.createView({
+>>>>>>> origin/master
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         right: 0,
+<<<<<<< HEAD
         id: "__alloyId131"
     });
     $.__views.footer.add($.__views.__alloyId131);
@@ -234,6 +312,17 @@ function Controller() {
         id: "__alloyId132"
     });
     $.__views.footer.add($.__views.__alloyId132);
+=======
+        id: "__alloyId132"
+    });
+    $.__views.footer.add($.__views.__alloyId132);
+    $.__views.__alloyId133 = Ti.UI.createView({
+        width: "33%",
+        bottom: "20",
+        id: "__alloyId133"
+    });
+    $.__views.footer.add($.__views.__alloyId133);
+>>>>>>> origin/master
     $.__views.btncomplete = Ti.UI.createLabel({
         width: "100%",
         color: "#fff",
@@ -245,7 +334,11 @@ function Controller() {
         text: "ORDER \nCOMPLETE",
         id: "btncomplete"
     });
+<<<<<<< HEAD
     $.__views.__alloyId132.add($.__views.btncomplete);
+=======
+    $.__views.__alloyId133.add($.__views.btncomplete);
+>>>>>>> origin/master
     orderComplete ? $.__views.btncomplete.addEventListener("touchend", orderComplete) : __defers["$.__views.btncomplete!touchend!orderComplete"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);

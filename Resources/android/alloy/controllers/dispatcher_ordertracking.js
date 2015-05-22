@@ -59,16 +59,26 @@ function Controller() {
     });
     $.__views.header.add($.__views.backTitle);
     goBack ? $.__views.backTitle.addEventListener("touchend", goBack) : __defers["$.__views.backTitle!touchend!goBack"] = true;
+<<<<<<< HEAD
     $.__views.__alloyId137 = Ti.UI.createView({
+=======
+    $.__views.__alloyId138 = Ti.UI.createView({
+>>>>>>> origin/master
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         right: 0,
         left: "25%",
         top: "0%",
+<<<<<<< HEAD
         id: "__alloyId137"
     });
     $.__views.header.add($.__views.__alloyId137);
+=======
+        id: "__alloyId138"
+    });
+    $.__views.header.add($.__views.__alloyId138);
+>>>>>>> origin/master
     $.__views.appTitle = Ti.UI.createLabel({
         width: Titanium.UI.SIZE,
         color: "#fff",
@@ -79,16 +89,26 @@ function Controller() {
         id: "appTitle"
     });
     $.__views.header.add($.__views.appTitle);
+<<<<<<< HEAD
     $.__views.__alloyId138 = Ti.UI.createView({
+=======
+    $.__views.__alloyId139 = Ti.UI.createView({
+>>>>>>> origin/master
         backgroundColor: "#e8e8e8",
         width: 1,
         height: Titanium.UI.FILL,
         right: 0,
         left: "75%",
         top: "0%",
+<<<<<<< HEAD
         id: "__alloyId138"
     });
     $.__views.header.add($.__views.__alloyId138);
+=======
+        id: "__alloyId139"
+    });
+    $.__views.header.add($.__views.__alloyId139);
+>>>>>>> origin/master
     $.__views.rightMenu = Ti.UI.createLabel({
         width: "25%",
         color: "#fff",

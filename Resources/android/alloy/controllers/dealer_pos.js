@@ -30,11 +30,11 @@ function Controller() {
         id: "dealer_pos"
     });
     $.__views.dealer_pos && $.addTopLevelView($.__views.dealer_pos);
-    $.__views.__alloyId46 = Alloy.createController("_subheader", {
-        id: "__alloyId46",
+    $.__views.__alloyId47 = Alloy.createController("_subheader", {
+        id: "__alloyId47",
         __parentSymbol: $.__views.dealer_pos
     });
-    $.__views.__alloyId46.setParent($.__views.dealer_pos);
+    $.__views.__alloyId47.setParent($.__views.dealer_pos);
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -47,7 +47,7 @@ function Controller() {
         id: "content"
     });
     $.__views.dealer_pos.add($.__views.content);
-    $.__views.__alloyId47 = Ti.UI.createLabel({
+    $.__views.__alloyId48 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -55,16 +55,16 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "DEALER - COURIER",
-        id: "__alloyId47"
-    });
-    $.__views.content.add($.__views.__alloyId47);
-    $.__views.__alloyId48 = Ti.UI.createImageView({
-        width: "100%",
-        height: 1,
-        backgroundColor: "#9d0404",
         id: "__alloyId48"
     });
     $.__views.content.add($.__views.__alloyId48);
+    $.__views.__alloyId49 = Ti.UI.createImageView({
+        width: "100%",
+        height: 1,
+        backgroundColor: "#9d0404",
+        id: "__alloyId49"
+    });
+    $.__views.content.add($.__views.__alloyId49);
     $.__views.posview = Ti.UI.createWebView({
         layout: "vertical",
         width: "100%",

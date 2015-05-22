@@ -69,7 +69,7 @@ function getSummary(e) {
 	     onerror : function(e) {
 	         createAlert('Network declined','Failed to contact with server. Please make sure your device are connected to internet.');
 	     },
-	     timeout : 10000  // in milliseconds
+	     timeout : 60000  // in milliseconds
 	 });
 	 // Prepare the connection.
 	 client.open("GET", url);
