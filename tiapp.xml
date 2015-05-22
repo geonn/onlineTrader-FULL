@@ -12,7 +12,7 @@
     <property name="acs-push-type" type="string">gcm</property>
     <property name="acs-grouped-notification-message" type="string">You have $number$ unread messages.</property>
     <name>Online Trader</name>
-    <version>1.6</version>
+    <version>1.6.1</version>
     <publisher>online trader</publisher>
     <url>http://</url>
     <description>not specified</description>

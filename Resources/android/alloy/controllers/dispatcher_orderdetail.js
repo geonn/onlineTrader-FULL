@@ -17,20 +17,31 @@ function Controller() {
         });
         dialog.addEventListener("click", function(e) {
             e.index === e.source.cancel;
-            1 === e.index && callOrderAction(Ti.API.REQUESTCANCEL);
+            1 === e.index && callOrderAction(Ti.API.REQUESTCANCEL, "cancel", "");
         });
         dialog.show();
     }
     function orderRelease() {
+        var textfield = Ti.UI.createTextField();
         var dialog = Ti.UI.createAlertDialog({
             cancel: 1,
+            androidView: textfield,
             buttonNames: [ "No", "Yes" ],
-            message: "Are you sure want to release the order?",
-            title: "Order Delivery Status"
+            message: "Please fill in reason of release",
+            title: "Release Order"
         });
         dialog.addEventListener("click", function(e) {
             e.index === e.source.cancel;
-            1 === e.index && callOrderAction(Ti.API.RELEASEORDER);
+            if (1 === e.index) {
+                reasonField = textfield.value;
+                if ("" == reasonField.trim()) {
+                    alert("Please fill in release reason.");
+                    return false;
+                }
+                callOrderAction(Ti.API.RELEASEORDER, "release", {
+                    reason: reasonField
+                });
+            }
         });
         dialog.show();
     }
@@ -43,13 +54,12 @@ function Controller() {
         });
         dialog.addEventListener("click", function(e) {
             e.index === e.source.cancel;
-            1 === e.index && callOrderAction(Ti.API.COMPLETEORDER);
+            1 === e.index && callOrderAction(Ti.API.COMPLETEORDER, "complete", "");
         });
         dialog.show();
     }
-    function callOrderAction(action) {
-        var url = action + Ti.App.Properties.getString("session") + "&o_id=" + o_id;
-        console.log(url);
+    function callOrderAction(action, actionName, params) {
+        if ("release" == actionName) var url = action + Ti.App.Properties.getString("session") + "&o_id=" + o_id + "&reason=" + params.reason; else var url = action + Ti.App.Properties.getString("session") + "&o_id=" + o_id;
         var client = Ti.Network.createHTTPClient({
             onload: function() {
                 var res = JSON.parse(this.responseText);

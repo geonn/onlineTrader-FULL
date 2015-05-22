@@ -25,7 +25,7 @@ function orderCancel(){
 		  //Do nothing
 		}
 		if (e.index === 1){
-			callOrderAction(Ti.API.REQUESTCANCEL);
+			callOrderAction(Ti.API.REQUESTCANCEL,'cancel','');
 		}
 	});
 	
@@ -33,11 +33,13 @@ function orderCancel(){
 }
 
 function orderRelease(){
+	var textfield = Ti.UI.createTextField();
 	var dialog = Ti.UI.createAlertDialog({
 		cancel: 1,
+		androidView: textfield,
 		buttonNames: ['No','Yes'],
-		message: 'Are you sure want to release the order?',
-		title: 'Order Delivery Status'
+		message: 'Please fill in reason of release',
+		title: 'Release Order'
 	});
 	
 	dialog.addEventListener('click', function(e){
@@ -45,7 +47,15 @@ function orderRelease(){
 		  //Do nothing
 		}
 		if (e.index === 1){
-			callOrderAction(Ti.API.RELEASEORDER);
+			reasonField = textfield.value;
+			 
+			if(reasonField.trim() == ""){
+				 alert("Please fill in release reason.");
+				 return false;
+			}else{
+				callOrderAction(Ti.API.RELEASEORDER,'release',{reason:reasonField });
+			}
+			
 		}
 	});
 	
@@ -65,16 +75,20 @@ function orderComplete(){
 		  //Do nothing
 		}
 		if (e.index === 1){
-			callOrderAction(Ti.API.COMPLETEORDER);
+			callOrderAction(Ti.API.COMPLETEORDER,'complete','');
 		}
 	});
 	
 	dialog.show();
 }
 
-function callOrderAction(action){
-	var url = action + Ti.App.Properties.getString('session')+"&o_id=" + o_id;
-	console.log(url);
+function callOrderAction(action, actionName,params){
+	if(actionName == "release"){
+		var url = action + Ti.App.Properties.getString('session')+"&o_id=" + o_id+"&reason="+params.reason;
+	}else{
+		var url = action + Ti.App.Properties.getString('session')+"&o_id=" + o_id;
+	} 
+	
 	var client = Ti.Network.createHTTPClient({
 	     // function called when the response data is available
 	     onload : function(e) {
