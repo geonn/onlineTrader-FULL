@@ -194,7 +194,7 @@ function goDailyReport(){
 //$.inventoryListview.addEventListener('load', function() {
 function setInventoryTableView(){
 	var url = Ti.API.GETINVENTORYDATA + Ti.App.Properties.getString('session');
-	console.log(url);
+	 
 	var client = Ti.Network.createHTTPClient({
 		 onload : function(e) {
 		 	 var tableData = [];
@@ -212,15 +212,18 @@ function setInventoryTableView(){
 						text: obj.product,
 						width: Ti.UI.SIZE,
 						height: Ti.UI.SIZE,
-						color: "#000000",
-						left: 5
+						color: "#898989",
+						font: {
+					        fontSize: '14'
+					    },
+						left: 10
 					});
 					var lable_amount = Ti.UI.createLabel({
 						text: obj.used,
 						width: Ti.UI.SIZE,
 						height: Ti.UI.SIZE,
-						color: "#000000",
-						right: 5
+						color: "#7D5050",
+						right: 10
 					});
 					row.add(lable_item);
 					row.add(lable_amount);

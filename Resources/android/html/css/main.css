@@ -244,3 +244,16 @@ hr {
    -khtml-border-radius: 10px;
    border-radius: 10px;
 }
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) { 
+	table.boxes{
+		font-size:12px; 
+	}
+}
+			 
+@media only screen  and (min-width : 1824px) { 
+	table.boxes{
+		font-size:18px; 
+	}
+}
