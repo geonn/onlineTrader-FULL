@@ -191,23 +191,9 @@ function Controller() {
         });
     });
     $.dealer_orderlist.addEventListener("close", function() {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
         Ti.App.removeEventListener("app:viewOrderDetail", goToDetails);
     });
     $.dealer_orderlist.addEventListener("androidback", function() {
-=======
-        console.log("close");
->>>>>>> origin/master
-        Ti.App.removeEventListener("Ti:getData", getData);
-        Ti.App.removeEventListener("Ti:clearCache", clearCache);
-        Ti.App.removeEventListener("app:viewOrderDetail", goToDetails);
-    });
-    $.dealer_orderlist.addEventListener("androidback", function() {
-        Ti.App.removeEventListener("Ti:getData", getData);
-        Ti.App.removeEventListener("Ti:clearCache", clearCache);
->>>>>>> origin/master
         Ti.App.removeEventListener("app:viewOrderDetail", goToDetails);
     });
     __defers["$.__views.__alloyId39!touchend!refreshPage"] && $.__views.__alloyId39.addEventListener("touchend", refreshPage);

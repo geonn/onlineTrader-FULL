@@ -49,20 +49,6 @@ function removeAllWindow() {
 }
 
 function setWindowRelationship(current) {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-    console.log("2");
-    console.log(Ti.App.WindowCabinet);
->>>>>>> origin/master
-    var tempArr = Ti.App.WindowCabinet;
-    current.open();
-<<<<<<< HEAD
-=======
-    console.log("3");
->>>>>>> origin/master
->>>>>>> origin/master
     Ti.App.CURRENTWINDOW = current;
     var tempArr = Ti.App.WindowCabinet;
     tempArr.push(current);

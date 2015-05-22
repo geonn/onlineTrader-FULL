@@ -95,11 +95,7 @@ function Controller() {
         id: "content"
     });
     $.__views.dispatcher_settings.add($.__views.content);
-<<<<<<< HEAD
-    $.__views.__alloyId139 = Ti.UI.createLabel({
-=======
-    $.__views.__alloyId140 = Ti.UI.createLabel({
->>>>>>> origin/master
+    $.__views.__alloyId141 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -107,76 +103,42 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "SETTINGS",
-<<<<<<< HEAD
-        id: "__alloyId139"
+        id: "__alloyId141"
     });
-    $.__views.content.add($.__views.__alloyId139);
-    $.__views.__alloyId140 = Ti.UI.createImageView({
-=======
-        id: "__alloyId140"
-    });
-    $.__views.content.add($.__views.__alloyId140);
-    $.__views.__alloyId141 = Ti.UI.createImageView({
->>>>>>> origin/master
+    $.__views.content.add($.__views.__alloyId141);
+    $.__views.__alloyId142 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
         bottom: "5",
-<<<<<<< HEAD
-        id: "__alloyId140"
-    });
-    $.__views.content.add($.__views.__alloyId140);
-    $.__views.__alloyId141 = Ti.UI.createScrollView({
-        layout: "vertical",
-        height: "78%",
-        width: "100%",
-        id: "__alloyId141"
-    });
-    $.__views.content.add($.__views.__alloyId141);
-    $.__views.__alloyId142 = Ti.UI.createView({
-=======
-        id: "__alloyId141"
-    });
-    $.__views.content.add($.__views.__alloyId141);
-    $.__views.__alloyId142 = Ti.UI.createScrollView({
-        layout: "vertical",
-        height: "78%",
-        width: "100%",
         id: "__alloyId142"
     });
     $.__views.content.add($.__views.__alloyId142);
-    $.__views.__alloyId143 = Ti.UI.createView({
->>>>>>> origin/master
+    $.__views.__alloyId143 = Ti.UI.createScrollView({
+        layout: "vertical",
+        height: "78%",
+        width: "100%",
+        id: "__alloyId143"
+    });
+    $.__views.content.add($.__views.__alloyId143);
+    $.__views.__alloyId144 = Ti.UI.createView({
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         top: "5",
         height: "60",
-<<<<<<< HEAD
-        id: "__alloyId142"
+        id: "__alloyId144"
     });
-    $.__views.__alloyId141.add($.__views.__alloyId142);
-    $.__views.__alloyId143 = Ti.UI.createLabel({
-=======
-        id: "__alloyId143"
-    });
-    $.__views.__alloyId142.add($.__views.__alloyId143);
-    $.__views.__alloyId144 = Ti.UI.createLabel({
->>>>>>> origin/master
+    $.__views.__alloyId143.add($.__views.__alloyId144);
+    $.__views.__alloyId145 = Ti.UI.createLabel({
         width: "auto",
         color: "#e02222",
         left: 10,
         text: "Dispatcher name",
         title: "Name",
-<<<<<<< HEAD
-        id: "__alloyId143"
+        id: "__alloyId145"
     });
-    $.__views.__alloyId142.add($.__views.__alloyId143);
-=======
-        id: "__alloyId144"
-    });
-    $.__views.__alloyId143.add($.__views.__alloyId144);
->>>>>>> origin/master
+    $.__views.__alloyId144.add($.__views.__alloyId145);
     $.__views.fullname = Ti.UI.createTextField({
         height: "35dp",
         left: 10,
@@ -189,42 +151,24 @@ function Controller() {
         value: "",
         hintText: "Enter Fullname"
     });
-<<<<<<< HEAD
-    $.__views.__alloyId142.add($.__views.fullname);
-    $.__views.__alloyId144 = Ti.UI.createView({
-=======
-    $.__views.__alloyId143.add($.__views.fullname);
-    $.__views.__alloyId145 = Ti.UI.createView({
->>>>>>> origin/master
+    $.__views.__alloyId144.add($.__views.fullname);
+    $.__views.__alloyId146 = Ti.UI.createView({
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
-<<<<<<< HEAD
-        id: "__alloyId144"
+        id: "__alloyId146"
     });
-    $.__views.__alloyId141.add($.__views.__alloyId144);
-    $.__views.__alloyId145 = Ti.UI.createLabel({
-=======
-        id: "__alloyId145"
-    });
-    $.__views.__alloyId142.add($.__views.__alloyId145);
-    $.__views.__alloyId146 = Ti.UI.createLabel({
->>>>>>> origin/master
+    $.__views.__alloyId143.add($.__views.__alloyId146);
+    $.__views.__alloyId147 = Ti.UI.createLabel({
         width: "auto",
         color: "#e02222",
         left: 10,
         text: "Contact Number",
         title: "Contact",
-<<<<<<< HEAD
-        id: "__alloyId145"
+        id: "__alloyId147"
     });
-    $.__views.__alloyId144.add($.__views.__alloyId145);
-=======
-        id: "__alloyId146"
-    });
-    $.__views.__alloyId145.add($.__views.__alloyId146);
->>>>>>> origin/master
+    $.__views.__alloyId146.add($.__views.__alloyId147);
     $.__views.mobile = Ti.UI.createTextField({
         hintText: "Enter Mobile Number",
         height: "35dp",
@@ -237,42 +181,24 @@ function Controller() {
         id: "mobile",
         value: ""
     });
-<<<<<<< HEAD
-    $.__views.__alloyId144.add($.__views.mobile);
-    $.__views.__alloyId146 = Ti.UI.createView({
-=======
-    $.__views.__alloyId145.add($.__views.mobile);
-    $.__views.__alloyId147 = Ti.UI.createView({
->>>>>>> origin/master
+    $.__views.__alloyId146.add($.__views.mobile);
+    $.__views.__alloyId148 = Ti.UI.createView({
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
-<<<<<<< HEAD
-        id: "__alloyId146"
+        id: "__alloyId148"
     });
-    $.__views.__alloyId141.add($.__views.__alloyId146);
-    $.__views.__alloyId147 = Ti.UI.createLabel({
-=======
-        id: "__alloyId147"
-    });
-    $.__views.__alloyId142.add($.__views.__alloyId147);
-    $.__views.__alloyId148 = Ti.UI.createLabel({
->>>>>>> origin/master
+    $.__views.__alloyId143.add($.__views.__alloyId148);
+    $.__views.__alloyId149 = Ti.UI.createLabel({
         width: "auto",
         color: "#e02222",
         left: 10,
         text: "Preferred State",
         title: "Contact",
-<<<<<<< HEAD
-        id: "__alloyId147"
+        id: "__alloyId149"
     });
-    $.__views.__alloyId146.add($.__views.__alloyId147);
-=======
-        id: "__alloyId148"
-    });
-    $.__views.__alloyId147.add($.__views.__alloyId148);
->>>>>>> origin/master
+    $.__views.__alloyId148.add($.__views.__alloyId149);
     $.__views.prefer_state = Ti.UI.createTextField({
         height: "35dp",
         left: 10,
@@ -285,44 +211,25 @@ function Controller() {
         editable: "false",
         hintText: "Choose state"
     });
-<<<<<<< HEAD
-    $.__views.__alloyId146.add($.__views.prefer_state);
+    $.__views.__alloyId148.add($.__views.prefer_state);
     chooseState ? $.__views.prefer_state.addEventListener("click", chooseState) : __defers["$.__views.prefer_state!click!chooseState"] = true;
-    $.__views.__alloyId148 = Ti.UI.createView({
-=======
-    $.__views.__alloyId147.add($.__views.prefer_state);
-    chooseState ? $.__views.prefer_state.addEventListener("click", chooseState) : __defers["$.__views.prefer_state!click!chooseState"] = true;
-    $.__views.__alloyId149 = Ti.UI.createView({
->>>>>>> origin/master
+    $.__views.__alloyId150 = Ti.UI.createView({
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
-<<<<<<< HEAD
-        id: "__alloyId148"
+        id: "__alloyId150"
     });
-    $.__views.__alloyId141.add($.__views.__alloyId148);
-    $.__views.__alloyId149 = Ti.UI.createLabel({
-=======
-        id: "__alloyId149"
-    });
-    $.__views.__alloyId142.add($.__views.__alloyId149);
-    $.__views.__alloyId150 = Ti.UI.createLabel({
->>>>>>> origin/master
+    $.__views.__alloyId143.add($.__views.__alloyId150);
+    $.__views.__alloyId151 = Ti.UI.createLabel({
         width: "auto",
         color: "#e02222",
         left: 10,
         text: "New Password",
         title: "Email",
-<<<<<<< HEAD
-        id: "__alloyId149"
+        id: "__alloyId151"
     });
-    $.__views.__alloyId148.add($.__views.__alloyId149);
-=======
-        id: "__alloyId150"
-    });
-    $.__views.__alloyId149.add($.__views.__alloyId150);
->>>>>>> origin/master
+    $.__views.__alloyId150.add($.__views.__alloyId151);
     $.__views.new_password = Ti.UI.createTextField({
         passwordMask: true,
         height: "35dp",
@@ -336,42 +243,24 @@ function Controller() {
         hintText: "Enter New Password",
         value: ""
     });
-<<<<<<< HEAD
-    $.__views.__alloyId148.add($.__views.new_password);
-    $.__views.__alloyId150 = Ti.UI.createView({
-=======
-    $.__views.__alloyId149.add($.__views.new_password);
-    $.__views.__alloyId151 = Ti.UI.createView({
->>>>>>> origin/master
+    $.__views.__alloyId150.add($.__views.new_password);
+    $.__views.__alloyId152 = Ti.UI.createView({
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         layout: "horizontal",
         height: "60",
-<<<<<<< HEAD
-        id: "__alloyId150"
+        id: "__alloyId152"
     });
-    $.__views.__alloyId141.add($.__views.__alloyId150);
-    $.__views.__alloyId151 = Ti.UI.createLabel({
-=======
-        id: "__alloyId151"
-    });
-    $.__views.__alloyId142.add($.__views.__alloyId151);
-    $.__views.__alloyId152 = Ti.UI.createLabel({
->>>>>>> origin/master
+    $.__views.__alloyId143.add($.__views.__alloyId152);
+    $.__views.__alloyId153 = Ti.UI.createLabel({
         width: "auto",
         color: "#e02222",
         left: 10,
         text: "Confirm Password",
         title: "Email",
-<<<<<<< HEAD
-        id: "__alloyId151"
+        id: "__alloyId153"
     });
-    $.__views.__alloyId150.add($.__views.__alloyId151);
-=======
-        id: "__alloyId152"
-    });
-    $.__views.__alloyId151.add($.__views.__alloyId152);
->>>>>>> origin/master
+    $.__views.__alloyId152.add($.__views.__alloyId153);
     $.__views.confirm_password = Ti.UI.createTextField({
         passwordMask: true,
         height: "35dp",
@@ -385,22 +274,14 @@ function Controller() {
         hintText: "Enter Confirm Password",
         value: ""
     });
-<<<<<<< HEAD
-    $.__views.__alloyId150.add($.__views.confirm_password);
-=======
-    $.__views.__alloyId151.add($.__views.confirm_password);
->>>>>>> origin/master
+    $.__views.__alloyId152.add($.__views.confirm_password);
     $.__views.updateButton = Ti.UI.createButton({
         id: "updateButton",
         backgroundImage: "/images/btn-update.png",
         width: "90%",
         bottom: "10"
     });
-<<<<<<< HEAD
-    $.__views.__alloyId141.add($.__views.updateButton);
-=======
-    $.__views.__alloyId142.add($.__views.updateButton);
->>>>>>> origin/master
+    $.__views.__alloyId143.add($.__views.updateButton);
     doUpdates ? $.__views.updateButton.addEventListener("click", doUpdates) : __defers["$.__views.updateButton!click!doUpdates"] = true;
     $.__views.footer = Alloy.createController("_dispatcher_footer", {
         height: 64,

@@ -212,7 +212,7 @@ function setInventoryTableView(){
 						text: obj.product,
 						width: Ti.UI.SIZE,
 						height: Ti.UI.SIZE,
-
+						color: "#000000",
 						left: 5
 					});
 					var lable_amount = Ti.UI.createLabel({
