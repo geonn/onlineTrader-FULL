@@ -90,6 +90,7 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.dispatcher_monthly_commission = Ti.UI.createWindow({
+        fullscreen: true,
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dispatcher_monthly_commission"
@@ -107,7 +108,7 @@ function Controller() {
         __parentSymbol: $.__views.dispatcher_monthly_commission
     });
     $.__views.footer.setParent($.__views.dispatcher_monthly_commission);
-    $.__views.__alloyId119 = Ti.UI.createView({
+    $.__views.__alloyId118 = Ti.UI.createView({
         top: "60dp",
         font: {
             fontSize: "14dp",
@@ -118,10 +119,10 @@ function Controller() {
         left: "5dp",
         right: "5dp",
         height: "88%",
-        id: "__alloyId119"
+        id: "__alloyId118"
     });
-    $.__views.dispatcher_monthly_commission.add($.__views.__alloyId119);
-    $.__views.__alloyId120 = Ti.UI.createLabel({
+    $.__views.dispatcher_monthly_commission.add($.__views.__alloyId118);
+    $.__views.__alloyId119 = Ti.UI.createLabel({
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -129,21 +130,21 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "DISPATCH - MONTHLY COMMISSION",
-        id: "__alloyId120"
+        id: "__alloyId119"
     });
-    $.__views.__alloyId119.add($.__views.__alloyId120);
-    $.__views.__alloyId121 = Ti.UI.createImageView({
+    $.__views.__alloyId118.add($.__views.__alloyId119);
+    $.__views.__alloyId120 = Ti.UI.createImageView({
         width: "100%",
         height: 1,
         backgroundColor: "#9d0404",
-        id: "__alloyId121"
+        id: "__alloyId120"
     });
-    $.__views.__alloyId119.add($.__views.__alloyId121);
+    $.__views.__alloyId118.add($.__views.__alloyId120);
     $.__views.tableView = Ti.UI.createTableView({
         width: "100%",
         id: "tableView"
     });
-    $.__views.__alloyId119.add($.__views.tableView);
+    $.__views.__alloyId118.add($.__views.tableView);
     exports.destroy = function() {};
     _.extend($, $.__views);
     arguments[0] || {};

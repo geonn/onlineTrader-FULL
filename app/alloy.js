@@ -17,6 +17,7 @@ Ti.API.GETDAILYSUMMARY   = "http://"+Ti.API.API_DOMAIN+"/api/getDailySummaryByDe
 Ti.API.GETSUMMARY   = "http://"+Ti.API.API_DOMAIN+"/api/getSummaryByDealer?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETCOMMISSION   = "http://"+Ti.API.API_DOMAIN+"/api/getCommissionByDate?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETINVENTORY = "http://"+Ti.API.API_DOMAIN+"/webview/summaryInventory?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
+Ti.API.GETINVENTORYDATA = "http://"+Ti.API.API_DOMAIN+"/api/getSummaryInventory?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETUSER      = "http://"+Ti.API.API_DOMAIN+"/api/getUser?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.GETORDDETAILS= "http://"+Ti.API.API_DOMAIN+"/api/getOrderDetails?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";
 Ti.API.UPDATEUSER   = "http://"+Ti.API.API_DOMAIN+"/api/updateUser?user="+Ti.API.USER+"&key="+Ti.API.KEY+"&session=";

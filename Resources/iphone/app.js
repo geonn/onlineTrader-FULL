@@ -36,10 +36,8 @@ function popup(event) {
 }
 
 function removeWindowRelationship() {
-    Ti.App.CURRENTWINDOW.close({
-        transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_RIGHT
-    });
     var tempArr = Ti.App.WindowCabinet;
+    tempArr.length > 1 && Ti.App.CURRENTWINDOW.close();
     tempArr.splice(tempArr.length - 1, 1);
     Ti.App.WindowCabinet = tempArr;
     Ti.App.CURRENTWINDOW = tempArr[tempArr.length - 1];
@@ -112,9 +110,7 @@ function doLogout() {
                     removeAllWindow();
                     Ti.App.Properties.removeProperty("session");
                     var login = Alloy.createController("index").getView();
-                    login.open({
-                        transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
-                    });
+                    login.open();
                 },
                 onerror: function() {
                     createAlert("Network declined", "Failed to contact with server. Please make sure your device are connected to internet.");
@@ -132,9 +128,7 @@ function checkSession() {
     var ses = Ti.App.Properties.getString("session");
     if (null == ses) {
         var login = Alloy.createController("index").getView();
-        login.open({
-            transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
-        });
+        login.open();
     } else {
         var url = Ti.API.CHECKSESSION + ses;
         var client = Ti.Network.createHTTPClient({
@@ -143,9 +137,7 @@ function checkSession() {
                 if ("success" == res.status) ; else {
                     createAlert("Session End", "Your account are login at another device. Please login again.");
                     var login = Alloy.createController("index").getView();
-                    login.open({
-                        transition: Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
-                    });
+                    login.open();
                 }
             },
             onerror: function() {
@@ -158,8 +150,111 @@ function checkSession() {
     }
 }
 
+function getNotificationNumber(payload) {
+    var ses = Ti.App.Properties.getString("session");
+    var url = Ti.API.GETNOTISCOUNT + ses;
+    var extra = "";
+    var target = "";
+    var client = Ti.Network.createHTTPClient({
+        onload: function() {
+            var res = JSON.parse(this.responseText);
+            "success" == res.status && (notificationNumber = res.data.total);
+            if (notificationNumber > 1) target = "group"; else {
+                target = payload.target;
+                extra = payload.extra;
+            }
+            "running" == app_status ? notificationNav(target, extra) : notificationNav(target, extra);
+        },
+        onerror: function() {
+            createAlert("Network declined", "Failed to contact with server. Please make sure your device are connected to internet.");
+        },
+        timeout: 1e4
+    });
+    client.open("GET", url);
+    client.send();
+}
+
+function notificationNav(target, extra) {
+    var param = {
+        o_id: extra
+    };
+    if ("dealer_ordertracking" == target) {
+        removeAllWindow();
+        Ti.App.Properties.setString("module", target);
+        var orderlisting = Alloy.createController("dealer_orderlist").getView();
+        setWindowRelationship(orderlisting);
+        var orderdetail = Alloy.createController("dealer_orderdetail", param).getView();
+        setWindowRelationship(orderdetail);
+        var targetWindow = Alloy.createController(target, param).getView();
+        setWindowRelationship(targetWindow);
+    } else if ("dealer_orderdetail" == target) {
+        removeAllWindow();
+        Ti.App.Properties.setString("module", target);
+        var orderlisting = Alloy.createController("dealer_orderlist").getView();
+        setWindowRelationship(orderlisting);
+        var targetWindow = Alloy.createController(target, param).getView();
+        setWindowRelationship(targetWindow);
+    } else if ("group" == target) {
+        removeAllWindow();
+        var roles = Ti.App.Properties.getString("roles");
+        target = roles + "_feed";
+        Ti.App.Properties.setString("module", target);
+        var targetWindow = Alloy.createController(target, param).getView();
+        setWindowRelationship(targetWindow);
+    } else if ("dispatcher_home" == target) {
+        removeAllWindow();
+        Ti.App.Properties.setString("module", target);
+        var targetWindow = Alloy.createController(target, param).getView();
+        setWindowRelationship(targetWindow);
+    } else if ("dispatcher_orderdetail" == target) {
+        removeAllWindow();
+        Ti.App.Properties.setString("module", target);
+        var orderlisting = Alloy.createController("dispatcher_orderlist").getView();
+        setWindowRelationship(orderlisting);
+        var targetWindow = Alloy.createController(target, param).getView();
+        setWindowRelationship(targetWindow);
+    } else if ("dispatcher_ordertracking" == target) {
+        removeAllWindow();
+        Ti.App.Properties.setString("module", target);
+        var orderlisting = Alloy.createController("dispatcher_orderlist").getView();
+        setWindowRelationship(orderlisting);
+        var orderdetail = Alloy.createController("dispatcher_orderdetail").getView();
+        setWindowRelationship(orderdetail);
+        var targetWindow = Alloy.createController(target, param).getView();
+        setWindowRelationship(targetWindow);
+    }
+}
+
+function deviceTokenSuccess(e) {
+    Ti.API.info("Device Token: " + e.deviceToken);
+    Ti.App.Properties.setString("deviceToken", e.deviceToken);
+}
+
+function subscribeDeviceToken(deviceToken, channel) {
+    Cloud.Users.login({
+        login: "geomilano",
+        password: "123456"
+    }, function(e) {
+        e.success ? Cloud.PushNotifications.subscribe({
+            channel: channel,
+            device_token: deviceToken,
+            type: "gcm"
+        }, function(e) {
+            e.success || alert("Subscribe error:" + (e.error + ": " + e.message || JSON.stringify(e)));
+        }) : alert("Error: " + (e.error + " : " + e.message || JSON.stringify(e)));
+    });
+}
+
+function deviceTokenError(e) {
+    alert("Failed to register for push! " + e.error);
+}
+
 function PixelsToDPUnits(ThePixels) {
     return ThePixels / (Titanium.Platform.displayCaps.dpi / 160);
+}
+
+function DPUnitsToPixels(TheDPUnits) {
+    return TheDPUnits * (Titanium.Platform.displayCaps.dpi / 160);
 }
 
 function GetWidth(value) {
@@ -281,5 +376,34 @@ var app_status = "";
 xhr.clean();
 
 var clickTime = null;
+
+if ("android" == Alloy.Globals.osname) {
+    var CloudPush = require("ti.cloudpush");
+    var Cloud = require("ti.cloud");
+    CloudPush.addEventListener("callback", function(evt) {
+        var payload = JSON.parse(evt.payload);
+        Ti.App.Payload = payload;
+        if (redirect) if ("not_running" == app_status) ; else {
+            redirect = false;
+            getNotificationNumber(payload);
+        } else {
+            var current_controller = Ti.App.Properties.getString("controller");
+            current_controller == payload.target && Ti.App.fireEvent("app:refresh");
+        }
+    });
+    CloudPush.addEventListener("trayClickLaunchedApp", function() {
+        redirect = true;
+        app_status = "not_running";
+        getNotificationNumber(Ti.App.Payload);
+    });
+    CloudPush.addEventListener("trayClickFocusedApp", function() {
+        redirect = true;
+        app_status = "running";
+    });
+    CloudPush.retrieveDeviceToken({
+        success: deviceTokenSuccess,
+        error: deviceTokenError
+    });
+}
 
 Alloy.createController("index");

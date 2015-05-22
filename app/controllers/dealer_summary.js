@@ -17,8 +17,8 @@ summary.image = "/images/icons/icon-summary-active.png";
 Ti.App.Properties.setString('module', 'dealer_summary');
 
 var pHeight = PixelsToDPUnits(Ti.Platform.displayCaps.platformHeight);
-$.webview.height = pHeight - 200 -105;
-$.webview.top = 200;
+//$.webview.height = pHeight - 200 -105;
+//$.webview.top = 200;
 
 var currentTime = new Date();
 var month = currentTime.getMonth() + 1;
@@ -191,12 +191,63 @@ function goDailyReport(){
     setWindowRelationship(monthCommissions);
 }
 
-$.webview.addEventListener('load', function() {
-	var url = Ti.API.GETINVENTORY + Ti.App.Properties.getString('session');
-	Ti.App.fireEvent("app:urlFromApp", {url: url});
-    //$.webview.evalJS("document.getElementById('body').style.width = '" + Titanium.Platform.displayCaps.platformWidth + "pt'");
-});
+//$.inventoryListview.addEventListener('load', function() {
+function setInventoryTableView(){
+	var url = Ti.API.GETINVENTORYDATA + Ti.App.Properties.getString('session');
+	console.log(url);
+	var client = Ti.Network.createHTTPClient({
+		 onload : function(e) {
+		 	 var tableData = [];
+	         var res = JSON.parse(this.responseText);
+	         if(res.status == "success"){
+	         	
+	         	var count =1;
+				for (var key in res.data){
+					var obj = res.data[key];
+					var row = Ti.UI.createTableViewRow({
+					    height: Ti.UI.SIZE,
+					    width:Ti.UI.FILL
+					  });
+					var lable_item = Ti.UI.createLabel({
+						text: obj.product,
+						width: Ti.UI.SIZE,
+						height: Ti.UI.SIZE,
 
+						left: 5
+					});
+					var lable_amount = Ti.UI.createLabel({
+						text: obj.used,
+						width: Ti.UI.SIZE,
+						height: Ti.UI.SIZE,
+						color: "#000000",
+						right: 5
+					});
+					row.add(lable_item);
+					row.add(lable_amount);
+					tableData.push(row);
+				}
+				$.inventoryTableView.setData(tableData);
+			}
+		},
+	     // function called when an error occurs, including a timeout
+	     onerror : function(e) {
+	     	console.log('e');
+	         getAnnouncement(e);
+	         setInventoryTableView();
+	     },
+	     timeout : 20000  // in milliseconds
+	 });
+	 // Prepare the connection.
+	 client.open("GET", url);
+	 // Send the request.
+	 client.send();
+}
+	//var url = Ti.API.GETINVENTORY + Ti.App.Properties.getString('session');
+	//Ti.App.fireEvent("app:urlFromApp", {url: url});
+    //$.webview.evalJS("document.getElementById('body').style.width = '" + Titanium.Platform.displayCaps.platformWidth + "pt'");
+    
+//});
+setInventoryTableView();
 var removeLoading = function() { 
 	Ti.App.removeEventListener('app:removeLoading', removeLoading);
 };
