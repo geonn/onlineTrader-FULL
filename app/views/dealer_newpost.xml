@@ -5,7 +5,7 @@
 			<Label id="titleHeader" class="h2">NEW POST</Label>
 			<ImageView class="separator" ></ImageView>
 		</View>
-		<WebView class="post_form" id="newpostview"  url="/html/dealer_newpost.html" softKeyboardOnFocus="Ti.UI.Android.SOFT_KEYBOARD_HIDE_ON_FOCUS" />
+		<WebView class="post_form" id="newpostview"  url="/html/dealer_newpost.html" />
 		
 	</Window>
 </Alloy>

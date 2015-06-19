@@ -10,6 +10,7 @@ function __processArg(obj, key) {
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_newpost";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -64,11 +65,7 @@ function Controller() {
         backgroundColor: "#9d0404",
         id: "__alloyId34"
     });
-<<<<<<< HEAD
-    $.__views.content.add($.__views.__alloyId33);
-=======
     $.__views.content.add($.__views.__alloyId34);
->>>>>>> origin/master
     $.__views.newpostview = Ti.UI.createWebView({
         layout: "vertical",
         width: "100%",
@@ -76,8 +73,7 @@ function Controller() {
         height: "auto",
         top: "90",
         id: "newpostview",
-        url: "/html/dealer_newpost.html",
-        softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_HIDE_ON_FOCUS
+        url: "/html/dealer_newpost.html"
     });
     $.__views.dealer_newpost.add($.__views.newpostview);
     exports.destroy = function() {};

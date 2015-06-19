@@ -87,6 +87,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_monthly_commission_detail";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -198,7 +199,6 @@ function Controller() {
     });
     $.__views.dealer_monthly_commission_detail.add($.__views.loadingBar);
     $.__views.activityIndicator = Ti.UI.createActivityIndicator({
-        style: Ti.UI.ActivityIndicatorStyle.BIG,
         top: 15,
         left: 20,
         width: 60,

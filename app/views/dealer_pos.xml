@@ -5,7 +5,7 @@
 			<Label class="h2">DEALER - COURIER</Label>
 			<ImageView class="separator" ></ImageView>
 		</View>
-		<WebView class="post_form"  id="posview" height="Ti.UI.SIZE" url="/html/dealer_pos.html" softKeyboardOnFocus="Ti.UI.Android.SOFT_KEYBOARD_HIDE_ON_FOCUS"/>
+		<WebView class="post_form"  id="posview" height="Ti.UI.SIZE" url="/html/dealer_pos.html"  />
 		
 	</Window>
 </Alloy>

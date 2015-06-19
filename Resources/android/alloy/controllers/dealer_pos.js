@@ -10,6 +10,7 @@ function __processArg(obj, key) {
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_pos";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -72,8 +73,7 @@ function Controller() {
         height: Ti.UI.SIZE,
         top: "90",
         id: "posview",
-        url: "/html/dealer_pos.html",
-        softKeyboardOnFocus: Ti.UI.Android.SOFT_KEYBOARD_HIDE_ON_FOCUS
+        url: "/html/dealer_pos.html"
     });
     $.__views.dealer_pos.add($.__views.posview);
     exports.destroy = function() {};

@@ -76,6 +76,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_monthly_commission";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -90,11 +91,7 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.dealer_monthly_commission = Ti.UI.createWindow({
-<<<<<<< HEAD
-        fullscreen: true,
-=======
         fullscreen: false,
->>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_monthly_commission"

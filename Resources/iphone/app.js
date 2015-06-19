@@ -167,11 +167,7 @@ function getNotificationNumber(payload) {
         onerror: function() {
             createAlert("Network declined", "Failed to contact with server. Please make sure your device are connected to internet.");
         },
-<<<<<<< HEAD
-        timeout: 1e4
-=======
         timeout: 6e4
->>>>>>> origin/master
     });
     client.open("GET", url);
     client.send();
@@ -238,13 +234,13 @@ function subscribeDeviceToken(deviceToken, channel) {
         login: "geomilano",
         password: "123456"
     }, function(e) {
-        e.success ? Cloud.PushNotifications.subscribe({
+        e.success && Cloud.PushNotifications.subscribe({
             channel: channel,
             device_token: deviceToken,
             type: "gcm"
         }, function(e) {
-            e.success || alert("Subscribe error:" + (e.error + ": " + e.message || JSON.stringify(e)));
-        }) : alert("Error: " + (e.error + " : " + e.message || JSON.stringify(e)));
+            e.success;
+        });
     });
 }
 
@@ -274,9 +270,9 @@ Ti.API.USER = "biomas";
 
 Ti.API.KEY = "06b53047cf294f7207789ff5293ad2dc";
 
-Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.6&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+Ti.API.CHECKSESSION = "http://" + Ti.API.API_DOMAIN + "/api/checkSession?version=1.6.1&user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
-Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.6&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
+Ti.API.LOGIN = "http://" + Ti.API.API_DOMAIN + "/api/loginUser?version=1.6.1&user=" + Ti.API.USER + "&key=" + Ti.API.KEY;
 
 Ti.API.LOGOUT = "http://" + Ti.API.API_DOMAIN + "/api/logoutUser?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
@@ -287,6 +283,8 @@ Ti.API.GETSUMMARY = "http://" + Ti.API.API_DOMAIN + "/api/getSummaryByDealer?use
 Ti.API.GETCOMMISSION = "http://" + Ti.API.API_DOMAIN + "/api/getCommissionByDate?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
 Ti.API.GETINVENTORY = "http://" + Ti.API.API_DOMAIN + "/webview/summaryInventory?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
+
+Ti.API.GETINVENTORYDATA = "http://" + Ti.API.API_DOMAIN + "/api/getSummaryInventory?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
 Ti.API.GETUSER = "http://" + Ti.API.API_DOMAIN + "/api/getUser?user=" + Ti.API.USER + "&key=" + Ti.API.KEY + "&session=";
 
@@ -396,10 +394,7 @@ if ("android" == Alloy.Globals.osname) {
     CloudPush.addEventListener("callback", function(evt) {
         var payload = JSON.parse(evt.payload);
         Ti.App.Payload = payload;
-<<<<<<< HEAD
-=======
         console.log("alloy:" + payload);
->>>>>>> origin/master
         if (redirect) if ("not_running" == app_status) ; else {
             redirect = false;
             getNotificationNumber(payload);

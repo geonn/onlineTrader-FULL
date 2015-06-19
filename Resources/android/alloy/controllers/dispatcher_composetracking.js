@@ -55,6 +55,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dispatcher_composetracking";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -185,7 +186,6 @@ function Controller() {
     });
     $.__views.composetracking_win.add($.__views.loadingBar);
     $.__views.activityIndicator = Ti.UI.createActivityIndicator({
-        style: Ti.UI.ActivityIndicatorStyle.BIG,
         top: 15,
         left: 20,
         width: 60,

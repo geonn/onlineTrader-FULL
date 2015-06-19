@@ -72,10 +72,22 @@
 							$("#o_id").val(data.data.order.o_id);
 							$("input[name=name]").val(data.data.order.name);
 							$("input[name=mobile]").val(data.data.order.mobile);
-							$("input[name=location]").val(data.data.order.location);
+							$("textarea[name=location]").val(data.data.order.location);
+							$("input[name=address1]").val(data.data.order.address1);
+							$("input[name=address2]").val(data.data.order.address2);
+							$("input[name=address3]").val(data.data.order.address3);
+							$("input[name=address4]").val(data.data.order.address4);
+							$("input[name=address5]").val(data.data.order.address5);
+							$("input[name=postcode]").val(data.data.order.postcode);
 							$("input[name=senddate]").val(data.data.order.senddate);
+							var tc = "n/a";
+							if(data.data.order.tracking_code != ""){
+								tc = data.data.order.tracking_code;
+							}
+							$("#tracking_code").html(tc); 
 							$("textarea[name=remark]").html(data.data.order.remark);
 							$("#selector_area").val(data.data.order.area);
+							$("select[name=timezone]").val(data.data.order.timezone);
 							//alert(data.data.order.area2);
 							if(data.data.order.area2 > 0){
 								$("#areaDesc").show();	
@@ -104,8 +116,20 @@
 							$("#name").html(data.data.order.name);
 							$("#mobile").html("<a href='tel:"+data.data.order.mobile+"'>"+data.data.order.mobile+"</a>");
 							$("#location").html(data.data.order.location);
+							$("#address1").html(data.data.order.address1);
+							$("#address2").html(data.data.order.address2);
+							$("#address3").html(data.data.order.address3);
+							$("#address4").html(data.data.order.address4);
+							$("#address5").html(data.data.order.address5);
+							$("#postcode").html(data.data.order.postcode);
 							$("#senddate").html(data.data.order.senddate);
 							$("#remark").html(data.data.order.remark);
+							$("#timezone").html(data.data.order.timezone);
+							var tc = "n/a";
+							if(data.data.order.tracking_code != ""){
+								tc = data.data.order.tracking_code;
+							}
+							$("#tracking_code").html(tc); 
 							$("#stateName").html(data.data.order.stateName);
 							if(data.data.order.area2){
 								$("#fixedArea").show();
@@ -303,7 +327,6 @@
     		<tr><td class="field" width="20%">Customer Name</td></tr>
     		<tr><td class="value"><input type="text" value="" name="name" class="text-input" placeholder="Enter Customer Name"></td></tr>
     		
-    		
     		<tr><td class="field" width="20%">Mobile</td></tr> 
     		<tr><td class="value"><input type="tel" value="" name="mobile" class="text-input" placeholder="Enter Mobile Number"></td></tr> 
     		
@@ -316,11 +339,45 @@
 			<tr id="areaDesc" style="display:none;"><td class="field" width="20%">Area</td></tr>
     		<tr id="areaSel" style="display:none;"><td class="value"><div id="area_selector"></div></td></tr>
 			
+			<tr><td class="field" width="20%">Address 1</td></tr>
+    		<tr><td class="value"><input type="text" value="" maxlength="30" name="address1" class="text-input" placeholder="Enter Address 1"></td></tr>
+    		
+    		<tr><td class="field" width="20%">Address 2</td></tr>
+    		<tr><td class="value"><input type="text" value="" maxlength="30" name="address2" class="text-input" placeholder="Enter Address 2"></td></tr>
+    		
+    		<tr><td class="field" width="20%">Address 3</td></tr>
+    		<tr><td class="value"><input type="text" value="" maxlength="30" name="address3" class="text-input" placeholder="Enter Address 3"></td></tr>
+    		
+    		<tr><td class="field" width="20%">Address 4</td></tr>
+    		<tr><td class="value"><input type="text" value="" maxlength="30" name="address4" class="text-input" placeholder="Enter Address 4"></td></tr>
+    		
+    		<tr><td class="field" width="20%">Address 5</td></tr>
+    		<tr><td class="value"><input type="text" value="" maxlength="50" name="address5" class="text-input" placeholder="Enter Address 5"></td></tr>
+    		
+    		<tr><td class="field" width="20%">Postcode</td></tr>
+    		<tr><td class="value"><input type="text" value="" maxlength="5" name="postcode" class="text-input" placeholder="Enter Postcode"></td></tr>
+    		
+    		
     		<tr><td class="field" width="20%">Location</td></tr>
-    		<tr><td class="value"><input type="text" value="" name="location" class="text-input" placeholder="Enter Location"></td></tr>
+    		<tr><td class="value"><textarea rows="5" cols="32"  style="height:68px;" value="" name="location" class="text-input" placeholder="Enter Location"></textarea></td></tr>
 			
     		<tr><td class="field" width="20%">Remark</td></tr>
     		<tr><td class="value"><textarea rows="4" cols="40" style="height:68px;"  name="remark" class="text-input" placeholder="Enter Remark"></textarea></td></tr>
+    		
+    		<tr><td class="field" width="20%">Time Zone</td></tr>
+    		<tr><td class="value"><select name="timezone" class="text-input"  style="width: 100%">
+    				<option value="0">Select Time Zone</option>
+    				<option value="1">9am - 12pm</option>
+    				<option value="2">12pm - 3pm</option>
+    				<option value="3">3pm - 6pm</option>
+    				<option value="4">6pm - 9pm</option>
+    				<option value="5">Anytime</option> 
+    			</select></td>
+    		</tr> 
+    			
+    		<tr><td class="field" width="20%">Tracking Code</td></tr>
+    		<tr><td class="value"><div id="tracking_code"></div></td></tr>
+    		
     		
     		<tr><td class="field" width="20%">Product</td></tr>
     		<tr><td class="value" align="left">
@@ -389,11 +446,35 @@
 			<tr id="fixedAreaDesc" style="display:none;"><td class="field" width="20%">Area</td></tr>
     		<tr id="fixedArea"  style="display:none;"><td class="value"><div id="areaName"></div></td></tr>
     		
+    		<tr><td width="20%" class="field">Address 1</td></tr>
+    		<tr><td class="value"><div id="address1"></div></td></tr>
+    		
+    		<tr><td width="20%" class="field">Address 2</td></tr>
+    		<tr><td class="value"><div id="address2"></div></td></tr>
+    		
+    		<tr><td width="20%" class="field">Address 3</td></tr>
+    		<tr><td class="value"><div id="address3"></div></td></tr>
+    		
+    		<tr><td width="20%" class="field">Address 4</td></tr>
+    		<tr><td class="value"><div id="address4"></div></td></tr>
+    		
+    		<tr><td width="20%" class="field">Address 5</td></tr>
+    		<tr><td class="value"><div id="address5"></div></td></tr> 
+    		
+    		<tr><td width="20%" class="field">Postcode</td></tr>
+    		<tr><td class="value"><div id="postcode"></div></td></tr> 
+    		
     		<tr><td class="field" width="20%">Location</td></tr>
     		<tr><td class="value"><div id="location"></div></td></tr>
 			
     		<tr><td class="field" width="20%">Remark</td></tr>
     		<tr><td class="value"><div id="remark"></div></td></tr>
+    		
+    		<tr><td class="field" width="20%">Time Zone</td></tr>
+    		<tr><td class="value"><div id="timezone"></div></td></tr> 
+    			
+    		<tr><td class="field" width="20%">Tracking Code</td></tr>
+    		<tr><td class="value"><div id="tracking_code"></div></td></tr>
     		
     		<tr><td class="field" width="20%">Products</td></tr>
     		

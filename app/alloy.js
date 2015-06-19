@@ -465,7 +465,7 @@ if(Alloy.Globals.osname == "android"){
 	    Ti.App.Properties.setString('deviceToken', e.deviceToken);
 	    
 	    //subscribeDeviceToken(e.deviceToken);
-	   // enablePush.enabled = true;
+	   //	enablePush.enabled = true;
 	}
 	
 	function subscribeDeviceToken(deviceToken,channel){
@@ -474,20 +474,20 @@ if(Alloy.Globals.osname == "android"){
 		    password: '123456'
 		}, function (e) {
 		    if (e.success) {
-		     //   alert("login success");
+		        
 		        Cloud.PushNotifications.subscribe({
 				    channel: channel,
 				    device_token: deviceToken,
 				    type: 'gcm' //here i am using gcm, it is recommended one
 				}, function (e) {
 				    if (e.success) {
-				   //     alert('Subscribed for Push Notification!');
+				       //alert('Subscribed for Push Notification!');
 				    } else {
-				        alert('Subscribe error:' + ((e.error +": " + e.message) || JSON.stringify(e)));
+				      //  alert('Subscribe error:' + ((e.error +": " + e.message) || JSON.stringify(e)));
 				    }
 				});
 		    } else {
-		        alert('Error: ' + ((e.error +" : " + e.message) || JSON.stringify(e)));
+		       // alert('Error: ' + ((e.error +" : " + e.message) || JSON.stringify(e)));
 		    }
 		});   
 		

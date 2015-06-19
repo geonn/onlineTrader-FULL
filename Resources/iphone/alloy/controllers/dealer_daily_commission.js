@@ -10,6 +10,7 @@ function __processArg(obj, key) {
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_daily_commission";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -24,11 +25,7 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.dealer_orderlist = Ti.UI.createWindow({
-<<<<<<< HEAD
-        fullscreen: true,
-=======
         fullscreen: false,
->>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "dealer_orderlist"

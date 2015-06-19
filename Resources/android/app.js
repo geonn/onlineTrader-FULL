@@ -232,13 +232,13 @@ function subscribeDeviceToken(deviceToken, channel) {
         login: "geomilano",
         password: "123456"
     }, function(e) {
-        e.success ? Cloud.PushNotifications.subscribe({
+        e.success && Cloud.PushNotifications.subscribe({
             channel: channel,
             device_token: deviceToken,
             type: "gcm"
         }, function(e) {
-            e.success || alert("Subscribe error:" + (e.error + ": " + e.message || JSON.stringify(e)));
-        }) : alert("Error: " + (e.error + " : " + e.message || JSON.stringify(e)));
+            e.success;
+        });
     });
 }
 

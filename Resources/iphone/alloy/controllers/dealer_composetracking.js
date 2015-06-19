@@ -48,6 +48,7 @@ function Controller() {
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_composetracking";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -63,11 +64,7 @@ function Controller() {
     var exports = {};
     var __defers = {};
     $.__views.composetracking_win = Ti.UI.createWindow({
-<<<<<<< HEAD
-        fullscreen: true,
-=======
         fullscreen: false,
->>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "composetracking_win"
@@ -182,7 +179,6 @@ function Controller() {
     });
     $.__views.composetracking_win.add($.__views.loadingBar);
     $.__views.activityIndicator = Ti.UI.createActivityIndicator({
-        style: Ti.UI.ActivityIndicatorStyle.BIG,
         top: 15,
         left: 20,
         width: 60,

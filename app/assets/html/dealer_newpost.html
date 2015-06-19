@@ -180,9 +180,10 @@
 							Ti.App.fireEvent('addOrderComplete', { });
 							setTimeout(function(){Ti.App.fireEvent('addOrderComplete', {});},2000);
 						}else{
+							alert(res.data);
 							$("#post_form").show();
 							$("#loading").hide();
-							
+							return false;
 						}
 						
 					});
@@ -208,13 +209,43 @@
     		
 			<tr id="areaDesc" style="display:none;"><td width="20%">Area</td></tr>
     		<tr id="areaSel" style="display:none;"><td><div id="area_selector"></div></td></tr>
-
+			
+			<tr><td width="20%">Address 1</td></tr>
+    		<tr><td><input type="text" value="" name="address1" maxlength="30" class="text-input auto" placeholder="Enter Address 1"></td></tr>
+				
+			<tr><td width="20%">Address 2</td></tr>
+    		<tr><td><input type="text" value="" name="address2" maxlength="30" class="text-input auto" placeholder="Enter Address 2"></td></tr>
+				
+			<tr><td width="20%">Address 3</td></tr>
+    		<tr><td><input type="text" value="" name="address3" maxlength="30" class="text-input auto" placeholder="Enter Address 3"></td></tr>
+				
+			<tr><td width="20%">Address 4</td></tr>
+    		<tr><td><input type="text" value="" name="address4" maxlength="30" class="text-input auto" placeholder="Enter Address 4"></td></tr>
+				
+			<tr><td width="20%">Address 5</td></tr>
+    		<tr><td><input type="text" value="" name="address5" maxlength="50" class="text-input auto" placeholder="Enter Address 5"></td></tr>
+			
+			<tr><td width="20%">Postcode</td></tr>
+    		<tr><td><input type="text" value="" name="postcode" maxlength="5" class="text-input auto" placeholder="Enter Postcode"></td></tr>
+			
+    		
 			<tr><td width="20%">Location</td></tr>
     		<tr><td><input type="text" value="" name="location" class="text-input auto" placeholder="Enter Location"></td></tr>
 						
     		<tr><td width="20%">Remark</td></tr>
     		<tr><td><textarea rows="4" cols="40" style="height:68px;"  name="remark" class="text-input auto" placeholder="Enter Remark"></textarea>
 			</td></tr>
+    		
+    		<tr><td class="field" width="20%">Time Zone</td></tr>
+    		<tr><td class="value"><select name="timezone" class="text-input"  style="width: 100%">
+    				<option value="0">Select Time Zone</option>
+    				<option value="1">9am - 12pm</option>
+    				<option value="2">12pm - 3pm</option>
+    				<option value="3">3pm - 6pm</option>
+    				<option value="4">6pm - 9pm</option>
+    				<option value="5">Anytime</option> 
+    			</select></td>
+    		</tr> 
     		
     		<tr><td width="20%">Product</td></tr>
     		<tr><td align="left">

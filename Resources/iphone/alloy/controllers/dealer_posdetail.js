@@ -10,6 +10,7 @@ function __processArg(obj, key) {
 function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "dealer_posdetail";
+    this.args = arguments[0] || {};
     if (arguments[0]) {
         {
             __processArg(arguments[0], "__parentSymbol");
@@ -24,29 +25,17 @@ function Controller() {
     var $ = this;
     var exports = {};
     $.__views.posdetail_win = Ti.UI.createWindow({
-<<<<<<< HEAD
         fullscreen: "false",
-=======
-        fullscreen: false,
->>>>>>> origin/master
         backgroundImage: "/images/bg.jpg",
         navBarHidden: true,
         id: "posdetail_win"
     });
     $.__views.posdetail_win && $.addTopLevelView($.__views.posdetail_win);
-<<<<<<< HEAD
-    $.__views.__alloyId49 = Alloy.createController("_subheader", {
-        id: "__alloyId49",
-        __parentSymbol: $.__views.posdetail_win
-    });
-    $.__views.__alloyId49.setParent($.__views.posdetail_win);
-=======
     $.__views.__alloyId50 = Alloy.createController("_subheader", {
         id: "__alloyId50",
         __parentSymbol: $.__views.posdetail_win
     });
     $.__views.__alloyId50.setParent($.__views.posdetail_win);
->>>>>>> origin/master
     $.__views.content = Ti.UI.createView({
         top: "60dp",
         font: {
@@ -59,11 +48,7 @@ function Controller() {
         id: "content"
     });
     $.__views.posdetail_win.add($.__views.content);
-<<<<<<< HEAD
-    $.__views.__alloyId50 = Ti.UI.createLabel({
-=======
     $.__views.__alloyId51 = Ti.UI.createLabel({
->>>>>>> origin/master
         width: Titanium.UI.FILL,
         color: "#e02222",
         font: {
@@ -71,19 +56,6 @@ function Controller() {
         },
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         text: "POS DETAILS",
-<<<<<<< HEAD
-        id: "__alloyId50"
-    });
-    $.__views.content.add($.__views.__alloyId50);
-    $.__views.__alloyId51 = Ti.UI.createImageView({
-        width: "100%",
-        height: 1,
-        backgroundColor: "#9d0404",
-        id: "__alloyId51"
-    });
-    $.__views.content.add($.__views.__alloyId51);
-    $.__views.__alloyId52 = Ti.UI.createView({
-=======
         id: "__alloyId51"
     });
     $.__views.content.add($.__views.__alloyId51);
@@ -95,31 +67,20 @@ function Controller() {
     });
     $.__views.content.add($.__views.__alloyId52);
     $.__views.__alloyId53 = Ti.UI.createView({
->>>>>>> origin/master
         layout: "vertical",
         width: "100%",
         bottom: 2,
         height: "90%",
         top: "90",
-<<<<<<< HEAD
-        id: "__alloyId52"
-    });
-    $.__views.posdetail_win.add($.__views.__alloyId52);
-=======
         id: "__alloyId53"
     });
     $.__views.posdetail_win.add($.__views.__alloyId53);
->>>>>>> origin/master
     $.__views.posdetailview = Ti.UI.createWebView({
         id: "posdetailview",
         disableBounce: "true",
         url: "/html/dealer_posdetail.html"
     });
-<<<<<<< HEAD
-    $.__views.__alloyId52.add($.__views.posdetailview);
-=======
     $.__views.__alloyId53.add($.__views.posdetailview);
->>>>>>> origin/master
     exports.destroy = function() {};
     _.extend($, $.__views);
     var args = arguments[0] || {};

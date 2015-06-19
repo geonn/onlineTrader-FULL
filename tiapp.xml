@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
-    <property name="acs-oauth-secret-development" type="string">nBa2gaLp0YlaPgVPEPzHJco5FuhwuodJ</property>
-    <property name="acs-oauth-key-development" type="string">BSUwvogr5Bv0PSiux8tuXdWQMn6TtDNO</property>
-    <property name="acs-api-key-development" type="string">YTkIiQzV8Vw1ZOnh9yu41nxUDHZezpxF</property>
-    <property name="acs-oauth-secret-production" type="string">nBa2gaLp0YlaPgVPEPzHJco5FuhwuodJ</property>
-    <property name="acs-oauth-key-production" type="string">BSUwvogr5Bv0PSiux8tuXdWQMn6TtDNO</property>
-    <property name="acs-api-key-production" type="string">YTkIiQzV8Vw1ZOnh9yu41nxUDHZezpxF</property>
-    <id>com.biomasglobal.onlinetrader</id>
+    <property name="acs-oauth-secret-development" type="string">n2xjkiZtMCOw7texkKh3ktYaKq7D2vko</property>
+    <property name="acs-oauth-key-development" type="string">vR7SbKv8wCFbPv777fyPI1cldVHw7Hti</property>
+    <property name="acs-api-key-development" type="string">XJved2Xvft1z4wUi50UsF5WX45katAYy</property>
+    <property name="acs-oauth-secret-production" type="string">0OE5ilflGzEStKfUb9ngFdBPPBLgp8f8</property>
+    <property name="acs-oauth-key-production" type="string">hlglqRygVXzDX7Q9P19dShEEsRmH2UCN</property>
+    <property name="acs-api-key-production" type="string">qzZ8hkWNVqJGuZQkbvzrsZsB16xPemUZ</property>
+    <id>com.geonn.onlinetrader</id>
     <property name="acs-push-type-development" type="string">gcm</property>
     <property name="acs-push-type-production" type="string">gcm</property>
     <property name="acs-push-type" type="string">gcm</property>
@@ -21,7 +21,7 @@
     <fullscreen>false</fullscreen>
     <navbar-hidden>false</navbar-hidden>
     <analytics>true</analytics>
-    <guid>947075c2-ffb7-4cf7-8e9a-f8c7ad397b3e</guid>
+    <guid>f086c33c-c06a-4c09-9ccc-8416cf2258bd</guid>
     <property name="ti.ui.defaultunit" type="string">dp</property>
     <ios>
         <plist>
@@ -49,27 +49,18 @@
         </plist>
     </ios>
     <android xmlns:android="http://schemas.android.com/apk/res/android">
-        <!-- <manifest>
-            <application>
-                <activity android:windowSoftInputMode="stateVisible|adjustPan"/>
-                <activity
+        <!-- <manifest><application><activity android:windowSoftInputMode="stateVisible|adjustPan"/><activity
                     android:configChanges="keyboardHidden|orientation"
-                    android:name="org.appcelerator.titanium.TiActivity" android:screenOrientation="portrait"/>
-                <activity
+                    android:name="org.appcelerator.titanium.TiActivity" android:screenOrientation="portrait"/><activity
                     android:configChanges="keyboardHidden|orientation"
                     android:name="org.appcelerator.titanium.TiTranslucentActivity"
-                    android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent"/>
-                <activity
+                    android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent"/><activity
                     android:configChanges="keyboardHidden|orientation"
                     android:name="org.appcelerator.titanium.TiModalActivity"
-                    android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent"/>
-                <activity
+                    android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent"/><activity
                     android:configChanges="keyboardHidden|orientation"
-                    android:name="ti.modules.titanium.ui.TiTabActivity" android:screenOrientation="portrait"/>
-                <activity
-                    android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" android:screenOrientation="portrait"/>
-            </application>
-        </manifest>
+                    android:name="ti.modules.titanium.ui.TiTabActivity" android:screenOrientation="portrait"/><activity
+                    android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" android:screenOrientation="portrait"/></application></manifest>
         -->
         <tool-api-level>16</tool-api-level>
         <manifest>
@@ -92,7 +83,7 @@
                 <activity
                     android:name="ti.modules.titanium.ui.android.TiPreferencesActivity" android:screenOrientation="portrait"/>
             </application>
-            <uses-sdk android:minSdkVersion="14"/>
+            <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="21"/>
         </manifest>
     </android>
     <mobileweb>
@@ -106,6 +97,8 @@
     <modules>
         <module platform="android">ti.cloudpush</module>
         <module platform="commonjs">ti.cloud</module>
+        <module platform="android">com.appcelerator.apm</module>
+        <module platform="iphone">com.appcelerator.apm</module>
     </modules>
     <deployment-targets>
         <target device="iphone">true</target>
@@ -115,8 +108,19 @@
         <target device="mobileweb">true</target>
         <target device="tizen">false</target>
     </deployment-targets>
-    <sdk-version>3.5.0.GA</sdk-version>
+    <sdk-version>4.0.0.GA</sdk-version>
     <plugins>
         <plugin version="1.0">ti.alloy</plugin>
     </plugins>
+    <property name="appc-app-id" type="string">555fdaa040c47c9a1194aebe</property>
+    <property name="acs-authbase-url-development" type="string">https://secure-identity.cloud.appcelerator.com</property>
+    <property name="acs-base-url-development" type="string">https://api.cloud.appcelerator.com</property>
+    <property name="acs-username-development" type="string">appc_app_user_dev</property>
+    <property name="acs-password-development" type="string">QndQtJxqVKKovxEBzo</property>
+    <property name="acs-authbase-url-production" type="string">https://secure-identity.cloud.appcelerator.com</property>
+    <property name="acs-base-url-production" type="string">https://api.cloud.appcelerator.com</property>
+    <property name="acs-username-production" type="string">appc_app_user</property>
+    <property name="acs-password-production" type="string">MySGtrsjjUvI0FtY1r</property>
+    <property name="appc-org-id" type="string">100016072</property>
+    <property name="appc-creator-user-id" type="string">974ebc0c-0865-4ea6-b748-9098dc431587</property>
 </ti:app>
